@@ -38,76 +38,76 @@
       <compileType>
         <ccTool>
           <incDir>
-            <pElem>../../../../../../../../opencv/opencv/build/include</pElem>
+            <pElem>C:\opencv\opencv\build\include</pElem>
           </incDir>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
-            <pElem>../../../../../../../../opencv/BuildMingW/lib</pElem>
+            <pElem>C:\opencv\release\lib</pElem>
           </linkerAddLib>
           <linkerLibItems>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libcv2.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_calib3d244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_contrib244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_contrib_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_core244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_features2d244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_flann244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_flann_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_gpu244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_haartraining_engine.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_highgui244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_imgproc244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_legacy244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_legacy_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ml244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ml_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_nonfree244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_objdetect244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_photo244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_stitching244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_contrib_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_flann_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_legacy_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_ml_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ts244.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ts_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_video244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_videostab244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_videostab_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libcv2.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_calib3d244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_contrib244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_contrib_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_core244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_features2d244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_flann244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_flann_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_gpu244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_haartraining_engine.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_highgui244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_imgproc244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_legacy244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_legacy_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ml244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ml_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_nonfree244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_objdetect244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_photo244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_stitching244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_contrib_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_flann_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_legacy_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_ml_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ts244.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ts_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_video244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_videostab244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_videostab_pch_dephelp.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -128,7 +128,7 @@
         <ccTool>
           <developmentMode>5</developmentMode>
           <incDir>
-            <pElem>../../../../../../../../opencv/opencv/build/include</pElem>
+            <pElem>C:\opencv\opencv\build\include</pElem>
           </incDir>
         </ccTool>
         <fortranCompilerTool>
@@ -139,71 +139,71 @@
         </asmTool>
         <linkerTool>
           <linkerAddLib>
-            <pElem>../../../../../../../../opencv/BuildMingW/lib</pElem>
+            <pElem>C:\opencv\release\lib</pElem>
           </linkerAddLib>
           <linkerLibItems>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libcv2.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_calib3d244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_contrib244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_contrib_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_core244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_features2d244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_flann244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_flann_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_gpu244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_haartraining_engine.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_highgui244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_imgproc244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_legacy244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_legacy_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ml244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ml_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_nonfree244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_objdetect244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_perf_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_photo244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_stitching244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_calib3d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_contrib_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_core_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_features2d_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_flann_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_gpu_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_highgui_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_imgproc_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_legacy_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_ml_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_nonfree_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_objdetect_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_photo_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_stitching_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_test_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ts244.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_ts_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_video244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_video_pch_dephelp.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_videostab244.dll.a</linkerLibFileItem>
-            <linkerLibFileItem>../../../../../../../../opencv/BuildMingW/lib/libopencv_videostab_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libcv2.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_calib3d244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_contrib244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_contrib_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_core244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_features2d244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_flann244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_flann_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_gpu244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_haartraining_engine.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_highgui244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_imgproc244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_legacy244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_legacy_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ml244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ml_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_nonfree244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_objdetect244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_perf_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_photo244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_stitching244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_calib3d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_contrib_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_core_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_features2d_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_flann_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_gpu_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_highgui_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_imgproc_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_legacy_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_ml_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_nonfree_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_objdetect_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_photo_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_stitching_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_test_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ts244.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_ts_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_video244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_video_pch_dephelp.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_videostab244.dll.a</linkerLibFileItem>
+            <linkerLibFileItem>C:/opencv/release/lib/libopencv_videostab_pch_dephelp.a</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
