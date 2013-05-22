@@ -14,7 +14,7 @@
 
 using namespace std;
 using namespace cv;
-
+//test
 void detectAndDisplay(Mat frame);
 
 String face_cascade_name = "./haarcascade_frontalface_alt.xml";
