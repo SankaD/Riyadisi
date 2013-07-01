@@ -1,3 +1,6 @@
 RiyadisiDevelopment/RiyadisiDevelopment.opensdf
 ipch
 Debug
+/RiyadisiDevelopment/*.suo
+/RiyadisiDevelopment/*.suo
+/RiyadisiDevelopment/RiyadisiDev/Debug
