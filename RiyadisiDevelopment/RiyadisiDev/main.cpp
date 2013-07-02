@@ -49,7 +49,7 @@ int main ( int argc, const char** argv )
                 break;
             }
 
-            int c = waitKey ( 10 );
+            int c = waitKey ( 30 );
             if ( ( char ) c == 'c' ) {
                 break;
             }
@@ -72,7 +72,9 @@ void detectAndDisplay ( Mat frame )
 
     for ( int i = 0; i < faces.size(); i++ ) {
         Point center ( faces[i].x + faces[i].width * 0.5, faces[i].y + faces[i].height * 0.5 );
-        ellipse ( frame, center, Size ( faces[i].width * 0.5, faces[i].height * 0.5 ), 0, 0, 360, Scalar ( 255, 0, 255 ), 4, 8, 0 );
+        //ellipse ( frame, center, Size ( faces[i].width * 0.5, faces[i].height * 0.5 ), 0, 0, 360, Scalar ( 255, 0, 255 ), 4, 8, 0 );
+        rectangle ( frame, Point ( faces[i].x, faces[i].y ), Point ( faces[i].x + faces[i].width, faces[i].y + faces[i].height ),
+                    Scalar ( 255, 0, 255 ), 1, 1, 0 );
 
         Mat faceROI = frame_gray ( faces[i] );
         std::vector<Rect> eyes;
@@ -83,7 +85,9 @@ void detectAndDisplay ( Mat frame )
         for ( int j = 0; j < eyes.size(); j++ ) {
             Point center ( faces[i].x + eyes[j].x + eyes[j].width * 0.5, faces[i].y + eyes[j].y + eyes[j].height * 0.5 );
             int radius = cvRound ( ( eyes[j].width + eyes[j].height ) * 0.25 );
-            circle ( frame, center, radius, Scalar ( 255, 0, 0 ), 4, 8, 0 );
+
+            rectangle ( frame, Point ( faces[i].x + eyes[j].x , faces[i].y + eyes[j].y ),
+                        Point ( faces[i].x + eyes[j].x + eyes[j].width , faces[i].y + eyes[j].y + eyes[j].height ), Scalar ( 255, 0, 0 ), 1, 1, 0 );
         }
     }
     //-- Show what you got
