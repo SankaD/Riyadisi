@@ -72,6 +72,30 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_eye_tree_eyeglasses.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt2.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt_tree.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_default.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_fullbody.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_lefteye_2splits.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_lowerbody.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_eyepair_big.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_eyepair_small.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_leftear.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_lefteye.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_mouth.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_nose.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_rightear.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_righteye.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_upperbody.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_profileface.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_righteye_2splits.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_smile.xml" />
+    <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

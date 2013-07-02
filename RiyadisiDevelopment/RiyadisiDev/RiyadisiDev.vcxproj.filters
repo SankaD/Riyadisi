@@ -13,10 +13,87 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{c542a247-ed32-4a92-965c-8206fa98bdda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Cascades">
+      <UniqueIdentifier>{4bd7ab25-2164-491a-9916-8107845a27d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Cascades\HaarCascades">
+      <UniqueIdentifier>{a1533255-3667-4d95-81f5-e0b99c370d93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_eye_tree_eyeglasses.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt_tree.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt2.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_default.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_fullbody.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_lefteye_2splits.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_lowerbody.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_eyepair_big.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_eyepair_small.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_leftear.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_lefteye.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_mouth.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_nose.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_rightear.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_righteye.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_mcs_upperbody.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_profileface.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_righteye_2splits.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_smile.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml">
+      <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
   </ItemGroup>
 </Project>
