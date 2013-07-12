@@ -1,0 +1,13 @@
+...requirements...
+
+	managing positive images
+		loads the images from an external folder
+		shows a rescaled version of the image which can be easily seen with standard display size.
+		if the image is good to preprocess, user can select the required regions as rectangles in the image
+		after selecting all the required regions user can select ok. 
+		then the next images is shown.
+		if the image is not in a good condition, image can be deleted through the application
+
+	managing negative images
+		loads the images from an external folder
+		if the image is not large enough for the application, it should not be added to the negative folder
