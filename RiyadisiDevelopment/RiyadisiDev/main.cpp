@@ -86,6 +86,7 @@ void detectAndDisplay ( Mat frame )
                     Scalar ( 255, 255, 255 ), 1, 1, 0 );
 
         Mat faceROI = frame_gray ( faces[i] );
+
         std::vector<Rect> eyes;
         std::vector<Rect> mouth;
 
