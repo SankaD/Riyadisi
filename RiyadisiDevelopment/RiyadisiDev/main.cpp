@@ -1,6 +1,7 @@
 #include "opencv2/objdetect/objdetect.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include "Neuron.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -113,4 +114,5 @@ void detectAndDisplay ( Mat frame )
     }
     //-- Show what you got
     imshow ( window_name, frame );
+    Neuron n = Neuron();
 }

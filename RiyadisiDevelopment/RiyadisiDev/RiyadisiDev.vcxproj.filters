@@ -22,10 +22,37 @@
     <Filter Include="Resources\Cascades\HaarCascades">
       <UniqueIdentifier>{a1533255-3667-4d95-81f5-e0b99c370d93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\face_detection">
+      <UniqueIdentifier>{8b7faae3-d347-416e-9fe7-6836db4ebf03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine">
+      <UniqueIdentifier>{31c6e849-af62-4645-bb80-6e5625b42015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\eye_detection">
+      <UniqueIdentifier>{c715bbab-f7ae-4c7c-b4f7-72261a8fac79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mouth_detection">
+      <UniqueIdentifier>{6464d5c0-e1c1-4dbf-ae08-54adfa172641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\fuzzy_logic">
+      <UniqueIdentifier>{7f8152af-9cec-40c5-ad91-7467bbe934a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\neural_network">
+      <UniqueIdentifier>{588ea453-049f-48c0-b876-7b194db7d25d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\main_engine">
+      <UniqueIdentifier>{0cb18829-cf17-49b8-9668-b74ce0f844cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\main_engine\neural_network">
+      <UniqueIdentifier>{83148170-0f36-40d4-975c-04c8fd8e6975}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Neuron.cpp">
+      <Filter>Source Files\main_engine\neural_network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,5 +122,10 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml">
       <Filter>Resources\Cascades\HaarCascades</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Neuron.h">
+      <Filter>Header Files\main_engine\neural_network</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

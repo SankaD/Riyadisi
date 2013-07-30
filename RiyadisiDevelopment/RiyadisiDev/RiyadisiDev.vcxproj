@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Neuron.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml" />
@@ -95,6 +96,9 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_righteye_2splits.xml" />
     <None Include="Resources\Cascades\haarcascades\haarcascade_smile.xml" />
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Neuron.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
