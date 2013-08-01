@@ -46,6 +46,30 @@
     <Filter Include="Header Files\main_engine\neural_network">
       <UniqueIdentifier>{83148170-0f36-40d4-975c-04c8fd8e6975}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\main_engine\interfacing">
+      <UniqueIdentifier>{e269f32f-2e07-4021-a23b-1ab58f3f1979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\drowsiness">
+      <UniqueIdentifier>{40cd6577-00c5-40e0-97e3-e2796f083990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\distraction">
+      <UniqueIdentifier>{2ece8dbe-41fa-42fc-bda1-2957e69c71be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\drowsiness\eye_state">
+      <UniqueIdentifier>{1398f5c4-8adc-40e7-b1ec-56fde27f5e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\drowsiness\nodding_off">
+      <UniqueIdentifier>{0be5e512-fd96-43ca-92d4-e87096708a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\drowsiness\yawning">
+      <UniqueIdentifier>{0dbef66d-f8df-443f-bb72-8ca322b4dfa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\distraction\gaze_detection">
+      <UniqueIdentifier>{edf9dc5b-bb73-49d1-921f-10f47f5ecc0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main_engine\interfacing\distraction\phone_usage">
+      <UniqueIdentifier>{97161983-3b18-40fe-88e8-3ee8aaecb3bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
