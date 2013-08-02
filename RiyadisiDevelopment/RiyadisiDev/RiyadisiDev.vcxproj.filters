@@ -22,17 +22,8 @@
     <Filter Include="Resources\Cascades\HaarCascades">
       <UniqueIdentifier>{a1533255-3667-4d95-81f5-e0b99c370d93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\face_detection">
-      <UniqueIdentifier>{8b7faae3-d347-416e-9fe7-6836db4ebf03}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\main_engine">
       <UniqueIdentifier>{31c6e849-af62-4645-bb80-6e5625b42015}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\eye_detection">
-      <UniqueIdentifier>{c715bbab-f7ae-4c7c-b4f7-72261a8fac79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\mouth_detection">
-      <UniqueIdentifier>{6464d5c0-e1c1-4dbf-ae08-54adfa172641}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\main_engine\fuzzy_logic">
       <UniqueIdentifier>{7f8152af-9cec-40c5-ad91-7467bbe934a8}</UniqueIdentifier>
@@ -69,6 +60,18 @@
     </Filter>
     <Filter Include="Source Files\main_engine\interfacing\distraction\phone_usage">
       <UniqueIdentifier>{97161983-3b18-40fe-88e8-3ee8aaecb3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sensory_components">
+      <UniqueIdentifier>{b634c88b-a6e8-494e-bbb3-b5a5a1bb8571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sensory_components\eye_detection">
+      <UniqueIdentifier>{c715bbab-f7ae-4c7c-b4f7-72261a8fac79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sensory_components\face_detection">
+      <UniqueIdentifier>{8b7faae3-d347-416e-9fe7-6836db4ebf03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sensory_components\mouth_detection">
+      <UniqueIdentifier>{6464d5c0-e1c1-4dbf-ae08-54adfa172641}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

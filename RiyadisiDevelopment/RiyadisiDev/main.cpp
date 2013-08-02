@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdio.h>
 
+#include <WinSock2.h>
 
 using namespace std;
 using namespace cv;
@@ -24,6 +25,7 @@ CascadeClassifier mouth_cascade;
 
 string window_name = "Capture - Face detection";
 RNG rng ( 12345 );
+
 
 /** @function main */
 int main ( int argc, const char** argv )
