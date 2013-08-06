@@ -70,6 +70,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Detector.cpp" />
+    <ClCompile Include="EyeDetector.cpp" />
+    <ClCompile Include="FaceDetector.cpp" />
+    <ClCompile Include="Gaze.cpp" />
+    <ClCompile Include="GazeDetector.cpp" />
+    <ClCompile Include="gaze_detection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Neuron.cpp" />
   </ItemGroup>
@@ -98,6 +104,11 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Detector.h" />
+    <ClInclude Include="EyeDetector.h" />
+    <ClInclude Include="FaceDetector.h" />
+    <ClInclude Include="Gaze.h" />
+    <ClInclude Include="gaze_detection.h" />
     <ClInclude Include="Neuron.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

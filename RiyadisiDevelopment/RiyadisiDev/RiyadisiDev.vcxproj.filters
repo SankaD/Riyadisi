@@ -73,6 +73,21 @@
     <Filter Include="Source Files\sensory_components\mouth_detection">
       <UniqueIdentifier>{6464d5c0-e1c1-4dbf-ae08-54adfa172641}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\sensory_components\gaze_detection">
+      <UniqueIdentifier>{9fee65bc-1056-4112-ba1f-640228536013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sensory_components">
+      <UniqueIdentifier>{3148c99c-2fd4-40c7-9dff-160db08ec61d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sensory_components\gaze_detection">
+      <UniqueIdentifier>{7e91439c-d26f-4b71-9c82-265d3b939702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sensory_components\eye_detection">
+      <UniqueIdentifier>{1b0c95cb-146a-4dcd-9610-a9c583d3abea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sensory_components\face_detection">
+      <UniqueIdentifier>{40b50852-70e5-4dd4-91fb-c3848544786d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,6 +95,24 @@
     </ClCompile>
     <ClCompile Include="Neuron.cpp">
       <Filter>Source Files\main_engine\neural_network</Filter>
+    </ClCompile>
+    <ClCompile Include="gaze_detection.cpp">
+      <Filter>Source Files\sensory_components\gaze_detection</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeDetector.cpp">
+      <Filter>Source Files\sensory_components\gaze_detection</Filter>
+    </ClCompile>
+    <ClCompile Include="Gaze.cpp">
+      <Filter>Source Files\sensory_components\gaze_detection</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceDetector.cpp">
+      <Filter>Source Files\sensory_components\face_detection</Filter>
+    </ClCompile>
+    <ClCompile Include="EyeDetector.cpp">
+      <Filter>Source Files\sensory_components\eye_detection</Filter>
+    </ClCompile>
+    <ClCompile Include="Detector.cpp">
+      <Filter>Source Files\sensory_components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +186,21 @@
   <ItemGroup>
     <ClInclude Include="Neuron.h">
       <Filter>Header Files\main_engine\neural_network</Filter>
+    </ClInclude>
+    <ClInclude Include="gaze_detection.h">
+      <Filter>Header Files\sensory_components\gaze_detection</Filter>
+    </ClInclude>
+    <ClInclude Include="Gaze.h">
+      <Filter>Header Files\sensory_components\gaze_detection</Filter>
+    </ClInclude>
+    <ClInclude Include="Detector.h">
+      <Filter>Header Files\sensory_components</Filter>
+    </ClInclude>
+    <ClInclude Include="EyeDetector.h">
+      <Filter>Header Files\sensory_components\eye_detection</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceDetector.h">
+      <Filter>Header Files\sensory_components\face_detection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
