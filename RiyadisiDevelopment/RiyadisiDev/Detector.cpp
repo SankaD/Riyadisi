@@ -1,6 +1,6 @@
 #include "Detector.h"
 
-std::vector<Rect> Detector::detect ( Mat frame, Rect regionOfInterest )
+std::vector<Rect> Detector::detect ( Mat frame )
 {
     std::vector<Rect> features;
 

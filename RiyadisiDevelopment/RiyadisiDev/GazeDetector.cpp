@@ -1,18 +1,4 @@
-
-#include <iostream>
-#include <opencv2/objdetect/objdetect.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include "Gaze.h"
-
-using namespace std;
-using namespace cv;
-
-class GazeDetector {
-public:
-    GazeDetector ( void );
-    ~GazeDetector ( void );
-    Gaze detectGaze ( std::vector<Rect> eyes );
-};
+#include "GazeDetector.h"
 
 GazeDetector::GazeDetector ( void )
 {
@@ -23,12 +9,25 @@ GazeDetector::~GazeDetector ( void )
 {
 }
 
+vector<Rect> GazeDetector::optimizeDetection ( vector<Rect> data )
+{
+    vector<Rect> optimizedResults;
 
-Gaze GazeDetector::detectGaze ( vector<Rect> eyes  )
+
+
+    return optimizedResults;
+}
+vector<Rect> GazeDetector::detect ( Mat frame, Rect regionOfInterest )
+{
+    vector<Rect> results;
+
+    throw "Not implemented yet.";
+
+    return results;
+}
+Gaze GazeDetector::calculateGaze ( Mat frame, Rect regionOfInterest )
 {
     Gaze gaze;
-
-    throw exception ( "Not implemented yet" );
 
     return gaze;
 }

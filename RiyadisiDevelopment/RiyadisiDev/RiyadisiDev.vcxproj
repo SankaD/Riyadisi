@@ -108,6 +108,7 @@
     <ClInclude Include="EyeDetector.h" />
     <ClInclude Include="FaceDetector.h" />
     <ClInclude Include="Gaze.h" />
+    <ClInclude Include="GazeDetector.h" />
     <ClInclude Include="gaze_detection.h" />
     <ClInclude Include="Neuron.h" />
   </ItemGroup>

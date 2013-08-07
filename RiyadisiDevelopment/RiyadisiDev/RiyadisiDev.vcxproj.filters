@@ -202,5 +202,8 @@
     <ClInclude Include="FaceDetector.h">
       <Filter>Header Files\sensory_components\face_detection</Filter>
     </ClInclude>
+    <ClInclude Include="GazeDetector.h">
+      <Filter>Header Files\sensory_components\gaze_detection</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

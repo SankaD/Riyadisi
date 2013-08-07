@@ -10,10 +10,11 @@ class Detector {
 public:
     Detector ( void );
     Detector ( string cascadeName );
-    ~Detector ( void );
-    std::vector<Rect> detect ( Mat frame, Rect regionOfInterest );
+    virtual ~Detector ( void );
+    std::vector<Rect> detect ( Mat frame );
     CascadeClassifier getClassifier();
     void setCascadeFileName ( string filename );
+    virtual vector<Rect> optimizeDetection ( vector<Rect> data ) = 0 ;
 private:
     string cascadeName;
     CascadeClassifier cascade;
