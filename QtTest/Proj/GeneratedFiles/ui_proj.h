@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'proj.ui'
 **
-** Created: Tue Jul 16 20:51:07 2013
+** Created: Fri Aug 16 18:04:06 2013
 **      by: Qt User Interface Compiler version 4.8.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
