@@ -71,6 +71,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeDetector.cpp" />
@@ -106,6 +107,7 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
     <ClInclude Include="EyeDetector.h" />

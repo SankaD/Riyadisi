@@ -133,6 +133,12 @@
     <Filter Include="Header Files\MainFeatures\SensoryProcessing\MouthDetection">
       <UniqueIdentifier>{eef80801-a95c-497d-92ac-7dce0ba6cbea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{28b91716-e373-48c0-b2c7-ece56562b2f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{91252439-a015-419d-ba29-ec5e2b966973}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
@@ -161,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="Eye.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +276,9 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

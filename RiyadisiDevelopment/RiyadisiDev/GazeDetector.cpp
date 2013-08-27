@@ -1,10 +1,9 @@
 #include "GazeDetector.h"
-#include "Pupil.h"
+#include "Circle.h"
 #include <opencv2\imgproc\imgproc.hpp>
 
 using namespace cv;
 using namespace std;
-Circle detectPupil ( Mat eye );
 
 GazeDetector::GazeDetector ( void )
 {
@@ -18,22 +17,25 @@ GazeDetector::~GazeDetector ( void )
 /**
     eyes should be provided as GRAY images
 */
-//Gaze GazeDetector::detectGaze ( Mat rightEye, Mat leftEye )
-//{
-//    rightEye = rightEye.clone();
-//    leftEye = leftEye.clone();
-//
-//    Circle rightPupil, leftPupil;
-//
-//    rightPupil = detectPupil ( rightEye );
-//    leftPupil = detectPupil ( leftEye );
-//
-//    return
-//}
+Gaze GazeDetector::detectGaze ( Mat rightEye, Mat leftEye )
+{
+    Gaze gaze;
+    rightEye = rightEye.clone();
+    leftEye = leftEye.clone();
+
+    Circle rightPupil, leftPupil;
+
+    rightPupil = detectPupil ( rightEye );
+    leftPupil = detectPupil ( leftEye );
+
+    gaze.setGaze ( leftPupil, rightPupil );
+
+    return gaze;
+}
 /**
 Detect the pupil of a given eye. Eye should be provided in GRAY profile.
 */
-Circle detectPupil ( Mat eye )
+Circle GazeDetector::detectPupil ( Mat eye )
 {
     int cannyThreshold = 10;
     float cannyRatio = 3;
@@ -75,9 +77,8 @@ Circle detectPupil ( Mat eye )
         }
     }
     Circle circle;
-    circle.x = center.x;
-    circle.y = center.y;
-    circle.radius = radius;
+    circle.setCenter ( center.x, center.y );
+    circle.setRadius ( radius );
 
     return circle;
 }

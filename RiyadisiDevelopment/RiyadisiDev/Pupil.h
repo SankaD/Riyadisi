@@ -1,9 +1,6 @@
 #pragma once
 
-struct Circle {
-    float x, y;
-    float radius;
-};
+#include "Circle.h"
 
 class Pupil {
 public:

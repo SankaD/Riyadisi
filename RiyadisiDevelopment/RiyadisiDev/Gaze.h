@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Face.h"
-#include "Utility.h"
-#include "Pupil.h"
+#include "Circle.h"
 
 class Gaze {
 
