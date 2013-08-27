@@ -61,61 +61,106 @@
     <Filter Include="Source Files\main_engine\interfacing\distraction\phone_usage">
       <UniqueIdentifier>{97161983-3b18-40fe-88e8-3ee8aaecb3bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sensory_components">
-      <UniqueIdentifier>{b634c88b-a6e8-494e-bbb3-b5a5a1bb8571}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures">
+      <UniqueIdentifier>{dc29e169-1001-448f-b05a-556c5146fd63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sensory_components\eye_detection">
-      <UniqueIdentifier>{c715bbab-f7ae-4c7c-b4f7-72261a8fac79}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DistractionDetection">
+      <UniqueIdentifier>{10fc62d7-c72c-4b27-9c87-0c4bf005733b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sensory_components\face_detection">
-      <UniqueIdentifier>{8b7faae3-d347-416e-9fe7-6836db4ebf03}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DrowsinessDetection">
+      <UniqueIdentifier>{2183903d-207d-45e6-9639-ead75b3cc14b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sensory_components\mouth_detection">
-      <UniqueIdentifier>{6464d5c0-e1c1-4dbf-ae08-54adfa172641}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DistractionDetection\GazeDetection">
+      <UniqueIdentifier>{19b4a184-e957-4a7e-9154-61f70d1fe982}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\sensory_components\gaze_detection">
-      <UniqueIdentifier>{9fee65bc-1056-4112-ba1f-640228536013}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DistractionDetection\HeadRotationDetection">
+      <UniqueIdentifier>{f9e44124-cbaf-49dc-90d9-2e3601fd08da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\sensory_components">
-      <UniqueIdentifier>{3148c99c-2fd4-40c7-9dff-160db08ec61d}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DrowsinessDetection\EyeStateDetection">
+      <UniqueIdentifier>{fbbf5d8f-374a-490e-a37d-961ed7137911}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\sensory_components\gaze_detection">
-      <UniqueIdentifier>{7e91439c-d26f-4b71-9c82-265d3b939702}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection">
+      <UniqueIdentifier>{424d7643-d40e-41ce-a4b6-12035d6960a2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\sensory_components\eye_detection">
-      <UniqueIdentifier>{1b0c95cb-146a-4dcd-9610-a9c583d3abea}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\DrowsinessDetection\YawningDetection">
+      <UniqueIdentifier>{f6dba270-7ea6-4174-a634-b22e9691976e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\sensory_components\face_detection">
-      <UniqueIdentifier>{40b50852-70e5-4dd4-91fb-c3848544786d}</UniqueIdentifier>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing">
+      <UniqueIdentifier>{c3f9d7e8-f643-4c9b-a204-9fd11c48fdcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\FaceDetection">
+      <UniqueIdentifier>{335025bd-1ab3-4d25-9cc4-a8a9693be650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\EyeDetection">
+      <UniqueIdentifier>{040f4024-7bdf-46fc-a5a5-daeb5801fbd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\MouthDetection">
+      <UniqueIdentifier>{a46cfe8a-28ea-4147-813f-2000da7d027a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures">
+      <UniqueIdentifier>{a46b67f4-d7fa-4786-b589-040ea086650a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DistractionDetection">
+      <UniqueIdentifier>{58a21492-8c79-4ada-9a68-59a45260bcd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection">
+      <UniqueIdentifier>{9857ed9d-8d1b-4ee1-a378-5789a2f422a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing">
+      <UniqueIdentifier>{b3ea0ced-b6c7-4573-b745-798c07b6797c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DistractionDetection\GazeDetection">
+      <UniqueIdentifier>{a7cf7448-1b04-447b-8f0b-ea1f5b2c6259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DistractionDetection\HeadRotationDetection">
+      <UniqueIdentifier>{bb45f97e-2e0b-4da4-9c19-aa481508ea71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection">
+      <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\YawningDetection">
+      <UniqueIdentifier>{576215d0-8442-493b-a573-94eef814a66a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\NoddingOffDetection">
+      <UniqueIdentifier>{c03231a8-da29-4aef-b81f-228ccd25b4ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\FaceDetection">
+      <UniqueIdentifier>{96aa0f6f-5fb8-442f-bd4f-a62697278f41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\EyeDetection">
+      <UniqueIdentifier>{1774a596-f842-4ac5-8ec2-1c65f13954e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\MouthDetection">
+      <UniqueIdentifier>{eef80801-a95c-497d-92ac-7dce0ba6cbea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
       <Filter>Source Files\main_engine\neural_network</Filter>
     </ClCompile>
-    <ClCompile Include="gaze_detection.cpp">
-      <Filter>Source Files\sensory_components\gaze_detection</Filter>
-    </ClCompile>
-    <ClCompile Include="GazeDetector.cpp">
-      <Filter>Source Files\sensory_components\gaze_detection</Filter>
-    </ClCompile>
-    <ClCompile Include="Gaze.cpp">
-      <Filter>Source Files\sensory_components\gaze_detection</Filter>
-    </ClCompile>
-    <ClCompile Include="FaceDetector.cpp">
-      <Filter>Source Files\sensory_components\face_detection</Filter>
-    </ClCompile>
-    <ClCompile Include="EyeDetector.cpp">
-      <Filter>Source Files\sensory_components\eye_detection</Filter>
-    </ClCompile>
-    <ClCompile Include="Detector.cpp">
-      <Filter>Source Files\sensory_components</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="EyeDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="Detector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="GazeDetector.cpp">
+      <Filter>Source Files\MainFeatures\DistractionDetection\GazeDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="Gaze.cpp">
+      <Filter>Source Files\MainFeatures\DistractionDetection\GazeDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="Face.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="Eye.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,23 +235,38 @@
     <ClInclude Include="Neuron.h">
       <Filter>Header Files\main_engine\neural_network</Filter>
     </ClInclude>
-    <ClInclude Include="gaze_detection.h">
-      <Filter>Header Files\sensory_components\gaze_detection</Filter>
-    </ClInclude>
-    <ClInclude Include="Gaze.h">
-      <Filter>Header Files\sensory_components\gaze_detection</Filter>
-    </ClInclude>
-    <ClInclude Include="Detector.h">
-      <Filter>Header Files\sensory_components</Filter>
-    </ClInclude>
     <ClInclude Include="EyeDetector.h">
-      <Filter>Header Files\sensory_components\eye_detection</Filter>
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
     <ClInclude Include="FaceDetector.h">
-      <Filter>Header Files\sensory_components\face_detection</Filter>
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="Detector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
     </ClInclude>
     <ClInclude Include="GazeDetector.h">
-      <Filter>Header Files\sensory_components\gaze_detection</Filter>
+      <Filter>Header Files\MainFeatures\DistractionDetection\GazeDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="Gaze.h">
+      <Filter>Header Files\MainFeatures\DistractionDetection\GazeDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="Face.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Eye.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Nose.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouth.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Pupil.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

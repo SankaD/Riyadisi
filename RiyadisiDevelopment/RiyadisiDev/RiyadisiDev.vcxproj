@@ -72,12 +72,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Detector.cpp" />
+    <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeDetector.cpp" />
+    <ClCompile Include="Face.cpp" />
     <ClCompile Include="FaceDetector.cpp" />
     <ClCompile Include="Gaze.cpp" />
     <ClCompile Include="GazeDetector.cpp" />
-    <ClCompile Include="gaze_detection.cpp" />
-    <ClCompile Include="main2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Neuron.cpp" />
   </ItemGroup>
@@ -107,12 +107,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Detector.h" />
+    <ClInclude Include="Eye.h" />
     <ClInclude Include="EyeDetector.h" />
+    <ClInclude Include="Face.h" />
     <ClInclude Include="FaceDetector.h" />
     <ClInclude Include="Gaze.h" />
     <ClInclude Include="GazeDetector.h" />
-    <ClInclude Include="gaze_detection.h" />
+    <ClInclude Include="Mouth.h" />
     <ClInclude Include="Neuron.h" />
+    <ClInclude Include="Nose.h" />
+    <ClInclude Include="Pupil.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

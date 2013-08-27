@@ -1,11 +1,18 @@
 #pragma once
 
+#include "Face.h"
+#include "Utility.h"
+#include "Pupil.h"
+
 class Gaze {
+
 private:
-    int gazeX, gazeY, gazeZ;
+    Circle leftEye;
+    Circle rightEye;
+
 public:
     Gaze ( void );
     ~Gaze ( void );
-    void setGaze ( int x, int y, int z );
-    int getGaze ( short int axis );
+    void setGaze ( Circle leftEye, Circle rightEye );
+    float getPupilDistance();
 };
