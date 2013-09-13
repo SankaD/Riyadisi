@@ -21,3 +21,7 @@ Point2f Circle::getCenter()
 {
     return Point2f ( this->x, this->y );
 }
+void Circle::setCenter ( Point2f center )
+{
+    this->setCenter ( center.x, center.y );
+}

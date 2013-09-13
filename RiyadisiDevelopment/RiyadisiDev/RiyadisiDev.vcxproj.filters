@@ -139,6 +139,12 @@
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{91252439-a015-419d-ba29-ec5e2b966973}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\EyeDetection\Pupil Detection">
+      <UniqueIdentifier>{79c957aa-72dc-4400-95ed-14d5cb83c67a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\EyeDetection\PupilDetection">
+      <UniqueIdentifier>{bd2f1e39-0516-4110-af54-c955d77f519c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
@@ -170,6 +176,12 @@
     </ClCompile>
     <ClCompile Include="Circle.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Pupil.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="PupilDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection\PupilDetection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +291,9 @@
     </ClInclude>
     <ClInclude Include="Circle.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="PupilDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection\Pupil Detection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
