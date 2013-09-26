@@ -78,6 +78,7 @@
     <ClCompile Include="EyeDetector.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FaceDetector.cpp" />
+    <ClCompile Include="FeatureDetector.cpp" />
     <ClCompile Include="Gaze.cpp" />
     <ClCompile Include="GazeDetector.cpp" />
     <ClCompile Include="main.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="EyeDetector.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FaceDetector.h" />
+    <ClInclude Include="FeatureDetector.h" />
     <ClInclude Include="Gaze.h" />
     <ClInclude Include="GazeDetector.h" />
     <ClInclude Include="Mouth.h" />

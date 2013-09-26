@@ -15,7 +15,13 @@ public:
     /// </summary>
     /// <param name="eye">Location of the eye</param>
     /// <param name="frame">Image where the eye is</param>
-    /// <Returns>
+    /// <returns> if detected,the detected pupil or an empty Pupil object if not.</returns>
     Pupil detectPupil ( Mat eye );
 
+    /// <summary>
+    /// Used for drawing a pupil into a video frame. Only used for debugging purposes.
+    /// </summary>
+    /// <param name="frame"> The image onto which the pupil is drawn </param>
+    /// <param name="pupil"> The pupil which should be drawn</param>
+    void drawPupil ( Mat frame, Pupil pupil );
 };

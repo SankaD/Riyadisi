@@ -183,6 +183,9 @@
     <ClCompile Include="PupilDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection\PupilDetection</Filter>
     </ClCompile>
+    <ClCompile Include="FeatureDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -294,6 +297,9 @@
     </ClInclude>
     <ClInclude Include="PupilDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection\Pupil Detection</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

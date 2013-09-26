@@ -50,3 +50,16 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     }
     return pupil;
 }
+
+void PupilDetector::drawPupil ( Mat frame, Pupil pupil )
+{
+    Point2f center = pupil.getPupilLocation().getCenter();
+    Point2f pNorth ( center.x, center.y - 2 );
+    Point2f pSouth ( center.x, center.y + 2 );
+    Point2f pEast ( center.x + 2, center.y );
+    Point2f pWest ( center.x - 2, center.y );
+
+    line ( frame, pNorth, pSouth, Scalar ( 255, 255, 0 ) );
+    line ( frame, pWest, pEast, Scalar ( 255, 255, 0 ) );
+
+}

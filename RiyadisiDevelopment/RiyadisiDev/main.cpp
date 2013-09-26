@@ -12,6 +12,9 @@
 #include "GazeDetector.h"
 #include "PupilDetector.h"
 
+// define constants here
+const short int WAIT_PERIOD_PER_FRAME = 30;
+
 using namespace std;
 using namespace cv;
 
@@ -20,10 +23,10 @@ void detectPupil ( Mat eye, Mat frame );
 
 int main ( int argc, char **argv )
 {
+    // required detectors are here
     EyeDetector eyeDetector;
     FaceDetector faceDetector;
     GazeDetector gazeDetector;
-
     PupilDetector pupilDetector;
 
     CvCapture *capture;
@@ -41,8 +44,7 @@ int main ( int argc, char **argv )
         while ( true ) {
             frame = cvQueryFrame ( capture );
 
-            int key = waitKey ( 30 );
-            //cout << counter++ << "\n";
+            int key = waitKey ( WAIT_PERIOD_PER_FRAME );// waiting for the key input. also determines operated frame rate.
 
             if ( key == 'c' ) {
                 break;
@@ -90,8 +92,16 @@ int main ( int argc, char **argv )
                         eyeLeft = regionOfFrame ( eyeResults[1] );
                         eyeRight = regionOfFrame ( eyeResults[0] );
                     }
-                    pupilDetector.detectPupil ( eyeLeft );
-                    pupilDetector.detectPupil ( eyeRight );
+
+                    Pupil leftPupil, rightPupil;
+
+                    leftPupil = pupilDetector.detectPupil ( eyeLeft );
+                    rightPupil = pupilDetector.detectPupil ( eyeRight );
+
+                    cout << leftPupil.getPupilLocation().getCenter() << endl;
+
+                    pupilDetector.drawPupil ( frame, leftPupil );
+                    pupilDetector.drawPupil ( frame, rightPupil );
                 }
             }
 
