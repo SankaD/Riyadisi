@@ -40,6 +40,7 @@ int main ( int argc, char **argv )
 
     int counter = 0;
 
+
     if ( capture ) {
         while ( true ) {
             frame = cvQueryFrame ( capture );
@@ -53,9 +54,20 @@ int main ( int argc, char **argv )
             cvtColor ( frame, grayFrame, CV_BGR2GRAY );
             equalizeHist ( grayFrame, grayFrame );
 
-            results =  faceDetector.detect ( grayFrame  );
+            // downsampling to increase performance
+            Mat downsampledFrame;
+            int downsamplingConstant = 2;
+
+            pyrDown ( grayFrame, downsampledFrame, Size ( ( grayFrame.cols + 1 ) / downsamplingConstant, ( grayFrame.rows + 1 ) / downsamplingConstant ) );
+
+            results =  faceDetector.detect ( downsampledFrame  );
 
             for ( int i = 0; i < results.size(); i++ ) {
+                //multiplying to cope with the downsampling of the source image
+                results[i].height = results[i].height * downsamplingConstant;
+                results[i].width = results[i].width * downsamplingConstant;
+                results[i].x = results[i].x * downsamplingConstant;
+                results[i].y = results[i].y * downsamplingConstant;
 
                 rectangle ( frame, Point ( results[i].x, results[i].y ),
                             Point ( results[i].x + results[i].width, results[i].y + results[i].height ),
@@ -98,7 +110,7 @@ int main ( int argc, char **argv )
                     leftPupil = pupilDetector.detectPupil ( eyeLeft );
                     rightPupil = pupilDetector.detectPupil ( eyeRight );
 
-                    cout << leftPupil.getPupilLocation().getCenter() << endl;
+                    //cout << leftPupil.getPupilLocation().getCenter() << endl;
 
                     pupilDetector.drawPupil ( frame, leftPupil );
                     pupilDetector.drawPupil ( frame, rightPupil );

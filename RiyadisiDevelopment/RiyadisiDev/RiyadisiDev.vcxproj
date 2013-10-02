@@ -76,15 +76,23 @@
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeDetector.cpp" />
+    <ClCompile Include="EyeFeature.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FaceDetector.cpp" />
+    <ClCompile Include="FaceFeature.cpp" />
+    <ClCompile Include="FaceFeatureManager.cpp" />
+    <ClCompile Include="Feature.cpp" />
+    <ClCompile Include="FeatureCollection.cpp" />
     <ClCompile Include="FeatureDetector.cpp" />
     <ClCompile Include="Gaze.cpp" />
     <ClCompile Include="GazeDetector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouthFeature.cpp" />
     <ClCompile Include="Neuron.cpp" />
+    <ClCompile Include="NoseFeature.cpp" />
     <ClCompile Include="Pupil.cpp" />
     <ClCompile Include="PupilDetector.cpp" />
+    <ClCompile Include="PupilFeature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml" />
@@ -115,16 +123,24 @@
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
     <ClInclude Include="EyeDetector.h" />
+    <ClInclude Include="EyeFeature.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FaceDetector.h" />
+    <ClInclude Include="FaceFeature.h" />
+    <ClInclude Include="FaceFeatureManager.h" />
+    <ClInclude Include="Feature.h" />
+    <ClInclude Include="FeatureCollection.h" />
     <ClInclude Include="FeatureDetector.h" />
     <ClInclude Include="Gaze.h" />
     <ClInclude Include="GazeDetector.h" />
     <ClInclude Include="Mouth.h" />
+    <ClInclude Include="MouthFeature.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="Nose.h" />
+    <ClInclude Include="NoseFeature.h" />
     <ClInclude Include="Pupil.h" />
     <ClInclude Include="PupilDetector.h" />
+    <ClInclude Include="PupilFeature.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -145,6 +145,12 @@
     <Filter Include="Source Files\MainFeatures\SensoryProcessing\EyeDetection\PupilDetection">
       <UniqueIdentifier>{bd2f1e39-0516-4110-af54-c955d77f519c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\FeatureManaging">
+      <UniqueIdentifier>{5c7daa3d-6a90-49f5-b89f-bbd29e69802d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\FeatureManaging">
+      <UniqueIdentifier>{2f2c4d64-6284-49ed-994f-d29ac8039709}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
@@ -185,6 +191,30 @@
     </ClCompile>
     <ClCompile Include="FeatureDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceFeatureManager.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="FaceFeature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="EyeFeature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Feature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="FeatureCollection.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="MouthFeature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="NoseFeature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="PupilFeature.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +330,30 @@
     </ClInclude>
     <ClInclude Include="FeatureDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceFeatureManager.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Feature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="NoseFeature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="PupilFeature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="EyeFeature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="MouthFeature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceFeature.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureCollection.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
