@@ -1,28 +1,34 @@
 #pragma once
 
 #include "FaceFeature.h"
-
-NoseFeature FaceFeature::getNose()
+FaceFeature::FaceFeature()
 {
-    return this->nose;
+    nose = new NoseFeature();
+    leftEye = new EyeFeature();
+    rightEye = new EyeFeature();
+    mouth = new MouthFeature();
 }
-EyeFeature FaceFeature::getLeftEye()
+NoseFeature *FaceFeature::getNose()
 {
-    return this->leftEye;
+    return nose;
 }
-EyeFeature FaceFeature::getRightEye()
+EyeFeature *FaceFeature::getLeftEye()
 {
-    return this->rightEye;
+    return leftEye;
 }
-MouthFeature FaceFeature::getMouth()
+EyeFeature *FaceFeature::getRightEye()
 {
-    return this->mouth;
+    return rightEye;
 }
-Mat FaceFeature::getImage()
+MouthFeature *FaceFeature::getMouth()
 {
-    return this->image;
+    return mouth;
 }
-void FaceFeature::setImage ( Mat image )
+Mat *FaceFeature::getImage()
 {
-    this->image = image;
+    return image;
+}
+void FaceFeature::setImage ( Mat *newImage )
+{
+    image = newImage;
 }

@@ -2,9 +2,11 @@
 
 class PupilFeature : public  Feature {
 private:
-    Point2f centerPoint;
+    Point2f *centerPoint;
 
 public:
-    Point2f getCenterPoint();
-    void setCenterPoint ( Point2f point );
+    PupilFeature();
+    ~PupilFeature();
+    Point2f *getCenterPoint();
+    void setCenterPoint ( Point2f *point );
 };

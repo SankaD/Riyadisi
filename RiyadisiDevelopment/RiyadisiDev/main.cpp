@@ -6,7 +6,9 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <time.h>
 
+/*
 #include "EyeDetector.h"
 #include "FaceDetector.h"
 #include "GazeDetector.h"
@@ -17,6 +19,7 @@ const short int WAIT_PERIOD_PER_FRAME = 30;
 
 using namespace std;
 using namespace cv;
+
 
 void detectIris ( Mat eye, Mat frame );
 void detectPupil ( Mat eye, Mat frame );
@@ -121,4 +124,50 @@ int main ( int argc, char **argv )
         }
     }
     return 0;
+}
+*/
+#include "FaceFeatureManager.h"
+
+const short int WAIT_PERIOD_PER_FRAME = 30;
+
+using namespace std;
+using namespace cv;
+
+int main ( int argc, char **argv )
+{
+    CvCapture *capture;
+    Mat frame, grayFrame;
+    FaceFeatureManager featureManager;
+
+
+    capture = cvCaptureFromAVI ( "G://temp/me_with_ir.wmv" );
+
+    if ( capture ) {
+        while ( true ) {
+            frame = cvQueryFrame ( capture );
+
+            int key = waitKey ( WAIT_PERIOD_PER_FRAME );// waiting for the key input. also determines operated frame rate.
+
+            if ( key == 'c' ) {
+                break;
+            }
+
+            cvtColor ( frame, grayFrame, CV_BGR2GRAY );
+            equalizeHist ( grayFrame, grayFrame );
+
+            time_t t = clock();
+
+            FaceFeature *faceFeature = featureManager.findFeatures ( grayFrame );
+            //cout << "HalfTime : " << ( clock() - t ) << endl;
+            featureManager.getFeatureCollection()->addFeature ( faceFeature );
+
+            cout << "FullTime : " << ( clock() - t ) << endl;
+            cout << "---------------------------------" << endl;
+
+            Rect r = * ( faceFeature->getLeftEye()->getFeatureRect() );
+
+            imshow ( "image", grayFrame );
+            //cout << r.x << " " << r.y << endl;
+        }
+    }
 }

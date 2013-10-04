@@ -2,7 +2,12 @@
 
 #include "EyeFeature.h"
 
-PupilFeature EyeFeature::getPupil()
+EyeFeature::EyeFeature() : Feature()
 {
-    return this->pupil;
+
+}
+
+PupilFeature *EyeFeature::getPupil()
+{
+    return &pupil;
 }

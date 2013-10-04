@@ -14,7 +14,8 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     Pupil pupil;
 
     //--- Preprocessing steps ---//
-    cvtColor ( eye, eyeTemp, CV_BGR2GRAY );
+    //cvtColor ( eye, eyeTemp, CV_BGR2GRAY );
+    eyeTemp = eye.clone();
 
     //--- detecting the pupil ---//
     threshold ( eyeTemp, eyeTemp, 50, 225, CV_THRESH_BINARY ); // low value needed for pupil detection.
@@ -25,7 +26,7 @@ Pupil PupilDetector::detectPupil ( Mat eye )
 
     Canny ( eyeTemp.clone(), eyeTemp, cannyThreshold, cannyThreshold * cannyRatio, 3, true );
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-    drawContours ( eyeTemp, contours, -1, Scalar ( 255, 255, 255 ), -1 );
+    //drawContours ( eyeTemp, contours, -1, Scalar ( 255, 255, 255 ), -1 );
 
     vector<vector<Point>> contours_poly ( contours.size() );
     vector<Rect> boundRect ( contours.size() );

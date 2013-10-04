@@ -5,5 +5,6 @@ class EyeFeature : public  Feature {
 private:
     PupilFeature pupil;
 public:
-    PupilFeature getPupil();
+    EyeFeature();
+    PupilFeature *getPupil();
 };

@@ -1,6 +1,9 @@
 #pragma once
 #include "Feature.h"
 #include "FaceFeature.h";
+#include <list>
+
+#define FEATURE_ARRAY_LENGTH  30
 
 ///<summary>
 ///A collection of for Feature instances which implements as a fixed size collection.
@@ -9,12 +12,14 @@ class FeatureCollection {
 private:
     int counter;
     int size;
-    FaceFeature featureArray[FEATURE_ARRAY_LENGTH];
+    FaceFeature **featureArray;
+    std::list<FaceFeature> features;
 public:
     FeatureCollection ( );
+    ~FeatureCollection();
     ///<summary>
     ///
     ///</summary>
-    FaceFeature getFeature ( int indexFromCurrent );
-    void addFeature ( FaceFeature feature );
+    FaceFeature *getFeature ( int indexFromCurrent );
+    void addFeature ( FaceFeature *feature );
 };
