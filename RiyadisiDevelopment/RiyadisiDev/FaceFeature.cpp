@@ -3,32 +3,28 @@
 #include "FaceFeature.h"
 FaceFeature::FaceFeature()
 {
-    nose = new NoseFeature();
-    leftEye = new EyeFeature();
-    rightEye = new EyeFeature();
-    mouth = new MouthFeature();
 }
-NoseFeature *FaceFeature::getNose()
+NoseFeature FaceFeature::getNose()
 {
     return nose;
 }
-EyeFeature *FaceFeature::getLeftEye()
+EyeFeature &FaceFeature::getLeftEye()
 {
     return leftEye;
 }
-EyeFeature *FaceFeature::getRightEye()
+EyeFeature &FaceFeature::getRightEye()
 {
     return rightEye;
 }
-MouthFeature *FaceFeature::getMouth()
+MouthFeature FaceFeature::getMouth()
 {
     return mouth;
 }
-Mat *FaceFeature::getImage()
+Mat FaceFeature::getImage()
 {
     return image;
 }
-void FaceFeature::setImage ( Mat *newImage )
+void FaceFeature::setImage ( Mat newImage )
 {
     image = newImage;
 }

@@ -12,13 +12,13 @@ class FaceFeatureManager {
 public:
     FaceFeatureManager ( void );
     ~FaceFeatureManager ( void );
-    FeatureCollection *getFeatureCollection();
-    FaceFeature *findFeatures ( Mat image );
-    NoseFeature findNoseFeature ( Mat image, Rect roi );
-    EyeFeature findLeftEyeFeature ( Mat image, Rect roi );
-    EyeFeature findRightEyeFeature ( Mat image, Rect roi );
-    MouthFeature findMouthFeature ( Mat image, Rect roi );
-    PupilFeature findPupilFeature ( Mat image, Rect roi );
+    FeatureCollection getFeatureCollection();
+    void findFeatures ( Mat image, FaceFeature &faceFeature );
+    void findNoseFeature ( Mat image, Rect roi, NoseFeature &noseFeature );
+    void findLeftEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
+    void findRightEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
+    void findMouthFeature ( Mat image, Rect roi, MouthFeature &mouthFeature );
+    void findPupilFeature ( Mat image, Rect roi, PupilFeature &pupilFeature );
 private:
-    FeatureCollection *features;
+    FeatureCollection features;
 };

@@ -6,7 +6,7 @@ Feature::Feature()
 {
     available = false;
     rotation = 0.0f;
-    featureRect = new Rect();
+    //featureRect = new Rect();
 }
 
 bool Feature::isAvailable()
@@ -21,11 +21,11 @@ void Feature::setRotation ( float rotation )
 {
     this->rotation = rotation;
 }
-Rect *Feature::getFeatureRect()
+Rect Feature::getFeatureRect()
 {
     return featureRect;
 }
-void Feature::setFeatureRect ( Rect *rect )
+void Feature::setFeatureRect ( Rect rect )
 {
     this->featureRect = rect;
 }

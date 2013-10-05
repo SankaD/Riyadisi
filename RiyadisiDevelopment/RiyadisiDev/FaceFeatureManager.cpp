@@ -6,16 +6,15 @@
 
 FaceFeatureManager::FaceFeatureManager ( void )
 {
-    features = new FeatureCollection();
-}
 
+}
 FaceFeatureManager::~FaceFeatureManager ( void )
 {
 }
 
-FaceFeature *FaceFeatureManager::findFeatures ( Mat image )
+void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
 {
-    FaceFeature *faceFeature = new FaceFeature();
+    //FaceFeature faceFeature = new FaceFeature();
 
     FaceDetector faceDetector;
     EyeDetector eyeDetector;
@@ -36,7 +35,7 @@ FaceFeature *FaceFeatureManager::findFeatures ( Mat image )
     //cout << "FullTime : " << ( clock() - t ) << endl;
 
     if ( faces.size() == 0 ) {
-        return faceFeature;
+        return;
     }
 
     Rect face = faces[0];// this should be changed to the largest identified face
@@ -48,41 +47,40 @@ FaceFeature *FaceFeatureManager::findFeatures ( Mat image )
     face.width *= DOWNSAMPLE_CONSTANT;
 
     Mat faceImage = image ( face );
-    faceFeature->setAvailable ( true );
-    faceFeature->setFeatureRect ( &face );
-    faceFeature->setImage ( &faceImage ) ;
+    faceFeature.setAvailable ( true );
+    faceFeature.setFeatureRect ( face );
+    faceFeature.setImage ( faceImage ) ;
 
 
     // handle the eye regions
     // --- handling the left eye
     Rect leftEye, rightEye;
     vector<Rect> eyes;
-    eyes = eyeDetector.detect (  * ( faceFeature->getImage() )  );
+    eyes = eyeDetector.detect (   ( faceFeature.getImage() )  );
 
-    float midX =  faceFeature->getFeatureRect()->width  / 2;
+    float midX =  faceFeature.getFeatureRect().width  / 2;
     if ( eyes.size() > 0 ) {
 
         if ( eyes[0].x + eyes[0].width / 2 < midX ) {
             leftEye = eyes[0];
-            faceFeature->getLeftEye()->setFeatureRect ( &leftEye );
+            faceFeature.getLeftEye().setFeatureRect ( leftEye );
             // faceFeature.getLeftEye().setFeatureRect ( leftEye );
-            faceFeature->getLeftEye()->setAvailable ( true );
+            faceFeature.getLeftEye().setAvailable ( true );
         } else {
             rightEye = eyes[0];
-            faceFeature->getRightEye()->setFeatureRect ( &rightEye );
-            faceFeature->getRightEye()->setAvailable ( true );
+            faceFeature.getRightEye().setFeatureRect ( rightEye );
+            faceFeature.getRightEye().setAvailable ( true );
         }
-
 
         if ( eyes.size() > 1 ) {
             if ( eyes[1].x + eyes[1].width / 2 > midX ) {
                 rightEye = eyes[1];
-                faceFeature->getRightEye()->setFeatureRect ( &rightEye );
-                faceFeature->getRightEye()->setAvailable ( true );
+                faceFeature.getRightEye().setFeatureRect ( rightEye );
+                faceFeature.getRightEye().setAvailable ( true );
             } else {
                 leftEye = eyes[1];
-                faceFeature->getLeftEye()->setFeatureRect ( &leftEye );
-                faceFeature->getLeftEye()->setAvailable ( true );
+                faceFeature.getLeftEye().setFeatureRect ( leftEye );
+                faceFeature.getLeftEye().setAvailable ( true );
             }
         }
     }
@@ -92,18 +90,18 @@ FaceFeature *FaceFeatureManager::findFeatures ( Mat image )
     // handle the nose region
 
     // handler the pupil regions
-    if ( faceFeature->getRightEye()->isAvailable() ) {
+    if ( faceFeature.getRightEye().isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
-        faceFeature->getRightEye()->getPupil()->setCenterPoint ( &pupil.getPupilLocation().getCenter() );
+        faceFeature.getRightEye().getPupil().setCenterPoint ( pupil.getPupilLocation().getCenter() );
     }
-    if ( faceFeature->getLeftEye()->isAvailable() ) {
+    if ( faceFeature.getLeftEye().isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( leftEye ) );
-        faceFeature->getLeftEye()->getPupil()->setCenterPoint ( &pupil.getPupilLocation().getCenter() );
+        faceFeature.getLeftEye().getPupil().setCenterPoint ( pupil.getPupilLocation().getCenter() );
     }
-    return faceFeature;
+    // return faceFeature;
 }
 
-FeatureCollection *FaceFeatureManager::getFeatureCollection()
+FeatureCollection FaceFeatureManager::getFeatureCollection()
 {
     return features;
 }

@@ -15,17 +15,17 @@ using namespace std;
 ///</summary>
 class FaceFeature : public Feature {
 private:
-    NoseFeature *nose;
-    EyeFeature *leftEye;
-    EyeFeature *rightEye;
-    MouthFeature *mouth;
-    Mat *image;
+    NoseFeature nose;
+    EyeFeature leftEye;
+    EyeFeature rightEye;
+    MouthFeature mouth;
+    Mat image;
 public:
     FaceFeature();
-    NoseFeature *getNose();
-    EyeFeature *getLeftEye();
-    EyeFeature *getRightEye();
-    MouthFeature *getMouth();
-    Mat *getImage();
-    void setImage ( Mat *image ) ;
+    NoseFeature getNose();
+    EyeFeature &getLeftEye();
+    EyeFeature &getRightEye();
+    MouthFeature getMouth();
+    Mat getImage();
+    void setImage ( Mat image ) ;
 };

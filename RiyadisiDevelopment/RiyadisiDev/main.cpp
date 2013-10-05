@@ -157,16 +157,22 @@ int main ( int argc, char **argv )
 
             time_t t = clock();
 
-            FaceFeature *faceFeature = featureManager.findFeatures ( grayFrame );
+            FaceFeature faceFeature = featureManager.getFeatureCollection().getNext();
+            featureManager.findFeatures ( grayFrame , faceFeature );
+
             //cout << "HalfTime : " << ( clock() - t ) << endl;
-            featureManager.getFeatureCollection()->addFeature ( faceFeature );
+            //featureManager.getFeatureCollection()->addFeature ( faceFeature );
 
             cout << "FullTime : " << ( clock() - t ) << endl;
             cout << "---------------------------------" << endl;
 
-            Rect r = * ( faceFeature->getLeftEye()->getFeatureRect() );
+            Rect eyeRect =   faceFeature.getLeftEye().getFeatureRect() ;
+            Rect faceRect = faceFeature.getFeatureRect();
 
+            circle ( grayFrame, Point2f ( faceRect.x + eyeRect.x + eyeRect.width / 2, faceRect.y + eyeRect.y + eyeRect.height / 2 ),
+                     ( eyeRect.width + eyeRect.height ) / 2, Scalar ( 255, 255, 255 ), 2 );
             imshow ( "image", grayFrame );
+
             //cout << r.x << " " << r.y << endl;
         }
     }

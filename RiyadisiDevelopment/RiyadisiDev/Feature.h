@@ -13,7 +13,7 @@ using namespace std;
 ///</summary>
 class Feature {
 private:
-    Rect *featureRect;
+    Rect featureRect;
     float rotation;
     bool available;
 public:
@@ -22,7 +22,7 @@ public:
     ///Used to get the location of the feature
     ///</summary>
     ///<returns>The location of the feature</returns>
-    Rect *getFeatureRect();
+    Rect getFeatureRect();
 
     ///<summary>
     ///Gets the rotation of the feature
@@ -37,5 +37,5 @@ public:
     bool isAvailable();
 
     void setAvailable ( bool availability );
-    void setFeatureRect ( Rect *featureRect );
+    void setFeatureRect ( Rect featureRect );
 };

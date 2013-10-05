@@ -6,5 +6,5 @@ private:
     PupilFeature pupil;
 public:
     EyeFeature();
-    PupilFeature *getPupil();
+    PupilFeature getPupil();
 };
