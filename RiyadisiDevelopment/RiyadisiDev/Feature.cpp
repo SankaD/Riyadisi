@@ -29,3 +29,13 @@ void Feature::setFeatureRect ( Rect rect )
 {
     this->featureRect = rect;
 }
+Rect Feature::getRelativeRect ( Rect rect )
+{
+    Rect returnValue;
+    returnValue.x = this->featureRect.x + rect.x;
+    returnValue.y = this->featureRect.y + rect.y;
+    returnValue.width = rect.width;
+    returnValue.height = rect.height;
+
+    return returnValue;
+}

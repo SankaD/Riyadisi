@@ -170,7 +170,13 @@ int main ( int argc, char **argv )
              circle ( grayFrame, Point2f ( gaze.x + faceFeature.getFeatureRect().x,
                                            gaze.y + faceFeature.getFeatureRect().y ),
                       10, Scalar ( 255, 255, 255 ), 3 );*/
-            imshow ( "image", grayFrame );
+            rectangle ( frame, faceFeature.getFeatureRect(), Scalar ( 255, 0, 255 ) );
+
+            Rect nose = faceFeature.getRelativeRect ( faceFeature.getNose().getFeatureRect() );
+            rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
+
+
+            imshow ( "image", frame );
 
 
         }

@@ -2,6 +2,7 @@
 #include "FaceDetector.h"
 #include "EyeDetector.h"
 #include "PupilDetector.h"
+#include "NoseDetector.h"
 #include <time.h>
 
 FaceFeatureManager::FaceFeatureManager ( void )
@@ -14,11 +15,10 @@ FaceFeatureManager::~FaceFeatureManager ( void )
 
 void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
 {
-    //FaceFeature faceFeature = new FaceFeature();
-
     FaceDetector faceDetector;
     EyeDetector eyeDetector;
     PupilDetector pupilDetector;
+    NoseDetector noseDetector;
 
     // handle the face region
     vector<Rect> faces;
@@ -26,13 +26,9 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
     // downsampling for increased performance
     Mat downsampledImage;
 
-    // time_t t = clock();
-
     pyrDown ( image, downsampledImage, Size ( ( image.cols  ) / DOWNSAMPLE_CONSTANT, ( image.rows  ) / DOWNSAMPLE_CONSTANT ) );
 
     faces = faceDetector.detect ( downsampledImage );
-
-    //cout << "FullTime : " << ( clock() - t ) << endl;
 
     if ( faces.size() == 0 ) {
         return;
@@ -41,8 +37,8 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
     Rect face = faces[0];// this should be changed to the largest identified face
 
     // rescaling into the original size
-    face.x *= DOWNSAMPLE_CONSTANT;
-    face.y *= DOWNSAMPLE_CONSTANT;
+    face.x *= DOWNSAMPLE_CONSTANT ;
+    face.y *= DOWNSAMPLE_CONSTANT ;
     face.height *= DOWNSAMPLE_CONSTANT;
     face.width *= DOWNSAMPLE_CONSTANT;
 
@@ -52,8 +48,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
     faceFeature.setImage ( faceImage ) ;
 
 
-    // handle the eye regions
-    // --- handling the left eye
+    //------------ handle the eye regions
     Rect leftEye, rightEye;
     vector<Rect> eyes;
     eyes = eyeDetector.detect (   ( faceFeature.getImage() )  );
@@ -85,11 +80,20 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature &faceFeature )
         }
     }
 
-    // handle the mouth region
+    //------------ handle the mouth region
 
-    // handle the nose region
+    //------------ handle the nose region
+    Rect nose;
+    vector<Rect> noseResults = noseDetector.detect ( faceFeature.getImage() );
 
-    // handler the pupil regions
+    //selecting the best rectangle for nose
+    if ( noseResults.size() > 0 ) {
+        nose = noseResults[0];
+        faceFeature.getNose().setFeatureRect ( nose );
+        faceFeature.getNose().setAvailable ( true );
+    }
+
+    //------------ handler the pupil regions
     if ( faceFeature.getRightEye().isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
         faceFeature.getRightEye().getPupil().setCenterPoint ( pupil.getPupilLocation().getCenter() );

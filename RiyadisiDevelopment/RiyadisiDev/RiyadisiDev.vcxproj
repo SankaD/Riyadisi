@@ -90,6 +90,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MouthFeature.cpp" />
     <ClCompile Include="Neuron.cpp" />
+    <ClCompile Include="NoseDetector.cpp" />
     <ClCompile Include="NoseFeature.cpp" />
     <ClCompile Include="Pupil.cpp" />
     <ClCompile Include="PupilDetector.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="MouthFeature.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="Nose.h" />
+    <ClInclude Include="NoseDetector.h" />
     <ClInclude Include="NoseFeature.h" />
     <ClInclude Include="Pupil.h" />
     <ClInclude Include="PupilDetector.h" />

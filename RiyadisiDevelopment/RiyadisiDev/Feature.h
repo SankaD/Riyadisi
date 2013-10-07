@@ -38,4 +38,10 @@ public:
 
     void setAvailable ( bool availability );
     void setFeatureRect ( Rect featureRect );
+
+    ///<summary>
+    ///Converts the provided rectangle which is related to this feature
+    ///into a rectangle which is related to the parent of this feature.
+    ///</summary>
+    Rect getRelativeRect ( Rect rect );
 };

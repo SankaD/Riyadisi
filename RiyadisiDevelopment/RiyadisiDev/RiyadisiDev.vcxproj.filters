@@ -151,6 +151,12 @@
     <Filter Include="Source Files\MainFeatures\SensoryProcessing\FeatureManaging">
       <UniqueIdentifier>{2f2c4d64-6284-49ed-994f-d29ac8039709}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\MainFeatures\SensoryProcessing\NoseDetection">
+      <UniqueIdentifier>{8720a1c1-e250-46ce-814e-adea5e50595f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\SensoryProcessing\NoseDetection">
+      <UniqueIdentifier>{46b66c5e-f431-4ade-b2be-c625ddc71713}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
@@ -218,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="DecisionEngine.cpp">
       <Filter>Source Files\main_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="NoseDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +369,9 @@
     </ClInclude>
     <ClInclude Include="DecisionEngine.h">
       <Filter>Header Files\main_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="NoseDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
