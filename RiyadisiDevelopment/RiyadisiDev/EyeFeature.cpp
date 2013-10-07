@@ -7,7 +7,7 @@ EyeFeature::EyeFeature() : Feature()
 
 }
 
-PupilFeature EyeFeature::getPupil()
+PupilFeature &EyeFeature::getPupil()
 {
     return pupil;
 }

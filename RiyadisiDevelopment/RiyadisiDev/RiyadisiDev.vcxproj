@@ -73,6 +73,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeDetector.cpp" />
@@ -120,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
     <ClInclude Include="EyeDetector.h" />

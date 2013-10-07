@@ -48,6 +48,7 @@ Pupil PupilDetector::detectPupil ( Mat eye )
         Circle c;
         c.setCenter ( center );
         c.setRadius ( radius );
+        pupil.setPupilLocation ( c );
     }
     return pupil;
 }

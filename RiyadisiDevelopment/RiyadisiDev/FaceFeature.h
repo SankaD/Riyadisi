@@ -22,10 +22,32 @@ private:
     Mat image;
 public:
     FaceFeature();
-    NoseFeature getNose();
+
+    ///<summary>
+    ///Gets a reference to the NoseFeature instance within the instance
+    ///</summary>
+    ///<returns>A reference to the NoseFeature instance</returns>
+    NoseFeature &getNose();
+
+    ///<summary>
+    ///Gets a 'reference' to the EyeFeature for left eye
+    ///</summary>
+    ///<returns>A reference to the left EyeFeature</returns>
     EyeFeature &getLeftEye();
+
+    ///<summary>
+    ///Gets a 'reference' to the EyeFeature for right eye
+    ///</summary>
+    ///<returns>A reference to the right EyeFeature</returns>
     EyeFeature &getRightEye();
-    MouthFeature getMouth();
+
+    ///<summary>
+    ///Gets a reference to the MouthFeature instance within this instance
+    ///</summary>
+    ///<returns>A reference to the MouthFeature instance</returns>
+    MouthFeature &getMouth();
+
+    Point2f getGazePoint();
     Mat getImage();
     void setImage ( Mat image ) ;
 };

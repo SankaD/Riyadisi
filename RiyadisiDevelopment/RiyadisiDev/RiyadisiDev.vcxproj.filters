@@ -216,6 +216,9 @@
     <ClCompile Include="PupilFeature.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
     </ClCompile>
+    <ClCompile Include="DecisionEngine.cpp">
+      <Filter>Source Files\main_engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -354,6 +357,9 @@
     </ClInclude>
     <ClInclude Include="FeatureCollection.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\FeatureManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="DecisionEngine.h">
+      <Filter>Header Files\main_engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

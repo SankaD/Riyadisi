@@ -12,15 +12,16 @@ class FeatureCollection {
 private:
     int counter;
     int size;
-    const FaceFeature featureArray[FEATURE_ARRAY_LENGTH];
-    std::list<FaceFeature> features;
+    int start;
+    FaceFeature featureArray[FEATURE_ARRAY_LENGTH];
+
 public:
     FeatureCollection ( );
     ~FeatureCollection();
     ///<summary>
     ///
     ///</summary>
-    FaceFeature getFeature ( int indexFromCurrent );
+    FaceFeature &getFeature ( int indexFromCurrent );
     //void addFeature ( FaceFeature feature );
-    FaceFeature FeatureCollection::getNext();
+    FaceFeature &FeatureCollection::getNext();
 };

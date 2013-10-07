@@ -160,20 +160,19 @@ int main ( int argc, char **argv )
             FaceFeature faceFeature = featureManager.getFeatureCollection().getNext();
             featureManager.findFeatures ( grayFrame , faceFeature );
 
-            //cout << "HalfTime : " << ( clock() - t ) << endl;
-            //featureManager.getFeatureCollection()->addFeature ( faceFeature );
 
             cout << "FullTime : " << ( clock() - t ) << endl;
             cout << "---------------------------------" << endl;
 
-            Rect eyeRect =   faceFeature.getLeftEye().getFeatureRect() ;
-            Rect faceRect = faceFeature.getFeatureRect();
+            /* Point2f gaze = faceFeature.getGazePoint();
 
-            circle ( grayFrame, Point2f ( faceRect.x + eyeRect.x + eyeRect.width / 2, faceRect.y + eyeRect.y + eyeRect.height / 2 ),
-                     ( eyeRect.width + eyeRect.height ) / 2, Scalar ( 255, 255, 255 ), 2 );
+             cout << gaze.x << " " << gaze.y << endl;
+             circle ( grayFrame, Point2f ( gaze.x + faceFeature.getFeatureRect().x,
+                                           gaze.y + faceFeature.getFeatureRect().y ),
+                      10, Scalar ( 255, 255, 255 ), 3 );*/
             imshow ( "image", grayFrame );
 
-            //cout << r.x << " " << r.y << endl;
+
         }
     }
 }

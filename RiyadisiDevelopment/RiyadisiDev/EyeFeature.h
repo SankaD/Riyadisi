@@ -6,5 +6,10 @@ private:
     PupilFeature pupil;
 public:
     EyeFeature();
-    PupilFeature getPupil();
+
+    ///<summary>
+    ///Gets a 'reference' to the PupilFeature in the eye
+    ///</summary>
+    ///<returns>A reference to the PupilFeature</returns>
+    PupilFeature &getPupil();
 };
