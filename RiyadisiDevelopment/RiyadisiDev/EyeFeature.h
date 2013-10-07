@@ -11,5 +11,5 @@ public:
     ///Gets a 'reference' to the PupilFeature in the eye
     ///</summary>
     ///<returns>A reference to the PupilFeature</returns>
-    PupilFeature &getPupil();
+    PupilFeature *getPupil();
 };

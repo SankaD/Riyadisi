@@ -138,6 +138,7 @@ int main ( int argc, char **argv )
     CvCapture *capture;
     Mat frame, grayFrame;
     FaceFeatureManager featureManager;
+    bool firstRun = true;
 
 
     capture = cvCaptureFromAVI ( "G://temp/me_with_ir.wmv" );
@@ -157,9 +158,44 @@ int main ( int argc, char **argv )
 
             time_t t = clock();
 
-            FaceFeature faceFeature = featureManager.getFeatureCollection().getNext();
-            featureManager.findFeatures ( grayFrame , faceFeature );
+            FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext() ;
 
+            if ( firstRun ) {
+                Rect r ;
+                r.x = 0;
+                r.y = 0;
+                r.width = grayFrame.cols;
+                r.height = grayFrame.rows;
+
+                featureManager.findFeatures ( grayFrame , faceFeature, r );
+
+                firstRun = false;
+            } else {
+                FaceFeature *previous = featureManager.getFeatureCollection()->getFeature ( 1 );
+                Rect r ;
+                if ( previous->isAvailable() ) {
+                    r = previous->getFeatureRect();
+                    r.x = r.x - r.width / 2;
+                    r.y = r.y - r.height / 2;
+                    if ( r.x < 0 ) { r.x = 0; }
+                    if ( r.y < 0 ) { r.y = 0; }
+
+                    r.width = r.width * 2;
+                    r.height = r.height * 2;
+                    if ( r.width > grayFrame.cols ) {
+                        r.width = grayFrame.cols - r.x;
+                    }
+                    if ( r.height > grayFrame.rows ) {
+                        r.height = grayFrame.rows - r.y;
+                    }
+                } else {
+                    r.x = 0;
+                    r.y = 0;
+                    r.width = grayFrame.cols;
+                    r.height = grayFrame.rows;
+                }
+                featureManager.findFeatures ( grayFrame , faceFeature, r );
+            }
 
             cout << "FullTime : " << ( clock() - t ) << endl;
             cout << "---------------------------------" << endl;
@@ -170,11 +206,10 @@ int main ( int argc, char **argv )
              circle ( grayFrame, Point2f ( gaze.x + faceFeature.getFeatureRect().x,
                                            gaze.y + faceFeature.getFeatureRect().y ),
                       10, Scalar ( 255, 255, 255 ), 3 );*/
-            rectangle ( frame, faceFeature.getFeatureRect(), Scalar ( 255, 0, 255 ) );
+            rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
 
-            Rect nose = faceFeature.getRelativeRect ( faceFeature.getNose().getFeatureRect() );
+            Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
             rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
-
 
             imshow ( "image", frame );
 

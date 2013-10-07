@@ -15,7 +15,7 @@ bool Feature::isAvailable()
 }
 void Feature::setAvailable ( bool availability )
 {
-    available = availability;
+    this->available = availability;
 }
 void Feature::setRotation ( float rotation )
 {
@@ -27,7 +27,10 @@ Rect Feature::getFeatureRect()
 }
 void Feature::setFeatureRect ( Rect rect )
 {
-    this->featureRect = rect;
+    this->featureRect.x = rect.x;
+    featureRect.y = rect.y;
+    featureRect.width = rect.width;
+    featureRect.height = rect.height;
 }
 Rect Feature::getRelativeRect ( Rect rect )
 {

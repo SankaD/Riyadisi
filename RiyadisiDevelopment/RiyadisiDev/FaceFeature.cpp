@@ -4,21 +4,21 @@
 FaceFeature::FaceFeature()
 {
 }
-NoseFeature &FaceFeature::getNose()
+NoseFeature *FaceFeature::getNose()
 {
-    return nose;
+    return &nose;
 }
-EyeFeature &FaceFeature::getLeftEye()
+EyeFeature *FaceFeature::getLeftEye()
 {
-    return leftEye;
+    return &leftEye;
 }
-EyeFeature &FaceFeature::getRightEye()
+EyeFeature *FaceFeature::getRightEye()
 {
-    return rightEye;
+    return &rightEye;
 }
-MouthFeature &FaceFeature::getMouth()
+MouthFeature *FaceFeature::getMouth()
 {
-    return mouth;
+    return &mouth;
 }
 Mat FaceFeature::getImage()
 {

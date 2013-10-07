@@ -21,7 +21,8 @@ public:
     ///<summary>
     ///
     ///</summary>
-    FaceFeature &getFeature ( int indexFromCurrent );
+    FaceFeature *getFeature ( int indexFromCurrent );
     //void addFeature ( FaceFeature feature );
-    FaceFeature &FeatureCollection::getNext();
+    FaceFeature *FeatureCollection::getNext();
+    int getSize();
 };
