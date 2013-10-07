@@ -140,8 +140,7 @@ int main ( int argc, char **argv )
     FaceFeatureManager featureManager;
     bool firstRun = true;
 
-
-    capture = cvCaptureFromAVI ( "G://temp/me_with_ir.wmv" );
+    capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
 
     if ( capture ) {
         while ( true ) {
@@ -206,10 +205,16 @@ int main ( int argc, char **argv )
              circle ( grayFrame, Point2f ( gaze.x + faceFeature.getFeatureRect().x,
                                            gaze.y + faceFeature.getFeatureRect().y ),
                       10, Scalar ( 255, 255, 255 ), 3 );*/
-            rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
+
 
             Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
+            Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
+            Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
+
             rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
+            rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
+            rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
+            rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 
             imshow ( "image", frame );
 
