@@ -12,4 +12,6 @@ public:
     ///</summary>
     ///<returns>A reference to the PupilFeature</returns>
     PupilFeature *getPupil();
+
+    virtual void clearFeature();
 };

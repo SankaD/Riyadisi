@@ -234,6 +234,9 @@
     <ClCompile Include="SystemState.cpp">
       <Filter>Source Files\main_engine</Filter>
     </ClCompile>
+    <ClCompile Include="NoddingOffDetector.cpp">
+      <Filter>Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">

@@ -50,4 +50,5 @@ public:
     Point2f getGazePoint();
     Mat getImage();
     void setImage ( Mat image ) ;
+    virtual void clearFeature();
 };

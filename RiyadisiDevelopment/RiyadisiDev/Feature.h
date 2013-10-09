@@ -51,4 +51,9 @@ public:
     ///</summary>
     ///<returns>The center point</returns>
     Point2f getCenterPoint();
+
+    ///<summary>
+    ///Clears all the data from the feature instance
+    ///</summary>
+    virtual void clearFeature();
 };

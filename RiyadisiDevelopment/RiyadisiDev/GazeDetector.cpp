@@ -21,6 +21,12 @@ Gaze GazeDetector::detectGaze ( FaceFeature faceFeature )
 {
     Gaze gaze;
 
+    Rect leftEyeRect = faceFeature.getLeftEye()->getFeatureRect();
+    Rect rightEyeRect = faceFeature.getRightEye()->getFeatureRect();
+    Point2f leftPupil =  faceFeature.getLeftEye()->getPupil()->getCenterPoint();
+    Point2f rightPupil = faceFeature.getRightEye()->getPupil()->getCenterPoint();
+
+
 
     return gaze;
 }

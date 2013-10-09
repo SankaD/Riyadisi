@@ -21,3 +21,9 @@ PupilFeature::PupilFeature()
 PupilFeature::~PupilFeature()
 {
 }
+void PupilFeature::clearFeature()
+{
+    Feature::clearFeature();
+    centerPoint.x = 0;
+    centerPoint.y = 0;
+}

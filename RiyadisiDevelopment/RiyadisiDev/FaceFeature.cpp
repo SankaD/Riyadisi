@@ -46,3 +46,11 @@ Point2f FaceFeature::getGazePoint()
     return point;*/
     throw new exception ( "Not implemented yet" );
 }
+void FaceFeature::clearFeature()
+{
+    Feature::clearFeature();
+    nose.clearFeature();
+    leftEye.clearFeature();
+    rightEye.clearFeature();
+    mouth.clearFeature();
+}
