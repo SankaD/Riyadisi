@@ -1,5 +1,8 @@
 #include "Gaze.h"
 
+using namespace cv;
+using namespace std;
+
 Gaze::Gaze ( void )
 {
 }

@@ -42,3 +42,15 @@ Rect Feature::getRelativeRect ( Rect rect )
 
     return returnValue;
 }
+Point2f Feature::getCenterPoint()
+{
+    Point2f point;
+    point.x = featureRect.x + featureRect.width / 2;
+    point.y = featureRect.y + featureRect.height / 2;
+
+    return point;
+}
+Point2f Feature::getRelativePoint ( Point2f point )
+{
+    throw new exception ( "Not implemented yet" );
+}

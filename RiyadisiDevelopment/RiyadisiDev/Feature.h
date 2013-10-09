@@ -1,11 +1,10 @@
 #pragma once
+
 #include <opencv2\objdetect\objdetect.hpp>
 #include <stdio.h>
 
 using namespace cv;
 using namespace std;
-
-
 
 ///<summary>
 ///Represents a general feature used in the feature managing in the system.
@@ -44,4 +43,12 @@ public:
     ///into a rectangle which is related to the parent of this feature.
     ///</summary>
     Rect getRelativeRect ( Rect rect );
+
+    Point2f getRelativePoint ( Point2f point );
+
+    ///<summary>
+    ///Gets the center point of the feature.
+    ///</summary>
+    ///<returns>The center point</returns>
+    Point2f getCenterPoint();
 };

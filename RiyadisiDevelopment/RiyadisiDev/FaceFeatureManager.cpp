@@ -14,8 +14,6 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 {
     Mat relatedImage = image ( roi );
 
-    //cout << roi.width << " " << roi.height << endl;
-
     // handle the face region
     vector<Rect> faces;
 

@@ -228,6 +228,12 @@
     <ClCompile Include="NoseDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
     </ClCompile>
+    <ClCompile Include="MainProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemState.cpp">
+      <Filter>Source Files\main_engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
