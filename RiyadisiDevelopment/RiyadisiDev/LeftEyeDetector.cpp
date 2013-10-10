@@ -1,10 +1,10 @@
 
-#include "EyeDetector.h"
+#include "LeftEyeDetector.h"
 
 using namespace std;
 using namespace cv;
 
-EyeDetector::EyeDetector ( void ) :
+LeftEyeDetector::LeftEyeDetector ( void ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" )
 {
 	scale = 1.5;
@@ -13,7 +13,7 @@ EyeDetector::EyeDetector ( void ) :
 }
 
 
-vector<Rect> EyeDetector::optimizeDetection ( vector<Rect> data )
+vector<Rect> LeftEyeDetector::optimizeDetection ( vector<Rect> data )
 {
     vector<Rect> optimizedResults;
     // if the number of eyes detected within a face is greater than 2
@@ -23,7 +23,7 @@ vector<Rect> EyeDetector::optimizeDetection ( vector<Rect> data )
     return optimizedResults;
 }
 
-EyeDetector::~EyeDetector()
+LeftEyeDetector::~LeftEyeDetector()
 {
 
 }

@@ -1,10 +1,10 @@
 #pragma once
 #include "Detector.h"
 
-class EyeDetector: public Detector {
+class LeftEyeDetector: public Detector {
 public:
-    EyeDetector();
-    ~EyeDetector();
+    LeftEyeDetector();
+    ~LeftEyeDetector();
     vector<Rect> optimizeDetection ( vector<Rect> data );
 private:
     string eyeCascadeName;

@@ -59,13 +59,12 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //eyes = eyeDetector.detect ( ( faceFeature->getImage() )  );
 
     //detect left eye
-    //if(leftEyeROI.area() == 0){
     leftEyeROI.x = 0;
     leftEyeROI.y = faceImage.rows/4;
     leftEyeROI.width = faceImage.cols / 2;
     leftEyeROI.height = faceImage.rows / 4;
-    //}
-    eyes = eyeDetector.detect ( faceImage ( leftEyeROI ) );
+    
+    eyes = leftEyeDetector.detect ( faceImage ( leftEyeROI ) );
 	
     if ( eyes.size() > 0 ) {
         leftEye = eyes[0];
@@ -74,17 +73,15 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
         faceFeature->getLeftEye()->setFeatureRect ( leftEye );
         faceFeature->getLeftEye()->setAvailable ( true );
-		//imshow("test", faceImage ( leftEye ));
-    }
+	}
 	
     //detect right eye
-    //if(rightEyeROI.area() == 0){
     rightEyeROI.x = faceImage.cols / 2;
     rightEyeROI.y = faceImage.rows/4;
     rightEyeROI.width = faceImage.cols / 2;
     rightEyeROI.height = faceImage.rows / 4;
-    //}
-    eyes = eyeDetector.detect ( faceImage ( rightEyeROI ) );
+    
+    eyes = rightEyeDetector.detect ( faceImage ( rightEyeROI ) );
 
     if ( eyes.size() > 0 ) {
         rightEye = eyes[0];
@@ -124,12 +121,11 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
     //------------ handle the mouth region
     Rect mouth;
-    //if(mouthROI.area() == 0){
     mouthROI.x = 0;
     mouthROI.y = faceImage.rows * 2 / 3;
     mouthROI.width = faceImage.cols;
     mouthROI.height = faceImage.rows / 3;
-    //}
+   
     vector<Rect> mouthResults = mouthDetector.detect ( faceImage ( mouthROI ) );
 
     //selecting the best rectangle for nose

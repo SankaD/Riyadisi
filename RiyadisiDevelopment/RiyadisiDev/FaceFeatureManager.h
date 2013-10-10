@@ -3,7 +3,8 @@
 #include "FeatureCollection.h"
 #include "FaceFeature.h"
 #include "FaceDetector.h"
-#include "EyeDetector.h"
+#include "LeftEyeDetector.h"
+#include "RightEyeDetector.h"
 #include "PupilDetector.h"
 #include "NoseDetector.h"
 #include "MouthDetector.h"
@@ -26,7 +27,8 @@ public:
 private:
     FeatureCollection features;
     FaceDetector faceDetector;
-    EyeDetector eyeDetector;
+    LeftEyeDetector leftEyeDetector;
+	RightEyeDetector rightEyeDetector;
 	MouthDetector mouthDetector;
     PupilDetector pupilDetector;
     NoseDetector noseDetector;

@@ -165,9 +165,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EyeDetector.cpp">
-      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
-    </ClCompile>
     <ClCompile Include="FaceDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
     </ClCompile>
@@ -243,6 +240,12 @@
     <ClCompile Include="MouthDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClCompile>
+    <ClCompile Include="LeftEyeDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="RightEyeDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -315,9 +318,6 @@
   <ItemGroup>
     <ClInclude Include="Neuron.h">
       <Filter>Header Files\main_engine\neural_network</Filter>
-    </ClInclude>
-    <ClInclude Include="EyeDetector.h">
-      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
     <ClInclude Include="FaceDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
@@ -396,6 +396,12 @@
     </ClInclude>
     <ClInclude Include="FaceNod.h">
       <Filter>Header Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="RightEyeDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftEyeDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -85,7 +85,7 @@
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="Eye.cpp" />
-    <ClCompile Include="EyeDetector.cpp" />
+    <ClCompile Include="LeftEyeDetector.cpp" />
     <ClCompile Include="EyeFeature.cpp" />
     <ClCompile Include="Face.cpp" />
     <ClCompile Include="FaceDetector.cpp" />
@@ -108,6 +108,7 @@
     <ClCompile Include="Pupil.cpp" />
     <ClCompile Include="PupilDetector.cpp" />
     <ClCompile Include="PupilFeature.cpp" />
+    <ClCompile Include="RightEyeDetector.cpp" />
     <ClCompile Include="SystemState.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +140,7 @@
     <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
-    <ClInclude Include="EyeDetector.h" />
+    <ClInclude Include="LeftEyeDetector.h" />
     <ClInclude Include="EyeFeature.h" />
     <ClInclude Include="Face.h" />
     <ClInclude Include="FaceDetector.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Pupil.h" />
     <ClInclude Include="PupilDetector.h" />
     <ClInclude Include="PupilFeature.h" />
+    <ClInclude Include="RightEyeDetector.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
