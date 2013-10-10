@@ -22,9 +22,9 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
     //pyrDown ( relatedImage, downsampledImage, Size ( ( relatedImage.cols  ) / DOWNSAMPLE_CONSTANT, ( relatedImage.rows  ) / DOWNSAMPLE_CONSTANT ) );
     downsampledImage = relatedImage.clone();
-	for(int i = 0; i < DOWNSAMPLE_CONSTANT/2; i++){
-		pyrDown ( downsampledImage, downsampledImage, Size ( ( downsampledImage.cols  ) / 2, ( downsampledImage.rows  ) / 2 ) );
-	}
+    for ( int i = 0; i < DOWNSAMPLE_CONSTANT / 2; i++ ) {
+        pyrDown ( downsampledImage, downsampledImage, Size ( ( downsampledImage.cols  ) / 2, ( downsampledImage.rows  ) / 2 ) );
+    }
 
     cout << "Finding eyes" << endl;
     faces = faceDetector.detect ( downsampledImage );
@@ -57,83 +57,83 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     Rect leftEye, rightEye;
     vector<Rect> eyes;
     //eyes = eyeDetector.detect ( ( faceFeature->getImage() )  );
-	
-	//detect left eye
-	//if(leftEyeROI.area() == 0){
-		leftEyeROI.x = 0;
-		leftEyeROI.y = 0;
-		leftEyeROI.width = faceImage.cols/2;
-		leftEyeROI.height = faceImage.rows/2;
-	//} 
-	eyes = eyeDetector.detect (faceImage(leftEyeROI));
 
-	if ( eyes.size() > 0 ) {
-		leftEye = eyes[0];
-		faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-		faceFeature->getLeftEye()->setAvailable ( true );
-	}
-
-	//detect right eye
-	//if(rightEyeROI.area() == 0){
-		rightEyeROI.x = faceImage.cols/2;
-		rightEyeROI.y = 0;
-		rightEyeROI.width = faceImage.cols/2;
-		rightEyeROI.height = faceImage.rows/2;
-	//}
-	eyes = eyeDetector.detect (faceImage(rightEyeROI));
-
-	if ( eyes.size() > 0 ) {
-		rightEye = eyes[0];
-		rightEye.x += rightEyeROI.x;
-		rightEye.y += rightEyeROI.y;
-
-		faceFeature->getRightEye()->setFeatureRect ( rightEye );
-		faceFeature->getRightEye()->setAvailable ( true );
-	}
-
-    //float midX =  faceFeature->getFeatureRect().width  / 2;
-    //if ( eyes.size() > 0 ) {
-
-    //    if ( eyes[0].x + eyes[0].width / 2 < midX ) {
-    //        leftEye = eyes[0];
-    //        faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-    //        // faceFeature.getLeftEye().setFeatureRect ( leftEye );
-    //        faceFeature->getLeftEye()->setAvailable ( true );
-    //    } else {
-    //        rightEye = eyes[0];
-    //        faceFeature->getRightEye()->setFeatureRect ( rightEye );
-    //        faceFeature->getRightEye()->setAvailable ( true );
-    //    }
-
-    //    if ( eyes.size() > 1 ) {
-    //        if ( eyes[1].x + eyes[1].width / 2 > midX ) {
-    //            rightEye = eyes[1];
-    //            faceFeature->getRightEye()->setFeatureRect ( rightEye );
-    //            faceFeature->getRightEye()->setAvailable ( true );
-    //        } else {
-    //            leftEye = eyes[1];
-    //            faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-    //            faceFeature->getLeftEye()->setAvailable ( true );
-    //        }
-    //    }
+    //detect left eye
+    //if(leftEyeROI.area() == 0){
+    leftEyeROI.x = 0;
+    leftEyeROI.y = 0;
+    leftEyeROI.width = faceImage.cols / 2;
+    leftEyeROI.height = faceImage.rows / 2;
     //}
+    eyes = eyeDetector.detect ( faceImage ( leftEyeROI ) );
+
+    if ( eyes.size() > 0 ) {
+        leftEye = eyes[0];
+        faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+        faceFeature->getLeftEye()->setAvailable ( true );
+    }
+
+    //detect right eye
+    //if(rightEyeROI.area() == 0){
+    rightEyeROI.x = faceImage.cols / 2;
+    rightEyeROI.y = 0;
+    rightEyeROI.width = faceImage.cols / 2;
+    rightEyeROI.height = faceImage.rows / 2;
+    //}
+    eyes = eyeDetector.detect ( faceImage ( rightEyeROI ) );
+
+    if ( eyes.size() > 0 ) {
+        rightEye = eyes[0];
+        rightEye.x += rightEyeROI.x;
+        rightEye.y += rightEyeROI.y;
+
+        faceFeature->getRightEye()->setFeatureRect ( rightEye );
+        faceFeature->getRightEye()->setAvailable ( true );
+    }
+
+    float midX =  faceFeature->getFeatureRect().width  / 2;
+    if ( eyes.size() > 0 ) {
+
+        if ( eyes[0].x + eyes[0].width / 2 < midX ) {
+            leftEye = eyes[0];
+            faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+            // faceFeature.getLeftEye().setFeatureRect ( leftEye );
+            faceFeature->getLeftEye()->setAvailable ( true );
+        } else {
+            rightEye = eyes[0];
+            faceFeature->getRightEye()->setFeatureRect ( rightEye );
+            faceFeature->getRightEye()->setAvailable ( true );
+        }
+
+        if ( eyes.size() > 1 ) {
+            if ( eyes[1].x + eyes[1].width / 2 > midX ) {
+                rightEye = eyes[1];
+                faceFeature->getRightEye()->setFeatureRect ( rightEye );
+                faceFeature->getRightEye()->setAvailable ( true );
+            } else {
+                leftEye = eyes[1];
+                faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+                faceFeature->getLeftEye()->setAvailable ( true );
+            }
+        }
+    }
 
     //------------ handle the mouth region
-	Rect mouth;
-	//if(mouthROI.area() == 0){
-		mouthROI.x = 0;
-		mouthROI.y = faceImage.rows*2/3;
-		mouthROI.width = faceImage.cols;
-		mouthROI.height = faceImage.rows/3;
-	//}
-	vector<Rect> mouthResults = mouthDetector.detect ( faceImage( mouthROI ) );
+    Rect mouth;
+    //if(mouthROI.area() == 0){
+    mouthROI.x = 0;
+    mouthROI.y = faceImage.rows * 2 / 3;
+    mouthROI.width = faceImage.cols;
+    mouthROI.height = faceImage.rows / 3;
+    //}
+    vector<Rect> mouthResults = mouthDetector.detect ( faceImage ( mouthROI ) );
 
     //selecting the best rectangle for nose
     if ( mouthResults.size() > 0 ) {
-		mouth = mouthResults[0];
+        mouth = mouthResults[0];
 
-		mouth.x += mouthROI.x;
-		mouth.y += mouthROI.y;
+        mouth.x += mouthROI.x;
+        mouth.y += mouthROI.y;
 
         faceFeature->getMouth()->setFeatureRect ( mouth );
         faceFeature->getMouth()->setAvailable ( true );
@@ -151,7 +151,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //}
 
     //------------ handler the pupil regions
-    /*if ( faceFeature->getRightEye()->isAvailable() ) {
+    if ( faceFeature->getRightEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
         if ( pupil.getPupilLocation().getRadius() > 0 ) {
             faceFeature->getRightEye()->getPupil()->setAvailable ( true );
@@ -164,7 +164,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             faceFeature->getLeftEye()->getPupil()->setAvailable ( true );
             faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
         }
-    }*/
+    }
     cout << "Finished finding features" << endl;
 }
 
