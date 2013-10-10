@@ -12,7 +12,7 @@ int prv_y_cordinate=0;
 bool NoddingOffDetector::noddingOffDetect(FaceFeature feature){
 
 	if(!feature.isAvailable()){
-	return;	
+	return false;	
 	}
 
 bool is_nodding_off[10] = {false};
@@ -25,11 +25,12 @@ Rect rightEyeRect = feature.getRightEye()->getFeatureRect();
 rightEyeRect.x = rightEyeRect.x + feature.getFeatureRect().x;
 rightEyeRect.y = rightEyeRect.x + feature.getFeatureRect().y;
 
-			std::cout<<  rightEyeRect.x << "      ";
-			std::cout<<  rightEyeRect.y <<endl;
+		/*	std::cout<<  rightEyeRect.x << "      ";
+			std::cout<<  rightEyeRect.y <<endl;*/
 			if(rightEyeRect.y-prv_y_cordinate>0 )
 			{
-			 
+				//std::cout<<  prv_y_cordinate <<endl;
+				std::cout<<  rightEyeRect.y <<endl;
 				is_nodding_off[no_frames]= true;	
 				no_frames++;
 			} 
@@ -41,7 +42,7 @@ rightEyeRect.y = rightEyeRect.x + feature.getFeatureRect().y;
 			prv_y_cordinate = rightEyeRect.y;
 			
 
-			if(no_frames == 5){
+			if(no_frames == 6){
 				std::cout<<  "###############################################################################" <<endl;
 			
 			no_frames = 0;

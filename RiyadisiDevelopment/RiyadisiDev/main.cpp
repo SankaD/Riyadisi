@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "FaceFeatureManager.h"
+#include "NoddingOffDetector.h"
 
 const short int WAIT_PERIOD_PER_FRAME = 30;
 
@@ -22,10 +23,11 @@ int main ( int argc, char **argv )
     CvCapture *capture;
     Mat frame, grayFrame;
     FaceFeatureManager featureManager;
+	NoddingOffDetector noddingOffDetector;
     bool firstRun = true;
     int frameCount = 0;
 
-    capture = cvCaptureFromCAM ( 1 );
+    capture = cvCaptureFromCAM ( 0 );
     //capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
     //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
 	//capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
@@ -147,6 +149,13 @@ int main ( int argc, char **argv )
             Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
             Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
             Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
+
+			bool isNoddingOff = noddingOffDetector.noddingOffDetect(*faceFeature);
+			if(isNoddingOff)
+			{
+			std::cout<<  "Driver is nodding off" <<endl;
+			}
+			
 
             Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
             Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
