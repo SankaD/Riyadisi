@@ -228,6 +228,9 @@
     <ClCompile Include="NoseDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
     </ClCompile>
+    <ClCompile Include="MouthDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -372,6 +375,9 @@
     </ClInclude>
     <ClInclude Include="NoseDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="MouthDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

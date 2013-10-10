@@ -15,6 +15,9 @@ public:
     CascadeClassifier getClassifier();
     void setCascadeFileName ( string filename );
     virtual vector<Rect> optimizeDetection ( vector<Rect> data ) = 0 ;
+protected:
+	float scale;
+	Size minSize;
 private:
     string cascadeName;
     CascadeClassifier cascade;
