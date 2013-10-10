@@ -3,6 +3,7 @@
 #include "NoseFeature.h"
 #include "EyeFeature.h"
 #include "MouthFeature.h"
+#include "Gaze.h"
 
 #include <opencv2\objdetect\objdetect.hpp>
 #include <stdio.h>
@@ -47,7 +48,7 @@ public:
     ///<returns>A reference to the MouthFeature instance</returns>
     MouthFeature *getMouth();
 
-    Point2f getGazePoint();
+    Gaze getGazeData();
     Mat getImage();
     void setImage ( Mat image ) ;
     virtual void clearFeature();

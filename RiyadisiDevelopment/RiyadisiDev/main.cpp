@@ -25,8 +25,8 @@ int main ( int argc, char **argv )
     bool firstRun = true;
     int frameCount = 0;
 
-    // capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
-    capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
+    capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
+    //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
 
     if ( capture ) {
         while ( true ) {

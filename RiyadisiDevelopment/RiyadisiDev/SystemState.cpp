@@ -14,5 +14,11 @@ private:
 
 public:
     bool isEyeClosed();
+    void setEyeState ( bool closed );
     bool isYawning();
+    void setYawning ( bool yawning );
+    float getNoddingOffProbability();
+    void setNoddingOffProbability();
+    FaceFeature getFaceFeature();
+    void setFaceFeature();
 };

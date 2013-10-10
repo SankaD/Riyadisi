@@ -18,7 +18,7 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     eyeTemp = eye.clone();
 
     //--- detecting the pupil ---//
-    threshold ( eyeTemp, eyeTemp, 50, 225, CV_THRESH_BINARY ); // low value needed for pupil detection.
+    threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
 
     equalizeHist ( eyeTemp, eyeTemp );
 
@@ -33,10 +33,16 @@ Pupil PupilDetector::detectPupil ( Mat eye )
 
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
+    imshow ( "eye original", eye );
+    imshow ( "eye", eyeTemp );
+
     vector<Point> contourCollection;
     for ( int i = 0; i < contours.size(); i++ ) {
         for ( int j = 0; j < contours[i].size(); j++ ) {
-            contourCollection.push_back ( contours[i][j] );
+            // consider the points only in the middle of the eye.
+            if ( contours[i][j].y < eye.rows * 0.75 && contours[i][j].y > eye.rows * 0.25 ) {
+                contourCollection.push_back ( contours[i][j] );
+            }
         }
     }
 

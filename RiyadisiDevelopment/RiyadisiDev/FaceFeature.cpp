@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FaceFeature.h"
-FaceFeature::FaceFeature()
+FaceFeature::FaceFeature() :  Feature()
 {
 }
 NoseFeature *FaceFeature::getNose()
@@ -28,23 +28,17 @@ void FaceFeature::setImage ( Mat newImage )
 {
     image = newImage;
 }
-Point2f FaceFeature::getGazePoint()
+Gaze FaceFeature::getGazeData()
 {
-    // need to check when both eyes are open, single eye is open and no eye is detected or opened.
-
-    /*Point2f point ( 0, 0 );
-    if ( getLeftEye().isAvailable() && getRightEye().isAvailable() ) {
-        point.x =  ( getLeftEye().getFeatureRect().x + getRightEye().getFeatureRect().x
-                     + getLeftEye().getPupil().getCenterPoint().x
-                     + getRightEye().getPupil().getCenterPoint().x ) / 2;
-        point.y =  ( getLeftEye().getFeatureRect().y + getRightEye().getFeatureRect().y
-                     + getLeftEye().getPupil().getCenterPoint().y
-                     + getRightEye().getPupil().getCenterPoint().y ) / 2;
+    Gaze gaze;
+    if ( isAvailable() ) {
+        gaze.setAvailable ( true );
+        gaze.setLeftEye ( leftEye.getFeatureRect() );
+        gaze.setRightEye ( rightEye.getFeatureRect() );
+        gaze.setLeftPupil ( leftEye.getRelativePoint ( leftEye.getPupil()->getCenterPoint() ) );
+        gaze.setRightPupil ( rightEye.getRelativePoint ( rightEye.getPupil()->getCenterPoint() ) );
     }
-
-
-    return point;*/
-    throw new exception ( "Not implemented yet" );
+    return gaze;
 }
 void FaceFeature::clearFeature()
 {

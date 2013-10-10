@@ -14,7 +14,7 @@ Point2f PupilFeature::getCenterPoint()
     point.y = centerPoint.y;
     return point;
 }
-PupilFeature::PupilFeature()
+PupilFeature::PupilFeature() : Feature()
 {
     //centerPoint = new Point2f();
 }
