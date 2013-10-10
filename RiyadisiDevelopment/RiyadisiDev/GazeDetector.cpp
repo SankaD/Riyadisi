@@ -52,8 +52,8 @@ float GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil )
 {
     float score = 0;
 
-	if(eye.width!=0)
-    score = ( eye.width / 2 - pupil.x ) / eye.width;
+    if ( eye.width != 0 )
+    { score = ( eye.width / 2 - pupil.x ) / eye.width; }
     score *= 100;
 
     return score;
@@ -65,9 +65,9 @@ float GazeDetector::getDistractionScore()
 
     float score = 0;
     scores[currentIndex] = calculateScore ( getGaze ( 0 ) );
-   // for ( int i = 0; i < FEATURE_ARRAY_LENGTH; i++ ) {
-        score += scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.2+scores[currentIndex] ;
-  //  }
+    // for ( int i = 0; i < FEATURE_ARRAY_LENGTH; i++ ) {
+    score += scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] ;
+    //  }
     scores[currentIndex] = score;
 
     return abs ( score );

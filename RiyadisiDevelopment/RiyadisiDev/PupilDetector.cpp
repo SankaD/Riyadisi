@@ -24,13 +24,13 @@ Pupil PupilDetector::detectPupil ( Mat eye )
 
 
     threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-    imshow ( "eye threshold", eyeTemp );
+    //imshow ( "eye threshold", eyeTemp );
 
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
     //dilate ( eyeTemp, eyeTemp, dilateElement );
     erode ( eyeTemp, eyeTemp, erodeElement );
-    imshow ( "transformed image", eyeTemp );
+    //imshow ( "transformed image", eyeTemp );
 
     vector<vector<Point>> contours;
 
