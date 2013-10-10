@@ -97,17 +97,14 @@
     <ClCompile Include="Gaze.cpp" />
     <ClCompile Include="GazeDetector.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainProgram.cpp" />
     <ClCompile Include="MouthDetector.cpp" />
     <ClCompile Include="MouthFeature.cpp" />
     <ClCompile Include="Neuron.cpp" />
-    <ClCompile Include="NoddingOffDetector.cpp" />
     <ClCompile Include="NoseDetector.cpp" />
     <ClCompile Include="NoseFeature.cpp" />
     <ClCompile Include="Pupil.cpp" />
     <ClCompile Include="PupilDetector.cpp" />
     <ClCompile Include="PupilFeature.cpp" />
-    <ClCompile Include="SystemState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml" />

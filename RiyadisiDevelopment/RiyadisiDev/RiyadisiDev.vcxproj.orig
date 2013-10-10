@@ -97,8 +97,11 @@
     <ClCompile Include="Gaze.cpp" />
     <ClCompile Include="GazeDetector.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainProgram.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="MouthDetector.cpp" />
+=======
+    <ClCompile Include="MainProgram.cpp" />
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
     <ClCompile Include="MouthFeature.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="NoddingOffDetector.cpp" />
