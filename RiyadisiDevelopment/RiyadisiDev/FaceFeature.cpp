@@ -35,8 +35,8 @@ Gaze FaceFeature::getGazeData()
         gaze.setAvailable ( true );
         gaze.setLeftEye ( leftEye.getFeatureRect() );
         gaze.setRightEye ( rightEye.getFeatureRect() );
-        gaze.setLeftPupil ( leftEye.getRelativePoint ( leftEye.getPupil()->getCenterPoint() ) );
-        gaze.setRightPupil ( rightEye.getRelativePoint ( rightEye.getPupil()->getCenterPoint() ) );
+        gaze.setLeftPupil (  ( leftEye.getPupil()->getCenterPoint() ) );
+        gaze.setRightPupil ( ( rightEye.getPupil()->getCenterPoint() ) );
     }
     return gaze;
 }

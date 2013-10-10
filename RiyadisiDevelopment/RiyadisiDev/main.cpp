@@ -10,6 +10,7 @@
 
 #include "FaceFeatureManager.h"
 #include "NoddingOffDetector.h"
+#include "GazeDetector.h"
 
 const short int WAIT_PERIOD_PER_FRAME = 30;
 
@@ -23,14 +24,16 @@ int main ( int argc, char **argv )
     CvCapture *capture;
     Mat frame, grayFrame;
     FaceFeatureManager featureManager;
-	NoddingOffDetector noddingOffDetector;
+    NoddingOffDetector noddingOffDetector;
+    GazeDetector gazeDetector;
+
     bool firstRun = true;
     int frameCount = 0;
 
-    capture = cvCaptureFromCAM ( 0 );
+    //capture = cvCaptureFromCAM ( 0 );
     //capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
-    //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
-	//capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
+    capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
+    //capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
 
     if ( capture ) {
         while ( true ) {
@@ -150,13 +153,16 @@ int main ( int argc, char **argv )
             Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
             Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-			bool isNoddingOff = noddingOffDetector.noddingOffDetect(*faceFeature);
-			if(isNoddingOff)
-			{
-			std::cout<<  "Driver is nodding off" <<endl;
-			}
-			
+            bool isNoddingOff = noddingOffDetector.noddingOffDetect ( *faceFeature );
+            if ( isNoddingOff ) {
+                std::cout <<  "Driver is nodding off" << endl;
+            }
 
+            // gaze calculations
+            gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
+            float gazeScore = gazeDetector.getDistractionScore();
+
+            // drawing image
             Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
             Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
 
@@ -184,8 +190,20 @@ int main ( int argc, char **argv )
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }
             CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
-            //addText ( frame, "Distraction Level : ", Point ( 10, 10 ), font );
-            //addText ( frame, "Drowsiness Level : ", Point ( 10, 30 ), font );
+
+            ostringstream distractedText ;
+            distractedText << "Distraction Level : " << gazeScore;
+            string drowsinessText = "Drowsiness Level";
+            string noddingText = "Nodding off : ";
+
+            if ( isNoddingOff ) {
+                noddingText += "True";
+            } else {
+                noddingText += "False";
+            }
+            addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
+            addText ( frame, drowsinessText, Point ( 10, 30 ), font );
+            addText ( frame, noddingText, Point ( 10, 50 ), font );
 
             imshow ( "image", frame );
             /* while ( true && frameCount == 45 ) {
