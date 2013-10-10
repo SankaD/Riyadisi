@@ -15,25 +15,30 @@ const short int WAIT_PERIOD_PER_FRAME = 30;
 using namespace std;
 using namespace cv;
 
+void point ( Mat img, Point2f point, Scalar color );
+
 int main ( int argc, char **argv )
 {
     CvCapture *capture;
     Mat frame, grayFrame;
     FaceFeatureManager featureManager;
     bool firstRun = true;
+    int frameCount = 0;
 
     capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
-	//capture = cvCaptureFromCAM(1);
+    //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
 
     if ( capture ) {
         while ( true ) {
             frame = cvQueryFrame ( capture );
+            frameCount++;
 
             int key = waitKey ( WAIT_PERIOD_PER_FRAME );// waiting for the key input. also determines operated frame rate.
 
             if ( key == 'c' ) {
                 break;
             }
+            cout << "Frame count : " << frameCount << endl;
 
             cvtColor ( frame, grayFrame, CV_BGR2GRAY );
             equalizeHist ( grayFrame, grayFrame );
@@ -42,6 +47,8 @@ int main ( int argc, char **argv )
 
             FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext() ;
 			Rect faceROI, leftEyeROI, rightEyeROI, mouthROI;
+
+            faceFeature->clearFeature();
 
             if ( firstRun ) {
                 //Rect r ;
@@ -140,15 +147,32 @@ int main ( int argc, char **argv )
             Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
 			Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
+            Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
+            Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
+
+            leftPupil = faceFeature->getLeftEye()->getRelativePoint ( leftPupil );
+            rightPupil = faceFeature->getRightEye()->getRelativePoint ( rightPupil );
+
+            leftPupil = faceFeature->getRelativePoint ( leftPupil );
+            rightPupil = faceFeature->getRelativePoint ( rightPupil );
+
             //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 			rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
 			
+            line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+            point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
+            point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+
             imshow ( "image", frame );
-
-
         }
     }
+}
+void point ( Mat img, Point2f point, Scalar color )
+{
+    line ( img, Point2f ( point.x + 10, point.y ), Point2f ( point.x - 10, point.y ), color );
+    line ( img, Point2f ( point.x , point.y + 10 ), Point2f ( point.x, point.y - 10 ), color );
+    circle ( img, point, 8, color );
 }

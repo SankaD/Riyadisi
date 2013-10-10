@@ -42,3 +42,29 @@ Rect Feature::getRelativeRect ( Rect rect )
 
     return returnValue;
 }
+Point2f Feature::getCenterPoint()
+{
+    Point2f point;
+    point.x = featureRect.x + featureRect.width / 2;
+    point.y = featureRect.y + featureRect.height / 2;
+
+    return point;
+}
+Point2f Feature::getRelativePoint ( Point2f point )
+{
+    Point2f p;
+
+    p.x = point.x + featureRect.x;
+    p.y = point.y + featureRect.y;
+
+    return p;
+}
+void Feature::clearFeature()
+{
+    featureRect.x = 0;
+    featureRect.y = 0;
+    featureRect.width = 0;
+    featureRect.height = 0;
+    available = false;
+    rotation = 0;
+}

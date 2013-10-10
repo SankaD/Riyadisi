@@ -14,10 +14,16 @@ Point2f PupilFeature::getCenterPoint()
     point.y = centerPoint.y;
     return point;
 }
-PupilFeature::PupilFeature()
+PupilFeature::PupilFeature() : Feature()
 {
     //centerPoint = new Point2f();
 }
 PupilFeature::~PupilFeature()
 {
+}
+void PupilFeature::clearFeature()
+{
+    Feature::clearFeature();
+    centerPoint.x = 0;
+    centerPoint.y = 0;
 }

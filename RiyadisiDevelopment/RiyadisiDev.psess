@@ -49,7 +49,7 @@
   </PostinstrumentEvent>
   <Binaries>
     <ProjBinary>
-      <Path>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\Debug\RiyadisiDev.exe</Path>
+      <Path>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\Release\RiyadisiDev.exe</Path>
       <ArgumentTimestamp>01/01/0001 00:00:00</ArgumentTimestamp>
       <Instrument>true</Instrument>
       <Sample>true</Sample>
@@ -59,7 +59,7 @@
       <LaunchProject>true</LaunchProject>
       <OverrideProjectSettings>false</OverrideProjectSettings>
       <LaunchMethod>Executable</LaunchMethod>
-      <ExecutablePath>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\Debug\RiyadisiDev.exe</ExecutablePath>
+      <ExecutablePath>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\Release\RiyadisiDev.exe</ExecutablePath>
       <StartupDirectory>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\RiyadisiDev\</StartupDirectory>
       <Arguments />
       <NetAppHost>IIS</NetAppHost>
@@ -77,6 +77,11 @@
       <ProjName>RiyadisiDev</ProjName>
     </ProjBinary>
   </Binaries>
+  <Reports>
+    <Report>
+      <Path>C:\Users\Sanka\Documents\Education\Projects\Final Year Project\Riyadisi\Riyadisi\RiyadisiDevelopment\RiyadisiDev131009.vsp</Path>
+    </Report>
+  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{A64A766A-1C9E-415C-A0F3-47E40F1EC810}|RiyadisiDev\RiyadisiDev.vcxproj</Path>

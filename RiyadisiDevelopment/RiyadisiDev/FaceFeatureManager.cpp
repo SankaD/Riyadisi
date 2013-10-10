@@ -14,11 +14,9 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 {
     Mat relatedImage = image ( faceROI );
 
-    //cout << roi.width << " " << roi.height << endl;
-
     // handle the face region
     vector<Rect> faces;
-
+    cout << "Finding features" << endl;
     // downsampling for increased performance
     Mat downsampledImage;
 
@@ -28,9 +26,11 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 		pyrDown ( downsampledImage, downsampledImage, Size ( ( downsampledImage.cols  ) / 2, ( downsampledImage.rows  ) / 2 ) );
 	}
 
+    cout << "Finding eyes" << endl;
     faces = faceDetector.detect ( downsampledImage );
 
     if ( faces.size() == 0 ) {
+        cout << "No faces found" << endl;
         return;
     }
 
@@ -52,6 +52,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     faceFeature->setFeatureRect ( face );
     faceFeature->setImage ( faceImage ) ;
 
+    cout << "Finding Eyes" << endl;
     //------------ handle the eye regions
     Rect leftEye, rightEye;
     vector<Rect> eyes;
@@ -158,6 +159,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( leftEye ) );
         faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
     }*/
+    cout << "Finished finding features" << endl;
 }
 
 FeatureCollection *FaceFeatureManager::getFeatureCollection()
