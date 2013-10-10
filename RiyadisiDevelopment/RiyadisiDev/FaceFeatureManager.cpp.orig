@@ -119,6 +119,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //}
 
     //------------ handle the mouth region
+<<<<<<< HEAD
 	Rect mouth;
 	//if(mouthROI.area() == 0){
 		mouthROI.x = 0;
@@ -127,6 +128,13 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 		mouthROI.height = faceImage.rows/3;
 	//}
 	vector<Rect> mouthResults = mouthDetector.detect ( faceImage( mouthROI ) );
+=======
+
+    cout << "Finding nose" << endl;
+    //------------ handle the nose region
+    Rect nose;
+    vector<Rect> noseResults = noseDetector.detect ( faceFeature->getImage() );
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
 
     //selecting the best rectangle for nose
     if ( mouthResults.size() > 0 ) {
@@ -139,6 +147,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         faceFeature->getMouth()->setAvailable ( true );
     }
 
+<<<<<<< HEAD
     //------------ handle the nose region
     //Rect nose;
     //vector<Rect> noseResults = noseDetector.detect ( faceFeature->getImage() );
@@ -150,22 +159,23 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //    faceFeature->getNose()->setAvailable ( true );
     //}
 
+=======
+    cout << "Finding pupils" << endl;
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
     //------------ handler the pupil regions
     /*if ( faceFeature->getRightEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
-        if ( pupil.getPupilLocation().getRadius() > 0 ) {
-            faceFeature->getRightEye()->getPupil()->setAvailable ( true );
-            faceFeature->getRightEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
-        }
+        faceFeature->getRightEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
     }
     if ( faceFeature->getLeftEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( leftEye ) );
-        if ( pupil.getPupilLocation().getRadius() > 0 ) {
-            faceFeature->getLeftEye()->getPupil()->setAvailable ( true );
-            faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
-        }
+        faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
+<<<<<<< HEAD
     }*/
+=======
+    }
     cout << "Finished finding features" << endl;
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
 }
 
 FeatureCollection *FaceFeatureManager::getFeatureCollection()

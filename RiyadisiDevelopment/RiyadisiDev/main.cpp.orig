@@ -26,7 +26,11 @@ int main ( int argc, char **argv )
     int frameCount = 0;
 
     capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
+<<<<<<< HEAD
+	//capture = cvCaptureFromCAM(1);
+=======
     //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
 
     if ( capture ) {
         while ( true ) {
@@ -62,6 +66,7 @@ int main ( int argc, char **argv )
                 firstRun = false;
             } else {
                 FaceFeature *previous = featureManager.getFeatureCollection()->getFeature ( 1 );
+                //Rect r ;
                 if ( previous->isAvailable() ) {
                     faceROI = previous->getFeatureRect();
                     faceROI.x = faceROI.x - faceROI.width / 2;
@@ -146,6 +151,8 @@ int main ( int argc, char **argv )
             Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
 			Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
+<<<<<<< HEAD
+=======
             Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
             Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
 
@@ -155,31 +162,24 @@ int main ( int argc, char **argv )
             leftPupil = faceFeature->getRelativePoint ( leftPupil );
             rightPupil = faceFeature->getRelativePoint ( rightPupil );
 
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
             //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
-
+<<<<<<< HEAD
 			rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
 			
-            if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
-                point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
-            }
-            if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
-            }
-            if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
-                    && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
-            }
+            imshow ( "image", frame );
+
+=======
+
+            line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+            point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
+            point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
 
             imshow ( "image", frame );
-            /* while ( true && frameCount == 45 ) {
-                 key = waitKey ( 30 );
-                 if ( key == ' ' ) {
-                     break;
-                 }
-             }*/
         }
     }
 }

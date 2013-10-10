@@ -228,6 +228,10 @@
     <ClCompile Include="NoseDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="MouthDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
+=======
     <ClCompile Include="MainProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -236,12 +240,7 @@
     </ClCompile>
     <ClCompile Include="NoddingOffDetector.cpp">
       <Filter>Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
-    </ClCompile>
-<ClCompile Include="FaceNod.cpp">
-      <Filter>Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
-    </ClCompile>
-    <ClCompile Include="MouthDetector.cpp">
-      <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
+>>>>>>> 9e4f33e945fcf554a1075bfe85632ccb39fc264a
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,9 +389,6 @@
     </ClInclude>
     <ClInclude Include="MouthDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
-    </ClInclude>
-<ClInclude Include="NoddingOffDetector.h">
-      <Filter>Header Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
