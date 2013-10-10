@@ -25,7 +25,8 @@ int main ( int argc, char **argv )
     bool firstRun = true;
     int frameCount = 0;
 
-    capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
+    capture = cvCaptureFromCAM ( 0 );
+    //capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
     //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
 
     if ( capture ) {
@@ -46,7 +47,7 @@ int main ( int argc, char **argv )
             time_t t = clock();
 
             FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext() ;
-			Rect faceROI, leftEyeROI, rightEyeROI, mouthROI;
+            Rect faceROI, leftEyeROI, rightEyeROI, mouthROI;
 
             faceFeature->clearFeature();
 
@@ -79,62 +80,62 @@ int main ( int argc, char **argv )
                     }
 
 
-					if(previous->getLeftEye()->isAvailable()) {
-						leftEyeROI = previous->getLeftEye()->getFeatureRect();
-						leftEyeROI.x = leftEyeROI.x - leftEyeROI.width / 2;
-						leftEyeROI.y = leftEyeROI.y - leftEyeROI.height / 2;
-						if ( leftEyeROI.x < 0 ) { leftEyeROI.x = 0; }
-						if ( leftEyeROI.y < 0 ) { leftEyeROI.y = 0; }
+                    if ( previous->getLeftEye()->isAvailable() ) {
+                        leftEyeROI = previous->getLeftEye()->getFeatureRect();
+                        leftEyeROI.x = leftEyeROI.x - leftEyeROI.width / 2;
+                        leftEyeROI.y = leftEyeROI.y - leftEyeROI.height / 2;
+                        if ( leftEyeROI.x < 0 ) { leftEyeROI.x = 0; }
+                        if ( leftEyeROI.y < 0 ) { leftEyeROI.y = 0; }
 
-						leftEyeROI.width = leftEyeROI.width * 2;
-						leftEyeROI.height = leftEyeROI.height * 2;
-						if ( leftEyeROI.width > grayFrame.cols ) {
-							leftEyeROI.width = grayFrame.cols;
-						}
-						if ( leftEyeROI.height > grayFrame.rows ) {
-							leftEyeROI.height = grayFrame.rows;
-						}
-					} 
-					
-					if(previous->getRightEye()->isAvailable()) {
-						rightEyeROI = previous->getRightEye()->getFeatureRect();
-						rightEyeROI.x = rightEyeROI.x - rightEyeROI.width / 2;
-						rightEyeROI.y = rightEyeROI.y - rightEyeROI.height / 2;
-						if ( rightEyeROI.x < 0 ) { rightEyeROI.x = 0; }
-						if ( rightEyeROI.y < 0 ) { rightEyeROI.y = 0; }
+                        leftEyeROI.width = leftEyeROI.width * 2;
+                        leftEyeROI.height = leftEyeROI.height * 2;
+                        if ( leftEyeROI.width > grayFrame.cols ) {
+                            leftEyeROI.width = grayFrame.cols;
+                        }
+                        if ( leftEyeROI.height > grayFrame.rows ) {
+                            leftEyeROI.height = grayFrame.rows;
+                        }
+                    }
 
-						rightEyeROI.width = rightEyeROI.width * 2;
-						rightEyeROI.height = rightEyeROI.height * 2;
-						if ( rightEyeROI.width > grayFrame.cols ) {
-							rightEyeROI.width = grayFrame.cols;
-						}
-						if ( rightEyeROI.height > grayFrame.rows ) {
-							rightEyeROI.height = grayFrame.rows;
-						}
-					} 
-					
-					if(previous->getMouth()->isAvailable()) {
-						mouthROI = previous->getMouth()->getFeatureRect();
-						mouthROI.x = mouthROI.x - mouthROI.width / 2;
-						mouthROI.y = mouthROI.y - mouthROI.height / 2;
-						if ( mouthROI.x < 0 ) { mouthROI.x = 0; }
-						if ( mouthROI.y < 0 ) { mouthROI.y = 0; }
+                    if ( previous->getRightEye()->isAvailable() ) {
+                        rightEyeROI = previous->getRightEye()->getFeatureRect();
+                        rightEyeROI.x = rightEyeROI.x - rightEyeROI.width / 2;
+                        rightEyeROI.y = rightEyeROI.y - rightEyeROI.height / 2;
+                        if ( rightEyeROI.x < 0 ) { rightEyeROI.x = 0; }
+                        if ( rightEyeROI.y < 0 ) { rightEyeROI.y = 0; }
 
-						mouthROI.width = mouthROI.width * 2;
-						mouthROI.height = mouthROI.height * 2;
-						if ( mouthROI.width > grayFrame.cols ) {
-							mouthROI.width = grayFrame.cols;
-						}
-						if ( mouthROI.height > grayFrame.rows ) {
-							mouthROI.height = grayFrame.rows;
-						}
-					} 
+                        rightEyeROI.width = rightEyeROI.width * 2;
+                        rightEyeROI.height = rightEyeROI.height * 2;
+                        if ( rightEyeROI.width > grayFrame.cols ) {
+                            rightEyeROI.width = grayFrame.cols;
+                        }
+                        if ( rightEyeROI.height > grayFrame.rows ) {
+                            rightEyeROI.height = grayFrame.rows;
+                        }
+                    }
+
+                    if ( previous->getMouth()->isAvailable() ) {
+                        mouthROI = previous->getMouth()->getFeatureRect();
+                        mouthROI.x = mouthROI.x - mouthROI.width / 2;
+                        mouthROI.y = mouthROI.y - mouthROI.height / 2;
+                        if ( mouthROI.x < 0 ) { mouthROI.x = 0; }
+                        if ( mouthROI.y < 0 ) { mouthROI.y = 0; }
+
+                        mouthROI.width = mouthROI.width * 2;
+                        mouthROI.height = mouthROI.height * 2;
+                        if ( mouthROI.width > grayFrame.cols ) {
+                            mouthROI.width = grayFrame.cols;
+                        }
+                        if ( mouthROI.height > grayFrame.rows ) {
+                            mouthROI.height = grayFrame.rows;
+                        }
+                    }
                 } else {
                     faceROI.x = 0;
                     faceROI.y = 0;
                     faceROI.width = grayFrame.cols;
                     faceROI.height = grayFrame.rows;
-	            }
+                }
                 featureManager.findFeatures ( grayFrame , faceFeature, faceROI, leftEyeROI, rightEyeROI, mouthROI );
             }
 
@@ -144,7 +145,7 @@ int main ( int argc, char **argv )
             Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
             Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
             Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
-			Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
+            Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
             Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
             Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
@@ -160,8 +161,8 @@ int main ( int argc, char **argv )
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 
-			rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
-			
+            rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+
             if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
                 point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
             }
@@ -172,6 +173,9 @@ int main ( int argc, char **argv )
                     && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }
+            CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
+            addText ( frame, "Distraction Level : ", Point ( 10, 10 ), font );
+            addText ( frame, "Drowsiness Level : ", Point ( 10, 30 ), font );
 
             imshow ( "image", frame );
             /* while ( true && frameCount == 45 ) {
