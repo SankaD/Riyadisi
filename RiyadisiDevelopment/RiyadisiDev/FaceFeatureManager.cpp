@@ -61,9 +61,9 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //detect left eye
     //if(leftEyeROI.area() == 0){
     leftEyeROI.x = 0;
-    leftEyeROI.y = 0;
+    leftEyeROI.y = faceImage.rows/4;
     leftEyeROI.width = faceImage.cols / 2;
-    leftEyeROI.height = faceImage.rows / 2;
+    leftEyeROI.height = faceImage.rows / 4;
     //}
     eyes = eyeDetector.detect ( faceImage ( leftEyeROI ) );
 	
@@ -80,9 +80,9 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //detect right eye
     //if(rightEyeROI.area() == 0){
     rightEyeROI.x = faceImage.cols / 2;
-    rightEyeROI.y = 0;
+    rightEyeROI.y = faceImage.rows/4;
     rightEyeROI.width = faceImage.cols / 2;
-    rightEyeROI.height = faceImage.rows / 2;
+    rightEyeROI.height = faceImage.rows / 4;
     //}
     eyes = eyeDetector.detect ( faceImage ( rightEyeROI ) );
 

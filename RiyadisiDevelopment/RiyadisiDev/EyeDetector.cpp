@@ -8,8 +8,8 @@ EyeDetector::EyeDetector ( void ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" )
 {
 	scale = 1.5;
-	minSize = Size(50, 50);
-	//downsampling??
+	minSize = Size(30, 30);
+	//downsampling??haarcascade_eye_tree_eyeglasses//haarcascade_mcs_lefteye
 }
 
 

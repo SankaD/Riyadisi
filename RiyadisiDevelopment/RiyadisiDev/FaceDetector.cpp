@@ -7,7 +7,7 @@ FaceDetector::FaceDetector ( void ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_frontalface_alt.xml" )
 {
 	scale = 1.5;
-	minSize = Size(100, 100);
+	minSize = Size(50, 50);
 }
 
 FaceDetector::~FaceDetector ( void )
