@@ -18,9 +18,19 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     eyeTemp = eye.clone();
 
     //--- detecting the pupil ---//
-    threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
+    //equalizeHist ( eyeTemp, eyeTemp );
+    //imshow ( "equalized image", eyeTemp );
 
-    equalizeHist ( eyeTemp, eyeTemp );
+
+
+    threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
+    imshow ( "eye threshold", eyeTemp );
+
+    Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
+    Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
+    //dilate ( eyeTemp, eyeTemp, dilateElement );
+    erode ( eyeTemp, eyeTemp, erodeElement );
+    imshow ( "transformed image", eyeTemp );
 
     vector<vector<Point>> contours;
 
@@ -28,33 +38,53 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
     //drawContours ( eyeTemp, contours, -1, Scalar ( 255, 255, 255 ), -1 );
 
-    vector<vector<Point>> contours_poly ( contours.size() );
-    vector<Rect> boundRect ( contours.size() );
+    /* vector<vector<Point>> contours_poly ( contours.size() );
+     vector<Rect> boundRect ( contours.size() );*/
 
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
-    imshow ( "eye original", eye );
     imshow ( "eye", eyeTemp );
 
-    vector<Point> contourCollection;
+    double area = 0, maxArea = 0;
+    int maxAreaIndex = -1;
+    float radiusTemp;
+    Point2f centerTemp;
     for ( int i = 0; i < contours.size(); i++ ) {
-        for ( int j = 0; j < contours[i].size(); j++ ) {
-            // consider the points only in the middle of the eye.
-            if ( contours[i][j].y < eye.rows * 0.75 && contours[i][j].y > eye.rows * 0.25 ) {
-                contourCollection.push_back ( contours[i][j] );
-            }
+        area = contourArea ( contours[i] );
+
+        minEnclosingCircle ( contours[i], centerTemp, radiusTemp );
+        if ( area > maxArea
+                && centerTemp.y < eyeTemp.rows * 0.75
+                && centerTemp.y > eyeTemp.rows * 0.25 ) {
+            maxAreaIndex = i;
+            maxArea = area;
         }
     }
+    cout << "Max Area : " << maxArea << endl;
+
+    //vector<Point> contourCollection;
+    //for ( int i = 0; i < contours[maxAreaIndex].size(); i++ ) {
+    //    contourCollection.push_back ( contours[maxAreaIndex][i] );
+    //}
+//for ( int i = 0; i < contours.size(); i++ ) {
+//    for ( int j = 0; j < contours[i].size(); j++ ) {
+//        // consider the points only in the middle of the eye.
+//        if ( contours[i][j].y < eye.rows * 0.75 && contours[i][j].y > eye.rows * 0.25 ) {
+//            contourCollection.push_back ( contours[i][j] );
+//        }
+//    }
+//}
 
     Point2f center;
-    float radius;
+    float radius = 0;
 
-    if ( contourCollection.size() > 0 ) {
-        minEnclosingCircle ( contourCollection, center, radius );
+    if ( maxAreaIndex > -1 && contours[maxAreaIndex].size() > 0 ) {
+        minEnclosingCircle ( contours[maxAreaIndex], center, radius );
         Circle c;
         c.setCenter ( center );
         c.setRadius ( radius );
         pupil.setPupilLocation ( c );
+
     }
     return pupil;
 }

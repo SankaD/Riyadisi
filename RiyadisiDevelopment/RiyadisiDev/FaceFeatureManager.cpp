@@ -100,11 +100,17 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //------------ handler the pupil regions
     if ( faceFeature->getRightEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
-        faceFeature->getRightEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
+        if ( pupil.getPupilLocation().getRadius() > 0 ) {
+            faceFeature->getRightEye()->getPupil()->setAvailable ( true );
+            faceFeature->getRightEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
+        }
     }
     if ( faceFeature->getLeftEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( leftEye ) );
-        faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
+        if ( pupil.getPupilLocation().getRadius() > 0 ) {
+            faceFeature->getLeftEye()->getPupil()->setAvailable ( true );
+            faceFeature->getLeftEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
+        }
     }
     cout << "Finished finding features" << endl;
 }

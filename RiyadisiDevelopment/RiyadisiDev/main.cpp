@@ -38,6 +38,7 @@ int main ( int argc, char **argv )
             if ( key == 'c' ) {
                 break;
             }
+
             cout << "Frame count : " << frameCount << endl;
 
             cvtColor ( frame, grayFrame, CV_BGR2GRAY );
@@ -107,11 +108,24 @@ int main ( int argc, char **argv )
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 
-            line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
-            point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
-            point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+            if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
+                point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
+            }
+            if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+            }
+            if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
+                    && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+            }
 
             imshow ( "image", frame );
+            /* while ( true && frameCount == 45 ) {
+                 key = waitKey ( 30 );
+                 if ( key == ' ' ) {
+                     break;
+                 }
+             }*/
         }
     }
 }

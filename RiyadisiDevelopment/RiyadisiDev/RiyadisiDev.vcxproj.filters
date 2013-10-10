@@ -237,6 +237,9 @@
     <ClCompile Include="NoddingOffDetector.cpp">
       <Filter>Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
     </ClCompile>
+    <ClCompile Include="FaceNod.cpp">
+      <Filter>Source Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -381,6 +384,12 @@
     </ClInclude>
     <ClInclude Include="NoseDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\NoseDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="NoddingOffDetector.h">
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="FaceNod.h">
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\NoddingOffDetection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
