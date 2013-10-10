@@ -15,5 +15,6 @@ public :
     FaceNod getRect ( int indexFromCurrent );
     void setCurrentRect ( FaceNod rectangle );
     float calculateNoddingOffProbability();
+	bool noddingOffDetect(FaceFeature feature);
 
 };
