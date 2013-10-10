@@ -5,7 +5,7 @@ using namespace std;
 using namespace cv;
 
 EyeDetector::EyeDetector ( void ) :
-    Detector ( "Resources/Cascades/HaarCascades/haarcascade_eye_tree_eyeglasses.xml" )
+    Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" )
 {
 	scale = 1.5;
 	minSize = Size(50, 50);

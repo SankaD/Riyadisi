@@ -66,13 +66,17 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     leftEyeROI.height = faceImage.rows / 2;
     //}
     eyes = eyeDetector.detect ( faceImage ( leftEyeROI ) );
-
+	
     if ( eyes.size() > 0 ) {
         leftEye = eyes[0];
+		leftEye.x += leftEyeROI.x;
+        leftEye.y += leftEyeROI.y;
+
         faceFeature->getLeftEye()->setFeatureRect ( leftEye );
         faceFeature->getLeftEye()->setAvailable ( true );
+		//imshow("test", faceImage ( leftEye ));
     }
-
+	
     //detect right eye
     //if(rightEyeROI.area() == 0){
     rightEyeROI.x = faceImage.cols / 2;
@@ -91,32 +95,32 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         faceFeature->getRightEye()->setAvailable ( true );
     }
 
-    float midX =  faceFeature->getFeatureRect().width  / 2;
-    if ( eyes.size() > 0 ) {
+    //float midX =  faceFeature->getFeatureRect().width  / 2;
+    //if ( eyes.size() > 0 ) {
 
-        if ( eyes[0].x + eyes[0].width / 2 < midX ) {
-            leftEye = eyes[0];
-            faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-            // faceFeature.getLeftEye().setFeatureRect ( leftEye );
-            faceFeature->getLeftEye()->setAvailable ( true );
-        } else {
-            rightEye = eyes[0];
-            faceFeature->getRightEye()->setFeatureRect ( rightEye );
-            faceFeature->getRightEye()->setAvailable ( true );
-        }
+    //    if ( eyes[0].x + eyes[0].width / 2 < midX ) {
+    //        leftEye = eyes[0];
+    //        faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+    //        // faceFeature.getLeftEye().setFeatureRect ( leftEye );
+    //        faceFeature->getLeftEye()->setAvailable ( true );
+    //    } else {
+    //        rightEye = eyes[0];
+    //        faceFeature->getRightEye()->setFeatureRect ( rightEye );
+    //        faceFeature->getRightEye()->setAvailable ( true );
+    //    }
 
-        if ( eyes.size() > 1 ) {
-            if ( eyes[1].x + eyes[1].width / 2 > midX ) {
-                rightEye = eyes[1];
-                faceFeature->getRightEye()->setFeatureRect ( rightEye );
-                faceFeature->getRightEye()->setAvailable ( true );
-            } else {
-                leftEye = eyes[1];
-                faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-                faceFeature->getLeftEye()->setAvailable ( true );
-            }
-        }
-    }
+    //    if ( eyes.size() > 1 ) {
+    //        if ( eyes[1].x + eyes[1].width / 2 > midX ) {
+    //            rightEye = eyes[1];
+    //            faceFeature->getRightEye()->setFeatureRect ( rightEye );
+    //            faceFeature->getRightEye()->setAvailable ( true );
+    //        } else {
+    //            leftEye = eyes[1];
+    //            faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+    //            faceFeature->getLeftEye()->setAvailable ( true );
+    //        }
+    //    }
+    //}
 
     //------------ handle the mouth region
     Rect mouth;
