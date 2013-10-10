@@ -25,9 +25,10 @@ int main ( int argc, char **argv )
     bool firstRun = true;
     int frameCount = 0;
 
-    capture = cvCaptureFromCAM ( 0 );
+    capture = cvCaptureFromCAM ( 1 );
     //capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
     //capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
+	//capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
 
     if ( capture ) {
         while ( true ) {
@@ -174,8 +175,8 @@ int main ( int argc, char **argv )
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }
             CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
-            addText ( frame, "Distraction Level : ", Point ( 10, 10 ), font );
-            addText ( frame, "Drowsiness Level : ", Point ( 10, 30 ), font );
+            //addText ( frame, "Distraction Level : ", Point ( 10, 10 ), font );
+            //addText ( frame, "Drowsiness Level : ", Point ( 10, 30 ), font );
 
             imshow ( "image", frame );
             /* while ( true && frameCount == 45 ) {
