@@ -173,21 +173,23 @@ int main ( int argc, char **argv )
             rightPupil = faceFeature->getRelativePoint ( rightPupil );
 
             //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
-            rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
-            rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
-            rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
+            if ( faceFeature->isAvailable() ) {
+                rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
+                rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
+                rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 
-            rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+                rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
 
-            if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
-                point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
-            }
-            if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
-            }
-            if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
-                    && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+                if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
+                    point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
+                }
+                if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                    point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+                }
+                if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
+                        && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                    line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+                }
             }
             CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
 
@@ -201,6 +203,7 @@ int main ( int argc, char **argv )
             } else {
                 noddingText += "False";
             }
+
             addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
             addText ( frame, drowsinessText, Point ( 10, 30 ), font );
             addText ( frame, noddingText, Point ( 10, 50 ), font );
