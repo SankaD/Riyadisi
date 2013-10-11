@@ -1,5 +1,4 @@
 #include "FaceFeatureManager.h"
-
 #include <time.h>
 
 FaceFeatureManager::FaceFeatureManager ( void )
@@ -69,11 +68,11 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     if ( eyes.size() > 0 ) {
         leftEye = eyes[0];
 
-        for ( int i = 1; i < eyes.size(); i++ ) {
+        /*for ( int i = 1; i < eyes.size(); i++ ) {
             if ( leftEye.area() < eyes[i].area() ) {
                 leftEye = eyes[i];
             }
-        }
+        }*/
 
         leftEye.x += leftEyeROI.x;
         leftEye.y += leftEyeROI.y;
@@ -82,6 +81,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         faceFeature->getLeftEye()->setAvailable ( true );
     }
 
+	perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ));
     //detect right eye
     rightEyeROI.x = faceImage.cols / 2;
     rightEyeROI.y = faceImage.rows / 4;
@@ -93,11 +93,11 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     if ( eyes.size() > 0 ) {
         rightEye = eyes[0];
 
-        for ( int i = 1; i < eyes.size(); i++ ) {
+        /*for ( int i = 1; i < eyes.size(); i++ ) {
             if ( rightEye.area() < eyes[i].area() ) {
                 rightEye = eyes[i];
             }
-        }
+        }*/
 
         rightEye.x += rightEyeROI.x;
         rightEye.y += rightEyeROI.y;
@@ -105,6 +105,8 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         faceFeature->getRightEye()->setFeatureRect ( rightEye );
         faceFeature->getRightEye()->setAvailable ( true );
     }
+
+	perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ));
 
     //float midX =  faceFeature->getFeatureRect().width  / 2;
     //if ( eyes.size() > 0 ) {

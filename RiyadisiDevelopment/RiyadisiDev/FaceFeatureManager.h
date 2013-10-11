@@ -8,6 +8,7 @@
 #include "PupilDetector.h"
 #include "NoseDetector.h"
 #include "MouthDetector.h"
+#include "EyeStateDetector.h"
 
 #define DOWNSAMPLE_CONSTANT 4 //should be a power of 2
 ///<summary>
@@ -24,6 +25,7 @@ public:
     void findRightEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
     void findMouthFeature ( Mat image, Rect roi, MouthFeature &mouthFeature );
     void findPupilFeature ( Mat image, Rect roi, PupilFeature &pupilFeature );
+	double perclos;
 private:
     FeatureCollection features;
     FaceDetector faceDetector;
@@ -32,4 +34,5 @@ private:
 	MouthDetector mouthDetector;
     PupilDetector pupilDetector;
     NoseDetector noseDetector;
+	EyeStateDetector eyeStateDetector;
 };

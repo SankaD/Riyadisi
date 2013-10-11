@@ -246,6 +246,9 @@
     <ClCompile Include="RightEyeDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClCompile>
+    <ClCompile Include="EyeStateDetector.cpp">
+      <Filter>Source Files\MainFeatures\DrowsinessDetection\EyeStateDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -313,6 +316,12 @@
     </None>
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml">
       <Filter>Resources\Cascades\HaarCascades</Filter>
+    </None>
+    <None Include="eyeStateHeaders\libmatlbm.mlib">
+      <Filter>Header Files\Utility</Filter>
+    </None>
+    <None Include="eyeStateHeaders\libmatlbmx.mlib">
+      <Filter>Header Files\Utility</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -403,5 +412,81 @@
     <ClInclude Include="LeftEyeDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
+    <ClInclude Include="EyeStateDetector.h">
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\blas.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\emlrt.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\engine.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\fintrf.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\io64.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\lapack.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mat.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\matrix.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclcom.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclcomclass.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclcommain.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclcppclass.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclmcr.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclmcrrt.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mclxlmain.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mcr.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mex.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mwdebug.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mwservices.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\mwutil.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="eyeStateHeaders\tmwtypes.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="eyeStateHeaders\mexversion.rc">
+      <Filter>Header Files\Utility</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="eyeStateHeaders\mwcomtypes.idl">
+      <Filter>Header Files\Utility</Filter>
+    </Midl>
   </ItemGroup>
 </Project>

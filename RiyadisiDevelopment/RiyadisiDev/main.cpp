@@ -35,10 +35,18 @@ int main ( int argc, char **argv )
     capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
     //capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
 
+	featureManager.perclos=0;
+	int frameNum=0;
+	double percloscore=0;
     if ( capture ) {
         while ( true ) {
             frame = cvQueryFrame ( capture );
             frameCount++;
+
+			frameNum=frameCount%30; //look every set of 30 frames
+			
+
+
 
             int key = waitKey ( WAIT_PERIOD_PER_FRAME );// waiting for the key input. also determines operated frame rate.
 
@@ -193,10 +201,21 @@ int main ( int argc, char **argv )
             }
             CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
 
+
+			if(frameNum==0){
+			 featureManager.perclos/=30;
+			 percloscore=featureManager.perclos;
+			 featureManager.perclos=0;
+			
+			}
+
             ostringstream distractedText ;
+			ostringstream perclosText ;
             distractedText << "Distraction Level : " << gazeScore;
+			perclosText << "perclos Level : " << percloscore;
             string drowsinessText = "Drowsiness Level";
             string noddingText = "Nodding off : ";
+			
 
             if ( isNoddingOff ) {
                 noddingText += "True";
@@ -207,7 +226,7 @@ int main ( int argc, char **argv )
             addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
             addText ( frame, drowsinessText, Point ( 10, 30 ), font );
             addText ( frame, noddingText, Point ( 10, 50 ), font );
-
+			addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
             imshow ( "image", frame );
             /* while ( true && frameCount == 45 ) {
                  key = waitKey ( 30 );

@@ -60,8 +60,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib\Debug;$(OPENCV_DIR)\bin\Debug;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib\Debug;$(OPENCV_DIR)\bin\Debug;C:\Users\admin\Desktop\latest\Riyadisi\RiyadisiDevelopment\RiyadisiDev\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;libeng.lib; libmx.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -85,6 +85,7 @@
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="Eye.cpp" />
+    <ClCompile Include="EyeStateDetector.cpp" />
     <ClCompile Include="LeftEyeDetector.cpp" />
     <ClCompile Include="EyeFeature.cpp" />
     <ClCompile Include="Face.cpp" />
@@ -112,6 +113,8 @@
     <ClCompile Include="SystemState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="eyeStateHeaders\libmatlbm.mlib" />
+    <None Include="eyeStateHeaders\libmatlbmx.mlib" />
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml" />
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye_tree_eyeglasses.xml" />
     <None Include="Resources\Cascades\haarcascades\haarcascade_frontalface_alt.xml" />
@@ -140,6 +143,28 @@
     <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
+    <ClInclude Include="EyeStateDetector.h" />
+    <ClInclude Include="eyeStateHeaders\blas.h" />
+    <ClInclude Include="eyeStateHeaders\emlrt.h" />
+    <ClInclude Include="eyeStateHeaders\engine.h" />
+    <ClInclude Include="eyeStateHeaders\fintrf.h" />
+    <ClInclude Include="eyeStateHeaders\io64.h" />
+    <ClInclude Include="eyeStateHeaders\lapack.h" />
+    <ClInclude Include="eyeStateHeaders\mat.h" />
+    <ClInclude Include="eyeStateHeaders\matrix.h" />
+    <ClInclude Include="eyeStateHeaders\mclcom.h" />
+    <ClInclude Include="eyeStateHeaders\mclcomclass.h" />
+    <ClInclude Include="eyeStateHeaders\mclcommain.h" />
+    <ClInclude Include="eyeStateHeaders\mclcppclass.h" />
+    <ClInclude Include="eyeStateHeaders\mclmcr.h" />
+    <ClInclude Include="eyeStateHeaders\mclmcrrt.h" />
+    <ClInclude Include="eyeStateHeaders\mclxlmain.h" />
+    <ClInclude Include="eyeStateHeaders\mcr.h" />
+    <ClInclude Include="eyeStateHeaders\mex.h" />
+    <ClInclude Include="eyeStateHeaders\mwdebug.h" />
+    <ClInclude Include="eyeStateHeaders\mwservices.h" />
+    <ClInclude Include="eyeStateHeaders\mwutil.h" />
+    <ClInclude Include="eyeStateHeaders\tmwtypes.h" />
     <ClInclude Include="LeftEyeDetector.h" />
     <ClInclude Include="EyeFeature.h" />
     <ClInclude Include="Face.h" />
@@ -165,6 +190,12 @@
     <ClInclude Include="PupilFeature.h" />
     <ClInclude Include="RightEyeDetector.h" />
     <ClInclude Include="Utility.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="eyeStateHeaders\mexversion.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="eyeStateHeaders\mwcomtypes.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
