@@ -115,9 +115,6 @@
     <Filter Include="Header Files\MainFeatures\DistractionDetection\HeadRotationDetection">
       <UniqueIdentifier>{bb45f97e-2e0b-4da4-9c19-aa481508ea71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection">
-      <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\MainFeatures\DrowsinessDetection\YawningDetection">
       <UniqueIdentifier>{576215d0-8442-493b-a573-94eef814a66a}</UniqueIdentifier>
     </Filter>
@@ -156,6 +153,9 @@
     </Filter>
     <Filter Include="Header Files\MainFeatures\SensoryProcessing\NoseDetection">
       <UniqueIdentifier>{46b66c5e-f431-4ade-b2be-c625ddc71713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\YawningDetection\EyeStateDetection">
+      <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -413,7 +413,7 @@
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
     <ClInclude Include="EyeStateDetector.h">
-      <Filter>Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection</Filter>
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\YawningDetection\EyeStateDetection</Filter>
     </ClInclude>
     <ClInclude Include="eyeStateHeaders\blas.h">
       <Filter>Header Files\Utility</Filter>

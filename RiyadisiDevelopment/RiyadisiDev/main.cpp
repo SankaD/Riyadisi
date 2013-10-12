@@ -29,10 +29,11 @@ int main ( int argc, char **argv )
 
     bool firstRun = true;
     int frameCount = 0;
-
+	
     //capture = cvCaptureFromCAM ( 0 );
-    //capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
-    capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
+    capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
+    //
+	//capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
     //capture = cvCaptureFromAVI ( "Testing/Videos/Motion 1.wmv" );
 
 	featureManager.perclos=0;
@@ -40,9 +41,12 @@ int main ( int argc, char **argv )
 	double percloscore=0;
     if ( capture ) {
         while ( true ) {
-            frame = cvQueryFrame ( capture );
+			if(frameCount> 200){
+				return 0;
+			}
+			frame = cvQueryFrame ( capture );
             frameCount++;
-
+			
 			frameNum=frameCount%30; //look every set of 30 frames
 			
 
@@ -234,8 +238,15 @@ int main ( int argc, char **argv )
                      break;
                  }
              }*/
+
+			 
         }
-    }
+
+		
+    }  
+
+	
+	
 }
 void point ( Mat img, Point2f point, Scalar color )
 {
