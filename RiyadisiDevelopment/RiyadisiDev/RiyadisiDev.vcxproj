@@ -60,8 +60,8 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib\Debug;$(OPENCV_DIR)\bin\Debug;.\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib\Debug;$(OPENCV_DIR)\bin\Debug;.\lib;.\lib\fann</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_calib3d245d.lib;opencv_contrib245d.lib;opencv_core245d.lib;opencv_features2d245d.lib;opencv_flann245d.lib;opencv_gpu245d.lib;opencv_highgui245d.lib;opencv_imgproc245d.lib;opencv_legacy245d.lib;opencv_ml245d.lib;opencv_nonfree245d.lib;opencv_objdetect245d.lib;opencv_photo245d.lib;opencv_stitching245d.lib;opencv_superres245d.lib;opencv_ts245d.lib;opencv_video245d.lib;opencv_videostab245d.lib;fannfloatd.lib;fannfixed.lib;fanndoubled.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -165,6 +165,20 @@
     <ClInclude Include="eyeStateHeaders\mwservices.h" />
     <ClInclude Include="eyeStateHeaders\mwutil.h" />
     <ClInclude Include="eyeStateHeaders\tmwtypes.h" />
+    <ClInclude Include="include\compat_time.h" />
+    <ClInclude Include="include\config.h" />
+    <ClInclude Include="include\doublefann.h" />
+    <ClInclude Include="include\fann.h" />
+    <ClInclude Include="include\fann_activation.h" />
+    <ClInclude Include="include\fann_cascade.h" />
+    <ClInclude Include="include\fann_cpp.h" />
+    <ClInclude Include="include\fann_data.h" />
+    <ClInclude Include="include\fann_error.h" />
+    <ClInclude Include="include\fann_internal.h" />
+    <ClInclude Include="include\fann_io.h" />
+    <ClInclude Include="include\fann_train.h" />
+    <ClInclude Include="include\fixedfann.h" />
+    <ClInclude Include="include\floatfann.h" />
     <ClInclude Include="LeftEyeDetector.h" />
     <ClInclude Include="EyeFeature.h" />
     <ClInclude Include="Face.h" />

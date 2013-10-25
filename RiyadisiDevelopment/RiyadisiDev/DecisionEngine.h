@@ -2,6 +2,7 @@
 
 #include "FaceFeature.h"
 #include "FeatureCollection.h"
+#include "include\fann.h"
 
 class DecisionEngine {
 private:

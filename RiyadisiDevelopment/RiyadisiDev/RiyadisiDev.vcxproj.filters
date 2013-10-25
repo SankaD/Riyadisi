@@ -157,6 +157,9 @@
     <Filter Include="Header Files\MainFeatures\DrowsinessDetection\YawningDetection\EyeStateDetection">
       <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Fann">
+      <UniqueIdentifier>{bad93b49-4159-44d8-b134-e063671ea284}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Neuron.cpp">
@@ -477,6 +480,48 @@
     </ClInclude>
     <ClInclude Include="eyeStateHeaders\tmwtypes.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="include\compat_time.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\config.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\doublefann.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_activation.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_cascade.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_cpp.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_data.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_error.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_internal.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_io.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fann_train.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fixedfann.h">
+      <Filter>Header Files\Fann</Filter>
+    </ClInclude>
+    <ClInclude Include="include\floatfann.h">
+      <Filter>Header Files\Fann</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

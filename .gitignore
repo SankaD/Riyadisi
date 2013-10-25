@@ -9,3 +9,7 @@ Debug
 Release
 /RiyadisiDevelopment/RiyadisiDev/Testing
 /RiyadisiDevelopment/Release
+
+RiyadisiDevelopment/RiyadisiDev/output.out
+*.vsp
+RiyadisiDevelopment/output.out
