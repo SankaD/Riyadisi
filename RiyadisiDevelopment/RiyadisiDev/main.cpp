@@ -4,6 +4,7 @@
 #include "opencv2\photo\photo.hpp";
 #include "opencv2\features2d\features2d.hpp";
 
+
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
@@ -30,7 +31,7 @@ int main ( int argc, char **argv )
     bool firstRun = true;
     int frameCount = 0;
 	
-    //capture = cvCaptureFromCAM ( 0 );
+   // capture = cvCaptureFromCAM ( 0 );
     capture = cvCaptureFromAVI ( "Testing/Videos/me_with_ir.wmv" );
     //
 	//capture = cvCaptureFromAVI ( "Testing/Videos/video 12.wmv" );
@@ -39,11 +40,14 @@ int main ( int argc, char **argv )
 	featureManager.perclos=0;
 	int frameNum=0;
 	double percloscore=0;
+
+	
     if ( capture ) {
+		
         while ( true ) {
-			if(frameCount> 200){
+			/*if(frameCount> 200){
 				return 0;
-			}
+			}*/
 			frame = cvQueryFrame ( capture );
             frameCount++;
 			

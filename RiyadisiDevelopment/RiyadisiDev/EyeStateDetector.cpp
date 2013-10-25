@@ -1,76 +1,66 @@
 #include "EyeStateDetector.h"
 
+
+Mat training_mat(1,60*40,CV_32FC1);
 float EyeStateDetector:: calculateEyeState(Mat eye) {
 
-    //opening matlab engine
-    Engine *ep;
-    //char *buffer;      // to store the output from matlab
-    //int nbuff = 4096; //buffer size
-
-    if (!(ep = engOpen("\0"))) {
-        fprintf(stderr, "\nCan't start MATLAB engine\n"); //error message
-        return EXIT_FAILURE;
-    }
+	imshow("image.jpg",eye);
+   double result=0;
+   processImage(eye);
 
 
-    /*if( (buffer = (char *) malloc(nbuff)) == NULL ) //not enough memory
-    printf("Unable to allocate output buffer\n");  //buffer is allocated for each eye
+   PCA pca; // declare pca variable
+   FileStorage fs("eye_state_pca",FileStorage::READ); //load the pca model of trained data
+    fs["mean"] >> pca.mean ;
+    fs["e_vectors"] >> pca.eigenvectors ;
+    fs["e_values"] >> pca.eigenvalues ;
+    fs.release();
 
-    */
+    Mat afterPca(1,100,CV_32FC1);
 
-    mxArray *image =mxCreateDoubleMatrix(eye.rows, eye.cols, mxREAL); //matlab array for the image
-    mxArray *z=mxCreateDoubleMatrix(1, 1, mxREAL); //array for the matlab output (one element array)
+	pca.project(training_mat, afterPca); // project eye image to pca space of training data
 
-    double *matbuffer=(double*)mxGetPr(image); //get real component of the image(mxArray is of type complex)
-    double *matz=(double*)mxGetPr(z);  //get real component of the output array(mxArray is of type complex)
+	CvSVM SVM;
+	SVM.load("eye_state_svm"); //loading trained svm
 
+	if(SVM.predict(afterPca)==0){
+	cout<< "open eye" <<endl;
+	}
+	else
+	cout << "close eye" <<endl;
 
-    for(int row=0; row<eye.rows; row++) {
-        for(int col=0; col<eye.cols; col++) {
-
-
-            matbuffer[col*(eye.rows)+row]= (double)eye.at<unsigned char>(row, col); //assign array in col major order
-
-        }
-    }
-
-
-    engPutVariable(ep,"im",image); //put variables in matlab workspace
-    engPutVariable(ep,"z",z);
-
-
-    //engOutputBuffer(ep, buffer, nbuff); //specify the buffer to store matlab output
-    engEvalString(ep,"z=Classify(im)"); //call the eye state classifier
-
-    /*	if( buffer != NULL )
-    printf(buffer);         //print the output
-
-    free(buffer);*/
-
-
-    mxArray *mresult;
-    double *cresult;
-    mresult = engGetVariable(ep,"z");
-
-    if(mresult==NULL)
-        cout<< "NULL pointer";
-
-
-    cresult = mxGetPr(mresult);
-
-    double result= cresult[0];
-
-    cout<< endl;
-    if(result==0)
-        cout << "Open eye";
-    else if(result==1)cout << "Closed eye";
-    cout<< endl;
-
-    mxDestroyArray(mresult);
-    mxDestroyArray(image);
-    mxDestroyArray(z);
-
-
-    return result;
+	return SVM.predict(afterPca);
 
 }
+
+void EyeStateDetector:: processImage(Mat image){
+
+	
+
+	resize(image, image, Size(60, 40)); //resize to standard size
+		
+		if(image.channels()==3)
+		cvtColor(image, image, CV_BGR2GRAY); //convert to greyscale
+		
+
+		equalizeHist( image,image ); //histogram equalization
+		
+		blur( image, image, Size(3,3) ); //gaussian blur
+		Canny( image, image, 50,300, 3 );
+	    
+		 
+		normalize(image, image, 0, 255, NORM_MINMAX, CV_8UC1); // normalize to have 0-1
+
+		/*int ii=0;
+				for (int i = 0; i<image.rows; i++) {
+			for (int j = 0; j < image.cols; j++) {
+				training_mat.at<float>(0,ii++) = image.at<uchar>(i,j);
+			}
+		}*/
+
+		Mat xi = training_mat.row(0);
+					image.reshape(1,1).convertTo(xi,CV_32FC1, 1,0);
+        
+
+}
+

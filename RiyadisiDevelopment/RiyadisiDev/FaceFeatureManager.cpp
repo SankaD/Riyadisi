@@ -79,9 +79,10 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
         faceFeature->getLeftEye()->setFeatureRect ( leftEye );
         faceFeature->getLeftEye()->setAvailable ( true );
+		perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ));
     }
 
-	perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ));
+	
     //detect right eye
     rightEyeROI.x = faceImage.cols / 2;
     rightEyeROI.y = faceImage.rows / 4;
@@ -104,9 +105,10 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
         faceFeature->getRightEye()->setFeatureRect ( rightEye );
         faceFeature->getRightEye()->setAvailable ( true );
+		perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ));
     }
 
-	perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ));
+	
 
     //float midX =  faceFeature->getFeatureRect().width  / 2;
     //if ( eyes.size() > 0 ) {
