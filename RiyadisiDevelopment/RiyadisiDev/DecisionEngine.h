@@ -2,7 +2,6 @@
 
 #include "FaceFeature.h"
 #include "FeatureCollection.h"
-#include "include\fann.h"
 
 class DecisionEngine {
 private:
@@ -13,6 +12,7 @@ public:
     ///Specially when a new feature is added for a new frame.
     ///</summary>
     void incrementStep();
+    void trainEngine();
 
 
 };

@@ -194,6 +194,7 @@
     <ClInclude Include="Mouth.h" />
     <ClInclude Include="MouthDetector.h" />
     <ClInclude Include="MouthFeature.h" />
+    <ClInclude Include="NeuralNetwork.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="NoddingOffDetector.h" />
     <ClInclude Include="Nose.h" />
