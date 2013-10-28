@@ -1,0 +1,11 @@
+New variables
+-------------------------------------------------------------------------------
+OPENCV_DIR	=	opencv release folder
+OPENCV_SRC	=	opencv source folder
+
+-------------------------------------------------------------------------------
+PATH
+-------------------------------------------------------------------------------
+FANN folder
+opencv debug folder
+opencv release folder

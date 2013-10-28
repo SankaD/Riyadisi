@@ -252,6 +252,9 @@
     <ClCompile Include="EyeStateDetector.cpp">
       <Filter>Source Files\MainFeatures\DrowsinessDetection\EyeStateDetection</Filter>
     </ClCompile>
+    <ClCompile Include="NeuralNetwork.cpp">
+      <Filter>Source Files\main_engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">

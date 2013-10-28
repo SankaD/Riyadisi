@@ -41,8 +41,8 @@
     <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;$(OPENCV_DIR)\install\include</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(OPENCV_DIR)\bin\Debug;</ReferencePath>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(OPENCV_DIR)\lib\Debug;</LibraryPath>
+    <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib;$(OPENCV_DIR)\bin\Debug;.\lib;</ReferencePath>
+    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(OPENCV_DIR)\lib\Debug;.\lib;.\lib\fann</LibraryPath>
     <SourcePath>$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;$(OPENCV_SRC)\modules</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -102,6 +102,7 @@
     <ClCompile Include="MainProgram.cpp" />
     <ClCompile Include="MouthDetector.cpp" />
     <ClCompile Include="MouthFeature.cpp" />
+    <ClCompile Include="NeuralNetwork.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="NoddingOffDetector.cpp" />
     <ClCompile Include="NoseDetector.cpp" />
