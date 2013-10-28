@@ -9,6 +9,9 @@
 #include "NoseDetector.h"
 #include "MouthDetector.h"
 #include "EyeStateDetector.h"
+#include <iostream>
+#include <stdio.h>
+#include <fstream>
 
 #define DOWNSAMPLE_CONSTANT 4 //should be a power of 2
 ///<summary>
@@ -35,4 +38,6 @@ private:
     PupilDetector pupilDetector;
     NoseDetector noseDetector;
 	EyeStateDetector eyeStateDetector;
+	FileStorage fs;
+	
 };

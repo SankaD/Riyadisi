@@ -31,9 +31,11 @@ private:
     
 public :
 
-    float calculateEyeState(Mat eye);
+    float calculateEyeState(Mat eye,FileStorage fs);
 
 	void processImage(Mat image);
+
+	
 
 };
 

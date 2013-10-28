@@ -3,7 +3,8 @@
 
 FaceFeatureManager::FaceFeatureManager ( void )
 {
-
+	fs=FileStorage("eye_state_pca",FileStorage::READ);
+	
 }
 FaceFeatureManager::~FaceFeatureManager ( void )
 {
@@ -79,7 +80,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
         faceFeature->getLeftEye()->setFeatureRect ( leftEye );
         faceFeature->getLeftEye()->setAvailable ( true );
-		perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ));
+		perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ),fs);
     }
 
 	
@@ -105,7 +106,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
         faceFeature->getRightEye()->setFeatureRect ( rightEye );
         faceFeature->getRightEye()->setAvailable ( true );
-		perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ));
+		perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ),fs);
     }
 
 	

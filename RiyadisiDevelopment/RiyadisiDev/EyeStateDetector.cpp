@@ -2,7 +2,7 @@
 
 
 Mat training_mat(1,60*40,CV_32FC1);
-float EyeStateDetector:: calculateEyeState(Mat eye) {
+float EyeStateDetector:: calculateEyeState(Mat eye,FileStorage fs) {
 
 	imshow("image.jpg",eye);
    double result=0;
@@ -10,7 +10,7 @@ float EyeStateDetector:: calculateEyeState(Mat eye) {
 
 
    PCA pca; // declare pca variable
-   FileStorage fs("eye_state_pca",FileStorage::READ); //load the pca model of trained data
+  // FileStorage fs("eye_state_pca",FileStorage::READ); //load the pca model of trained data
     fs["mean"] >> pca.mean ;
     fs["e_vectors"] >> pca.eigenvectors ;
     fs["e_values"] >> pca.eigenvalues ;
@@ -59,7 +59,11 @@ void EyeStateDetector:: processImage(Mat image){
 		}*/
 
 		Mat xi = training_mat.row(0);
+		            
+		if(image.isContinuous())
 					image.reshape(1,1).convertTo(xi,CV_32FC1, 1,0);
+		else
+			  image.clone().reshape(1,1).convertTo(xi,CV_32FC1, 1,0);
         
 
 }
