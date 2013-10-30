@@ -2,7 +2,7 @@
 
 NeuralNetwork::NeuralNetwork ( bool isTraining, bool fromFile )
 {
-
+    // use the .data extension for the training data and .neural for the data generated from the neural network
     neuralDataFilename = "neuralData.neural";
 
     this->isTraining = isTraining;

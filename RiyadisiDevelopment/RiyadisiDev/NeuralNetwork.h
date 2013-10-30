@@ -25,13 +25,6 @@ public:
     ///<param name="isTraining">Whether the network is created for training or not.</param>
     NeuralNetwork ( bool isTraining = false, bool fromFile = true );
     ~NeuralNetwork();
-private:
-    bool isTraining;
-    string neuralDataFilename;;// = "neuralData.neural";
-
-
-    neural_net network;
-
     ///<summary>
     ///Trains the network using the given file.
     ///</summary>
@@ -51,4 +44,9 @@ private:
     bool getAlertValue ( double weightedPerclose, double noddingOffMeasure,
                          double gazeMeasure, double headRotationMeasure,
                          double yawningMeasure );
+private:
+    bool isTraining;
+    string neuralDataFilename;;// = "neuralData.neural";
+    neural_net network;
+
 };

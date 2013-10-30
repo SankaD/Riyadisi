@@ -2,17 +2,23 @@
 
 #include "FaceFeature.h"
 #include "FeatureCollection.h"
+#include "NeuralNetwork.h"
 
+///<summary>
+///Manages the decision making component of the system
+///</summary>
 class DecisionEngine {
 private:
-    FeatureCollection features;
+    NeuralNetwork network;
+    static string defaultFilename;
 public:
-    ///<summary>
-    ///Called when the next step of the processing needs to happen.
-    ///Specially when a new feature is added for a new frame.
-    ///</summary>
-    void incrementStep();
-    void trainEngine();
+    DecisionEngine();
+    ~DecisionEngine();
 
+    ///<summary>
+    ///Trains the internal neural network using the provided file.
+    ///</summary>
+    void trainEngine ( string filename = defaultFilename );
+    bool shouldAlert ( double eyeState, double noddingOff, double gaze, double headRotation, double yawning );
 
 };
