@@ -1,69 +1,26 @@
-#pragma once
-//opencv includes
-#include <opencv2\objdetect\objdetect.hpp>
-#include <opencv2\highgui\highgui.hpp>
-
-//standard c++ includes
-#include <iostream>
-#include <time.h>
-
-//project related includes
-#include "FaceFeatureManager.h"
-#include "NoddingOffDetector.h"
-#include "GazeDetector.h"
+#include "MainProgram.h"
 
 using namespace std;
 using namespace cv;
-
-///<summary>
-///Represents the image source type
-///</summary>
-enum ImageSourceType {
-    Camera, File
-};
-
-const short int WAIT_PERIOD_PER_FRAME = 30;
-
-///<summary>
-///Retrieves images from a given video source
-///</summary>
-class ImageManager {
-public:
-
-    ImageManager ( ImageSourceType sourceType, string fileName = "", int cameraID = 0 );
-    ~ImageManager();
-    Mat &acquireImage ();
-    Mat &acquireImage ( Mat &image );
-    bool isOpened();
-private:
-    VideoCapture capture;
-};
-
-class MainProgram {
-public:
-    const static short int WAIT_PERIOD_PER_FRAME;
-    void run();
-private:
-};
 
 const short int MainProgram::WAIT_PERIOD_PER_FRAME = 30;
 
 void MainProgram::run()
 {
-    ImageManager imageManager ( ImageSourceType::File, "" );
+    ImageManager imageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
 
-    FaceFeatureManager featureManager;
-    NoddingOffDetector noddingOffDetector;
-    GazeDetector gazeDetector;
-
     Mat frame, grayFrame;
-    long int frameCount;// for keeping the frame count
+    long int frameCount=0;// for keeping the frame count
     int key;// for the key pressed by the user
     time_t time = clock();// used to keep the time in the system
     bool firstRun = true;
+
+    FaceFeatureManager featureManager;
+    NoddingOffDetector noddingOffDetector;
+    GazeDetector gazeDetector;
 
     while ( true ) {
         frame = imageManager.acquireImage ( frame );
@@ -186,30 +143,81 @@ void MainProgram::run()
             }
             featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
         }
+        Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
+        Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
+        Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
+        Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
+
+        bool isNoddingOff = noddingOffDetector.noddingOffDetect ( *faceFeature );
+        if ( isNoddingOff ) {
+            cout << "Driver is Nodding off" << endl;
+        }
+
+        gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
+        float gazeScore = gazeDetector.getDistractionScore();
+
+        int frameNum = frameCount % 30;
+        double percloscore = 0;
+        if ( frameNum == 0 ) {
+            featureManager.perclos /= 30;
+            percloscore = featureManager.perclos;
+            featureManager.perclos = 0;
+        }
+
+        // drawing image
+        Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
+        Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
+
+        leftPupil = faceFeature->getLeftEye()->getRelativePoint ( leftPupil );
+        rightPupil = faceFeature->getRightEye()->getRelativePoint ( rightPupil );
+
+        leftPupil = faceFeature->getRelativePoint ( leftPupil );
+        rightPupil = faceFeature->getRelativePoint ( rightPupil );
+
+        //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
+        if ( faceFeature->isAvailable() ) {
+            rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
+            rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
+            rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
+
+            rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+
+            if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
+                point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
+            }
+            if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
+            }
+            if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
+                    && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
+                line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
+            }
+        }
+        CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
+
+
+        ostringstream distractedText ;
+        ostringstream perclosText ;
+        distractedText << "Distraction Level : " << gazeScore;
+        perclosText << "perclos Level : " << percloscore;
+        string drowsinessText = "Drowsiness Level";
+        string noddingText = "Nodding off : ";
+
+
+        if ( isNoddingOff ) {
+            noddingText += "True";
+        } else {
+            noddingText += "False";
+        }
+
+        addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
+        addText ( frame, drowsinessText, Point ( 10, 30 ), font );
+        addText ( frame, noddingText, Point ( 10, 50 ), font );
+        addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
+        imshow ( "image", frame );
     }
 }
-ImageManager::ImageManager ( ImageSourceType sourceType, string filename, int cameraID )
+MainProgram::MainProgram()
 {
-    if ( sourceType == ImageSourceType::File ) {
-        capture = VideoCapture ( filename );
-    } else {
-        capture = VideoCapture ( cameraID );
-    }
-}
-Mat &ImageManager::acquireImage()
-{
-    Mat image;
-    return acquireImage ( image );
-}
-Mat &ImageManager::acquireImage ( Mat &image )
-{
-    capture >> image;
-    return image;
-}
-bool ImageManager::isOpened()
-{
-    return capture.isOpened();
-}
-ImageManager::~ImageManager()
-{
+    isAlertOn = false;
 }

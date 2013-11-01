@@ -255,6 +255,12 @@
     <ClCompile Include="NeuralNetwork.cpp">
       <Filter>Source Files\main_engine</Filter>
     </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Source Files\MainFeatures</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -359,9 +365,6 @@
       <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Pupil.h">
-      <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing</Filter>
     </ClInclude>
     <ClInclude Include="Circle.h">
@@ -528,6 +531,15 @@
     </ClInclude>
     <ClInclude Include="NeuralNetwork.h">
       <Filter>Header Files\main_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MainProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Header Files\MainFeatures</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Header Files\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -84,8 +84,10 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeStateDetector.cpp" />
+    <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="LeftEyeDetector.cpp" />
     <ClCompile Include="EyeFeature.cpp" />
     <ClCompile Include="Face.cpp" />
@@ -166,6 +168,7 @@
     <ClInclude Include="eyeStateHeaders\mwservices.h" />
     <ClInclude Include="eyeStateHeaders\mwutil.h" />
     <ClInclude Include="eyeStateHeaders\tmwtypes.h" />
+    <ClInclude Include="ImageManager.h" />
     <ClInclude Include="include\compat_time.h" />
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\doublefann.h" />
@@ -192,6 +195,7 @@
     <ClInclude Include="FeatureDetector.h" />
     <ClInclude Include="Gaze.h" />
     <ClInclude Include="GazeDetector.h" />
+    <ClInclude Include="MainProgram.h" />
     <ClInclude Include="Mouth.h" />
     <ClInclude Include="MouthDetector.h" />
     <ClInclude Include="MouthFeature.h" />
