@@ -25,3 +25,6 @@ bool ImageManager::isOpened()
 ImageManager::~ImageManager()
 {
 }
+ImageManager::ImageManager()
+{
+}

@@ -3,6 +3,9 @@
 #include "include\floatfann.h"
 #include <iostream>
 
+#include "Utility.h"
+#include "Log.h"
+
 using namespace std;
 using namespace FANN;
 
@@ -23,7 +26,7 @@ public:
     ///Creates a neural network
     ///</summary>
     ///<param name="isTraining">Whether the network is created for training or not.</param>
-    NeuralNetwork ( bool isTraining = false, bool fromFile = true );
+    NeuralNetwork ( bool isTraining = false );
     ~NeuralNetwork();
     ///<summary>
     ///Trains the network using the given file.
@@ -44,6 +47,10 @@ public:
     bool getAlertValue ( double weightedPerclose, double noddingOffMeasure,
                          double gazeMeasure, double headRotationMeasure,
                          double yawningMeasure );
+    ///<summary>
+    ///Saves the neural network into the disk
+    ///</summary>
+    void save();
 private:
     bool isTraining;
     string neuralDataFilename;;// = "neuralData.neural";

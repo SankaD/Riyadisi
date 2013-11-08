@@ -20,6 +20,7 @@ class ImageManager {
 public:
 
     ImageManager ( ImageSourceType sourceType, string fileName = "", int cameraID = 0 );
+    ImageManager();
     ~ImageManager();
     Mat &acquireImage ();
     Mat &acquireImage ( Mat &image );

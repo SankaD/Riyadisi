@@ -5,22 +5,9 @@ using namespace cv;
 
 const short int MainProgram::WAIT_PERIOD_PER_FRAME = 30;
 
-void MainProgram::run()
-{
-    ImageManager imageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
-    if ( !imageManager.isOpened() ) {
-        throw exception ( "Program was unable to load the image source" );
-    }
-
-    Mat frame, grayFrame;
-    long int frameCount=0;// for keeping the frame count
-    int key;// for the key pressed by the user
-    time_t time = clock();// used to keep the time in the system
-    bool firstRun = true;
-
-    FaceFeatureManager featureManager;
-    NoddingOffDetector noddingOffDetector;
-    GazeDetector gazeDetector;
+void MainProgram::run() {
+    Log::log ( "Program started" );
+    firstRun = true;
 
     while ( true ) {
         frame = imageManager.acquireImage ( frame );
@@ -33,9 +20,7 @@ void MainProgram::run()
             break;
         }
 
-        // processing the image
-        cvtColor ( frame, grayFrame, CV_BGR2GRAY );
-        equalizeHist ( grayFrame, grayFrame );
+        processImage();
 
         // Detection
         FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext();
@@ -195,7 +180,6 @@ void MainProgram::run()
         }
         CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
 
-
         ostringstream distractedText ;
         ostringstream perclosText ;
         distractedText << "Distraction Level : " << gazeScore;
@@ -216,8 +200,38 @@ void MainProgram::run()
         addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
         imshow ( "image", frame );
     }
+    Log::log ( "Program ended" );
 }
-MainProgram::MainProgram()
-{
+MainProgram::MainProgram() {
     isAlertOn = false;
+    trainingMode = false;
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    if ( !imageManager.isOpened() ) {
+        throw exception ( "Program was unable to load the image source" );
+    }
+}
+void MainProgram::processImage() {
+    // processing the image
+    cvtColor ( frame, grayFrame, CV_BGR2GRAY );
+    equalizeHist ( grayFrame, grayFrame );
+}
+void MainProgram::trainingRun() {
+    Log::log ( "Training Started" );
+    try {
+        int key = 0;
+        /* Mat mat;
+         imshow ( "Window", mat );*/
+        cout << "Should the model be created new ? y/n" << endl;
+
+        key = waitKey ( 10000 );//doesn't work without a highgui component
+        key = 'y';
+        if ( key == 'y' || key == 'Y' ) {
+            decisionEngine.trainEngine ( "data/trainingData.data" );
+        } else {
+            decisionEngine.trainEngine ();
+        }
+    } catch ( exception e ) {
+        Log::log ( e.what() );
+    }
+    Log::log ( "Training ended" );
 }

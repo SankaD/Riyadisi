@@ -84,6 +84,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeStateDetector.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="FeatureDetector.h" />
     <ClInclude Include="Gaze.h" />
     <ClInclude Include="GazeDetector.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="MainProgram.h" />
     <ClInclude Include="Mouth.h" />
     <ClInclude Include="MouthDetector.h" />
