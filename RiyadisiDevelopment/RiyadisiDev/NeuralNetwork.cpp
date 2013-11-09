@@ -27,21 +27,36 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
     }
 }
 NeuralNetwork::~NeuralNetwork() {
-    network.destroy();
+    try {
+        // deleting the network from the memory
+//        network.destroy();
+
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
+    }
 }
 void NeuralNetwork::trainNetwork ( string fileName ) {
-    if ( !isTraining ) {
-        throw exception ( "Unsupported mode" );
-    }
+    try {
+        if ( !isTraining ) {
+            throw exception ( "Unsupported mode" );
+        }
 
-    network.train_on_file ( fileName, maxEpochs, epochsBetweenReports, desiredError );
-    network.save ( neuralDataFilename );
+        network.train_on_file ( fileName, maxEpochs, epochsBetweenReports, desiredError );
+        network.save ( neuralDataFilename );
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
+    }
 }
 void NeuralNetwork::save() {
-    if ( !isTraining ) {
-        throw exception ( "Unsupported mode" );
+    try {
+        // only save in the operation mode.
+        if ( !isTraining ) {
+            throw exception ( "Unsupported mode" );
+        }
+        network.save ( neuralDataFilename );
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
     }
-    network.save ( neuralDataFilename );
 }
 
 void NeuralNetwork::resetNetwork() {

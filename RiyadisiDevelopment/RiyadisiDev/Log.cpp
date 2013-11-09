@@ -21,6 +21,7 @@ void Log::log ( string message ) {
         time_t t = time ( &t );
         file << t << " :: " ;
         file << message.c_str() << endl;
+        file.flush();
     } catch ( exception ex ) {
         cerr << ex.what() << endl;
     }

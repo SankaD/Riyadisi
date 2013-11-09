@@ -8,6 +8,7 @@ const short int MainProgram::WAIT_PERIOD_PER_FRAME = 30;
 void MainProgram::run() {
     Log::log ( "Program started" );
     firstRun = true;
+    frameCount = 0;
 
     while ( true ) {
         frame = imageManager.acquireImage ( frame );
@@ -187,6 +188,7 @@ void MainProgram::run() {
         string drowsinessText = "Drowsiness Level";
         string noddingText = "Nodding off : ";
 
+        bool alert =  decisionEngine.shouldAlert ( percloscore, 0, gazeScore, 0, 0 );
 
         if ( isNoddingOff ) {
             noddingText += "True";
@@ -198,14 +200,21 @@ void MainProgram::run() {
         addText ( frame, drowsinessText, Point ( 10, 30 ), font );
         addText ( frame, noddingText, Point ( 10, 50 ), font );
         addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
+        if ( alert ) {
+            addText ( frame, "Alert", Point ( 90, 90 ), font );
+        }
         imshow ( "image", frame );
+
+
     }
     Log::log ( "Program ended" );
 }
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 12.wmv" );
+
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }

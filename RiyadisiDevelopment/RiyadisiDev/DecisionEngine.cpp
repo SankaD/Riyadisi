@@ -4,8 +4,8 @@
 
 string DecisionEngine::defaultFilename = "data/trainingData.data";
 
-DecisionEngine::DecisionEngine() {
-    network = NeuralNetwork ( false );
+DecisionEngine::DecisionEngine() : network ( NeuralNetwork ( false ) ) {
+
 }
 
 bool DecisionEngine::trainEngine ( string filename ) {
@@ -17,12 +17,17 @@ bool DecisionEngine::trainEngine ( string filename ) {
             // file contains multiple filenames
             int lineCount = 0;
             stream >> lineCount;
+            stringstream str;
+            str << "Training using " << lineCount << " files.";
+            Log::log (  str.str() );
 
             // iteratively train the network using each file.
             for ( int i = 0; i < lineCount; i++ ) {
                 stream >> filename;
+                Log::log ( "Training using : " + filename );
                 trainingNetwork.trainNetwork ( filename );
 
+                Log::log ( "Trained using : " + filename );
             }
             trainingNetwork.save();
         }

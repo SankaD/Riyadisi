@@ -11,11 +11,11 @@ using namespace FANN;
 
 static const unsigned int numInput = 5;
 static const unsigned int numOutput = 1;
-static const unsigned int numLayers = 3;
-static const unsigned int numNeuronsHidden = 3;
-static const float desiredError = 0.0001;
-static const unsigned int maxEpochs = 500000;
-static const unsigned int epochsBetweenReports = 1000;
+static const unsigned int numLayers = 4;
+static const unsigned int numNeuronsHidden = 5;
+static const float desiredError = 0.01;
+static const unsigned int maxEpochs = 50000;
+static const unsigned int epochsBetweenReports = 10000;
 
 ///<summary>
 ///Represents a neural network
