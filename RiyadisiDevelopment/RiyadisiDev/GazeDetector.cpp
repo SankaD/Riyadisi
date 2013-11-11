@@ -15,7 +15,6 @@ GazeDetector::GazeDetector ( void ) {
     currentIndex = 0;
 }
 
-
 GazeDetector::~GazeDetector ( void ) {
 }
 
@@ -54,16 +53,15 @@ float GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSide
 
     if ( eye.width != 0 ) {
         if ( eyeSide == 'l' ) {
-            horizontalScore = defaultLeftRatio -  pupil.x / eye.width;
+            horizontalScore =   pupil.x / eye.width - defaultLeftRatio;
         } else if ( eyeSide == 'r' ) {
-            horizontalScore = defaultRightRatio -  pupil.x / eye.width;
+            horizontalScore =  pupil.x / eye.width - defaultRightRatio;
         }
 
         if ( eye.height > 0 ) {
-            verticalScore = defaultTopRatio - pupil.y / eye.height;
-
+            verticalScore = pupil.y / eye.height - defaultTopRatio;
         }
-        score = horizontalScore * horizontalScore + verticalScore * verticalScore;
+        score = horizontalScore  +  verticalScore;
     }
     score *= 100;
 
@@ -82,7 +80,7 @@ float GazeDetector::getDistractionScore() {
     return abs ( score );
 }
 Gaze GazeDetector::getGaze ( int gazeFromCurrent ) {
-    Gaze gaze;
+    // Gaze gaze;
     /*if  ( gazeFromCurrent > size ) {
         return gaze;
     }*/
