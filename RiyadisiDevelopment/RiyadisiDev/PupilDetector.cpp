@@ -1,13 +1,10 @@
 #include "PupilDetector.h"
 
-PupilDetector::PupilDetector ( void )
-{
+PupilDetector::PupilDetector ( void ) {
 }
-PupilDetector::~PupilDetector ( void )
-{
+PupilDetector::~PupilDetector ( void ) {
 }
-Pupil PupilDetector::detectPupil ( Mat eye )
-{
+Pupil PupilDetector::detectPupil ( Mat eye ) {
     Mat eyeTemp; // matrices for internal calculations
     int cannyThreshold = 10;
     float cannyRatio = 3;
@@ -18,19 +15,14 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     eyeTemp = eye.clone();
 
     //--- detecting the pupil ---//
-    //equalizeHist ( eyeTemp, eyeTemp );
-    //imshow ( "equalized image", eyeTemp );
-
-
 
     threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-    //imshow ( "eye threshold", eyeTemp );
+
 
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
-    //dilate ( eyeTemp, eyeTemp, dilateElement );
     erode ( eyeTemp, eyeTemp, erodeElement );
-    //imshow ( "transformed image", eyeTemp );
+
 
     vector<vector<Point>> contours;
 
@@ -42,8 +34,6 @@ Pupil PupilDetector::detectPupil ( Mat eye )
      vector<Rect> boundRect ( contours.size() );*/
 
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
-
-    imshow ( "eye", eyeTemp );
 
     double area = 0, maxArea = 0;
     int maxAreaIndex = -1;
@@ -60,7 +50,7 @@ Pupil PupilDetector::detectPupil ( Mat eye )
             maxArea = area;
         }
     }
-    cout << "Max Area : " << maxArea << endl;
+    // cout << "Max Area : " << maxArea << endl;
 
     //vector<Point> contourCollection;
     //for ( int i = 0; i < contours[maxAreaIndex].size(); i++ ) {
@@ -89,8 +79,7 @@ Pupil PupilDetector::detectPupil ( Mat eye )
     return pupil;
 }
 
-void PupilDetector::drawPupil ( Mat frame, Pupil pupil )
-{
+void PupilDetector::drawPupil ( Mat frame, Pupil pupil ) {
     Point2f center = pupil.getPupilLocation().getCenter();
     Point2f pNorth ( center.x, center.y - 2 );
     Point2f pSouth ( center.x, center.y + 2 );

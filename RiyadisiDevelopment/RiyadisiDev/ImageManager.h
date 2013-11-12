@@ -25,6 +25,7 @@ public:
     Mat &acquireImage ();
     Mat &acquireImage ( Mat &image );
     bool isOpened();
+    float getFPS();
 private:
     VideoCapture capture;
 };

@@ -10,9 +10,19 @@ void MainProgram::run() {
     firstRun = true;
     frameCount = 0;
 
+    float frameRate = 0;
+    float frameTime = 0;
+    time ( &systemTime );
+    time_t tempTime;
+    int elapsedTime = 0;
+    long int ticks = 0, tempTicks = 0;
+
     while ( true ) {
         frame = imageManager.acquireImage ( frame );
         frameCount++;
+
+        tempTicks =  getTickCount() - ticks;
+        ticks = getTickCount();
 
         key = waitKey ( WAIT_PERIOD_PER_FRAME );
 
@@ -136,7 +146,7 @@ void MainProgram::run() {
 
         bool isNoddingOff = noddingOffDetector.noddingOffDetect ( *faceFeature );
         if ( isNoddingOff ) {
-            cout << "Driver is Nodding off" << endl;
+            //cout << "Driver is Nodding off" << endl;
         }
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
@@ -179,14 +189,23 @@ void MainProgram::run() {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }
         }
-        CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
+        CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
+        CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
+        CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
 
         ostringstream distractedText ;
         ostringstream perclosText ;
-        distractedText << "Distraction Level : " << gazeScore;
-        perclosText << "perclos Level : " << percloscore;
-        string drowsinessText = "Drowsiness Level";
-        string noddingText = "Nodding off : ";
+        ostringstream frameRateText;
+        ostringstream frameTimeText;
+
+        distractedText		<< "Distraction Level  : " << gazeScore;
+        perclosText			<< "perclos Level     : " << percloscore;
+        frameRateText		<< "Frame Rate        : " << frameRate;
+        frameTimeText		<< "Frame Time        : " << ( tempTicks / (  getTickFrequency() ) );
+
+        string drowsinessText	= "Drowsiness Level : ";
+        string noddingText		= "Nodding off         : ";
+        string alertText		= "Alert the driver  : ";
 
         bool alert =  decisionEngine.shouldAlert ( percloscore, 0, gazeScore, 0, 0 );
 
@@ -195,17 +214,21 @@ void MainProgram::run() {
         } else {
             noddingText += "False";
         }
-
-        addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
-        addText ( frame, drowsinessText, Point ( 10, 30 ), font );
-        addText ( frame, noddingText, Point ( 10, 50 ), font );
-        addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
         if ( alert ) {
-            addText ( frame, "Alert", Point ( 90, 90 ), font );
+            alertText += "Yes";
+        } else {
+            alertText += "No";
         }
+        namedWindow ( "image", CV_WINDOW_AUTOSIZE );
+
+        addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
+        addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
+        addText ( frame, noddingText, Point ( 10, 50 ), fontYellow );
+        addText ( frame, perclosText.str(), Point ( 10, 70 ), fontYellow );
+        addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
+        addText ( frame, alertText, Point ( 10, 110 ), fontAlert );
+
         imshow ( "image", frame );
-
-
     }
     Log::log ( "Program ended" );
 }
@@ -228,8 +251,6 @@ void MainProgram::trainingRun() {
     Log::log ( "Training Started" );
     try {
         int key = 0;
-        /* Mat mat;
-         imshow ( "Window", mat );*/
         cout << "Should the model be created new ? y/n" << endl;
 
         key = waitKey ( 10000 );//doesn't work without a highgui component

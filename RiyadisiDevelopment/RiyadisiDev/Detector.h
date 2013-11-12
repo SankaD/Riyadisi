@@ -16,8 +16,14 @@ public:
     void setCascadeFileName ( string filename );
     virtual vector<Rect> optimizeDetection ( vector<Rect> data ) = 0 ;
 protected:
-	float scale;
-	Size minSize;
+    int flags;
+    int minNeighbors;
+
+    /// Image reduction factor for each step.
+    float scale;
+
+    /// Minimum and maximum possible object sizes.
+    Size minSize, maxSize;
 private:
     string cascadeName;
     CascadeClassifier cascade;

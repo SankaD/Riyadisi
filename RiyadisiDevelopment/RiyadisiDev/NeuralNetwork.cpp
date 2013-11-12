@@ -21,26 +21,22 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
             }
         }
     } catch ( exception e ) {
-
         Log::log ( e.what() );
-
     }
 }
 NeuralNetwork::~NeuralNetwork() {
     try {
-        // deleting the network from the memory
-//        network.destroy();
+        // deletion
 
     } catch ( exception ex ) {
         Log::log ( ex.what() );
     }
 }
 void NeuralNetwork::trainNetwork ( string fileName ) {
+    if ( !isTraining ) {
+        throw exception ( "Unsupported mode" );
+    }
     try {
-        if ( !isTraining ) {
-            throw exception ( "Unsupported mode" );
-        }
-
         network.train_on_file ( fileName, maxEpochs, epochsBetweenReports, desiredError );
         network.save ( neuralDataFilename );
     } catch ( exception ex ) {
@@ -48,11 +44,11 @@ void NeuralNetwork::trainNetwork ( string fileName ) {
     }
 }
 void NeuralNetwork::save() {
+    // only save in the operation mode.
+    if ( !isTraining ) {
+        throw exception ( "Unsupported mode" );
+    }
     try {
-        // only save in the operation mode.
-        if ( !isTraining ) {
-            throw exception ( "Unsupported mode" );
-        }
         network.save ( neuralDataFilename );
     } catch ( exception ex ) {
         Log::log ( ex.what() );
@@ -68,14 +64,18 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
     if ( isTraining ) {
         throw exception ( "Unsupported mode" );
     }
-    fann_type input[5], output;
-    input[0] = weightedPerclose;
-    input[1] = noddingOffMeasure;
-    input[2] = gazeMeasure;
-    input[3] = headRotationMeasure;
-    input[4] = yawningMeasure;
+    try {
+        fann_type input[5], output;
+        input[0] = weightedPerclose;
+        input[1] = noddingOffMeasure;
+        input[2] = gazeMeasure;
+        input[3] = headRotationMeasure;
+        input[4] = yawningMeasure;
 
-    output = * ( network.run ( input ) );
+        output = * ( network.run ( input ) );
 
-    return ( output > 0.5 );
+        return ( output > 0.5 );
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
+    }
 }

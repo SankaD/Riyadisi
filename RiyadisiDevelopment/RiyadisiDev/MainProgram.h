@@ -38,7 +38,7 @@ private:
     Mat frame, grayFrame;
     long int frameCount;// for keeping the frame count
     int key;// for the key pressed by the user
-    time_t time;// used to keep the time in the system
+    time_t systemTime;// used to keep the time in the system
     bool firstRun;
     bool trainingMode;
     DecisionEngine decisionEngine;
