@@ -11,6 +11,8 @@
 #include "MainProgram.h"
 #include "FaceFeatureManager.h"
 #include "NoddingOffDetector.h"
+#include "YawningDetector.h"
+#include "HeadRotationDetector.h"
 #include "GazeDetector.h"
 #include "ImageManager.h"
 #include "Utility.h"
@@ -35,6 +37,8 @@ private:
     FaceFeatureManager featureManager;
     NoddingOffDetector noddingOffDetector;
     GazeDetector gazeDetector;
+	YawningDetector yawningDetector;
+	HeadRotationDetector headRotationDetector;
     Mat frame, grayFrame;
     long int frameCount;// for keeping the frame count
     int key;// for the key pressed by the user
@@ -42,4 +46,6 @@ private:
     bool firstRun;
     bool trainingMode;
     DecisionEngine decisionEngine;
+	float yawning;
+	vector<float> headRotAngles;
 };

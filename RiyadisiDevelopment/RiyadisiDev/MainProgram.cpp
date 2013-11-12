@@ -144,10 +144,9 @@ void MainProgram::run() {
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        bool isNoddingOff = noddingOffDetector.noddingOffDetect ( *faceFeature );
-        if ( isNoddingOff ) {
-            //cout << "Driver is Nodding off" << endl;
-        }
+        double noddingOffLevel = 0.0;
+		noddingOffLevel = noddingOffDetector.noddingOffDetect(*faceFeature);
+		std::cout<<  "----------------------------------Nodding off level = "<< noddingOffLevel <<endl;
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         float gazeScore = gazeDetector.getDistractionScore();
@@ -159,6 +158,20 @@ void MainProgram::run() {
             percloscore = featureManager.perclos;
             featureManager.perclos = 0;
         }
+
+		//calculate yawning frequency
+		if( faceFeature->getMouth()->isAvailable() ) {
+			yawning = yawningDetector.detectYawning( faceFeature );
+			cout<<"----- Yawning:" << yawning<<endl;
+		}
+
+		//calculate head orientation
+		if( frameCount == 1) 
+			headRotationDetector.setStartPoints( Point(leftEye.x + leftEye.width/2, leftEye.y + leftEye.height/2), Point(rightEye.x + rightEye.width/2, rightEye.y + rightEye.height/2), Point(nose.x + nose.width/2, nose.y + nose.height/2) );
+		if( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable()) {
+			headRotAngles =  headRotationDetector.calculateRotation( faceFeature );
+			cout<<"Head orientation: "<<headRotAngles[0]<<" "<<headRotAngles[1]<<" "<<headRotAngles[2]<<endl;
+		}
 
         // drawing image
         Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
@@ -209,11 +222,7 @@ void MainProgram::run() {
 
         bool alert =  decisionEngine.shouldAlert ( percloscore, 0, gazeScore, 0, 0 );
 
-        if ( isNoddingOff ) {
-            noddingText += "True";
-        } else {
-            noddingText += "False";
-        }
+       
         if ( alert ) {
             alertText += "Yes";
         } else {

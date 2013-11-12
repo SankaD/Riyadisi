@@ -127,15 +127,27 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         }
 
         //------------ handle the nose region
-        //Rect nose;
-        //vector<Rect> noseResults = noseDetector.detect ( faceFeature->getImage() );
+        Rect nose, noseROI;
+		vector<Rect> noseResults;
 
-        ////selecting the best rectangle for nose
-        //if ( noseResults.size() > 0 ) {
-        //    nose = noseResults[0];
-        //    faceFeature->getNose()->setFeatureRect ( nose );
-        //    faceFeature->getNose()->setAvailable ( true );
-        //}
+		//selecting the best rectangle for nose
+		if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
+			noseROI.x = leftEye.x + leftEye.width/2;
+			noseROI.y = faceImage.rows/2;
+			noseROI.width = (rightEye.x + rightEye.width/2) - (leftEye.x + leftEye.width/2);
+			noseROI.height = faceImage.rows / 4;
+
+			noseResults = noseDetector.detect ( faceImage ( noseROI ) );
+
+			if ( noseResults.size() > 0 ) {
+				nose = noseResults[0];
+				nose.x += noseROI.x;
+				nose.y += noseROI.y;
+
+				faceFeature->getNose()->setFeatureRect ( nose );
+				faceFeature->getNose()->setAvailable ( true );
+			}
+		}
 
         //------------ handler the pupil regions
         if ( faceFeature->getRightEye()->isAvailable() ) {
