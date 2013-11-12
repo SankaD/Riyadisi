@@ -27,7 +27,7 @@ void MainProgram::run()
         Rect faceRoi;
 
         faceFeature->clearFeature();
-
+		
         // initial run, needs to be managed seperately.
         if ( firstRun ) {
             // initial ROI is the whole image.
@@ -98,12 +98,18 @@ void MainProgram::run()
         }
 
 		//calculate yawning frequency
-		yawning = yawningDetector.detectYawning( faceFeature );
-		cout<<"----- Yawning:" << yawning<<endl;
+		if( faceFeature->getMouth()->isAvailable() ) {
+			yawning = yawningDetector.detectYawning( faceFeature );
+			cout<<"----- Yawning:" << yawning<<endl;
+		}
 
 		//calculate head orientation
-		headRotAngles =  headRotationDetector.calculateRotation( faceFeature );
-		cout<<"Head orientation: "<<headRotAngles[0]<<" "<<headRotAngles[1]<<" "<<headRotAngles[2]<<endl;
+		if( frameCount == 1) 
+			headRotationDetector.setStartPoints( Point(leftEye.x + leftEye.width/2, leftEye.y + leftEye.height/2), Point(rightEye.x + rightEye.width/2, rightEye.y + rightEye.height/2), Point(nose.x + nose.width/2, nose.y + nose.height/2) );
+		if( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable()) {
+			headRotAngles =  headRotationDetector.calculateRotation( faceFeature );
+			cout<<"Head orientation: "<<headRotAngles[0]<<" "<<headRotAngles[1]<<" "<<headRotAngles[2]<<endl;
+		}
 
         // drawing image
         Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
@@ -172,6 +178,11 @@ MainProgram::MainProgram() {
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
+
+	percloscore = 0.0;
+	noddingOffLevel = 0.0;
+	yawning = 0.0;
+	gazeScore = 0.0;
 }
 void MainProgram::processImage() {
     // processing the image

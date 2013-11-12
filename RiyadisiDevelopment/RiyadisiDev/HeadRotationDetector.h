@@ -4,6 +4,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "FaceFeature.h"
 
+#define PI 3.1415926
+
 using namespace std;
 using namespace cv;
 
@@ -14,6 +16,7 @@ class HeadRotationDetector {
 private:
 	Point pl, pr, pn;
 	Point fl, fr, fn;
+	float radian( float angle );
 public:
     HeadRotationDetector ( void );
     ~HeadRotationDetector ( void );

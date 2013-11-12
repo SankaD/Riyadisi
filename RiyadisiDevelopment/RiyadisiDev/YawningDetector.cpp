@@ -7,7 +7,7 @@ using namespace std;
 YawningDetector::YawningDetector ( void )
 {
 	for ( int i = 0; i < ARRAY_LENGTH; i++ ) {
-        mouthHeights[i] = 1;
+        mouthToFaceRatio[i] = 1;
     }
     currentIndex = ARRAY_LENGTH - 1;
 }
@@ -17,8 +17,8 @@ YawningDetector::~YawningDetector ( void )
 {
 }
 
-void YawningDetector::setInitialMouthHeight( int height ) {
-	mouthHeights[currentIndex] = height;
+void YawningDetector::setInitialMouthHeight( float ratio ) {
+	mouthToFaceRatio[currentIndex] = ratio;
 	currentIndex--;
 }
 
@@ -32,14 +32,15 @@ float YawningDetector::detectYawning ( FaceFeature *faceFeature )
 	imshow("test", binaryImage);*/
 	float yawningScore = 0.0;
 	Rect mouth = faceFeature->getMouth()->getFeatureRect();
-	int mouthHeight = mouth.height;
+	Rect face = faceFeature->getFeatureRect();
+	float ratio = mouth.height;
 
-	mouthHeights[currentIndex] = mouthHeight;
+	mouthToFaceRatio[currentIndex] = ratio;
 	int curr, prev;
 	for(int i=0; i < NO_OF_FRAMES; i++) {
 		curr = (currentIndex + i) % ARRAY_LENGTH;
 		prev = (currentIndex + i + 1) % ARRAY_LENGTH;
-		yawningScore += ( mouthHeights[curr] - mouthHeights[prev] ) / mouthHeights[prev];
+		yawningScore += ( mouthToFaceRatio[curr] - mouthToFaceRatio[prev] ) / mouthToFaceRatio[prev];
 	}
 	
 	return yawningScore/NO_OF_FRAMES;

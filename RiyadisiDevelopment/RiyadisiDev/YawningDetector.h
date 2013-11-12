@@ -18,8 +18,8 @@ public:
     YawningDetector ( void );
     ~YawningDetector ( void );
     float detectYawning ( FaceFeature *faceFeature );
-	void setInitialMouthHeight( int height );
+	void setInitialMouthHeight( float ratio );
 private:
 	int currentIndex;
-	float mouthHeights[ARRAY_LENGTH];
+	float mouthToFaceRatio[ARRAY_LENGTH];
 };
