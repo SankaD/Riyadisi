@@ -154,11 +154,11 @@
     <Filter Include="Header Files\MainFeatures\SensoryProcessing\NoseDetection">
       <UniqueIdentifier>{46b66c5e-f431-4ade-b2be-c625ddc71713}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\YawningDetection\EyeStateDetection">
-      <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Fann">
       <UniqueIdentifier>{bad93b49-4159-44d8-b134-e063671ea284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection">
+      <UniqueIdentifier>{9c7c0c5d-20c2-4fab-aabf-0cb1f072175e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +263,24 @@
     </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileFaceDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="FrontalFaceDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="YawningDetector.cpp">
+      <Filter>Source Files\MainFeatures\DrowsinessDetection\YawningDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="HeadRotationDetector.cpp">
+      <Filter>Source Files\MainFeatures\DistractionDetection\HeadRotationDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="EyeDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="EyeGlassDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -425,7 +443,7 @@
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
     <ClInclude Include="EyeStateDetector.h">
-      <Filter>Header Files\MainFeatures\DrowsinessDetection\YawningDetection\EyeStateDetection</Filter>
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\EyeStateDetection</Filter>
     </ClInclude>
     <ClInclude Include="eyeStateHeaders\blas.h">
       <Filter>Header Files\Utility</Filter>
@@ -546,6 +564,24 @@
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileFaceDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontalFaceDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\FaceDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadRotationDetector.h">
+      <Filter>Header Files\MainFeatures\DistractionDetection\HeadRotationDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="YawningDetector.h">
+      <Filter>Header Files\MainFeatures\DrowsinessDetection\YawningDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="EyeDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="EyeGlassDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

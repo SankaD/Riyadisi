@@ -14,32 +14,40 @@
 #include "GazeDetector.h"
 #include "ImageManager.h"
 #include "Utility.h"
+#include "YawningDetector.h"
+#include "HeadRotationDetector.h"
+#include "Utility.h"
 #include "DecisionEngine.h"
 #include "Log.h"
 
 
 class MainProgram {
 public:
-    MainProgram();
     const static short int WAIT_PERIOD_PER_FRAME;
-
+    
+    MainProgram();
     ///<summary>
     ///Main function of the program
     ///</summary>
     void run();
-    void trainingRun();
+	void trainingRun();
     void processImage();
+
 private:
-    bool isAlertOn;
+	bool isAlertOn;
     ImageManager imageManager;
     FaceFeatureManager featureManager;
     NoddingOffDetector noddingOffDetector;
     GazeDetector gazeDetector;
-    Mat frame, grayFrame;
+	YawningDetector yawningDetector;
+	HeadRotationDetector headRotationDetector;
+	Mat frame, grayFrame;
     long int frameCount;// for keeping the frame count
     int key;// for the key pressed by the user
     time_t time;// used to keep the time in the system
     bool firstRun;
     bool trainingMode;
     DecisionEngine decisionEngine;
+	float percloscore, noddingOffLevel, yawning, gazeScore;
+	vector<float> headRotAngles;
 };

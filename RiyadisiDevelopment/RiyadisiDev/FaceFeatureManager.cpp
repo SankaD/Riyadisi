@@ -1,18 +1,21 @@
 #include "FaceFeatureManager.h"
-#include <time.h>
+#include "opencv2\features2d\features2d.hpp";
+
 
 FaceFeatureManager::FaceFeatureManager ( void )
 {
 	fs=FileStorage("eye_state_pca",FileStorage::READ);
+	preeyeState=0;
 	
 }
 FaceFeatureManager::~FaceFeatureManager ( void )
 {
 }
 
-void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rect faceROI, Rect leftEyeROI, Rect rightEyeROI, Rect mouthROI )
+void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rect faceROI )
 {
     Mat relatedImage = image ( faceROI );
+	Rect mouthROI, noseROI;
 
     // handle the face region
     vector<Rect> faces;
@@ -25,16 +28,17 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     for ( int i = 0; i < DOWNSAMPLE_CONSTANT / 2; i++ ) {
         pyrDown ( downsampledImage, downsampledImage, Size ( ( downsampledImage.cols  ) / 2, ( downsampledImage.rows  ) / 2 ) );
     }
+	
+    cout << "Finding Face" << endl;
+	time = clock();
+    Rect face = faceDetector.detect ( downsampledImage );
+	time = clock() - time;
 
-    cout << "Finding eyes" << endl;
-    faces = faceDetector.detect ( downsampledImage );
-
-    if ( faces.size() == 0 ) {
+    if ( face.area() == 0 ) {
         cout << "No faces found" << endl;
         return;
     }
 
-    Rect face = faces[0];// this should be changed to the largest identified face
 
     // rescaling into the original size
     face.x *= DOWNSAMPLE_CONSTANT ;
@@ -45,7 +49,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //compensate for the roi
     Mat faceImage = relatedImage ( face );
 
-    face.x += faceROI.x;
+	face.x += faceROI.x;
     face.y += faceROI.y;
 
     faceFeature->setAvailable ( true );
@@ -55,63 +59,32 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     cout << "Finding Eyes" << endl;
     //------------ handle the eye regions
     Rect leftEye, rightEye;
-    vector<Rect> eyes;
-    //eyes = eyeDetector.detect ( ( faceFeature->getImage() )  );
-
-    //detect left eye
-    leftEyeROI.x = 0;
-    leftEyeROI.y = faceImage.rows / 4;
-    leftEyeROI.width = faceImage.cols / 2;
-    leftEyeROI.height = faceImage.rows / 4;
-
-    eyes = leftEyeDetector.detect ( faceImage ( leftEyeROI ) );
-
-    if ( eyes.size() > 0 ) {
+	vector<Rect> eyes;
+    eyes = eyeDetector.detect ( faceImage );
+	int temp;
+    if ( eyes[0].area() > 0 ) {
         leftEye = eyes[0];
-
-        /*for ( int i = 1; i < eyes.size(); i++ ) {
-            if ( leftEye.area() < eyes[i].area() ) {
-                leftEye = eyes[i];
-            }
-        }*/
-
-        leftEye.x += leftEyeROI.x;
-        leftEye.y += leftEyeROI.y;
-
-        faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+		faceFeature->getLeftEye()->setFeatureRect ( leftEye );
         faceFeature->getLeftEye()->setAvailable ( true );
-		perclos+=eyeStateDetector.calculateEyeState(faceImage( leftEye ),fs);
-    }
+		temp=eyeStateDetector.calculateEyeState(faceImage( leftEye ),fs);
+		perclos+=temp;
+		preeyeState=temp;
 
-	
-    //detect right eye
-    rightEyeROI.x = faceImage.cols / 2;
-    rightEyeROI.y = faceImage.rows / 4;
-    rightEyeROI.width = faceImage.cols / 2;
-    rightEyeROI.height = faceImage.rows / 4;
+	}
+	else perclos=preeyeState;
 
-    eyes = rightEyeDetector.detect ( faceImage ( rightEyeROI ) );
-
-    if ( eyes.size() > 0 ) {
-        rightEye = eyes[0];
-
-        /*for ( int i = 1; i < eyes.size(); i++ ) {
-            if ( rightEye.area() < eyes[i].area() ) {
-                rightEye = eyes[i];
-            }
-        }*/
-
-        rightEye.x += rightEyeROI.x;
-        rightEye.y += rightEyeROI.y;
-
+	if ( eyes[1].area() > 0 ) {
+		rightEye = eyes[1];
         faceFeature->getRightEye()->setFeatureRect ( rightEye );
         faceFeature->getRightEye()->setAvailable ( true );
-		perclos+=eyeStateDetector.calculateEyeState(faceImage( rightEye ),fs);
-    }
+		temp=eyeStateDetector.calculateEyeState(faceImage( rightEye ),fs);
+		perclos+=temp;
+		preeyeState=temp;
+	}
+	else perclos=preeyeState;
 
 	
-
-    //float midX =  faceFeature->getFeatureRect().width  / 2;
+	//float midX =  faceFeature->getFeatureRect().width  / 2;
     //if ( eyes.size() > 0 ) {
 
     //    if ( eyes[0].x + eyes[0].width / 2 < midX ) {
@@ -139,37 +112,51 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
     //}
 
     //------------ handle the mouth region
+	cout << "Finding Mouth" << endl;
     Rect mouth;
-    mouthROI.x = 0;
-    mouthROI.y = faceImage.rows * 2 / 3;
-    mouthROI.width = faceImage.cols;
-    mouthROI.height = faceImage.rows / 3;
+		
+	if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
+		mouthROI.x = leftEye.x;
+		mouthROI.y = faceImage.rows * 2 / 3;
+		mouthROI.width = (rightEye.x + rightEye.width - leftEye.x);
+		mouthROI.height = faceImage.rows / 3;
 
-    vector<Rect> mouthResults = mouthDetector.detect ( faceImage ( mouthROI ) );
+		mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
 
-    //selecting the best rectangle for nose
-    if ( mouthResults.size() > 0 ) {
-        mouth = mouthResults[0];
+		if ( mouth.area() > 0 ) {
+			mouth.x += mouthROI.x;
+			mouth.y += mouthROI.y;
 
-        mouth.x += mouthROI.x;
-        mouth.y += mouthROI.y;
-
-        faceFeature->getMouth()->setFeatureRect ( mouth );
-        faceFeature->getMouth()->setAvailable ( true );
-    }
+			faceFeature->getMouth()->setFeatureRect ( mouth );
+			faceFeature->getMouth()->setAvailable ( true );
+		}
+	} 
 
     //------------ handle the nose region
-    //Rect nose;
-    //vector<Rect> noseResults = noseDetector.detect ( faceFeature->getImage() );
+	cout << "Finding Nose" << endl;
+    Rect nose;
+    vector<Rect> noseResults;
 
-    ////selecting the best rectangle for nose
-    //if ( noseResults.size() > 0 ) {
-    //    nose = noseResults[0];
-    //    faceFeature->getNose()->setFeatureRect ( nose );
-    //    faceFeature->getNose()->setAvailable ( true );
-    //}
+    //selecting the best rectangle for nose
+	if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
+		noseROI.x = leftEye.x + leftEye.width/2;
+		noseROI.y = faceImage.rows/2;
+		noseROI.width = (rightEye.x + rightEye.width/2) - (leftEye.x + leftEye.width/2);
+		noseROI.height = faceImage.rows / 4;
 
+		noseResults = noseDetector.detect ( faceImage ( noseROI ) );
+
+		if ( noseResults.size() > 0 ) {
+			nose = noseResults[0];
+			nose.x += noseROI.x;
+			nose.y += noseROI.y;
+
+			faceFeature->getNose()->setFeatureRect ( nose );
+			faceFeature->getNose()->setAvailable ( true );
+		}
+	}
     //------------ handler the pupil regions
+	cout << "Finding Pupils" << endl;
     if ( faceFeature->getRightEye()->isAvailable() ) {
         Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
         if ( pupil.getPupilLocation().getRadius() > 0 ) {

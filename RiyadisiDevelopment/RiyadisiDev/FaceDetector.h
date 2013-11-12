@@ -1,11 +1,23 @@
 #pragma once
-#include "Detector.h"
 
-class FaceDetector: public Detector {
+#include "opencv2/highgui/highgui.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include <iostream>
+#include <stdio.h>
+
+#include "FrontalFaceDetector.h"
+#include "ProfileFaceDetector.h"
+
+using namespace cv;
+using namespace std;
+
+class FaceDetector {
 public:
     FaceDetector ( void );
     ~FaceDetector ( void );
-    virtual vector<Rect> optimizeDetection ( vector<Rect> data );
+    Rect detect ( Mat frame );
 private:
-    string faceCascadeName;
+	FrontalFaceDetector fontalFaceDetector;
+	ProfileFaceDetector profileFaceDetector;
+	vector<Rect> optimizeDetection ( vector<Rect> data );
 };

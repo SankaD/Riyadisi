@@ -84,7 +84,12 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
+    <ClCompile Include="EyeDetector.cpp" />
+    <ClCompile Include="EyeGlassDetector.cpp" />
+    <ClCompile Include="FrontalFaceDetector.cpp" />
+    <ClCompile Include="HeadRotationDetector.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="ProfileFaceDetector.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeStateDetector.cpp" />
@@ -115,6 +120,7 @@
     <ClCompile Include="PupilFeature.cpp" />
     <ClCompile Include="RightEyeDetector.cpp" />
     <ClCompile Include="SystemState.cpp" />
+    <ClCompile Include="YawningDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="eyeStateHeaders\libmatlbm.mlib" />
@@ -147,6 +153,8 @@
     <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="Eye.h" />
+    <ClInclude Include="EyeDetector.h" />
+    <ClInclude Include="EyeGlassDetector.h" />
     <ClInclude Include="EyeStateDetector.h" />
     <ClInclude Include="eyeStateHeaders\blas.h" />
     <ClInclude Include="eyeStateHeaders\emlrt.h" />
@@ -169,6 +177,8 @@
     <ClInclude Include="eyeStateHeaders\mwservices.h" />
     <ClInclude Include="eyeStateHeaders\mwutil.h" />
     <ClInclude Include="eyeStateHeaders\tmwtypes.h" />
+    <ClInclude Include="FrontalFaceDetector.h" />
+    <ClInclude Include="HeadRotationDetector.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="include\compat_time.h" />
     <ClInclude Include="include\config.h" />
@@ -207,11 +217,13 @@
     <ClInclude Include="Nose.h" />
     <ClInclude Include="NoseDetector.h" />
     <ClInclude Include="NoseFeature.h" />
+    <ClInclude Include="ProfileFaceDetector.h" />
     <ClInclude Include="Pupil.h" />
     <ClInclude Include="PupilDetector.h" />
     <ClInclude Include="PupilFeature.h" />
     <ClInclude Include="RightEyeDetector.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="YawningDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="eyeStateHeaders\mexversion.rc" />

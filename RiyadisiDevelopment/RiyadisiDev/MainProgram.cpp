@@ -5,28 +5,26 @@ using namespace cv;
 
 const short int MainProgram::WAIT_PERIOD_PER_FRAME = 30;
 
-void MainProgram::run() {
-    Log::log ( "Program started" );
+void MainProgram::run()
+{
+	Log::log ( "Program started" );
     firstRun = true;
     frameCount = 0;
-
+	
+	ofstream dataFile;
+	dataFile.open ("Resources/Data Files/test.txt");
+	short isDrowsy = 0;
+	
     while ( true ) {
         frame = imageManager.acquireImage ( frame );
-        frameCount++;
-
-        key = waitKey ( WAIT_PERIOD_PER_FRAME );
-
-        // if the used press 'c', abort
-        if ( key == 'c' ) {
-            break;
-        }
-
+		frameCount++;
+		
         processImage();
-
+		
         // Detection
         FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext();
 
-        Rect faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi;
+        Rect faceRoi;
 
         faceFeature->clearFeature();
 
@@ -38,7 +36,7 @@ void MainProgram::run() {
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -67,59 +65,6 @@ void MainProgram::run() {
                     faceRoi.height = grayFrame.rows - faceRoi.y;
                 }
 
-                // handling the left eye region of interest
-                if ( previous->getLeftEye()->isAvailable() ) {
-                    leftEyeRoi = previous->getLeftEye()->getFeatureRect();
-                    leftEyeRoi.x = leftEyeRoi.x - leftEyeRoi.width / 2;
-                    leftEyeRoi.y = leftEyeRoi.y - leftEyeRoi.height / 2;
-                    if ( leftEyeRoi.x < 0 ) { leftEyeRoi.x = 0; }
-                    if ( leftEyeRoi.y < 0 ) { leftEyeRoi.y = 0; }
-
-                    leftEyeRoi.width = leftEyeRoi.width * 2;
-                    leftEyeRoi.height = leftEyeRoi.height * 2;
-                    if ( leftEyeRoi.width > grayFrame.cols ) {
-                        leftEyeRoi.width = grayFrame.cols;
-                    }
-                    if ( leftEyeRoi.height > grayFrame.rows ) {
-                        leftEyeRoi.height = grayFrame.rows;
-                    }
-                }
-
-                // handling the right eye ROI
-                if ( previous->getRightEye()->isAvailable() ) {
-                    rightEyeRoi = previous->getRightEye()->getFeatureRect();
-                    rightEyeRoi.x = rightEyeRoi.x - rightEyeRoi.width / 2;
-                    rightEyeRoi.y = rightEyeRoi.y - rightEyeRoi.height / 2;
-                    if ( rightEyeRoi.x < 0 ) { rightEyeRoi.x = 0; }
-                    if ( rightEyeRoi.y < 0 ) { rightEyeRoi.y = 0; }
-
-                    rightEyeRoi.width = rightEyeRoi.width * 2;
-                    rightEyeRoi.height = rightEyeRoi.height * 2;
-                    if ( rightEyeRoi.width > grayFrame.cols ) {
-                        rightEyeRoi.width = grayFrame.cols;
-                    }
-                    if ( rightEyeRoi.height > grayFrame.rows ) {
-                        rightEyeRoi.height = grayFrame.rows;
-                    }
-                }
-
-                // handling the mouth ROI
-                if ( previous->getMouth()->isAvailable() ) {
-                    mouthRoi = previous->getMouth()->getFeatureRect();
-                    mouthRoi.x = mouthRoi.x - mouthRoi.width / 2;
-                    mouthRoi.y = mouthRoi.y - mouthRoi.height / 2;
-                    if ( mouthRoi.x < 0 ) { mouthRoi.x = 0; }
-                    if ( mouthRoi.y < 0 ) { mouthRoi.y = 0; }
-
-                    mouthRoi.width = mouthRoi.width * 2;
-                    mouthRoi.height = mouthRoi.height * 2;
-                    if ( mouthRoi.width > grayFrame.cols ) {
-                        mouthRoi.width = grayFrame.cols;
-                    }
-                    if ( mouthRoi.height > grayFrame.rows ) {
-                        mouthRoi.height = grayFrame.rows;
-                    }
-                }
             } else {
                 // if there was no previous frame take the whole image as ROI
                 faceRoi.x = 0;
@@ -127,28 +72,38 @@ void MainProgram::run() {
                 faceRoi.width = grayFrame.cols;
                 faceRoi.height = grayFrame.rows;
             }
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
+		
+		//dataFile<<featureManager.time<<endl;
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        bool isNoddingOff = noddingOffDetector.noddingOffDetect ( *faceFeature );
-        if ( isNoddingOff ) {
-            cout << "Driver is Nodding off" << endl;
-        }
+		//calculate nodding off level
+        noddingOffLevel = noddingOffDetector.noddingOffDetect(*faceFeature);
+		std::cout<<  "----------------------------------Nodding off level = "<< noddingOffLevel <<endl;
 
+		//calculate gaze score
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
-        float gazeScore = gazeDetector.getDistractionScore();
+        gazeScore = gazeDetector.getDistractionScore();
 
+		//calculate PERCLOS
         int frameNum = frameCount % 30;
-        double percloscore = 0;
         if ( frameNum == 0 ) {
             featureManager.perclos /= 30;
             percloscore = featureManager.perclos;
             featureManager.perclos = 0;
         }
+
+		//calculate yawning frequency
+		yawning = yawningDetector.detectYawning( faceFeature );
+		cout<<"----- Yawning:" << yawning<<endl;
+
+		//calculate head orientation
+		headRotAngles =  headRotationDetector.calculateRotation( faceFeature );
+		cout<<"Head orientation: "<<headRotAngles[0]<<" "<<headRotAngles[1]<<" "<<headRotAngles[2]<<endl;
 
         // drawing image
         Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
@@ -159,14 +114,15 @@ void MainProgram::run() {
 
         leftPupil = faceFeature->getRelativePoint ( leftPupil );
         rightPupil = faceFeature->getRelativePoint ( rightPupil );
-
-        //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
+		       
         if ( faceFeature->isAvailable() ) {
+			Rect face = faceFeature->getFeatureRect();
             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
-            rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
+			rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
-
-            rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+			rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+			rectangle ( frame, nose , Scalar ( 255, 255, 0 ) );
+			
 
             if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
                 point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
@@ -178,42 +134,40 @@ void MainProgram::run() {
                     && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }
+			
         }
         CvFont font = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
 
+		//display parameters
         ostringstream distractedText ;
         ostringstream perclosText ;
+		ostringstream noddingText;
         distractedText << "Distraction Level : " << gazeScore;
         perclosText << "perclos Level : " << percloscore;
+		noddingText << "Nodding off : " << noddingOffLevel;
         string drowsinessText = "Drowsiness Level";
-        string noddingText = "Nodding off : ";
-
-        bool alert =  decisionEngine.shouldAlert ( percloscore, 0, gazeScore, 0, 0 );
-
-        if ( isNoddingOff ) {
-            noddingText += "True";
-        } else {
-            noddingText += "False";
-        }
-
-        addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
+        
+		addText ( frame, distractedText.str(), Point ( 10, 10 ), font );
         addText ( frame, drowsinessText, Point ( 10, 30 ), font );
-        addText ( frame, noddingText, Point ( 10, 50 ), font );
+        addText ( frame, noddingText.str(), Point ( 10, 50 ), font );
         addText ( frame, perclosText.str(), Point ( 10, 70 ), font );
-        if ( alert ) {
-            addText ( frame, "Alert", Point ( 90, 90 ), font );
-        }
         imshow ( "image", frame );
 
-
-    }
-    Log::log ( "Program ended" );
+		//for writing data file
+		int key = waitKey ( 30 );
+		if ( key == ' ') isDrowsy = 1-isDrowsy;
+					
+		//dataFile << percloscore << " " << noddingOffLevel << " " << gazeScore << " " << headmovement << " " << yawning << " " << isDrowsy << endl;
+   	
+	}
+	dataFile.close();
 }
+
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 12.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 12.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
@@ -224,6 +178,7 @@ void MainProgram::processImage() {
     cvtColor ( frame, grayFrame, CV_BGR2GRAY );
     equalizeHist ( grayFrame, grayFrame );
 }
+
 void MainProgram::trainingRun() {
     Log::log ( "Training Started" );
     try {
