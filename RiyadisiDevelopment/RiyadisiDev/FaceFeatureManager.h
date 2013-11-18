@@ -5,6 +5,7 @@
 #include "FaceDetector.h"
 #include "LeftEyeDetector.h"
 #include "RightEyeDetector.h"
+#include "EyeDetector.h"
 #include "PupilDetector.h"
 #include "NoseDetector.h"
 #include "MouthDetector.h"
@@ -29,10 +30,12 @@ public:
     void findRightEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
     void findMouthFeature ( Mat image, Rect roi, MouthFeature &mouthFeature );
     void findPupilFeature ( Mat image, Rect roi, PupilFeature &pupilFeature );
-    double perclos;
+	double perclos;
+	double preeyeState;
 private:
     FeatureCollection features;
     FaceDetector faceDetector;
+	EyeDetector eyeDetector;
     LeftEyeDetector leftEyeDetector;
     RightEyeDetector rightEyeDetector;
     MouthDetector mouthDetector;
