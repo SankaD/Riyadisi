@@ -11,6 +11,8 @@ using namespace cv;
 /// Detects the pupil given an image of an eye.
 /// </summary>
 class PupilDetector {
+private:
+
 public:
     PupilDetector ( void );
     ~PupilDetector ( void );
@@ -24,9 +26,15 @@ public:
     Pupil detectPupil ( Mat eye );
 
     /// <summary>
+    /// Identifies the exact location of the eye and returns the eye borders as a rectangle
+    /// </summary>
+    Rect getExactEyeBorders ( Mat eye );
+
+    /// <summary>
     /// Used for drawing a pupil into a video frame. Only used for debugging purposes.
     /// </summary>
     /// <param name="frame"> The image onto which the pupil is drawn </param>
     /// <param name="pupil"> The pupil which should be drawn</param>
     void drawPupil ( Mat frame, Pupil pupil );
+
 };

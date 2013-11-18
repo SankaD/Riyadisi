@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue Nov 12 23:59:53 2013
+/* at Mon Nov 18 13:53:23 2013
  */
 /* Compiler settings for eyeStateHeaders\mwcomtypes.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
