@@ -5,6 +5,7 @@
 #include "EyeGlassDetector.h"
 #include "LeftEyeDetector.h"
 #include "RightEyeDetector.h"
+#include <fstream>
 
 using namespace cv;
 using namespace std;
@@ -18,5 +19,6 @@ private:
 	EyeGlassDetector eyeGlassDetector;
 	LeftEyeDetector leftEyeDetector;
 	RightEyeDetector rightEyeDetector;
-	Rect optimizeDetection ( vector<Rect> data );
+	Rect optimizeDetection ( vector<Rect> data, Mat image );
+	ofstream dataFile;
 };

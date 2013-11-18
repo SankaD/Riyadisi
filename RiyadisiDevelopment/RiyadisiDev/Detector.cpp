@@ -4,8 +4,8 @@ std::vector<Rect> Detector::detect ( Mat frame ) {
     std::vector<Rect> features;
 
     cascade.detectMultiScale ( frame, features, scale, minNeighbors, flags | CV_HAAR_SCALE_IMAGE, minSize, maxSize );
-
-    return features;
+	
+	return features;
 }
 
 Detector::Detector ( string cascadeName ) {
@@ -19,7 +19,7 @@ Detector::Detector ( string cascadeName ) {
 Detector::Detector ( void ) {
     flags = 0;
     minNeighbors = 3;
-    scale = 1.1;
+    //scale = 1.1;
 }
 
 Detector::~Detector ( void ) {

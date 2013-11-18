@@ -10,9 +10,6 @@ void MainProgram::run() {
     firstRun = true;
     frameCount = 0;
 
-    //time ( &systemTime );
-    // time_t tempTime;
-    //int elapsedTime = 0;
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
@@ -74,60 +71,6 @@ void MainProgram::run() {
                 if ( faceRoi.height > grayFrame.rows ) {
                     faceRoi.height = grayFrame.rows - faceRoi.y;
                 }
-
-                // handling the left eye region of interest
-                if ( previous->getLeftEye()->isAvailable() ) {
-                    leftEyeRoi = previous->getLeftEye()->getFeatureRect();
-                    leftEyeRoi.x = leftEyeRoi.x - leftEyeRoi.width / 2;
-                    leftEyeRoi.y = leftEyeRoi.y - leftEyeRoi.height / 2;
-                    if ( leftEyeRoi.x < 0 ) { leftEyeRoi.x = 0; }
-                    if ( leftEyeRoi.y < 0 ) { leftEyeRoi.y = 0; }
-
-                    leftEyeRoi.width = leftEyeRoi.width * 2;
-                    leftEyeRoi.height = leftEyeRoi.height * 2;
-                    if ( leftEyeRoi.width > grayFrame.cols ) {
-                        leftEyeRoi.width = grayFrame.cols;
-                    }
-                    if ( leftEyeRoi.height > grayFrame.rows ) {
-                        leftEyeRoi.height = grayFrame.rows;
-                    }
-                }
-
-                // handling the right eye ROI
-                if ( previous->getRightEye()->isAvailable() ) {
-                    rightEyeRoi = previous->getRightEye()->getFeatureRect();
-                    rightEyeRoi.x = rightEyeRoi.x - rightEyeRoi.width / 2;
-                    rightEyeRoi.y = rightEyeRoi.y - rightEyeRoi.height / 2;
-                    if ( rightEyeRoi.x < 0 ) { rightEyeRoi.x = 0; }
-                    if ( rightEyeRoi.y < 0 ) { rightEyeRoi.y = 0; }
-
-                    rightEyeRoi.width = rightEyeRoi.width * 2;
-                    rightEyeRoi.height = rightEyeRoi.height * 2;
-                    if ( rightEyeRoi.width > grayFrame.cols ) {
-                        rightEyeRoi.width = grayFrame.cols;
-                    }
-                    if ( rightEyeRoi.height > grayFrame.rows ) {
-                        rightEyeRoi.height = grayFrame.rows;
-                    }
-                }
-
-                // handling the mouth ROI
-                if ( previous->getMouth()->isAvailable() ) {
-                    mouthRoi = previous->getMouth()->getFeatureRect();
-                    mouthRoi.x = mouthRoi.x - mouthRoi.width / 2;
-                    mouthRoi.y = mouthRoi.y - mouthRoi.height / 2;
-                    if ( mouthRoi.x < 0 ) { mouthRoi.x = 0; }
-                    if ( mouthRoi.y < 0 ) { mouthRoi.y = 0; }
-
-                    mouthRoi.width = mouthRoi.width * 2;
-                    mouthRoi.height = mouthRoi.height * 2;
-                    if ( mouthRoi.width > grayFrame.cols ) {
-                        mouthRoi.width = grayFrame.cols;
-                    }
-                    if ( mouthRoi.height > grayFrame.rows ) {
-                        mouthRoi.height = grayFrame.rows;
-                    }
-                }
             } else {
                 // if there was no previous frame take the whole image as ROI
                 faceRoi.x = 0;
@@ -135,6 +78,7 @@ void MainProgram::run() {
                 faceRoi.width = grayFrame.cols;
                 faceRoi.height = grayFrame.rows;
             }
+
             featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
@@ -142,7 +86,9 @@ void MainProgram::run() {
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        noddingOffScore = noddingOffDetector.noddingOffDetect ( *faceFeature );
+        double noddingOffLevel = 0.0;
+        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
+        //cout<<  "----------------------------------Nodding off level = "<< noddingOffLevel <<endl;
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
@@ -159,7 +105,6 @@ void MainProgram::run() {
         //calculate yawning frequency
         if ( faceFeature->getMouth()->isAvailable() ) {
             yawningScore = yawningDetector.detectYawning ( faceFeature );
-            //cout << "----- Yawning:" << yawningScore << endl;
         }
 
         //calculate head orientation
@@ -168,7 +113,6 @@ void MainProgram::run() {
         }
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
-            //cout << "Head orientation: " << headRotAngles[0] << " " << headRotAngles[1] << " " << headRotAngles[2] << endl;
         }
 
         // drawing image
@@ -188,6 +132,7 @@ void MainProgram::run() {
             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
 
             rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
+            rectangle ( frame, nose , Scalar ( 255, 255, 0 ) );
 
             if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
                 point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
@@ -195,12 +140,13 @@ void MainProgram::run() {
             if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
-            if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
+            /*if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
                     && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
-            }
+            }*/
         }
         bool alert =  decisionEngine.shouldAlert ( percloseScore, 0, gazeScore, 0, 0 );
+
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );

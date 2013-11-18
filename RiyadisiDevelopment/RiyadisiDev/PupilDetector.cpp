@@ -11,27 +11,19 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
     Pupil pupil;
 
     //--- Preprocessing steps ---//
-    //cvtColor ( eye, eyeTemp, CV_BGR2GRAY );
     eyeTemp = eye.clone();
 
     //--- detecting the pupil ---//
-
     threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-
 
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
     erode ( eyeTemp, eyeTemp, erodeElement );
 
-
     vector<vector<Point>> contours;
 
     Canny ( eyeTemp.clone(), eyeTemp, cannyThreshold, cannyThreshold * cannyRatio, 3, true );
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-    //drawContours ( eyeTemp, contours, -1, Scalar ( 255, 255, 255 ), -1 );
-
-    /* vector<vector<Point>> contours_poly ( contours.size() );
-     vector<Rect> boundRect ( contours.size() );*/
 
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
@@ -50,20 +42,6 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
             maxArea = area;
         }
     }
-    // cout << "Max Area : " << maxArea << endl;
-
-    //vector<Point> contourCollection;
-    //for ( int i = 0; i < contours[maxAreaIndex].size(); i++ ) {
-    //    contourCollection.push_back ( contours[maxAreaIndex][i] );
-    //}
-//for ( int i = 0; i < contours.size(); i++ ) {
-//    for ( int j = 0; j < contours[i].size(); j++ ) {
-//        // consider the points only in the middle of the eye.
-//        if ( contours[i][j].y < eye.rows * 0.75 && contours[i][j].y > eye.rows * 0.25 ) {
-//            contourCollection.push_back ( contours[i][j] );
-//        }
-//    }
-//}
 
     Point2f center;
     float radius = 0;
@@ -76,6 +54,13 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
         pupil.setPupilLocation ( c );
 
     }
+
+    // temp code -- start
+    Rect borders = getExactEyeBorders ( eye );
+    cout << borders.x << " " << borders.y << " " << borders.width << " " << borders.height << endl;
+
+    // temp code -- finish
+
     return pupil;
 }
 
@@ -89,4 +74,18 @@ void PupilDetector::drawPupil ( Mat frame, Pupil pupil ) {
     line ( frame, pNorth, pSouth, Scalar ( 255, 255, 0 ) );
     line ( frame, pWest, pEast, Scalar ( 255, 255, 0 ) );
 
+}
+Rect PupilDetector::getExactEyeBorders ( Mat eye ) {
+    Mat tempEye = eye.clone();
+    Rect border;
+
+    equalizeHist ( tempEye, tempEye );
+    GaussianBlur ( tempEye.clone(), tempEye, Size ( 5, 5 ), 5 );
+    //threshold ( tempEye.clone(), tempEye, 100, 255, CV_THRESH_TOZERO );
+    Mat out;
+    Canny ( tempEye, out, 50, 200 );
+
+    imshow ( "Eye", out );
+
+    return border;
 }

@@ -1,979 +1,348 @@
-1384324194 :: Program started
-1384324194 :: Finding features
-1384324194 :: Finding faces
-1384324194 :: Finding Eyes
-1384324195 :: Finished finding features
-1384324197 :: Finding features
-1384324197 :: Finding faces
-1384324197 :: Finding Eyes
-1384324197 :: Finished finding features
-1384324197 :: Finding features
-1384324197 :: Finding faces
-1384324197 :: Finding Eyes
-1384324198 :: Finished finding features
-1384324200 :: Finding features
-1384324200 :: Finding faces
-1384324200 :: Finding Eyes
-1384324200 :: Finished finding features
-1384324201 :: Finding features
-1384324201 :: Finding faces
-1384324201 :: Finding Eyes
-1384324201 :: Finished finding features
-1384324201 :: Finding features
-1384324201 :: Finding faces
-1384324201 :: Finding Eyes
-1384324201 :: Finished finding features
-1384324202 :: Finding features
-1384324202 :: Finding faces
-1384324202 :: Finding Eyes
-1384324202 :: Finished finding features
-1384324202 :: Finding features
-1384324202 :: Finding faces
-1384324202 :: Finding Eyes
-1384324202 :: Finished finding features
-1384324203 :: Finding features
-1384324203 :: Finding faces
-1384324203 :: Finding Eyes
-1384324203 :: Finished finding features
-1384324203 :: Finding features
-1384324203 :: Finding faces
-1384324203 :: Finding Eyes
-1384324203 :: Finished finding features
-1384324204 :: Finding features
-1384324204 :: Finding faces
-1384324204 :: Finding Eyes
-1384324204 :: Finished finding features
-1384324204 :: Finding features
-1384324204 :: Finding faces
-1384324204 :: Finding Eyes
-1384324204 :: Finished finding features
-1384324205 :: Finding features
-1384324205 :: Finding faces
-1384324205 :: Finding Eyes
-1384324205 :: Finished finding features
-1384324205 :: Finding features
-1384324205 :: Finding faces
-1384324205 :: Finding Eyes
-1384324205 :: Finished finding features
-1384324206 :: Finding features
-1384324206 :: Finding faces
-1384324206 :: Finding Eyes
-1384324206 :: Finished finding features
-1384324206 :: Finding features
-1384324206 :: Finding faces
-1384324206 :: Finding Eyes
-1384324206 :: Finished finding features
-1384324207 :: Finding features
-1384324207 :: Finding faces
-1384324207 :: Finding Eyes
-1384324207 :: Finished finding features
-1384324207 :: Finding features
-1384324207 :: Finding faces
-1384324207 :: Finding Eyes
-1384324208 :: Finished finding features
-1384324208 :: Finding features
-1384324208 :: Finding faces
-1384324208 :: Finding Eyes
-1384324208 :: Finished finding features
-1384324208 :: Finding features
-1384324208 :: Finding faces
-1384324208 :: Finding Eyes
-1384324209 :: Finished finding features
-1384324209 :: Finding features
-1384324209 :: Finding faces
-1384324209 :: Finding Eyes
-1384324209 :: Finished finding features
-1384324210 :: Finding features
-1384324210 :: Finding faces
-1384324210 :: Finding Eyes
-1384324210 :: Finished finding features
-1384324210 :: Finding features
-1384324210 :: Finding faces
-1384324210 :: Finding Eyes
-1384324210 :: Finished finding features
-1384324211 :: Finding features
-1384324211 :: Finding faces
-1384324211 :: Finding Eyes
-1384324211 :: Finished finding features
-1384324211 :: Finding features
-1384324211 :: Finding faces
-1384324211 :: Finding Eyes
-1384324211 :: Finished finding features
-1384324212 :: Finding features
-1384324212 :: Finding faces
-1384324212 :: Finding Eyes
-1384324212 :: Finished finding features
-1384324212 :: Finding features
-1384324212 :: Finding faces
-1384324212 :: Finding Eyes
-1384324213 :: Finished finding features
-1384324213 :: Finding features
-1384324213 :: Finding faces
-1384324213 :: Finding Eyes
-1384324213 :: Finished finding features
-1384324213 :: Finding features
-1384324213 :: Finding faces
-1384324213 :: Finding Eyes
-1384324214 :: Finished finding features
-1384324214 :: Finding features
-1384324214 :: Finding faces
-1384324214 :: Finding Eyes
-1384324214 :: Finished finding features
-1384324215 :: Finding features
-1384324215 :: Finding faces
-1384324215 :: Finding Eyes
-1384324215 :: Finished finding features
-1384324215 :: Finding features
-1384324215 :: Finding faces
-1384324215 :: Finding Eyes
-1384324215 :: Finished finding features
-1384324216 :: Finding features
-1384324216 :: Finding faces
-1384324216 :: Finding Eyes
-1384324216 :: Finished finding features
-1384324216 :: Finding features
-1384324216 :: Finding faces
-1384324216 :: Finding Eyes
-1384324216 :: Finished finding features
-1384324217 :: Finding features
-1384324217 :: Finding faces
-1384324217 :: Finding Eyes
-1384324217 :: Finished finding features
-1384324217 :: Finding features
-1384324217 :: Finding faces
-1384324217 :: Finding Eyes
-1384324217 :: Finished finding features
-1384324218 :: Finding features
-1384324218 :: Finding faces
-1384324218 :: Finding Eyes
-1384324218 :: Finished finding features
-1384324218 :: Finding features
-1384324218 :: Finding faces
-1384324218 :: Finding Eyes
-1384324219 :: Finished finding features
-1384324219 :: Finding features
-1384324219 :: Finding faces
-1384324219 :: Finding Eyes
-1384324219 :: Finished finding features
-1384324219 :: Finding features
-1384324219 :: Finding faces
-1384324219 :: Finding Eyes
-1384324220 :: Finished finding features
-1384324220 :: Finding features
-1384324220 :: Finding faces
-1384324220 :: Finding Eyes
-1384324220 :: Finished finding features
-1384324220 :: Finding features
-1384324220 :: Finding faces
-1384324221 :: Finding Eyes
-1384324221 :: Finished finding features
-1384324221 :: Finding features
-1384324221 :: Finding faces
-1384324221 :: Finding Eyes
-1384324221 :: Finished finding features
-1384324222 :: Finding features
-1384324222 :: Finding faces
-1384324222 :: Finding Eyes
-1384324222 :: Finished finding features
-1384324222 :: Finding features
-1384324222 :: Finding faces
-1384324222 :: Finding Eyes
-1384324222 :: Finished finding features
-1384324223 :: Finding features
-1384324223 :: Finding faces
-1384324223 :: Finding Eyes
-1384324223 :: Finished finding features
-1384324223 :: Finding features
-1384324223 :: Finding faces
-1384324223 :: Finding Eyes
-1384324223 :: Finished finding features
-1384324224 :: Finding features
-1384324224 :: Finding faces
-1384324224 :: Finding Eyes
-1384324224 :: Finished finding features
-1384324224 :: Finding features
-1384324224 :: Finding faces
-1384324224 :: Finding Eyes
-1384324224 :: Finished finding features
-1384324225 :: Finding features
-1384324225 :: Finding faces
-1384324225 :: Finding Eyes
-1384324225 :: Finished finding features
-1384324225 :: Finding features
-1384324225 :: Finding faces
-1384324225 :: Finding Eyes
-1384324225 :: Finished finding features
-1384324226 :: Finding features
-1384324226 :: Finding faces
-1384324226 :: Finding Eyes
-1384324226 :: Finished finding features
-1384324226 :: Finding features
-1384324226 :: Finding faces
-1384324226 :: Finding Eyes
-1384324227 :: Finished finding features
-1384324227 :: Finding features
-1384324227 :: Finding faces
-1384324227 :: Finding Eyes
-1384324227 :: Finished finding features
-1384324227 :: Finding features
-1384324227 :: Finding faces
-1384324227 :: Finding Eyes
-1384324228 :: Finished finding features
-1384324228 :: Finding features
-1384324228 :: Finding faces
-1384324228 :: Finding Eyes
-1384324228 :: Finished finding features
-1384324229 :: Finding features
-1384324229 :: Finding faces
-1384324229 :: Finding Eyes
-1384324229 :: Finished finding features
-1384324229 :: Finding features
-1384324229 :: Finding faces
-1384324229 :: Finding Eyes
-1384324229 :: Finished finding features
-1384325858 :: Program started
-1384325858 :: Finding features
-1384325858 :: Finding faces
-1384325858 :: Finding Eyes
-1384325858 :: Finished finding features
-1384325860 :: Finding features
-1384325860 :: Finding faces
-1384325860 :: Finding Eyes
-1384325860 :: Finished finding features
-1384325860 :: Finding features
-1384325860 :: Finding faces
-1384325860 :: Finding Eyes
-1384325861 :: Finished finding features
-1384325861 :: Finding features
-1384325861 :: Finding faces
-1384325861 :: Finding Eyes
-1384325861 :: Finished finding features
-1384325862 :: Finding features
-1384325862 :: Finding faces
-1384325862 :: Finding Eyes
-1384325862 :: Finished finding features
-1384325863 :: Finding features
-1384325863 :: Finding faces
-1384325863 :: Finding Eyes
-1384325863 :: Finished finding features
-1384325864 :: Finding features
-1384325864 :: Finding faces
-1384325864 :: Finding Eyes
-1384325864 :: Finished finding features
-1384325864 :: Finding features
-1384325864 :: Finding faces
-1384325864 :: Finding Eyes
-1384325865 :: Finished finding features
-1384325892 :: Program started
-1384325892 :: Finding features
-1384325893 :: Finding faces
-1384325893 :: Finding Eyes
-1384325893 :: Finished finding features
-1384325894 :: Finding features
-1384325894 :: Finding faces
-1384325894 :: Finding Eyes
-1384325894 :: Finished finding features
-1384325895 :: Finding features
-1384325895 :: Finding faces
-1384325895 :: Finding Eyes
-1384325895 :: Finished finding features
-1384325895 :: Finding features
-1384325895 :: Finding faces
-1384325895 :: Finding Eyes
-1384325896 :: Finished finding features
-1384325900 :: Finding features
-1384325900 :: Finding faces
-1384325900 :: Finding Eyes
-1384325900 :: Finished finding features
-1384325901 :: Finding features
-1384325901 :: Finding faces
-1384325901 :: Finding Eyes
-1384325901 :: Finished finding features
-1384325902 :: Finding features
-1384325902 :: Finding faces
-1384325902 :: Finding Eyes
-1384325902 :: Finished finding features
-1384325938 :: Program started
-1384325938 :: Finding features
-1384325938 :: Finding faces
-1384325938 :: Finding Eyes
-1384325938 :: Finished finding features
-1384325939 :: Finding features
-1384325939 :: Finding faces
-1384325939 :: Finding Eyes
-1384325939 :: Finished finding features
-1384325940 :: Finding features
-1384325940 :: Finding faces
-1384325940 :: Finding Eyes
-1384325940 :: Finished finding features
-1384325942 :: Finding features
-1384325942 :: Finding faces
-1384325942 :: Finding Eyes
-1384325942 :: Finished finding features
-1384325943 :: Finding features
-1384325943 :: Finding faces
-1384325943 :: Finding Eyes
-1384325943 :: Finished finding features
-1384325944 :: Finding features
-1384325944 :: Finding faces
-1384325944 :: Finding Eyes
-1384325945 :: Finished finding features
-1384325945 :: Finding features
-1384325945 :: Finding faces
-1384325945 :: Finding Eyes
-1384325945 :: Finished finding features
-1384325946 :: Finding features
-1384325946 :: Finding faces
-1384325946 :: Finding Eyes
-1384325946 :: Finished finding features
-1384325946 :: Finding features
-1384325946 :: Finding faces
-1384325946 :: Finding Eyes
-1384325947 :: Finished finding features
-1384325947 :: Finding features
-1384325947 :: Finding faces
-1384325947 :: Finding Eyes
-1384325947 :: Finished finding features
-1384325948 :: Finding features
-1384325948 :: Finding faces
-1384325948 :: Finding Eyes
-1384325948 :: Finished finding features
-1384325948 :: Finding features
-1384325948 :: Finding faces
-1384325949 :: Finding Eyes
-1384325949 :: Finished finding features
-1384325949 :: Finding features
-1384325949 :: Finding faces
-1384325949 :: Finding Eyes
-1384325949 :: Finished finding features
-1384325950 :: Finding features
-1384325950 :: Finding faces
-1384325950 :: Finding Eyes
-1384325950 :: Finished finding features
-1384325951 :: Finding features
-1384325951 :: Finding faces
-1384325951 :: Finding Eyes
-1384325951 :: Finished finding features
-1384325951 :: Finding features
-1384325951 :: Finding faces
-1384325951 :: Finding Eyes
-1384325952 :: Finished finding features
-1384325952 :: Finding features
-1384325952 :: Finding faces
-1384325952 :: Finding Eyes
-1384325952 :: Finished finding features
-1384325953 :: Finding features
-1384325953 :: Finding faces
-1384325953 :: Finding Eyes
-1384325953 :: Finished finding features
-1384325953 :: Finding features
-1384325953 :: Finding faces
-1384325953 :: Finding Eyes
-1384325954 :: Finished finding features
-1384325954 :: Finding features
-1384325954 :: Finding faces
-1384325954 :: Finding Eyes
-1384325954 :: Finished finding features
-1384325955 :: Finding features
-1384325955 :: Finding faces
-1384325955 :: Finding Eyes
-1384325955 :: Finished finding features
-1384325956 :: Finding features
-1384325956 :: Finding faces
-1384325956 :: Finding Eyes
-1384325956 :: Finished finding features
-1384325956 :: Finding features
-1384325956 :: Finding faces
-1384325956 :: Finding Eyes
-1384325957 :: Finished finding features
-1384325957 :: Finding features
-1384325957 :: Finding faces
-1384325957 :: Finding Eyes
-1384325957 :: Finished finding features
-1384325958 :: Finding features
-1384325958 :: Finding faces
-1384325958 :: Finding Eyes
-1384325958 :: Finished finding features
-1384325958 :: Finding features
-1384325958 :: Finding faces
-1384325958 :: Finding Eyes
-1384325959 :: Finished finding features
-1384325959 :: Finding features
-1384325959 :: Finding faces
-1384325959 :: Finding Eyes
-1384325959 :: Finished finding features
-1384325960 :: Finding features
-1384325960 :: Finding faces
-1384325960 :: Finding Eyes
-1384325960 :: Finished finding features
-1384325961 :: Finding features
-1384325961 :: Finding faces
-1384325961 :: Finding Eyes
-1384325961 :: Finished finding features
-1384325961 :: Finding features
-1384325961 :: Finding faces
-1384325961 :: Finding Eyes
-1384325962 :: Finished finding features
-1384325962 :: Finding features
-1384325962 :: Finding faces
-1384325962 :: Finding Eyes
-1384325962 :: Finished finding features
-1384325963 :: Finding features
-1384325963 :: Finding faces
-1384325963 :: Finding Eyes
-1384325963 :: Finished finding features
-1384325963 :: Finding features
-1384325963 :: Finding faces
-1384325963 :: Finding Eyes
-1384325964 :: Finished finding features
-1384325964 :: Finding features
-1384325964 :: Finding faces
-1384325964 :: Finding Eyes
-1384325964 :: Finished finding features
-1384325965 :: Finding features
-1384325965 :: Finding faces
-1384325965 :: Finding Eyes
-1384325965 :: Finished finding features
-1384325966 :: Finding features
-1384325966 :: Finding faces
-1384325966 :: Finding Eyes
-1384325966 :: Finished finding features
-1384325966 :: Finding features
-1384325966 :: Finding faces
-1384325966 :: Finding Eyes
-1384325967 :: Finished finding features
-1384325967 :: Finding features
-1384325967 :: Finding faces
-1384325967 :: Finding Eyes
-1384325967 :: Finished finding features
-1384325968 :: Finding features
-1384325968 :: Finding faces
-1384325968 :: Finding Eyes
-1384325968 :: Finished finding features
-1384325968 :: Finding features
-1384325968 :: Finding faces
-1384325968 :: Finding Eyes
-1384325969 :: Finished finding features
-1384325969 :: Finding features
-1384325969 :: Finding faces
-1384325969 :: Finding Eyes
-1384325969 :: Finished finding features
-1384325970 :: Finding features
-1384325970 :: Finding faces
-1384325970 :: Finding Eyes
-1384325970 :: Finished finding features
-1384325970 :: Finding features
-1384325970 :: Finding faces
-1384325970 :: Finding Eyes
-1384325971 :: Finished finding features
-1384325971 :: Finding features
-1384325971 :: Finding faces
-1384325971 :: Finding Eyes
-1384325971 :: Finished finding features
-1384325972 :: Finding features
-1384325972 :: Finding faces
-1384325972 :: Finding Eyes
-1384325972 :: Finished finding features
-1384325973 :: Finding features
-1384325973 :: Finding faces
-1384325973 :: Finding Eyes
-1384325973 :: Finished finding features
-1384325973 :: Finding features
-1384325973 :: Finding faces
-1384325973 :: Finding Eyes
-1384325973 :: Finished finding features
-1384325974 :: Finding features
-1384325974 :: Finding faces
-1384325974 :: Finding Eyes
-1384325974 :: Finished finding features
-1384325975 :: Finding features
-1384325975 :: Finding faces
-1384325975 :: Finding Eyes
-1384325975 :: Finished finding features
-1384325975 :: Finding features
-1384325975 :: Finding faces
-1384325975 :: Finding Eyes
-1384325976 :: Finished finding features
-1384325976 :: Finding features
-1384325976 :: Finding faces
-1384325976 :: Finding Eyes
-1384325976 :: Finished finding features
-1384325977 :: Finding features
-1384325977 :: Finding faces
-1384325977 :: Finding Eyes
-1384325977 :: Finished finding features
-1384325977 :: Finding features
-1384325978 :: Finding faces
-1384325978 :: Finding Eyes
-1384325978 :: Finished finding features
-1384325978 :: Finding features
-1384325978 :: Finding faces
-1384325978 :: Finding Eyes
-1384325978 :: Finished finding features
-1384325979 :: Finding features
-1384325979 :: Finding faces
-1384325979 :: Finding Eyes
-1384325979 :: Finished finding features
-1384325980 :: Finding features
-1384325980 :: Finding faces
-1384325980 :: Finding Eyes
-1384325980 :: Finished finding features
-1384325980 :: Finding features
-1384325980 :: Finding faces
-1384325980 :: Finding Eyes
-1384325981 :: Finished finding features
-1384325981 :: Finding features
-1384325981 :: Finding faces
-1384325981 :: Finding Eyes
-1384325981 :: Finished finding features
-1384325982 :: Finding features
-1384325982 :: Finding faces
-1384325982 :: Finding Eyes
-1384325982 :: Finished finding features
-1384325982 :: Finding features
-1384325982 :: Finding faces
-1384325982 :: Finding Eyes
-1384325983 :: Finished finding features
-1384325983 :: Finding features
-1384325983 :: Finding faces
-1384325983 :: Finding Eyes
-1384325983 :: Finished finding features
-1384325984 :: Finding features
-1384325984 :: Finding faces
-1384325984 :: Finding Eyes
-1384325984 :: Finished finding features
-1384325984 :: Finding features
-1384325984 :: Finding faces
-1384325984 :: Finding Eyes
-1384325985 :: Finished finding features
-1384325985 :: Finding features
-1384325985 :: Finding faces
-1384325985 :: Finding Eyes
-1384325986 :: Finished finding features
-1384325986 :: Finding features
-1384325986 :: Finding faces
-1384325986 :: Finding Eyes
-1384325986 :: Finished finding features
-1384325986 :: Finding features
-1384325986 :: Finding faces
-1384325986 :: Finding Eyes
-1384325986 :: Finished finding features
-1384325987 :: Finding features
-1384325987 :: Finding faces
-1384325987 :: Finding Eyes
-1384328254 :: Program started
-1384328254 :: Finding features
-1384328254 :: Finding faces
-1384328254 :: Finding Eyes
-1384328255 :: Finished finding features
-1384328258 :: Finding features
-1384328258 :: Finding faces
-1384328258 :: Finding Eyes
-1384328258 :: Finished finding features
-1384328259 :: Finding features
-1384328259 :: Finding faces
-1384328259 :: Finding Eyes
-1384328259 :: Finished finding features
-1384328260 :: Finding features
-1384328261 :: Finding faces
-1384328261 :: Finding Eyes
-1384328261 :: Finished finding features
-1384328261 :: Finding features
-1384328261 :: Finding faces
-1384328261 :: Finding Eyes
-1384328261 :: Finished finding features
-1384328262 :: Finding features
-1384328262 :: Finding faces
-1384328262 :: Finding Eyes
-1384328262 :: Finished finding features
-1384328263 :: Finding features
-1384328263 :: Finding faces
-1384328263 :: Finding Eyes
-1384328263 :: Finished finding features
-1384328263 :: Finding features
-1384328263 :: Finding faces
-1384328263 :: Finding Eyes
-1384328264 :: Finished finding features
-1384328264 :: Finding features
-1384328264 :: Finding faces
-1384328264 :: Finding Eyes
-1384328264 :: Finished finding features
-1384328265 :: Finding features
-1384328265 :: Finding faces
-1384328265 :: Finding Eyes
-1384328265 :: Finished finding features
-1384328265 :: Finding features
-1384328265 :: Finding faces
-1384328265 :: Finding Eyes
-1384328266 :: Finished finding features
-1384328266 :: Finding features
-1384328266 :: Finding faces
-1384328266 :: Finding Eyes
-1384328266 :: Finished finding features
-1384328267 :: Finding features
-1384328267 :: Finding faces
-1384328267 :: Finding Eyes
-1384328267 :: Finished finding features
-1384328267 :: Finding features
-1384328267 :: Finding faces
-1384328267 :: Finding Eyes
-1384328268 :: Finished finding features
-1384328268 :: Finding features
-1384328268 :: Finding faces
-1384328268 :: Finding Eyes
-1384328268 :: Finished finding features
-1384328269 :: Finding features
-1384328269 :: Finding faces
-1384328269 :: Finding Eyes
-1384328269 :: Finished finding features
-1384328269 :: Finding features
-1384328269 :: Finding faces
-1384328269 :: Finding Eyes
-1384328270 :: Finished finding features
-1384328270 :: Finding features
-1384328270 :: Finding faces
-1384328270 :: Finding Eyes
-1384328270 :: Finished finding features
-1384328271 :: Finding features
-1384328271 :: Finding faces
-1384328271 :: Finding Eyes
-1384328271 :: Finished finding features
-1384328271 :: Finding features
-1384328271 :: Finding faces
-1384328271 :: Finding Eyes
-1384328272 :: Finished finding features
-1384328272 :: Finding features
-1384328272 :: Finding faces
-1384328272 :: Finding Eyes
-1384328272 :: Finished finding features
-1384328273 :: Finding features
-1384328273 :: Finding faces
-1384328273 :: Finding Eyes
-1384328273 :: Finished finding features
-1384328273 :: Finding features
-1384328273 :: Finding faces
-1384328273 :: Finding Eyes
-1384328274 :: Finished finding features
-1384328274 :: Finding features
-1384328274 :: Finding faces
-1384328274 :: Finding Eyes
-1384328274 :: Finished finding features
-1384328275 :: Finding features
-1384328275 :: Finding faces
-1384328275 :: Finding Eyes
-1384328275 :: Finished finding features
-1384328275 :: Finding features
-1384328275 :: Finding faces
-1384328275 :: Finding Eyes
-1384328276 :: Finished finding features
-1384328276 :: Finding features
-1384328276 :: Finding faces
-1384328276 :: Finding Eyes
-1384328276 :: Finished finding features
-1384328277 :: Finding features
-1384328277 :: Finding faces
-1384328277 :: Finding Eyes
-1384328277 :: Finished finding features
-1384328277 :: Finding features
-1384328277 :: Finding faces
-1384328277 :: Finding Eyes
-1384328278 :: Finished finding features
-1384328278 :: Finding features
-1384328278 :: Finding faces
-1384328278 :: Finding Eyes
-1384328278 :: Finished finding features
-1384328279 :: Finding features
-1384328279 :: Finding faces
-1384328279 :: Finding Eyes
-1384328279 :: Finished finding features
-1384328279 :: Finding features
-1384328279 :: Finding faces
-1384328279 :: Finding Eyes
-1384328280 :: Finished finding features
-1384328280 :: Finding features
-1384328280 :: Finding faces
-1384328280 :: Finding Eyes
-1384328280 :: Finished finding features
-1384328281 :: Finding features
-1384328281 :: Finding faces
-1384328281 :: Finding Eyes
-1384328281 :: Finished finding features
-1384328281 :: Finding features
-1384328281 :: Finding faces
-1384328281 :: Finding Eyes
-1384328282 :: Finished finding features
-1384328282 :: Finding features
-1384328282 :: Finding faces
-1384328282 :: Finding Eyes
-1384328282 :: Finished finding features
-1384328283 :: Finding features
-1384328283 :: Finding faces
-1384328283 :: Finding Eyes
-1384328283 :: Finished finding features
-1384328283 :: Finding features
-1384328283 :: Finding faces
-1384328283 :: Finding Eyes
-1384328284 :: Finished finding features
-1384328284 :: Finding features
-1384328284 :: Finding faces
-1384328284 :: Finding Eyes
-1384328284 :: Finished finding features
-1384328285 :: Finding features
-1384328285 :: Finding faces
-1384328285 :: Finding Eyes
-1384328285 :: Finished finding features
-1384328285 :: Finding features
-1384328285 :: Finding faces
-1384328285 :: Finding Eyes
-1384328286 :: Finished finding features
-1384328286 :: Finding features
-1384328286 :: Finding faces
-1384328286 :: Finding Eyes
-1384328286 :: Finished finding features
-1384328287 :: Finding features
-1384328287 :: Finding faces
-1384328287 :: Finding Eyes
-1384328287 :: Finished finding features
-1384328287 :: Finding features
-1384328287 :: Finding faces
-1384328287 :: Finding Eyes
-1384328288 :: Finished finding features
-1384328288 :: Finding features
-1384328288 :: Finding faces
-1384328288 :: Finding Eyes
-1384328288 :: Finished finding features
-1384328289 :: Finding features
-1384328289 :: Finding faces
-1384328289 :: Finding Eyes
-1384328289 :: Finished finding features
-1384328289 :: Finding features
-1384328289 :: Finding faces
-1384328289 :: Finding Eyes
-1384328290 :: Finished finding features
-1384328721 :: Program started
-1384328721 :: Finding features
-1384328721 :: Finding faces
-1384328721 :: Finding Eyes
-1384328722 :: Finished finding features
-1384328723 :: Finding features
-1384328723 :: Finding faces
-1384328723 :: Finding Eyes
-1384328723 :: Finished finding features
-1384328724 :: Finding features
-1384328724 :: Finding faces
-1384328724 :: Finding Eyes
-1384328724 :: Finished finding features
-1384328725 :: Finding features
-1384328725 :: Finding faces
-1384328725 :: Finding Eyes
-1384328725 :: Finished finding features
-1384328725 :: Finding features
-1384328725 :: Finding faces
-1384328725 :: Finding Eyes
-1384328726 :: Finished finding features
-1384328726 :: Finding features
-1384328726 :: Finding faces
-1384328726 :: Finding Eyes
-1384328726 :: Finished finding features
-1384328727 :: Finding features
-1384328727 :: Finding faces
-1384328727 :: Finding Eyes
-1384328727 :: Finished finding features
-1384328728 :: Finding features
-1384328728 :: Finding faces
-1384328728 :: Finding Eyes
-1384328729 :: Finished finding features
-1384328729 :: Finding features
-1384328729 :: Finding faces
-1384328729 :: Finding Eyes
-1384328729 :: Finished finding features
-1384328730 :: Finding features
-1384328730 :: Finding faces
-1384328730 :: Finding Eyes
-1384328730 :: Finished finding features
-1384328730 :: Finding features
-1384328730 :: Finding faces
-1384328730 :: Finding Eyes
-1384328731 :: Finished finding features
-1384328732 :: Finding features
-1384328732 :: Finding faces
-1384328732 :: Finding Eyes
-1384328732 :: Finished finding features
-1384328732 :: Finding features
-1384328732 :: Finding faces
-1384328732 :: Finding Eyes
-1384328733 :: Finished finding features
-1384328733 :: Finding features
-1384328733 :: Finding faces
-1384328733 :: Finding Eyes
-1384328733 :: Finished finding features
-1384328734 :: Finding features
-1384328734 :: Finding faces
-1384328734 :: Finding Eyes
-1384328734 :: Finished finding features
-1384328734 :: Finding features
-1384328734 :: Finding faces
-1384328734 :: Finding Eyes
-1384328735 :: Finished finding features
-1384328735 :: Finding features
-1384328735 :: Finding faces
-1384328735 :: Finding Eyes
-1384328735 :: Finished finding features
-1384328736 :: Finding features
-1384328736 :: Finding faces
-1384328736 :: Finding Eyes
-1384328736 :: Finished finding features
-1384328737 :: Finding features
-1384328737 :: Finding faces
-1384328737 :: Finding Eyes
-1384328737 :: Finished finding features
-1384328737 :: Finding features
-1384328737 :: Finding faces
-1384328737 :: Finding Eyes
-1384328738 :: Finished finding features
-1384328738 :: Finding features
-1384328738 :: Finding faces
-1384328738 :: Finding Eyes
-1384328738 :: Finished finding features
-1384328739 :: Finding features
-1384328739 :: Finding faces
-1384328739 :: Finding Eyes
-1384328739 :: Finished finding features
-1384328740 :: Finding features
-1384328740 :: Finding faces
-1384328740 :: Finding Eyes
-1384328740 :: Finished finding features
-1384328740 :: Finding features
-1384328740 :: Finding faces
-1384328740 :: Finding Eyes
-1384328741 :: Finished finding features
-1384328741 :: Finding features
-1384328741 :: Finding faces
-1384328741 :: Finding Eyes
-1384328741 :: Finished finding features
-1384328742 :: Finding features
-1384328742 :: Finding faces
-1384328742 :: Finding Eyes
-1384328742 :: Finished finding features
-1384328743 :: Finding features
-1384328743 :: Finding faces
-1384328743 :: Finding Eyes
-1384328743 :: Finished finding features
-1384328743 :: Finding features
-1384328743 :: Finding faces
-1384328743 :: Finding Eyes
-1384328744 :: Finished finding features
-1384328744 :: Finding features
-1384328744 :: Finding faces
-1384328744 :: Finding Eyes
-1384328744 :: Finished finding features
-1384328745 :: Finding features
-1384328745 :: Finding faces
-1384328745 :: Finding Eyes
-1384328745 :: Finished finding features
-1384328745 :: Finding features
-1384328746 :: Finding faces
-1384328746 :: Finding Eyes
-1384328746 :: Finished finding features
-1384328746 :: Finding features
-1384328746 :: Finding faces
-1384328746 :: Finding Eyes
-1384328746 :: Finished finding features
-1384328747 :: Finding features
-1384328747 :: Finding faces
-1384328747 :: Finding Eyes
-1384328747 :: Finished finding features
-1384328748 :: Finding features
-1384328748 :: Finding faces
-1384328748 :: Finding Eyes
-1384328748 :: Finished finding features
-1384328748 :: Finding features
-1384328748 :: Finding faces
-1384328748 :: Finding Eyes
-1384328749 :: Finished finding features
-1384328749 :: Finding features
-1384328749 :: Finding faces
-1384328749 :: Finding Eyes
-1384328749 :: Finished finding features
-1384328750 :: Finding features
-1384328750 :: Finding faces
-1384328750 :: Finding Eyes
-1384328750 :: Finished finding features
-1384328750 :: Finding features
-1384328750 :: Finding faces
-1384328750 :: Finding Eyes
-1384328751 :: Finished finding features
-1384328751 :: Finding features
-1384328751 :: Finding faces
-1384328751 :: Finding Eyes
-1384328751 :: Finished finding features
-1384328752 :: Finding features
-1384328752 :: Finding faces
-1384328752 :: Finding Eyes
-1384328752 :: Finished finding features
-1384328753 :: Finding features
-1384328753 :: Finding faces
-1384328753 :: Finding Eyes
-1384328753 :: Finished finding features
-1384328753 :: Finding features
-1384328753 :: Finding faces
-1384328753 :: Finding Eyes
-1384328754 :: Finished finding features
-1384328754 :: Finding features
-1384328754 :: Finding faces
-1384328754 :: Finding Eyes
-1384328754 :: Finished finding features
-1384328755 :: Finding features
-1384328755 :: Finding faces
-1384328755 :: Finding Eyes
-1384328755 :: Finished finding features
-1384328755 :: Finding features
-1384328755 :: Finding faces
-1384328755 :: Finding Eyes
-1384328756 :: Finished finding features
-1384328756 :: Finding features
-1384328756 :: Finding faces
-1384328756 :: Finding Eyes
-1384328756 :: Finished finding features
-1384328757 :: Finding features
-1384328757 :: Finding faces
-1384328757 :: Finding Eyes
-1384328757 :: Finished finding features
-1384328757 :: Finding features
-1384328757 :: Finding faces
-1384328757 :: Finding Eyes
-1384328758 :: Finished finding features
-1384328758 :: Finding features
-1384328758 :: Finding faces
-1384328758 :: Finding Eyes
-1384328758 :: Finished finding features
-1384328759 :: Finding features
-1384328759 :: Finding faces
-1384328759 :: Finding Eyes
-1384328759 :: Finished finding features
-1384328760 :: Finding features
-1384328760 :: Finding faces
-1384328760 :: Finding Eyes
-1384328760 :: Finished finding features
-1384328760 :: Finding features
-1384328760 :: Finding faces
-1384328760 :: Finding Eyes
-1384328761 :: Finished finding features
-1384328761 :: Finding features
-1384328761 :: Finding faces
-1384328761 :: Finding Eyes
-1384328761 :: Finished finding features
-1384328762 :: Finding features
-1384328762 :: Finding faces
-1384328762 :: Finding Eyes
-1384328762 :: Finished finding features
-1384328762 :: Finding features
-1384328762 :: Finding faces
-1384328762 :: Finding Eyes
-1384328763 :: Finished finding features
-1384328763 :: Finding features
-1384328763 :: Finding faces
-1384328763 :: Finding Eyes
+1384762608 :: Program started
+1384762608 :: Finding features
+1384762608 :: Finding faces
+1384762608 :: Finding Eyes
+1384762611 :: Finished finding features
+1384762615 :: Finding features
+1384762615 :: Finding faces
+1384762615 :: Finding Eyes
+1384762616 :: Finished finding features
+1384762617 :: Finding features
+1384762617 :: Finding faces
+1384762617 :: Finding Eyes
+1384762617 :: Finished finding features
+1384762618 :: Finding features
+1384762618 :: Finding faces
+1384762618 :: Finding Eyes
+1384762619 :: Finished finding features
+1384762620 :: Finding features
+1384762620 :: Finding faces
+1384762620 :: Finding Eyes
+1384762620 :: Finished finding features
+1384762621 :: Finding features
+1384762621 :: Finding faces
+1384762621 :: Finding Eyes
+1384762622 :: Finished finding features
+1384762622 :: Finding features
+1384762622 :: Finding faces
+1384762622 :: Finding Eyes
+1384762623 :: Finished finding features
+1384762624 :: Finding features
+1384762624 :: Finding faces
+1384762624 :: Finding Eyes
+1384762624 :: Finished finding features
+1384762625 :: Finding features
+1384762625 :: Finding faces
+1384762625 :: Finding Eyes
+1384762625 :: Finished finding features
+1384762626 :: Finding features
+1384762626 :: Finding faces
+1384762626 :: Finding Eyes
+1384762626 :: Finished finding features
+1384762627 :: Finding features
+1384762627 :: Finding faces
+1384762627 :: Finding Eyes
+1384762627 :: Finished finding features
+1384762628 :: Finding features
+1384762628 :: Finding faces
+1384762628 :: Finding Eyes
+1384762629 :: Finished finding features
+1384762629 :: Finding features
+1384762629 :: Finding faces
+1384762630 :: Finding Eyes
+1384762630 :: Finished finding features
+1384762631 :: Finding features
+1384762631 :: Finding faces
+1384762631 :: Finding Eyes
+1384762631 :: Finished finding features
+1384762632 :: Finding features
+1384762632 :: Finding faces
+1384762632 :: Finding Eyes
+1384762632 :: Finished finding features
+1384762633 :: Finding features
+1384762633 :: Finding faces
+1384762633 :: Finding Eyes
+1384762633 :: Finished finding features
+1384762634 :: Finding features
+1384762634 :: Finding faces
+1384762634 :: Finding Eyes
+1384762635 :: Finished finding features
+1384762636 :: Finding features
+1384762636 :: Finding faces
+1384762636 :: Finding Eyes
+1384762636 :: Finished finding features
+1384762638 :: Finding features
+1384762638 :: Finding faces
+1384762638 :: Finding Eyes
+1384762638 :: Finished finding features
+1384762639 :: Finding features
+1384762639 :: Finding faces
+1384762639 :: Finding Eyes
+1384762639 :: Finished finding features
+1384762640 :: Finding features
+1384762640 :: Finding faces
+1384762640 :: Finding Eyes
+1384762640 :: Finished finding features
+1384762641 :: Finding features
+1384762641 :: Finding faces
+1384762641 :: Finding Eyes
+1384762642 :: Finished finding features
+1384762643 :: Finding features
+1384762643 :: Finding faces
+1384762643 :: Finding Eyes
+1384762643 :: Finished finding features
+1384762644 :: Finding features
+1384762644 :: Finding faces
+1384762644 :: Finding Eyes
+1384762644 :: Finished finding features
+1384762645 :: Finding features
+1384762645 :: Finding faces
+1384762645 :: Finding Eyes
+1384762645 :: Finished finding features
+1384762646 :: Finding features
+1384762646 :: Finding faces
+1384762646 :: Finding Eyes
+1384762647 :: Finished finding features
+1384762647 :: Finding features
+1384762647 :: Finding faces
+1384762647 :: Finding Eyes
+1384762648 :: Finished finding features
+1384762649 :: Finding features
+1384762649 :: Finding faces
+1384762649 :: Finding Eyes
+1384762649 :: Finished finding features
+1384762650 :: Finding features
+1384762650 :: Finding faces
+1384762650 :: Finding Eyes
+1384762650 :: Finished finding features
+1384762651 :: Finding features
+1384762651 :: Finding faces
+1384762651 :: Finding Eyes
+1384762651 :: Finished finding features
+1384762652 :: Finding features
+1384762652 :: Finding faces
+1384762652 :: Finding Eyes
+1384762652 :: Finished finding features
+1384762653 :: Finding features
+1384762653 :: Finding faces
+1384762653 :: Finding Eyes
+1384762654 :: Finished finding features
+1384762655 :: Finding features
+1384762655 :: Finding faces
+1384762655 :: Finding Eyes
+1384762655 :: Finished finding features
+1384762656 :: Finding features
+1384762656 :: Finding faces
+1384762656 :: Finding Eyes
+1384762657 :: Finished finding features
+1384762659 :: Finding features
+1384762659 :: Finding faces
+1384762659 :: Finding Eyes
+1384762659 :: Finished finding features
+1384762660 :: Finding features
+1384762660 :: Finding faces
+1384762660 :: Finding Eyes
+1384762661 :: Finished finding features
+1384762661 :: Finding features
+1384762661 :: Finding faces
+1384762662 :: Finding Eyes
+1384762662 :: Finished finding features
+1384762663 :: Finding features
+1384762663 :: Finding faces
+1384762663 :: Finding Eyes
+1384762663 :: Finished finding features
+1384762664 :: Finding features
+1384762664 :: Finding faces
+1384762664 :: Finding Eyes
+1384762665 :: Finished finding features
+1384762665 :: Finding features
+1384762665 :: Finding faces
+1384762666 :: Finding Eyes
+1384762666 :: Finished finding features
+1384762668 :: Finding features
+1384762668 :: Finding faces
+1384762668 :: Finding Eyes
+1384762669 :: Finished finding features
+1384762670 :: Finding features
+1384762670 :: Finding faces
+1384762670 :: Finding Eyes
+1384762670 :: Finished finding features
+1384762671 :: Finding features
+1384762671 :: Finding faces
+1384762671 :: Finding Eyes
+1384762672 :: Finished finding features
+1384762673 :: Finding features
+1384762673 :: Finding faces
+1384762673 :: Finding Eyes
+1384762673 :: Finished finding features
+1384762674 :: Finding features
+1384762674 :: Finding faces
+1384762674 :: Finding Eyes
+1384762674 :: Finished finding features
+1384762675 :: Finding features
+1384762675 :: Finding faces
+1384762675 :: Finding Eyes
+1384762676 :: Finished finding features
+1384762677 :: Finding features
+1384762677 :: Finding faces
+1384762677 :: Finding Eyes
+1384762677 :: Finished finding features
+1384762678 :: Finding features
+1384762678 :: Finding faces
+1384762678 :: Finding Eyes
+1384762678 :: Finished finding features
+1384762679 :: Finding features
+1384762679 :: Finding faces
+1384762679 :: Finding Eyes
+1384762680 :: Finished finding features
+1384762681 :: Finding features
+1384762681 :: Finding faces
+1384762681 :: Finding Eyes
+1384762681 :: Finished finding features
+1384762682 :: Finding features
+1384762682 :: Finding faces
+1384762682 :: Finding Eyes
+1384764119 :: Program started
+1384764119 :: Finding features
+1384764119 :: Finding faces
+1384764120 :: Finding Eyes
+1384764122 :: Finished finding features
+1384764123 :: Finding features
+1384764123 :: Finding faces
+1384764123 :: Finding Eyes
+1384764124 :: Finished finding features
+1384764125 :: Finding features
+1384764125 :: Finding faces
+1384764125 :: Finding Eyes
+1384764126 :: Finished finding features
+1384764126 :: Finding features
+1384764126 :: Finding faces
+1384764126 :: Finding Eyes
+1384764127 :: Finished finding features
+1384764128 :: Finding features
+1384764128 :: Finding faces
+1384764128 :: Finding Eyes
+1384764128 :: Finished finding features
+1384764129 :: Finding features
+1384764129 :: Finding faces
+1384764129 :: Finding Eyes
+1384764130 :: Finished finding features
+1384764130 :: Finding features
+1384764130 :: Finding faces
+1384764130 :: Finding Eyes
+1384764131 :: Finished finding features
+1384764131 :: Finding features
+1384764131 :: Finding faces
+1384764131 :: Finding Eyes
+1384764132 :: Finished finding features
+1384764133 :: Finding features
+1384764133 :: Finding faces
+1384764133 :: Finding Eyes
+1384764133 :: Finished finding features
+1384764134 :: Finding features
+1384764134 :: Finding faces
+1384764134 :: Finding Eyes
+1384764134 :: Finished finding features
+1384764135 :: Finding features
+1384764135 :: Finding faces
+1384764135 :: Finding Eyes
+1384764136 :: Finished finding features
+1384764136 :: Finding features
+1384764136 :: Finding faces
+1384764136 :: Finding Eyes
+1384764137 :: Finished finding features
+1384764137 :: Finding features
+1384764137 :: Finding faces
+1384764137 :: Finding Eyes
+1384764138 :: Finished finding features
+1384764139 :: Finding features
+1384764139 :: Finding faces
+1384764139 :: Finding Eyes
+1384764139 :: Finished finding features
+1384764140 :: Finding features
+1384764140 :: Finding faces
+1384764140 :: Finding Eyes
+1384764140 :: Finished finding features
+1384764141 :: Finding features
+1384764141 :: Finding faces
+1384764141 :: Finding Eyes
+1384764141 :: Finished finding features
+1384764142 :: Finding features
+1384764142 :: Finding faces
+1384764142 :: Finding Eyes
+1384764142 :: Finished finding features
+1384764143 :: Finding features
+1384764143 :: Finding faces
+1384764143 :: Finding Eyes
+1384764143 :: Finished finding features
+1384764144 :: Finding features
+1384764144 :: Finding faces
+1384764144 :: Finding Eyes
+1384764145 :: Finished finding features
+1384764145 :: Finding features
+1384764145 :: Finding faces
+1384764145 :: Finding Eyes
+1384764146 :: Finished finding features
+1384764147 :: Finding features
+1384764147 :: Finding faces
+1384764147 :: Finding Eyes
+1384764147 :: Finished finding features
+1384764148 :: Finding features
+1384764148 :: Finding faces
+1384764148 :: Finding Eyes
+1384764148 :: Finished finding features
+1384764149 :: Finding features
+1384764149 :: Finding faces
+1384764149 :: Finding Eyes
+1384764149 :: Finished finding features
+1384764150 :: Finding features
+1384764150 :: Finding faces
+1384764150 :: Finding Eyes
+1384764150 :: Finished finding features
+1384764151 :: Finding features
+1384764151 :: Finding faces
+1384764151 :: Finding Eyes
+1384764152 :: Finished finding features
+1384764152 :: Finding features
+1384764152 :: Finding faces
+1384764152 :: Finding Eyes
+1384764153 :: Finished finding features
+1384764154 :: Finding features
+1384764154 :: Finding faces
+1384764154 :: Finding Eyes
+1384764154 :: Finished finding features
+1384764155 :: Finding features
+1384764155 :: Finding faces
+1384764155 :: Finding Eyes
+1384764155 :: Finished finding features
+1384764156 :: Finding features
+1384764156 :: Finding faces
+1384764156 :: Finding Eyes
+1384764156 :: Finished finding features
+1384764157 :: Finding features
+1384764157 :: Finding faces
+1384764157 :: Finding Eyes
+1384764157 :: Finished finding features
+1384764158 :: Finding features
+1384764158 :: Finding faces
+1384764158 :: Finding Eyes
+1384764158 :: Finished finding features
+1384764159 :: Finding features
+1384764159 :: Finding faces
+1384764159 :: Finding Eyes
+1384764159 :: Finished finding features
+1384764160 :: Finding features
+1384764160 :: Finding faces
+1384764160 :: Finding Eyes
+1384764161 :: Finished finding features
+1384764162 :: Finding features
+1384764162 :: Finding faces
+1384764162 :: Finding Eyes
+1384764162 :: Finished finding features
+1384764163 :: Finding features
+1384764163 :: Finding faces
+1384764163 :: Finding Eyes
+1384764163 :: Finished finding features
 1384350792 :: Program started
 1384350792 :: Finding features
 1384350792 :: Finding faces
