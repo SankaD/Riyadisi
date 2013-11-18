@@ -10,18 +10,17 @@ void MainProgram::run() {
     firstRun = true;
     frameCount = 0;
 
-    float frameRate = 0;
-    float frameTime = 0;
-    time ( &systemTime );
-    time_t tempTime;
-    int elapsedTime = 0;
-    long int ticks = 0, tempTicks = 0;
+    //time ( &systemTime );
+    // time_t tempTime;
+    //int elapsedTime = 0;
+    long int ticks = 0, ticksForFrame = 0;
+   
 
 	while ( true ) {
         frame = imageManager.acquireImage ( frame );
 		frameCount++;
 		
-		tempTicks =  getTickCount() - ticks;
+        ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
         key = waitKey ( WAIT_PERIOD_PER_FRAME );
@@ -149,29 +148,30 @@ void MainProgram::run() {
 		//cout<<  "----------------------------------Nodding off level = "<< noddingOffLevel <<endl;
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
-        float gazeScore = gazeDetector.getDistractionScore();
+        gazeScore = gazeDetector.getDistractionScore();
 
         int frameNum = frameCount % 30;
-        double percloscore = 0;
+
         if ( frameNum == 0 ) {
             featureManager.perclos /= 30;
-            percloscore = featureManager.perclos;
+            percloseScore = featureManager.perclos;
             featureManager.perclos = 0;
         }
 
-		//calculate yawning frequency
-		if( faceFeature->getMouth()->isAvailable() ) {
-			yawning = yawningDetector.detectYawning( faceFeature );
+        //calculate yawning frequency
+        if ( faceFeature->getMouth()->isAvailable() ) {
+            yawningScore = yawningDetector.detectYawning ( faceFeature );
 			//cout<<"----- Yawning:" << yawning<<endl;
-		}
+        }
 
-		//calculate head orientation
-		if( frameCount == 1) 
-			headRotationDetector.setStartPoints( Point(leftEye.x + leftEye.width/2, leftEye.y + leftEye.height/2), Point(rightEye.x + rightEye.width/2, rightEye.y + rightEye.height/2), Point(nose.x + nose.width/2, nose.y + nose.height/2) );
-		if( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable()) {
-			headRotAngles =  headRotationDetector.calculateRotation( faceFeature );
+        //calculate head orientation
+        if ( frameCount == 1 ) {
+            headRotationDetector.setStartPoints ( Point ( leftEye.x + leftEye.width / 2, leftEye.y + leftEye.height / 2 ), Point ( rightEye.x + rightEye.width / 2, rightEye.y + rightEye.height / 2 ), Point ( nose.x + nose.width / 2, nose.y + nose.height / 2 ) );
+        }
+        if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
+            headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
 			//cout<<"Head orientation: "<<headRotAngles[0]<<" "<<headRotAngles[1]<<" "<<headRotAngles[2]<<endl;
-		}
+        }
 
         // drawing image
         Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
@@ -203,6 +203,7 @@ void MainProgram::run() {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }*/
         }
+        bool alert =  decisionEngine.shouldAlert ( percloseScore, 0, gazeScore, 0, 0 );
         CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
         CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
         CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
@@ -236,6 +237,7 @@ void MainProgram::run() {
         }
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
+        drawTexts ( frame, ticksForFrame );
         addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
         addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
         addText ( frame, noddingText.str(), Point ( 10, 50 ), fontYellow );
@@ -259,10 +261,11 @@ MainProgram::MainProgram() {
         throw exception ( "Program was unable to load the image source" );
     }
 
-	//initialize the vector
-	headRotAngles.push_back( 0.0); 
-	headRotAngles.push_back( 0.0); 
-	headRotAngles.push_back( 0.0);
+    gazeScore = 0;
+    percloseScore = 0;
+    noddingOffScore = 0;
+    yawningScore = 0;
+    alertStatus = false;
 }
 void MainProgram::processImage() {
     // processing the image
@@ -286,4 +289,42 @@ void MainProgram::trainingRun() {
         Log::log ( e.what() );
     }
     Log::log ( "Training ended" );
+}
+void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
+    CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
+    CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
+    CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
+
+    ostringstream distractedText ;
+    ostringstream perclosText ;
+    ostringstream frameTimeText;
+    ostringstream noddingOffText;
+    ostringstream yawningText;
+    ostringstream headRotationText;
+
+    frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
+
+    distractedText		<< "Gaze Level        : " << gazeScore;
+    perclosText			<< "perclos Level     : " << percloseScore;
+    frameTimeText		<< "Frame Time        : " << frameTime;
+    noddingOffText		<< "Nodding Off Rate  : " << noddingOffScore;
+    yawningText			<< "Yawning Rate	  : " << yawningScore;
+    headRotationText	<< "Head Rotation	  : " << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+
+    string drowsinessText	= "Drowsiness Level : ";
+    string alertText		= "Alert the driver  : ";
+
+    if ( alertStatus ) {
+        alertText += "Yes";
+    } else {
+        alertText += "No";
+    }
+    addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
+    addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
+    addText ( frame, noddingOffText.str(), Point ( 10, 50 ), fontYellow );
+    addText ( frame, perclosText.str(), Point ( 10, 70 ), fontYellow );
+    addText ( frame, headRotationText.str(), Point ( 10, 90 ), fontYellow );
+    addText ( frame, yawningText.str(), Point ( 10, 110 ), fontYellow );
+    addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
+    addText ( frame, alertText, Point ( 10, 140 ), fontAlert );
 }

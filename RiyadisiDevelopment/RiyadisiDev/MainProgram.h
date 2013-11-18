@@ -37,8 +37,8 @@ private:
     FaceFeatureManager featureManager;
     NoddingOffDetector noddingOffDetector;
     GazeDetector gazeDetector;
-	YawningDetector yawningDetector;
-	HeadRotationDetector headRotationDetector;
+    YawningDetector yawningDetector;
+    HeadRotationDetector headRotationDetector;
     Mat frame, grayFrame;
     long int frameCount;// for keeping the frame count
     int key;// for the key pressed by the user
@@ -46,6 +46,14 @@ private:
     bool firstRun;
     bool trainingMode;
     DecisionEngine decisionEngine;
-	float yawning;
-	vector<float> headRotAngles;
+
+    float frameTime;
+
+    // declaration of sensory information
+    vector<float> headRotAngles;
+    float gazeScore, percloseScore, noddingOffScore, yawningScore;
+    bool alertStatus;
+
+
+    void drawTexts ( Mat &frame, long int ticksForFrame  );
 };
