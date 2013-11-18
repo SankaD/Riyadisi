@@ -204,49 +204,11 @@ void MainProgram::run() {
             }*/
         }
         bool alert =  decisionEngine.shouldAlert ( percloseScore, 0, gazeScore, 0, 0 );
-        CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
-        CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
-        CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
-
-        ostringstream distractedText ;
-        ostringstream perclosText ;
-		ostringstream noddingText ;
-		ostringstream yawningText ;
-		ostringstream headRotationText ;
-        ostringstream frameRateText;
-        ostringstream frameTimeText;
-
-        distractedText		<< "Distraction Level : " << gazeScore;
-        perclosText			<< "perclos Level     : " << percloscore;
-		noddingText			<< "Nodding off       : " << noddingOffLevel;
-		yawningText			<< "Yawning			  : " << yawning;
-		headRotationText	<< "Head Orientation  : " << headRotAngles[0] << " " << headRotAngles[1] << " " << headRotAngles[2];
-        frameRateText		<< "Frame Rate        : " << frameRate;
-        frameTimeText		<< "Frame Time        : " << ( tempTicks / (  getTickFrequency() ) );
-
-        string drowsinessText	= "Drowsiness Level : ";
-        string alertText		= "Alert the driver  : ";
-
-        bool alert =  decisionEngine.shouldAlert ( percloscore, 0, gazeScore, 0, 0 );
-
-       
-        if ( alert ) {
-            alertText += "Yes";
-        } else {
-            alertText += "No";
-        }
+        
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );
-        addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
-        addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
-        addText ( frame, noddingText.str(), Point ( 10, 50 ), fontYellow );
-		addText ( frame, yawningText.str(), Point ( 10, 70 ), fontYellow );
-		addText ( frame, headRotationText.str(), Point ( 10, 90 ), fontYellow );
-        addText ( frame, perclosText.str(), Point ( 10, 110 ), fontYellow );
-        addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
-        addText ( frame, alertText, Point ( 10, 150 ), fontAlert );
-
+        
         imshow ( "image", frame );
     }
     Log::log ( "Program ended" );
