@@ -54,28 +54,34 @@ void MainProgram::run() {
             FaceFeature *previous = featureManager.getFeatureCollection()->getFeature ( 1 );
 
             // take a portion of the previous image using the previously detected face and other features.
-            //if ( previous->isAvailable() ) {
-            //    faceRoi = previous->getFeatureRect();
-            //    faceRoi.x = faceRoi.x - faceRoi.width / 2;
-            //    faceRoi.y = faceRoi.y - faceRoi.height / 2;
+            if ( previous->isAvailable() ) {
+                faceRoi = previous->getFeatureRect();
+                faceRoi.x = faceRoi.x - faceRoi.width / 2;
+                faceRoi.y = faceRoi.y - faceRoi.height / 2;
 
-            //    if ( faceRoi.x < 0 ) {
-            //        faceRoi.x = 0;
-            //    }
-            //    if ( faceRoi.y < 0 ) {
-            //        faceRoi.y = 0;
-            //    }
+                if ( faceRoi.x < 0 ) {
+                    faceRoi.x = 0;
+                }
+                if ( faceRoi.y < 0 ) {
+                    faceRoi.y = 0;
+                }
 
-            //    faceRoi.width = faceRoi.width * 2;
-            //    faceRoi.height = faceRoi.height * 2;
+                faceRoi.width = faceRoi.width * 2;
+                faceRoi.height = faceRoi.height * 2;
 
-            //    if ( faceRoi.width > grayFrame.cols ) {
-            //        faceRoi.width = grayFrame.cols - faceRoi.x;
-            //    }
-            //    if ( faceRoi.height > grayFrame.rows ) {
-            //        faceRoi.height = grayFrame.rows - faceRoi.y;
-            //    }
-
+                if ( faceRoi.width > grayFrame.cols ) {
+                    faceRoi.width = grayFrame.cols - faceRoi.x;
+                }
+                if ( faceRoi.height > grayFrame.rows ) {
+                    faceRoi.height = grayFrame.rows - faceRoi.y;
+                }
+			 } else {
+                // if there was no previous frame take the whole image as ROI
+                faceRoi.x = 0;
+                faceRoi.y = 0;
+                faceRoi.width = grayFrame.cols;
+                faceRoi.height = grayFrame.rows;
+            }
             //    // handling the left eye region of interest
             //    if ( previous->getLeftEye()->isAvailable() ) {
             //        leftEyeRoi = previous->getLeftEye()->getFeatureRect();
@@ -129,13 +135,7 @@ void MainProgram::run() {
             //            mouthRoi.height = grayFrame.rows;
             //        }
             //    }
-            //} else {
-                // if there was no previous frame take the whole image as ROI
-                faceRoi.x = 0;
-                faceRoi.y = 0;
-                faceRoi.width = grayFrame.cols;
-                faceRoi.height = grayFrame.rows;
-            //}
+           
             featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
