@@ -147,13 +147,14 @@ void MainProgram::run() {
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
 
-        int frameNum = frameCount % 30;
+     //   int frameNum = frameCount % 6;
 
-        if ( frameNum == 0 ) {
+        /*if ( frameNum == 0 ) {
             featureManager.perclos /= 30;
             percloseScore = featureManager.perclos;
             featureManager.perclos = 0;
-        }
+        }*/
+		percloseScore=featureManager.perclos;
 
         //calculate yawning frequency
         if ( faceFeature->getMouth()->isAvailable() ) {

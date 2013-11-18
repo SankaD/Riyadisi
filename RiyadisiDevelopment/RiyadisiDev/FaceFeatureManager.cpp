@@ -2,7 +2,7 @@
 #include <time.h>
 
 FaceFeatureManager::FaceFeatureManager ( void ) {
-    fs = FileStorage ( "eye_state_pca", FileStorage::READ );
+    fs=FileStorage("eye_state_bpca",FileStorage::READ);
 
 }
 FaceFeatureManager::~FaceFeatureManager ( void ) {
@@ -78,7 +78,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
             faceFeature->getLeftEye()->setFeatureRect ( leftEye );
             faceFeature->getLeftEye()->setAvailable ( true );
-            perclos += eyeStateDetector.calculateEyeState ( faceImage ( leftEye ), fs );
+            perclos = eyeStateDetector.getPerclosScore ( faceImage ( leftEye ), fs );
         }
 
         //detect right eye
@@ -103,7 +103,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
             faceFeature->getRightEye()->setFeatureRect ( rightEye );
             faceFeature->getRightEye()->setAvailable ( true );
-            perclos += eyeStateDetector.calculateEyeState ( faceImage ( rightEye ), fs );
+            perclos = eyeStateDetector.getPerclosScore ( faceImage ( rightEye ), fs );
         }
 
         //------------ handle the mouth region

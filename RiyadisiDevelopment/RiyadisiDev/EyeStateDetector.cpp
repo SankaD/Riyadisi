@@ -2,6 +2,18 @@
 
 
 Mat training_mat ( 1, 60 * 40, CV_32FC1 );
+
+EyeStateDetector::EyeStateDetector ( void ) {
+    for ( int i = 0; i < FEATURE_ARRAY_LENGTH; i++ ) {
+        scores[i] = 0;
+    }
+	currentIndex=0;
+}
+
+EyeStateDetector::~EyeStateDetector ( void ) {
+}
+
+
 float EyeStateDetector:: calculateEyeState ( Mat eye, FileStorage fs ) {
 
 
@@ -11,15 +23,14 @@ float EyeStateDetector:: calculateEyeState ( Mat eye, FileStorage fs ) {
 
     PCA pca; // declare pca variable
     // FileStorage fs("eye_state_pca",FileStorage::READ); //load the pca model of trained data
-    fs["mean"] >> pca.mean ;
-    fs["e_vectors"] >> pca.eigenvectors ;
-    fs["e_values"] >> pca.eigenvalues ;
-    fs.release();
+    Mat trainbpca(200,2400,CV_32FC1);
+   fs["bpca"] >> trainbpca;
+   fs.release();
 
-    Mat afterPca ( 1, 100, CV_32FC1 );
+    Mat afterPca ( 1, 200, CV_32FC1 );
 
-    pca.project ( training_mat, afterPca ); // project eye image to pca space of training data
-
+    //pca.project ( training_mat, afterPca ); // project eye image to pca space of training data
+	afterPca=training_mat*(trainbpca.t());
     CvSVM SVM;
     SVM.load ( "eye_state_svm" ); //loading trained svm
 
@@ -68,3 +79,17 @@ void EyeStateDetector:: processImage ( Mat image ) {
 
 }
 
+float EyeStateDetector::getPerclosScore(Mat eye,FileStorage fs) {
+    
+	currentIndex = ( currentIndex + 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH;
+    float score = 0;
+    scores[currentIndex] = calculateEyeState ( eye, fs );
+
+	if(scores[currentIndex]==0){
+		score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] * 0.2 ;}
+	else score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.6 + scores[currentIndex] * 0.4 ;
+    
+scores[currentIndex] = score;
+
+    return abs ( score );
+}

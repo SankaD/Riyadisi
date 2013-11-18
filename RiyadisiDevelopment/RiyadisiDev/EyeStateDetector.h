@@ -20,20 +20,24 @@
 #include "LeftEyeDetector.h"
 #include "RightEyeDetector.h"
 #include "FaceDetector.h"
+#include "FeatureCollection.h"
 
 using namespace cv;
 using namespace std;
 
 class EyeStateDetector {
 private:
-    /// stores the face locations
-	
-    
+    /// stores the perclos scores in a cyclic array
+	float scores[FEATURE_ARRAY_LENGTH];
+    int currentIndex;
 public :
 
     float calculateEyeState(Mat eye,FileStorage fs);
+    void processImage(Mat image);
+	float getPerclosScore(Mat eye,FileStorage fs);
 
-	void processImage(Mat image);
+	EyeStateDetector ( void );
+    ~EyeStateDetector ( void );
 
 	
 
