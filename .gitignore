@@ -13,3 +13,6 @@ Release
 RiyadisiDevelopment/RiyadisiDev/output.out
 *.vsp
 RiyadisiDevelopment/output.out
+/RiyadisiDevelopment/*.psess
+/RiyadisiDevelopment/*.vsp
+/RiyadisiDevelopment/*.psess
