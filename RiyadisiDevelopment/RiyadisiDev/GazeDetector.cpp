@@ -94,7 +94,6 @@ void GazeDetector::setCurrentGaze ( Gaze gaze ) {
     gazeArray[currentIndex].setLeftPupil ( gaze.getLeftPupil() );
     gazeArray[currentIndex].setRightEye ( gaze.getRightEye() );
     gazeArray[currentIndex].setRightPupil ( gaze.getRightPupil() );
-
 }
 void GazeDetector::trainDefaultValues ( FaceFeature faceFeature ) {
     Rect leftEye = Rect ( 0, 0, 0, 0 );
