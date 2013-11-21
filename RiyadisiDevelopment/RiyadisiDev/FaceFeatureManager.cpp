@@ -2,7 +2,7 @@
 #include <time.h>
 
 FaceFeatureManager::FaceFeatureManager ( void ) {
-    fs=FileStorage("eye_state_bpca",FileStorage::READ);
+    fs = FileStorage ( "eye_state_bpca", FileStorage::READ );
 
 }
 FaceFeatureManager::~FaceFeatureManager ( void ) {
@@ -10,7 +10,7 @@ FaceFeatureManager::~FaceFeatureManager ( void ) {
 
 void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rect faceROI, Rect leftEyeROI, Rect rightEyeROI, Rect mouthROI ) {
     try {
-		Mat relatedImage = image( faceROI ).clone();
+        Mat relatedImage = image ( faceROI ).clone();
 
         // handle the face region
         Log::log ( "Finding features" );
@@ -36,73 +36,111 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         Log::log ( "Finding Eyes" );
         //------------ handle the eye regions
         Rect leftEye, rightEye;
-		vector<Rect> eyes;
-		eyes = eyeDetector.detect ( faceImage );
-		int temp;
-		if ( eyes[0].area() > 0 ) {
-			leftEye = eyes[0];
-			faceFeature->getLeftEye()->setFeatureRect ( leftEye );
-			faceFeature->getLeftEye()->setAvailable ( true );
+        vector<Rect> eyes;
+        eyes = eyeDetector.detect ( faceImage );
+        int temp;
+        if ( eyes[0].area() > 0 ) {
+            leftEye = eyes[0];
+            faceFeature->getLeftEye()->setFeatureRect ( leftEye );
+            faceFeature->getLeftEye()->setAvailable ( true );
             perclos = eyeStateDetector.getPerclosScore ( faceImage ( leftEye ), fs );
-			
-			preeyeState=perclos;
 
-		}
-		else perclos=preeyeState;
+            preeyeState = perclos;
 
-		if ( eyes[1].area() > 0 ) {
-			rightEye = eyes[1];
-			faceFeature->getRightEye()->setFeatureRect ( rightEye );
-			faceFeature->getRightEye()->setAvailable ( true );
+        } else {
+            perclos = preeyeState;
+        }
+
+        if ( eyes[1].area() > 0 ) {
+            rightEye = eyes[1];
+            faceFeature->getRightEye()->setFeatureRect ( rightEye );
+            faceFeature->getRightEye()->setAvailable ( true );
             perclos = eyeStateDetector.getPerclosScore ( faceImage ( rightEye ), fs );
-			
-			preeyeState=perclos;
-		}
-		else perclos=preeyeState;
 
-        
+            preeyeState = perclos;
+        } else {
+            perclos = preeyeState;
+        }
+
+
         //------------ handle the mouth region
         Rect mouth;
-		
-		if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
-			mouthROI.x = leftEye.x;
-			mouthROI.y = faceImage.rows * 2 / 3;
-			mouthROI.width = (rightEye.x + rightEye.width - leftEye.x);
-			mouthROI.height = faceImage.rows / 3;
 
-			mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
+        if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() ) {
+            mouthROI.x = leftEye.x;
+            mouthROI.y = faceImage.rows * 2 / 3;
+            mouthROI.width = ( rightEye.x + rightEye.width - leftEye.x );
+            mouthROI.height = faceImage.rows / 3;
 
-			if ( mouth.area() > 0 ) {
-				mouth.x += mouthROI.x;
-				mouth.y += mouthROI.y;
+            mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
 
-				faceFeature->getMouth()->setFeatureRect ( mouth );
-				faceFeature->getMouth()->setAvailable ( true );
-			}
-		} 
+            if ( mouth.area() > 0 ) {
+                mouth.x += mouthROI.x;
+                mouth.y += mouthROI.y;
+
+                faceFeature->getMouth()->setFeatureRect ( mouth );
+                faceFeature->getMouth()->setAvailable ( true );
+            }
+        }
 
         //------------ handle the nose region
         Rect nose, noseROI;
-		vector<Rect> noseResults;
+        vector<Rect> noseResults;
 
-		//selecting the best rectangle for nose
-		if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
-			noseROI.x = leftEye.x + leftEye.width/2;
-			noseROI.y = faceImage.rows/2;
-			noseROI.width = (rightEye.x + rightEye.width/2) - (leftEye.x + leftEye.width/2);
-			noseROI.height = faceImage.rows / 4;
 
-			noseResults = noseDetector.detect ( faceImage ( noseROI ) );
+        // reducing the search area for a nose
+        if ( faceFeature->isAvailable() ) {
+            noseROI = faceFeature->getFeatureRect();
+            noseROI.x =  noseROI.width / 4;
+            noseROI.y =  noseROI.height / 4;
+            noseROI.width = noseROI.width / 2;
+            noseROI.height = noseROI.height / 2;
 
-			if ( noseResults.size() > 0 ) {
-				nose = noseResults[0];
-				nose.x += noseROI.x;
-				nose.y += noseROI.y;
+            Mat noseImage = faceImage ( noseROI );
+            noseResults = noseDetector.detect ( noseImage );
 
-				faceFeature->getNose()->setFeatureRect ( nose );
-				faceFeature->getNose()->setAvailable ( true );
-			}
-		}
+            if ( noseResults.size() > 0 ) {
+                nose = noseResults[0];
+
+                //selecting the best rectangle for nose
+
+                nose.x += noseROI.x;
+                nose.y += noseROI.y;
+
+                faceFeature->getNose()->setFeatureRect ( nose );
+                faceFeature->getNose()->setAvailable ( true );
+
+                Rect tempNoseROI;
+                tempNoseROI.x = nose.x + nose.width / 4;
+                tempNoseROI.y = nose.y;
+                tempNoseROI.width = nose.width / 2;
+                tempNoseROI.height = nose.height;
+
+                Mat tempNose = faceImage ( tempNoseROI );
+                equalizeHist ( tempNose, tempNose );
+                threshold ( tempNose, tempNose, 200, 255, CV_THRESH_BINARY );
+
+                Canny ( tempNose.clone(), tempNose, 200, 255 );
+                Point2f noseCenter;
+                float radius;
+                vector<vector<Point>> contours;
+                findContours ( tempNose.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
+
+                double area = 0, maxArea = 0;
+                int maxAreaIndex = -1;
+                float radiusTemp;
+                Point2f centerTemp;
+                vector<Point> points;
+                for ( int i = 0; i < contours.size(); i++ ) {
+                    points.insert ( points.end(), contours[i].begin(), contours[i].end() );
+                }
+                minEnclosingCircle ( points, noseCenter, radius );
+                line ( tempNose, Point ( noseCenter.x, noseCenter.y + 5 ), Point ( noseCenter.x, noseCenter.y - 5 ), Scalar ( 255, 255, 0 ) );
+
+                imshow ( "Nose", tempNose );
+            }
+        }
+        //}
 
         //------------ handler the pupil regions
         if ( faceFeature->getRightEye()->isAvailable() ) {
