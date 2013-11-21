@@ -20,5 +20,5 @@ private:
 	LeftEyeDetector leftEyeDetector;
 	RightEyeDetector rightEyeDetector;
 	Rect optimizeDetection ( vector<Rect> data, Mat image );
-	ofstream dataFile;
+	//ofstream dataFile;
 };

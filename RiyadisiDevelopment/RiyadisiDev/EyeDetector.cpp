@@ -33,8 +33,7 @@ vector<Rect> EyeDetector::detect ( Mat faceImage )
 	rightEye.x += rightEyeROI.x;
     rightEye.y += rightEyeROI.y;
 	eyes.push_back( rightEye );
-
-	
+		
 	return eyes;
 }
 
@@ -66,7 +65,7 @@ Rect EyeDetector::optimizeDetection ( vector<Rect> data, Mat image )
 EyeDetector::EyeDetector ( void )
 {
 	
-	dataFile.open ("Testing/Images/eye_testing/cum_sum.txt");
+	//dataFile.open ("Testing/Images/eye_testing/cum_sum.txt");
 }
 
 EyeDetector::~EyeDetector ( void )
