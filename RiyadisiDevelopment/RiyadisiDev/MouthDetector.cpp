@@ -10,7 +10,11 @@
 //	minSize = Size(75, 50);
 //}
 
-MouthDetector::MouthDetector ( void ) { }
+MouthDetector::MouthDetector ( void ) { 
+	mouthTemplate = Mat::zeros(Size(60,40), CV_8U);
+	erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
+	dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
+}
 
 vector<vector<Point>> MouthDetector::getContourMap( Mat image) {
 	Scalar mu, sigma;
@@ -23,25 +27,45 @@ vector<vector<Point>> MouthDetector::getContourMap( Mat image) {
 	threshold(image, image, binaryThresold, 255, THRESH_BINARY );
 	//adaptiveThreshold(image, image, 255, ADAPTIVE_THRESH_MEAN_C, THRESH_BINARY, 3, 0);
     
-    Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 5, 5 ), Point ( 1, 1 ) );
-	Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 5, 5 ), Point ( 1, 1 ) );
 	erode ( image, image, erodeElement );
     dilate( image, image, dilateElement );
 	
-	//imshow ( "transformed image", image );
+	imshow ( "transformed image", image );
 
 	Canny ( image, image, lowerThreshold, upperThreshold, 3, true );
     findContours ( image, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-    
+	
 	return contours;
 }
 
 Rect MouthDetector::detect( Mat mouthROI )
 {
 	Rect mouth;
-	vector<vector<Point>> contours = getContourMap( mouthROI.clone() );
+	Mat temp = mouthROI.clone();
+	/*, tempTemplate;
+	resize(mouthTemplate, tempTemplate, mouthROI.size(), 0, 0, 1 );
+	
+	int binaryThresold = calculateThreshold( temp );
+	threshold(temp, temp, binaryThresold, 255, THRESH_BINARY );
+	erode ( temp, temp, erodeElement );
+
+	binaryThresold = calculateThreshold( tempTemplate );
+	threshold(tempTemplate, tempTemplate, binaryThresold, 255, THRESH_BINARY );
+	dilate( tempTemplate, tempTemplate, dilateElement );*/
+	
+	//for(int i=0; i < mouthROI.cols; i++) {
+	//	for(int j=0; j < mouthROI.rows; j++) {
+	//		if( temp.at<uchar>(j, i) == 0 && tempTemplate.at<uchar>(j, i) == 0 )
+	//			temp.at<uchar>(j, i) = 255;
+	//		/*if( i < mouthROI.cols * 0.2 || i > mouthROI.cols * 0.8 || j > mouthROI.rows * 0.7 || j < mouthROI.rows * 0.1 )
+	//			temp.at<uchar>(j, i) = 255;*/
+	//	} 
+	//}
+	//imshow ( "transformed image", temp );
+
+	vector<vector<Point>> contours = getContourMap( temp );
 	vector<int> mouthContourIndices;
-		
+			
 	for ( int i = 0; i < contours.size(); i++ ) { 
 		Rect rectTemp = minEnclosingRectangle( contours[i] );
 		Point centerTemp( (rectTemp.x + rectTemp.width/2), (rectTemp.y + rectTemp.height/2) );
@@ -50,10 +74,10 @@ Rect MouthDetector::detect( Mat mouthROI )
 
 		if(centerTemp.x < mouthROI.cols * 0.75 
 			&& centerTemp.x > mouthROI.cols * 0.25
-			&& centerTemp.y < mouthROI.rows * 0.6
-			&& centerTemp.y > mouthROI.rows * 0.2
-			&& mouthArea > imageArea/100 
-			&& mouthArea < imageArea/5) {
+			&& centerTemp.y < mouthROI.rows * 0.75
+			&& centerTemp.y > mouthROI.rows * 0.25)
+			//&& mouthArea > imageArea/100)
+		{
 				mouthContourIndices.push_back(i);
 		}
 		//rectangle(mouthROI, rectTemp, Scalar(0,255,0), 1, 8);
@@ -76,6 +100,7 @@ Rect MouthDetector::minEnclosingRectangle( vector<Point> data ) {
 		maxX = 0, 
 		minY = numeric_limits<int>::max(), 
 		maxY = 0;
+	Rect ans(0,0,0,0);
 	
 	for(int i=0; i<data.size(); i++) {
 		if(data[i].x < minX) minX = data[i].x;
@@ -83,36 +108,26 @@ Rect MouthDetector::minEnclosingRectangle( vector<Point> data ) {
 		if(data[i].y < minY) minY = data[i].y;
 		if(data[i].y > maxY) maxY = data[i].y;
 	}
-	return Rect(minX, minY, maxX-minX, maxY-minY);
+
+	if( minX < numeric_limits<int>::max() && minY < numeric_limits<int>::max() || maxX > 0 || maxY > 0 )
+		ans = Rect(minX, minY, maxX-minX, maxY-minY);
+
+	return ans;
 }
 
-void MouthDetector::drawTemplate ( vector<Mat> imageList )
+
+void MouthDetector::updateTemplate ( Mat image )
 {
-	mouthTemplate = Mat::zeros(imageList[0].size(), CV_8U);
-	vector<vector<Point>> contours;
-	Mat image;
-	int T = imageList.size() * 0.2, size;
-
-	for(int i=0; i<imageList.size(); i++) {
-		image = imageList[i].clone();
-		size = image.rows * image.cols;
-		contours = getContourMap( image );
-		
-		for(int j=0; j<contours.size(); j++) {
-			double area = contours[j].size();
-
-			if( area > (size/1000) ) {
-				for(int k=0; k<contours[j].size(); k++) {
-					mouthTemplate.at<uchar>(contours[j][k].y, contours[j][k].x)++;
-				}
-			}
+	float alpha = 0.2;
+	Mat mouthROI = image.clone();
+	resize(	mouthROI, mouthROI, Size(60,40), 0, 0, 1);	
+			
+	for(int i=0; i < mouthROI.cols; i++) {
+		for(int j=0; j < mouthROI.rows; j++) {
+			mouthTemplate.at<uchar>(j, i) += ( mouthROI.at<uchar>(j, i) - mouthTemplate.at<uchar>(j, i) ) * alpha;
 		}
-		
 	}
-
-	threshold ( mouthTemplate, mouthTemplate, T, 255, CV_THRESH_BINARY_INV );
-	//imwrite("output/template/mouth_template.jpg", mouthTemplate);
-	//imshow("mouth", mouthTemplate);
+	imwrite("Testing/Images/mouth_template.jpg", mouthTemplate);
 }
 
 int MouthDetector::calculateThreshold( Mat image ) 

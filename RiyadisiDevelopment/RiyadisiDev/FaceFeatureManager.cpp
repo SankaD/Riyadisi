@@ -65,10 +65,13 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         Rect mouth;
 		
 		if(faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable()){
-			mouthROI.x = leftEye.x;
-			mouthROI.y = faceImage.rows * 2 / 3;
-			mouthROI.width = (rightEye.x + rightEye.width - leftEye.x);
-			mouthROI.height = faceImage.rows / 3;
+			int mouthCenter = faceFeature->getLeftEye()->getCenterPoint().y + face.width * 0.36;
+			
+			mouthROI.x = faceFeature->getLeftEye()->getCenterPoint().x;
+			mouthROI.width = faceFeature->getRightEye()->getCenterPoint().x - faceFeature->getLeftEye()->getCenterPoint().x;
+			mouthROI.y = mouthCenter - mouthROI.width/6;
+			mouthROI.height = mouthROI.width/3;
+			//imshow("testing", faceImage ( mouthROI ) );
 
 			mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
 

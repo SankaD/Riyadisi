@@ -167,7 +167,7 @@ MainProgram::MainProgram() {
 
     gazeScore = 0;
     percloseScore = 0;
-    noddingOffScore = 0;
+    noddingOffLevel = 0;
     yawningScore = 0;
     alertStatus = false;
 }
@@ -211,7 +211,7 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     distractedText		<< "Gaze Level        : " << gazeScore;
     perclosText			<< "perclos Level     : " << percloseScore;
     frameTimeText		<< "Frame Time        : " << frameTime;
-    noddingOffText		<< "Nodding Off Rate  : " << noddingOffScore;
+    noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;
     yawningText			<< "Yawning Rate	  : " << yawningScore;
     headRotationText	<< "Head Rotation	  : " << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
 

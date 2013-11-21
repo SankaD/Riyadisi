@@ -4,7 +4,6 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "FaceFeature.h"
 
-#define NO_OF_FRAMES 5
 #define ARRAY_LENGTH 6
 
 using namespace std;
@@ -22,4 +21,5 @@ public:
 private:
 	int currentIndex;
 	float mouthToFaceRatio[ARRAY_LENGTH];
+	float alpha[ARRAY_LENGTH];
 };

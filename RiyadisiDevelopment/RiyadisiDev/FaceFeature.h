@@ -21,6 +21,7 @@ private:
     EyeFeature rightEye;
     MouthFeature mouth;
     Mat image;
+	string orientation;
 public:
     FaceFeature();
 
@@ -51,5 +52,7 @@ public:
     Gaze getGazeData();
     Mat getImage();
     void setImage ( Mat image ) ;
+	string getOrientation();
+    void setOrientation ( string orientation ) ;
     virtual void clearFeature();
 };

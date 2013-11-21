@@ -6,10 +6,13 @@ using namespace std;
 
 YawningDetector::YawningDetector ( void )
 {
+	alpha[0] = 0.1;
+	alpha[1] = 0.4;
+	alpha[2] = 0.5;
 	for ( int i = 0; i < ARRAY_LENGTH; i++ ) {
         mouthToFaceRatio[i] = 1;
     }
-    currentIndex = ARRAY_LENGTH - 1;
+    currentIndex = 0;
 }
 
 
@@ -37,11 +40,19 @@ float YawningDetector::detectYawning ( FaceFeature *faceFeature )
 
 	mouthToFaceRatio[currentIndex] = ratio;
 	int curr, prev;
-	for(int i=0; i < NO_OF_FRAMES; i++) {
+	for(int i=0; i < 3; i++) {
 		curr = (currentIndex + i) % ARRAY_LENGTH;
-		prev = (currentIndex + i + 1) % ARRAY_LENGTH;
-		yawningScore += ( mouthToFaceRatio[curr] - mouthToFaceRatio[prev] ) / mouthToFaceRatio[prev];
+		prev = (currentIndex + i - 1) % ARRAY_LENGTH;
+		if( prev < 0 )
+			prev = 0;
+		if( ( mouthToFaceRatio[curr] - mouthToFaceRatio[prev] ) > 0 )
+			yawningScore += alpha[i] *( mouthToFaceRatio[curr] - mouthToFaceRatio[prev] );
+		else 
+			yawningScore += 0;
 	}
-	
-	return yawningScore/NO_OF_FRAMES;
+	currentIndex++;
+	if(currentIndex == ARRAY_LENGTH)
+		currentIndex = 0;
+
+	return yawningScore/3;
 }
