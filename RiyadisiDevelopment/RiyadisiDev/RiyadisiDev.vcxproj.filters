@@ -282,6 +282,9 @@
     <ClCompile Include="YawningDetector.cpp">
       <Filter>Source Files\MainFeatures\DrowsinessDetection\YawningDetection</Filter>
     </ClCompile>
+    <ClCompile Include="TrainingFileCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -582,6 +585,9 @@
     </ClInclude>
     <ClInclude Include="EyeGlassDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="TrainingFileCreator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
