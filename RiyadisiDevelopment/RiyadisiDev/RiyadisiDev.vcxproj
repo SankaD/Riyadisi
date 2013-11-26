@@ -90,6 +90,7 @@
     <ClCompile Include="HeadRotationDetector.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ProfileFaceDetector.cpp" />
+    <ClCompile Include="TrainingFileCreator.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Eye.cpp" />
     <ClCompile Include="EyeStateDetector.cpp" />
@@ -222,6 +223,7 @@
     <ClInclude Include="PupilDetector.h" />
     <ClInclude Include="PupilFeature.h" />
     <ClInclude Include="RightEyeDetector.h" />
+    <ClInclude Include="TrainingFileCreator.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="YawningDetector.h" />
   </ItemGroup>
