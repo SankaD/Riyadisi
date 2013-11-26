@@ -11,9 +11,9 @@ vector<Rect> EyeDetector::detect ( Mat faceImage )
     leftEyeROI.width = faceImage.cols / 2;
     leftEyeROI.height = faceImage.rows / 4;
 	
-	leftEye = optimizeDetection( eyeGlassDetector.detect ( faceImage( leftEyeROI ) ), faceImage( leftEyeROI ) );
+	leftEye = optimizeDetection( eyeGlassDetector.detect ( faceImage( leftEyeROI ) ) );
 	if(leftEye.area() == 0){
-		leftEye = optimizeDetection( leftEyeDetector.detect ( faceImage( leftEyeROI ) ), faceImage( leftEyeROI ) );
+		leftEye = optimizeDetection( leftEyeDetector.detect ( faceImage( leftEyeROI ) ) );
 	} 
 	leftEye.x += leftEyeROI.x;
     leftEye.y += leftEyeROI.y;
@@ -25,11 +25,10 @@ vector<Rect> EyeDetector::detect ( Mat faceImage )
     rightEyeROI.width = faceImage.cols / 2;
     rightEyeROI.height = faceImage.rows / 4;
 	
-	rightEye = optimizeDetection( eyeGlassDetector.detect ( faceImage( rightEyeROI ) ), faceImage( rightEyeROI ) );
-
+	rightEye = optimizeDetection( eyeGlassDetector.detect ( faceImage( rightEyeROI ) ) );
 	if(rightEye.area() == 0){
-		rightEye = optimizeDetection( rightEyeDetector.detect ( faceImage( rightEyeROI ) ), faceImage( rightEyeROI ) );
-	} 
+		rightEye = optimizeDetection( rightEyeDetector.detect ( faceImage( rightEyeROI ) ) );
+	}
 	rightEye.x += rightEyeROI.x;
     rightEye.y += rightEyeROI.y;
 	eyes.push_back( rightEye );
@@ -37,7 +36,7 @@ vector<Rect> EyeDetector::detect ( Mat faceImage )
 	return eyes;
 }
 
-Rect EyeDetector::optimizeDetection ( vector<Rect> data, Mat image ) 
+Rect EyeDetector::optimizeDetection ( vector<Rect> data ) 
 {
 	/*Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
 	Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );

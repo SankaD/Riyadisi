@@ -16,10 +16,9 @@ class YawningDetector {
 public:
     YawningDetector ( void );
     ~YawningDetector ( void );
-    float detectYawning ( FaceFeature *faceFeature );
-	void setInitialMouthHeight( float ratio );
+    float detectYawning ( FaceFeature *faceFeature );	
 private:
-	int currentIndex;
-	float mouthToFaceRatio[ARRAY_LENGTH];
-	float alpha[ARRAY_LENGTH];
+	float cSum;
+	int prevH;
+	float alpha;
 };

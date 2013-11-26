@@ -7,8 +7,9 @@ using namespace cv;
 EyeGlassDetector::EyeGlassDetector ( void ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_eye_tree_eyeglasses.xml" )
 {
-	scale = 1.25;
+	scale = 1.1;
 	minSize = Size(30, 30);
+	donwsampleConst = 2;
 }
 
 
