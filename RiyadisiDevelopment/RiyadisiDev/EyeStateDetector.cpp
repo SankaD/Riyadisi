@@ -116,12 +116,12 @@ float EyeStateDetector::getPerclosScore(Mat eye,FileStorage fs) {
     float score = 0;
     scores[currentIndex] = calculateEyeState ( eye, fs );
 
-	/*if(scores[currentIndex]==0){
+	if(scores[currentIndex]==0){
 		score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] * 0.2 ;}
 	else score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.6 + scores[currentIndex] * 0.4 ;
     
-scores[currentIndex] = score;*/
+scores[currentIndex] = score;
 
-   // return abs ( score );
-	return abs ( scores[currentIndex] );
+    return abs ( score );
+//	return abs ( scores[currentIndex] );
 }
