@@ -14,10 +14,11 @@
 #include "YawningDetector.h"
 #include "HeadRotationDetector.h"
 #include "GazeDetector.h"
-#include "ImageManager.h"
 #include "Utility.h"
 #include "DecisionEngine.h"
 #include "Log.h"
+#include "TrainingFileCreator.h"
+
 
 
 class MainProgram {
@@ -30,6 +31,7 @@ public:
     ///</summary>
     void run();
     void trainingRun();
+    void createTrainingFile();
     void processImage();
 private:
     bool isAlertOn;

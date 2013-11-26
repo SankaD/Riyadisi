@@ -33,11 +33,11 @@ bool DecisionEngine::trainEngine ( string filename ) {
         }
 
         return true;
-    } catch ( exception e ) {
-        Log::log ( e.what() );
+    } catch ( exception ex ) {
+        Log::log ( ex.what()  );
     }
 }
-bool DecisionEngine::shouldAlert ( double eyeState, double noddingOff, double gaze, double headRotation, double yawning ) {
+bool DecisionEngine::shouldAlert ( double eyeState, double noddingOff, double gaze, vector<float> headRotation, double yawning ) {
     return network.getAlertValue ( eyeState, noddingOff, gaze, headRotation, yawning );
 }
 DecisionEngine::~DecisionEngine() {

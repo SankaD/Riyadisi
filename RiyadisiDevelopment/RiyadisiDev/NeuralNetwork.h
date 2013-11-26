@@ -9,10 +9,10 @@
 using namespace std;
 using namespace FANN;
 
-static const unsigned int numInput = 5;
+static const unsigned int numInput = 7;
 static const unsigned int numOutput = 1;
 static const unsigned int numLayers = 4;
-static const unsigned int numNeuronsHidden = 5;
+static const unsigned int numNeuronsHidden = 10;
 static const float desiredError = 0.01;
 static const unsigned int maxEpochs = 50000;
 static const unsigned int epochsBetweenReports = 10000;
@@ -45,7 +45,7 @@ public:
     ///<param name="noddingOffMeasure">Accumilated weighted Nodding off values</param>
     ///<returns> Whether or not to alert the driver</returns>
     bool getAlertValue ( double weightedPerclose, double noddingOffMeasure,
-                         double gazeMeasure, double headRotationMeasure,
+                         double gazeMeasure, vector<float> headRotationMeasure,
                          double yawningMeasure );
     ///<summary>
     ///Saves the neural network into the disk

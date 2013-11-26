@@ -145,7 +145,7 @@ void MainProgram::run() {
                 line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
             }*/
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, 0, gazeScore, 0, 0 );
+        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
@@ -190,8 +190,8 @@ void MainProgram::trainingRun() {
         } else {
             decisionEngine.trainEngine ();
         }
-    } catch ( exception e ) {
-        Log::log ( e.what() );
+    } catch ( exception ex ) {
+        Log::log ( ex.what() ) ;
     }
     Log::log ( "Training ended" );
 }
@@ -232,4 +232,16 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     addText ( frame, yawningText.str(), Point ( 10, 110 ), fontYellow );
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
     addText ( frame, alertText, Point ( 10, 140 ), fontAlert );
+}
+void MainProgram::createTrainingFile() {
+    try {
+        Log::log ( "Program started" );
+        TrainingFileCreator creator;
+
+        creator.trainUsingFile ( "Testing/filelist.txt" );
+
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
+    }
+    Log::log ( "Program ended" );
 }
