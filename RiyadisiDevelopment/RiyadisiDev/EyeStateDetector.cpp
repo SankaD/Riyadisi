@@ -24,7 +24,8 @@ float EyeStateDetector:: calculateEyeState ( Mat eye, FileStorage fs ) {
     PCA pca; // declare pca variable
     // FileStorage fs("eye_state_pca",FileStorage::READ); //load the pca model of trained data
     Mat trainbpca(200,2400,CV_32FC1);
-   fs["bpca"] >> trainbpca;
+  // fs["bpca"] >> trainbpca;
+	 fs["sobel_bpca"] >> trainbpca;
    fs.release();
 
     Mat afterPca ( 1, 200, CV_32FC1 );
@@ -32,7 +33,9 @@ float EyeStateDetector:: calculateEyeState ( Mat eye, FileStorage fs ) {
     //pca.project ( training_mat, afterPca ); // project eye image to pca space of training data
 	afterPca=training_mat*(trainbpca.t());
     CvSVM SVM;
-    SVM.load ( "eye_state_svm" ); //loading trained svm
+  //  SVM.load ( "eye_state_svm" ); //loading trained svm
+
+	SVM.load ( "eye_state_sobel_svm" ); //loading trained svm
 
     if ( SVM.predict ( afterPca ) == 0 ) {
         // cout << "open eye" << endl;
@@ -57,8 +60,36 @@ void EyeStateDetector:: processImage ( Mat image ) {
     equalizeHist ( image, image ); //histogram equalization
 
     blur ( image, image, Size ( 3, 3 ) ); //gaussian blur
-    Canny ( image, image, 50, 300, 3 );
+  //  Canny ( image, image, 50, 300, 3 );
 
+	//do sobel
+		int scale = 1;
+    int delta = 0;
+    int ddepth = CV_16S;
+
+    /// Gradient X
+	Mat grad_x,grad_y,abs_grad_x,abs_grad_y;
+    cv::Sobel( image, grad_x, ddepth, 1, 0, 3, scale, delta, cv::BORDER_DEFAULT );   
+    cv::convertScaleAbs( grad_x, abs_grad_x );
+    
+    /// Gradient Y  
+    cv::Sobel( image, grad_y, ddepth, 0, 1, 3, scale, delta, cv::BORDER_DEFAULT );   
+    cv::convertScaleAbs( grad_y, abs_grad_y );
+    
+    /// Total Gradient (approximate)
+    cv::addWeighted( abs_grad_x, 0.5, abs_grad_y, 0.5, 0, image );
+	 /*Scalar mu, sigma;
+meanStdDev(image, mu, sigma);*/
+
+double minVal; 
+        double maxVal; 
+        Point minLoc; 
+        Point maxLoc;
+		minMaxLoc( image, &minVal, &maxVal, &minLoc, &maxLoc );
+
+
+threshold(image,image, maxVal*0.4, 255, THRESH_BINARY);
+	//end sobel
 
     normalize ( image, image, 0, 255, NORM_MINMAX, CV_8UC1 ); // normalize to have 0-1
 
@@ -85,11 +116,12 @@ float EyeStateDetector::getPerclosScore(Mat eye,FileStorage fs) {
     float score = 0;
     scores[currentIndex] = calculateEyeState ( eye, fs );
 
-	if(scores[currentIndex]==0){
+	/*if(scores[currentIndex]==0){
 		score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] * 0.2 ;}
 	else score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.6 + scores[currentIndex] * 0.4 ;
     
-scores[currentIndex] = score;
+scores[currentIndex] = score;*/
 
-    return abs ( score );
+   // return abs ( score );
+	return abs ( scores[currentIndex] );
 }

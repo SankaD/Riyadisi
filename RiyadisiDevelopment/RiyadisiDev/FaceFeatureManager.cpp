@@ -2,7 +2,8 @@
 #include <time.h>
 
 FaceFeatureManager::FaceFeatureManager ( void ) {
-    fs = FileStorage ( "eye_state_bpca", FileStorage::READ );
+   // fs = FileStorage ( "eye_state_bpca", FileStorage::READ );
+	fs=FileStorage("eye_state_sobel_bpca",FileStorage::READ);
 
 }
 FaceFeatureManager::~FaceFeatureManager ( void ) {
