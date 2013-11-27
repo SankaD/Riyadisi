@@ -22,5 +22,4 @@ private:
 	ProfileFaceDetector profileFaceDetector;
 	vector<Rect> optimizeDetection ( vector<Rect> data );
 	Mat downsampleImage( Mat src, int factor );
-	int donwsampleConst;
 };

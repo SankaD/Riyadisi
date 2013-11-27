@@ -24,6 +24,9 @@ protected:
 
     /// Minimum and maximum possible object sizes.
     Size minSize, maxSize;
+
+	/// downsampling factor
+	int donwsampleConst;
 private:
     string cascadeName;
     CascadeClassifier cascade;

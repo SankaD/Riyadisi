@@ -8,6 +8,7 @@ ProfileFaceDetector::ProfileFaceDetector ( void ) :
 {
 	scale = 1.5;
 	minSize = Size(50, 50);
+	donwsampleConst = 4;
 }
 
 ProfileFaceDetector::~ProfileFaceDetector ( void )

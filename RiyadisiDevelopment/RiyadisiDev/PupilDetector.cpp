@@ -57,7 +57,7 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
 
     // temp code -- start
     Rect borders = getExactEyeBorders ( eye );
-    cout << borders.x << " " << borders.y << " " << borders.width << " " << borders.height << endl;
+    //cout << borders.x << " " << borders.y << " " << borders.width << " " << borders.height << endl;
 
     // temp code -- finish
 

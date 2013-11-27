@@ -65,10 +65,10 @@ void MainProgram::run() {
                 faceRoi.width = faceRoi.width * 2;
                 faceRoi.height = faceRoi.height * 2;
 
-                if ( faceRoi.width > grayFrame.cols ) {
+                if ( (faceRoi.x + faceRoi.width) > grayFrame.cols ) {
                     faceRoi.width = grayFrame.cols - faceRoi.x;
                 }
-                if ( faceRoi.height > grayFrame.rows ) {
+                if ( (faceRoi.y + faceRoi.height) > grayFrame.rows ) {
                     faceRoi.height = grayFrame.rows - faceRoi.y;
                 }
             } else {
@@ -108,8 +108,8 @@ void MainProgram::run() {
         }
 
         //calculate head orientation
-        if ( frameCount == 1 ) {
-            headRotationDetector.setStartPoints ( Point ( leftEye.x + leftEye.width / 2, leftEye.y + leftEye.height / 2 ), Point ( rightEye.x + rightEye.width / 2, rightEye.y + rightEye.height / 2 ), Point ( nose.x + nose.width / 2, nose.y + nose.height / 2 ) );
+        if ( frameCount < 20 ) {
+            headRotationDetector.updateGroundPosition ( faceFeature );
         }
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
@@ -159,9 +159,9 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
     //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 12.wmv" );
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 3.wmv" );
-
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 14.wmv" );
+	
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
@@ -214,7 +214,10 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     frameTimeText		<< "Frame Time        : " << frameTime;
     noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;
     yawningText			<< "Yawning Rate	  : " << yawningScore;
-    headRotationText	<< "Head Rotation	  : " << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+    headRotationText	<< "Head Rotation	  : " ;
+
+	if( headRotAngles.size() > 0 )
+		headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
 
     string drowsinessText	= "Drowsiness Level : ";
     string alertText		= "Alert the driver  : ";
