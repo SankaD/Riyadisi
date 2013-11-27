@@ -1,5 +1,4 @@
 #include "HeadRotationDetector.h"
-#include <opencv2\imgproc\imgproc.hpp>
 
 using namespace cv;
 using namespace std;
@@ -19,6 +18,13 @@ void HeadRotationDetector::updateGroundPosition ( FaceFeature *faceFeature )
 	Point p1( faceFeature->getLeftEye()->getCenterPoint().x, faceFeature->getLeftEye()->getCenterPoint().y );
 	Point p2( faceFeature->getRightEye()->getCenterPoint().x, faceFeature->getRightEye()->getCenterPoint().y );
 	Point p3( faceFeature->getNose()->getCenterPoint().x, faceFeature->getNose()->getCenterPoint().y );
+
+	p1.x += faceFeature->getFeatureRect().x;
+	p1.y += faceFeature->getFeatureRect().y;
+	p2.x += faceFeature->getFeatureRect().x;
+	p2.y += faceFeature->getFeatureRect().y;
+	p3.x += faceFeature->getFeatureRect().x;
+	p3.y += faceFeature->getFeatureRect().y;
 	
 	pl.x += ( p1.x - pl.x ) * 0.2;
 	pl.y += ( p1.y - pl.y ) * 0.2;
@@ -41,6 +47,29 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 	fl = faceFeature->getLeftEye()->getCenterPoint();
 	fr = faceFeature->getRightEye()->getCenterPoint();
 	fn = faceFeature->getNose()->getCenterPoint();
+
+	fl.x += faceFeature->getFeatureRect().x;
+	fl.y += faceFeature->getFeatureRect().y;
+	fr.x += faceFeature->getFeatureRect().x;
+	fr.y += faceFeature->getFeatureRect().y;
+	fn.x += faceFeature->getFeatureRect().x;
+	fn.y += faceFeature->getFeatureRect().y;
+
+	float d = sqrt( pow(float(pr.x - pl.x),2) + pow(float(pr.y - pl.y),2) )/ (pr.x - pl.x ); 
+
+	fl.x *= d;
+	fl.y *= d;
+	fr.x *= d;
+	fr.y *= d;
+	fn.x *= d;
+	fn.y *= d;
+
+	pl.x *= d;
+	pl.y *= d;
+	pr.x *= d;
+	pr.y *= d;
+	pn.x *= d;
+	pn.y *= d;
 	
 	
 	minE=1E+27;
@@ -184,3 +213,4 @@ float HeadRotationDetector::calcError( float theta, float phi, float shi)
 
 	return E;
 }
+
