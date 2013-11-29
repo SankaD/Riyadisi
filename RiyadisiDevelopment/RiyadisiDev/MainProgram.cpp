@@ -120,7 +120,6 @@ void MainProgram::run() {
         leftPupil = faceFeature->getRelativePoint ( leftPupil );
         rightPupil = faceFeature->getRelativePoint ( rightPupil );
 
-        //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
         if ( faceFeature->isAvailable() ) {
             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );

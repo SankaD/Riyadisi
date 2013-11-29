@@ -1405,3 +1405,9 @@
       Nodding off level  0.6
       Nodding off level  0.6
       Nodding off level  0.566667
+      Nodding off level  0.566667
+      Nodding off level  0.6
+      Nodding off level  0.5
+      Nodding off level  0.5
+      Nodding off level  0.6
+      Nodding off level  0.566667
