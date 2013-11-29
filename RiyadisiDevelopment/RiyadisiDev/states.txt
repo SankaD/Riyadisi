@@ -493,3 +493,7 @@
 1001010100      Nodding off level0.6
 1000010000      Nodding off level0.8
 1010100000      Nodding off level0.7
+1000000100      Nodding off level0.8
+1001010100      Nodding off level0.6
+1010001000      Nodding off level0.7
+1010100100      Nodding off level0.6
