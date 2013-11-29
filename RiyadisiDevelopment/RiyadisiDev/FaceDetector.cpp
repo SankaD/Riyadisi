@@ -3,18 +3,14 @@
 Rect FaceDetector::detect ( Mat frame )
 {
     vector<Rect> features;
-	
-	// downsampling for increased performance
-	donwsampleConst = 4;
-	Mat downsampledImage = downsampleImage( frame.clone(), donwsampleConst );
-	
-	features = fontalFaceDetector.detect( downsampledImage );
+
+	features = fontalFaceDetector.detect( frame );
 	if( features.size() == 0 ) {
-		features = profileFaceDetector.detect( downsampledImage );
+		features = profileFaceDetector.detect( frame );
 	}
 	if( features.size() == 0 ) {
 		Mat flippedFrame = Mat::zeros( frame.size(), frame.type() );
-		flip( downsampledImage, flippedFrame, 1);
+		flip( frame, flippedFrame, 1);
 		features = profileFaceDetector.detect( flippedFrame );
 
 		for(int i=0; i<features.size(); i++) {
@@ -66,13 +62,6 @@ vector<Rect> FaceDetector::optimizeDetection ( vector<Rect> data )
 						temp = data[j];
 			}
 		}
-
-		// rescaling into the original size
-        temp.x *= donwsampleConst ;
-        temp.y *= donwsampleConst ;
-        temp.height *= donwsampleConst;
-        temp.width *= donwsampleConst;
-
 		optimizedResults.push_back( temp );
 	}
 
@@ -93,7 +82,7 @@ Mat FaceDetector::downsampleImage( Mat src, int factor )
 
 FaceDetector::FaceDetector ( void )
 {
-	donwsampleConst = 1;
+	
 }
 
 FaceDetector::~FaceDetector ( void )

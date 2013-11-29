@@ -6,9 +6,9 @@ using namespace cv;
 
 RightEyeDetector::RightEyeDetector () :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_righteye.xml" ) {
-    scale = 1.01;
+    scale = 1.1;
     minSize = Size ( 30, 30 );
-    //downsampling??
+    donwsampleConst = 2;
 }
 
 vector<Rect> RightEyeDetector::optimizeDetection ( vector<Rect> data ) {

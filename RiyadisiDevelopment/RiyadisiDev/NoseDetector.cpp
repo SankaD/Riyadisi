@@ -7,6 +7,7 @@ NoseDetector::NoseDetector ( void ) :
 {
 	scale = 1.25;
     minSize = Size ( 30,  30 );
+	donwsampleConst = 2;
 }
 
 NoseDetector::~NoseDetector()

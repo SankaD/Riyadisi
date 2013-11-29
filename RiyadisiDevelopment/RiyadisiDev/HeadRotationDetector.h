@@ -16,10 +16,13 @@ class HeadRotationDetector {
 private:
 	Point pl, pr, pn;
 	Point fl, fr, fn;
+	vector<Point> list_l, list_r, list_n;
 	float radian( float angle );
+	float calcError( float theta, float phi, float shi);
+
 public:
     HeadRotationDetector ( void );
     ~HeadRotationDetector ( void );
     vector<float> calculateRotation ( FaceFeature *faceFeature );
-	void setStartPoints ( Point p1, Point p2, Point p3 );
+	void updateGroundPosition ( FaceFeature *faceFeature );
 };

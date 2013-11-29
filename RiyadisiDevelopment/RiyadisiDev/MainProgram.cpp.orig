@@ -159,10 +159,15 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
     //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+<<<<<<< HEAD
     imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 14.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 14.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Final/Video 3.wmv" );
 	
+=======
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 12.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 14.wmv" );
+
+>>>>>>> e3387d2f8930c543ea93ec07c9a7a18daa0fc606
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
