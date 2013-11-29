@@ -53,7 +53,8 @@ private:
 
     // declaration of sensory information
     vector<float> headRotAngles;
-    float gazeScore, percloseScore, noddingOffLevel, yawningScore;
+    float percloseScore, noddingOffLevel, yawningScore;
+    DirectedGaze gazeScore;
     bool alertStatus;
 
 

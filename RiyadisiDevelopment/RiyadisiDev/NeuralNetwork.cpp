@@ -59,20 +59,21 @@ void NeuralNetwork::resetNetwork() {
     throw exception ( "Not implemented yet" );
 }
 bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMeasure,
-                                    double gazeMeasure, vector<float> headRotationMeasure,
+                                    DirectedGaze gazeMeasure, vector<float> headRotationMeasure,
                                     double yawningMeasure ) {
     if ( isTraining ) {
         throw exception ( "Unsupported mode" );
     }
     try {
-        fann_type input[7], output;
+        fann_type input[8], output;
         input[0] = weightedPerclose;
         input[1] = noddingOffMeasure;
-        input[2] = gazeMeasure;
-        input[3] = yawningMeasure;
-        input[4] = headRotationMeasure[0];
-        input[5] = headRotationMeasure[1];
-        input[6] = headRotationMeasure[2];
+        input[2] = gazeMeasure.horizontal;
+        input[3] = gazeMeasure.vertical;
+        input[4] = yawningMeasure;
+        input[5] = headRotationMeasure[0];
+        input[6] = headRotationMeasure[1];
+        input[7] = headRotationMeasure[2];
         output = * ( network.run ( input ) );
 
         return ( output > 0.5 );

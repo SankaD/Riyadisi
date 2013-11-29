@@ -32,7 +32,8 @@ private:
     YawningDetector yawningDetector;
     HeadRotationDetector headRotationDetector;
 
-    float gazeScore , percloseScore , noddingOffLevel , yawningScore ;
+    float percloseScore , noddingOffLevel , yawningScore ;
+    DirectedGaze gazeScore;
     vector<float> headRotAngles;
     bool alertStatus;
 };

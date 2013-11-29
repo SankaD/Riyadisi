@@ -37,7 +37,7 @@ bool DecisionEngine::trainEngine ( string filename ) {
         Log::log ( ex.what()  );
     }
 }
-bool DecisionEngine::shouldAlert ( double eyeState, double noddingOff, double gaze, vector<float> headRotation, double yawning ) {
+bool DecisionEngine::shouldAlert ( double eyeState, double noddingOff, DirectedGaze gaze, vector<float> headRotation, double yawning ) {
     return network.getAlertValue ( eyeState, noddingOff, gaze, headRotation, yawning );
 }
 DecisionEngine::~DecisionEngine() {

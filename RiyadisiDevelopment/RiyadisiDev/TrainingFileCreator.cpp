@@ -11,12 +11,13 @@ TrainingFileCreator::~TrainingFileCreator ( void ) {
 
 void TrainingFileCreator::trainUsingFile ( string fileName ) {
     try {
-        int fileCount = 0;
+        int fileCount ;
         ifstream listFileStream ( fileName );
 
         if ( listFileStream.is_open() ) {
             // get the file count from the top of the file
             listFileStream >> fileCount;
+            //fileCount << listFileStream;
 
             string videoFileName = "";
             //train using the video files list known from the provided file
@@ -25,7 +26,9 @@ void TrainingFileCreator::trainUsingFile ( string fileName ) {
                 listFileStream >> videoFileName;
                 try {
                     Log::log ( "Using file : " + videoFileName );
-                    trainUsingVideo ( videoFileName, i + ".data" );
+                    stringstream stringStream;
+                    stringStream << "data/data/" << i << ".data";
+                    trainUsingVideo ( videoFileName, stringStream.str() );
                 } catch ( exception ex ) {
                     Log::log ( ex.what()  );
                 }
@@ -143,8 +146,8 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         }
 
         //calculate head orientation
-        if ( imageManager.getFrameNumber() == 1 ) {
-            headRotationDetector.setStartPoints ( Point ( leftEye.x + leftEye.width / 2, leftEye.y + leftEye.height / 2 ), Point ( rightEye.x + rightEye.width / 2, rightEye.y + rightEye.height / 2 ), Point ( nose.x + nose.width / 2, nose.y + nose.height / 2 ) );
+        if ( imageManager.getFrameNumber() < 20 ) {
+            headRotationDetector.updateGroundPosition ( faceFeature );
         }
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
@@ -178,7 +181,8 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
 
         outputFile << percloseScore << " "
                    << noddingOffLevel << " "
-                   << gazeScore << " "
+                   << gazeScore.horizontal << " "
+                   << gazeScore.vertical << " "
                    << yawningScore << " "
                    << headRotAngles[0] << " "
                    << headRotAngles[1] << " "
@@ -204,7 +208,7 @@ void TrainingFileCreator::drawTexts ( Mat &frame, long int ticksForFrame ) {
     ostringstream yawningText;
     ostringstream headRotationText;
 
-    distractedText		<< "Gaze Level        : " << gazeScore;
+    distractedText		<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
     perclosText			<< "perclos Level     : " << percloseScore;
     frameTimeText		<< "Frame Time        : " << imageManager.getFrameNumber();
     noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;

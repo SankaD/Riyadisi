@@ -35,3 +35,6 @@ bool ImageManager::isVideoEnded() {
 int ImageManager::getFrameNumber() {
     return capture.get ( CV_CAP_PROP_POS_FRAMES );
 }
+int ImageManager::getVideoFrameLength() {
+    return capture.get ( CV_CAP_PROP_FRAME_COUNT );
+}
