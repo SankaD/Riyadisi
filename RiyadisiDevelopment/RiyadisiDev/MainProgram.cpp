@@ -15,6 +15,10 @@ void MainProgram::run() {
     while ( true ) {
 		//if(frameCount == 100) imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );;
         frame = imageManager.acquireImage ( frame );
+
+        if ( imageManager.isVideoEnded() ) {
+            return;
+        }
 		frameCount++;
 		        
         ticksForFrame =  getTickCount() - ticks;
@@ -66,10 +70,10 @@ void MainProgram::run() {
                 faceRoi.width = faceRoi.width * 2;
                 faceRoi.height = faceRoi.height * 2;
 
-                if ( (faceRoi.x + faceRoi.width) > grayFrame.cols ) {
+                if ( ( faceRoi.x + faceRoi.width ) > grayFrame.cols ) {
                     faceRoi.width = grayFrame.cols - faceRoi.x;
                 }
-                if ( (faceRoi.y + faceRoi.height) > grayFrame.rows ) {
+                if ( ( faceRoi.y + faceRoi.height ) > grayFrame.rows ) {
                     faceRoi.height = grayFrame.rows - faceRoi.y;
                 }
             } else {
@@ -87,20 +91,11 @@ void MainProgram::run() {
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        double noddingOffLevel = 0.0;
-        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
-        //cout<<  "----------------------------------Nodding off level = "<< noddingOffLevel <<endl;
+        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature ) * 10;
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
 
-        //   int frameNum = frameCount % 6;
-
-        /*if ( frameNum == 0 ) {
-            featureManager.perclos /= 30;
-            percloseScore = featureManager.perclos;
-            featureManager.perclos = 0;
-        }*/
         percloseScore = featureManager.perclos;
 
         //calculate yawning frequency
@@ -126,7 +121,6 @@ void MainProgram::run() {
         leftPupil = faceFeature->getRelativePoint ( leftPupil );
         rightPupil = faceFeature->getRelativePoint ( rightPupil );
 
-        //rectangle ( frame, nose , Scalar ( 0, 255, 255 ) );
         if ( faceFeature->isAvailable() ) {
             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
@@ -141,12 +135,8 @@ void MainProgram::run() {
             if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
-            /*if ( faceFeature->getLeftEye()->getPupil()->isAvailable()
-                    && faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                line ( frame, leftPupil, rightPupil, Scalar ( 255, 255, 255 ) );
-            }*/
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, 0, gazeScore, 0, 0 );
+        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
@@ -159,20 +149,23 @@ void MainProgram::run() {
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+
     imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/test3_edit.wmv" );
     //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 17.wmv" );
 	//imageManager = ImageManager ( ImageSourceType::Camera, "", 0 );
-	
+
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
 
-    gazeScore = 0;
+    gazeScore.horizontal = 0;
+    gazeScore.vertical = 0;
     percloseScore = 0;
     noddingOffLevel = 0;
     yawningScore = 0;
     alertStatus = false;
+
+    cout << "Length of Video = " << imageManager.getVideoFrameLength() << endl;
 }
 void MainProgram::processImage() {
     // processing the image
@@ -192,17 +185,17 @@ void MainProgram::trainingRun() {
         } else {
             decisionEngine.trainEngine ();
         }
-    } catch ( exception e ) {
-        Log::log ( e.what() );
+    } catch ( exception ex ) {
+        Log::log ( ex.what() ) ;
     }
     Log::log ( "Training ended" );
 }
 void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
     CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
-    CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
+    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 0, 0, 0 ), 200 );
 
-    ostringstream distractedText ;
+    ostringstream gazeText ;
     ostringstream perclosText ;
     ostringstream frameTimeText;
     ostringstream noddingOffText;
@@ -211,17 +204,19 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
 
     frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
 
-    distractedText		<< "Gaze Level        : " << gazeScore;
+    gazeText			<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
     perclosText			<< "perclos Level     : " << percloseScore;
     frameTimeText		<< "Frame Time        : " << frameTime;
     noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;
     yawningText			<< "Yawning Rate	  : " << yawningScore;
-    headRotationText	<< "Head Rotation	  : " ;
+    headRotationText	<< "Head Rotation     : " ;
 
-	if( headRotAngles.size() > 0 )
-		headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+    if ( headRotAngles.size() > 0 ) {
+        headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+    }
 
-    string drowsinessText	= "Drowsiness Level : ";
+    string drowsinessText	= ":: Drowsiness Measures  ::";
+    string distractionText =  ":: Distraction Measures ::";
     string alertText		= "Alert the driver  : ";
 
     if ( alertStatus ) {
@@ -229,12 +224,29 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     } else {
         alertText += "No";
     }
-    addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
-    addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
+
+    addText ( frame, drowsinessText, Point ( 10, 10 ), fontYellow );
+    addText ( frame, perclosText.str(), Point ( 10, 30 ), fontYellow );
     addText ( frame, noddingOffText.str(), Point ( 10, 50 ), fontYellow );
-    addText ( frame, perclosText.str(), Point ( 10, 70 ), fontYellow );
-    addText ( frame, headRotationText.str(), Point ( 10, 90 ), fontYellow );
-    addText ( frame, yawningText.str(), Point ( 10, 110 ), fontYellow );
+    addText ( frame, yawningText.str(), Point ( 10, 70 ), fontYellow );
+
+    addText ( frame, distractionText, Point ( 10, 100 ), fontYellow );
+    addText ( frame, gazeText.str(), Point ( 10, 120 ), fontYellow );
+    addText ( frame, headRotationText.str(), Point ( 10, 140 ), fontYellow );
+
+
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
-    addText ( frame, alertText, Point ( 10, 140 ), fontAlert );
+    addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
+}
+void MainProgram::createTrainingFile() {
+    try {
+        Log::log ( "Program started" );
+        TrainingFileCreator creator;
+
+        creator.trainUsingFile ( "Testing/filelist.txt" );
+
+    } catch ( exception ex ) {
+        Log::log ( ex.what() );
+    }
+    Log::log ( "Program ended" );
 }

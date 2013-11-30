@@ -20,8 +20,8 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
                 network.create_from_file ( neuralDataFilename );
             }
         }
-    } catch ( exception e ) {
-        Log::log ( e.what() );
+    } catch ( exception ex ) {
+        Log::log (  ex.what() );
     }
 }
 NeuralNetwork::~NeuralNetwork() {
@@ -40,7 +40,7 @@ void NeuralNetwork::trainNetwork ( string fileName ) {
         network.train_on_file ( fileName, maxEpochs, epochsBetweenReports, desiredError );
         network.save ( neuralDataFilename );
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log (  ex.what() );
     }
 }
 void NeuralNetwork::save() {
@@ -51,7 +51,7 @@ void NeuralNetwork::save() {
     try {
         network.save ( neuralDataFilename );
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log ( ex.what()  );
     }
 }
 
@@ -59,23 +59,25 @@ void NeuralNetwork::resetNetwork() {
     throw exception ( "Not implemented yet" );
 }
 bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMeasure,
-                                    double gazeMeasure, double headRotationMeasure,
+                                    DirectedGaze gazeMeasure, vector<float> headRotationMeasure,
                                     double yawningMeasure ) {
     if ( isTraining ) {
         throw exception ( "Unsupported mode" );
     }
     try {
-        fann_type input[5], output;
+        fann_type input[8], output;
         input[0] = weightedPerclose;
         input[1] = noddingOffMeasure;
-        input[2] = gazeMeasure;
-        input[3] = headRotationMeasure;
+        input[2] = gazeMeasure.horizontal;
+        input[3] = gazeMeasure.vertical;
         input[4] = yawningMeasure;
-
+        input[5] = headRotationMeasure[0];
+        input[6] = headRotationMeasure[1];
+        input[7] = headRotationMeasure[2];
         output = * ( network.run ( input ) );
 
         return ( output > 0.5 );
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log (  ex.what() );
     }
 }

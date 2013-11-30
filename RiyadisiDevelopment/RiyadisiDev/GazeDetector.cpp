@@ -7,7 +7,8 @@ using namespace std;
 
 GazeDetector::GazeDetector ( void ) {
     for ( int i = 0; i < FEATURE_ARRAY_LENGTH; i++ ) {
-        scores[i] = 0;
+        scores[i].horizontal = 0;
+        scores[i].vertical = 0;
     }
     defaultLeftRatio = 0.5;
     defaultRightRatio = 0.5;
@@ -31,59 +32,76 @@ Gaze GazeDetector::detectGaze ( FaceFeature faceFeature ) {
 
     return gaze;
 }
-float GazeDetector::calculateScore ( Gaze gaze ) {
-    float score = 0;
+DirectedGaze GazeDetector::calculateScore ( Gaze gaze ) {
+    double hScore = 0, vScore = 0;
+    DirectedGaze directedGaze ;
+
+
+
     if ( gaze.isAvailable() ) {
-        float leftEyeScore, rightEyeScore;
+        double leftEyeScore, rightEyeScore;
+        double leftEyeHScore, rightEyeHScore;
 
         leftEyeScore = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l' );
         rightEyeScore = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil() , 'r' );
 
+        leftEyeHScore = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l', 'v' );
+        rightEyeHScore = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil(), 'r', 'v' );
+
+        vScore = ( leftEyeHScore > rightEyeHScore ) ? leftEyeHScore : rightEyeHScore;
+
         // need a method which would compensate when a measure from one eye is not available.
-        score = ( ( ( leftEyeScore > 0 ) ? leftEyeScore : ( -1 * leftEyeScore ) )
-                  > ( ( rightEyeScore > 0 ) ? rightEyeScore : ( -1 * rightEyeScore ) ) )
-                ? leftEyeScore : rightEyeScore;
+        hScore = ( ( ( leftEyeScore > 0 ) ? leftEyeScore : ( -1 * leftEyeScore ) )
+                   > ( ( rightEyeScore > 0 ) ? rightEyeScore : ( -1 * rightEyeScore ) ) )
+                 ? leftEyeScore : rightEyeScore;
     }
-    //cout << " Score : " << score << endl;
-    return score;
+
+    directedGaze.horizontal = hScore;
+    directedGaze.vertical = vScore;
+
+    return directedGaze;
 }
-float GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSide ) {
-    float horizontalScore = 0, verticalScore = 0;
-    float score = 0;
+double GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSide, char direction ) {
+    double horizontalScore = 0, verticalScore = 0;
+    double score = 0;
 
     if ( eye.width != 0 ) {
-        if ( eyeSide == 'l' ) {
-            horizontalScore =   pupil.x / eye.width - defaultLeftRatio;
-        } else if ( eyeSide == 'r' ) {
-            horizontalScore =  pupil.x / eye.width - defaultRightRatio;
+        if ( direction == 'h' ) {
+            if ( eyeSide == 'l' ) {
+                score =   ( pupil.x / eye.width ) - defaultLeftRatio;
+            } else if ( eyeSide == 'r' ) {
+                score =  ( pupil.x / eye.width ) - defaultRightRatio;
+            }
+        } else if ( direction == 'v' ) {
+            score = ( pupil.y / eye.height ) - defaultTopRatio;
         }
-
-        if ( eye.height > 0 ) {
-            verticalScore = pupil.y / eye.height - defaultTopRatio;
-        }
-        score = horizontalScore  +  verticalScore;
     }
     score *= 100;
 
     return score;
 }
 
-float GazeDetector::getDistractionScore() {
-    float distractedAmount;
+DirectedGaze GazeDetector::getDistractionScore() {
+    double distractedAmount;
 
-    float score = 0;
+    double score = 0;
+    DirectedGaze gaze;
+    double hScore = 0, vScore = 0;
     scores[currentIndex] = calculateScore ( getGaze ( 0 ) );
 
-    score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] * 0.2 ;
-    scores[currentIndex] = score;
+    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.5
+             + scores[currentIndex].horizontal * 0.5 ;
+    vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.5
+             + scores[currentIndex].vertical * 0.5 ;
+    scores[currentIndex].horizontal = hScore;
+    scores[currentIndex].vertical = vScore;
 
-    return abs ( score );
+    gaze.horizontal = hScore;
+    gaze.vertical = vScore;
+
+    return gaze;
 }
 Gaze GazeDetector::getGaze ( int gazeFromCurrent ) {
-    // Gaze gaze;
-    /*if  ( gazeFromCurrent > size ) {
-        return gaze;
-    }*/
     return gazeArray[ ( currentIndex - gazeFromCurrent + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH];
 }
 void GazeDetector::setCurrentGaze ( Gaze gaze ) {
