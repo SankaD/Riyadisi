@@ -5,41 +5,54 @@ Rect FaceDetector::detect ( Mat frame )
     vector<Rect> features;
 
 	features = fontalFaceDetector.detect( frame );
-	if( features.size() == 0 ) {
+	if( features.size() == 0 ) 
+	{
 		features = profileFaceDetector.detect( frame );
 	}
-	if( features.size() == 0 ) {
+	if( features.size() == 0 ) 
+	{
 		Mat flippedFrame = Mat::zeros( frame.size(), frame.type() );
 		flip( frame, flippedFrame, 1);
 		features = profileFaceDetector.detect( flippedFrame );
 
-		for(int i=0; i<features.size(); i++) {
+		for(int i=0; i<features.size(); i++) 
+		{
 			features[i].x = frame.cols - ( features[i].x + features[i].width );
 		}
 	}
-	/*if( features.size() == 0 ) {
+	if( features.size() == 0 ) 
+	{
 		Mat rotatedFrame = Mat::zeros( frame.size(), frame.type() );
 		int angle = -60;
 
-		while( angle < 90 ){
-			if( angle == 0 ) {
+		do 
+		{
+			if( angle == 0 ) 
+			{
 				angle += 30;
 				continue;
 			}
 
 			Point center( frame.cols/2, frame.rows/2 );
 			Mat rotM = getRotationMatrix2D( center, angle, 1.0 );
-			wrapAffine( frame, rotatedFrame, rotM, frame.size() );
-
-			features = profileFaceDetector.detect( rotatedFrame );
-			for(int i=0; i<features.size(); i++) {
+			cv::warpAffine( frame, rotatedFrame, rotM, frame.size() );
+			
+			features = fontalFaceDetector.detect( rotatedFrame );
+			for(int i=0; i<features.size(); i++) 
+			{
 				features[i].x = rotM.at<double>(0,0)*features[i].x + rotM.at<double>(0,1)*features[i].y + rotM.at<double>(0,2);
 				features[i].y = rotM.at<double>(1,0)*features[i].x + rotM.at<double>(1,1)*features[i].y + rotM.at<double>(1,2);           
 			} 
 			angle += 30;
-		}
-	}*/
 
+		} while ( angle < 90 && features.size() == 0 );
+
+		if(features.size() > 0 ){
+			rectangle(rotatedFrame, features[0], Scalar(0,255,0), 1,8);
+			imshow("rot_test", rotatedFrame);
+		}
+	}
+	
 	return optimizeDetection( features )[0];
 }
 
@@ -49,15 +62,19 @@ vector<Rect> FaceDetector::optimizeDetection ( vector<Rect> data )
 	vector<Point> centerPoints;
 	Rect temp;
 
-	for(int i=0; i<data.size(); i++) {
+	for(int i=0; i<data.size(); i++) 
+	{
 		centerPoints.push_back(Point( (data[i].x + data[i].width/2), (data[i].y + data[i].height/2) ));
 	}
 
-	for(int i=0; i<data.size(); i++) {
+	for(int i=0; i<data.size(); i++) 
+	{
 		temp = data[i];
-		for(int j=0; j<centerPoints.size(); j++) {
+		for(int j=0; j<centerPoints.size(); j++) 
+		{
 			if( data[i].x < centerPoints[j].x && (data[i].x + data[i].width ) > centerPoints[j].x ||
-				data[i].y < centerPoints[j].y && (data[i].y + data[i].height ) > centerPoints[j].y ) {
+				data[i].y < centerPoints[j].y && (data[i].y + data[i].height ) > centerPoints[j].y ) 
+			{
 					if( data[j].area() < temp.area() )
 						temp = data[j];
 			}
@@ -73,7 +90,8 @@ vector<Rect> FaceDetector::optimizeDetection ( vector<Rect> data )
 
 Mat FaceDetector::downsampleImage( Mat src, int factor ) 
 {
-	for ( int i = 0; i < factor / 2; i++ ) {
+	for ( int i = 0; i < factor / 2; i++ ) 
+	{
         pyrDown ( src, src, Size ( ( src.cols  ) / 2, ( src.rows  ) / 2 ) );
     }
 

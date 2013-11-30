@@ -9,13 +9,14 @@ void MainProgram::run() {
     Log::log ( "Program started" );
     firstRun = true;
     frameCount = 0;
-
+	
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
+		//if(frameCount == 100) imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );;
         frame = imageManager.acquireImage ( frame );
-        frameCount++;
-
+		frameCount++;
+		        
         ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
@@ -151,7 +152,7 @@ void MainProgram::run() {
 
         drawTexts ( frame, ticksForFrame );
 
-        imshow ( "image", frame );
+		imshow ( "image", grayFrame );
     }
     Log::log ( "Program ended" );
 }
@@ -159,8 +160,9 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
     //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 14.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/test3_edit.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 17.wmv" );
+	//imageManager = ImageManager ( ImageSourceType::Camera, "", 0 );
 	
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );

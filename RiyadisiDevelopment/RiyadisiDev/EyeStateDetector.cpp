@@ -110,18 +110,30 @@ threshold(image,image, maxVal*0.4, 255, THRESH_BINARY);
 
 }
 
-float EyeStateDetector::getPerclosScore(Mat eye,FileStorage fs) {
-    
+float EyeStateDetector::getPerclosScore( FaceFeature *faceFeature, String eyeType, FileStorage fs) 
+{
+	Mat eye;
+	double eyestate=0;
+	if( eyeType == "left" ) eye = faceFeature->getImage()( faceFeature->getLeftEye()->getFeatureRect() );
+	else eye = faceFeature->getImage()( faceFeature->getRightEye()->getFeatureRect() );
+
 	currentIndex = ( currentIndex + 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH;
     float score = 0;
-    scores[currentIndex] = calculateEyeState ( eye, fs );
-
+    
+	eyestate= calculateEyeState ( eye, fs );
+	
+	scores[currentIndex] =eyestate;
 	if(scores[currentIndex]==0){
 		score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8 + scores[currentIndex] * 0.2 ;}
 	else score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.6 + scores[currentIndex] * 0.4 ;
     
-scores[currentIndex] = score;
+	scores[currentIndex] = score;
+
+	if( eyeType == "left" )
+		faceFeature->getLeftEye()->setEyeState( (eyestate == 0.0)? EyeState::OPEN: EyeState::CLOSE );
+	else
+		faceFeature->getRightEye()->setEyeState( (eyestate == 0.0)? EyeState::OPEN: EyeState::CLOSE );
 
     return abs ( score );
-//	return abs ( scores[currentIndex] );
+	//return abs ( scores[currentIndex] );
 }

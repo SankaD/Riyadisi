@@ -30,7 +30,7 @@ vector<vector<Point>> MouthDetector::getContourMap( Mat image) {
 	erode ( image, image, erodeElement );
     dilate( image, image, dilateElement );
 	
-	imshow ( "transformed image", image );
+	//imshow ( "transformed image", image );
 
 	Canny ( image, image, lowerThreshold, upperThreshold, 3, true );
     findContours ( image, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
