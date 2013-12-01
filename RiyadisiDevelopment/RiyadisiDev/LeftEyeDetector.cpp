@@ -6,11 +6,10 @@ using namespace cv;
 
 LeftEyeDetector::LeftEyeDetector (  ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" ) {
-    scale = 1.1;
+    scale = 1.01;
     minSize = Size ( 30,  30 );
     donwsampleConst = 2;
 }
-
 
 vector<Rect> LeftEyeDetector::optimizeDetection ( vector<Rect> data ) {
     vector<Rect> optimizedResults;

@@ -6,7 +6,7 @@ using namespace cv;
 
 RightEyeDetector::RightEyeDetector () :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_righteye.xml" ) {
-    scale = 1.1;
+    scale = 1.01;
     minSize = Size ( 30, 30 );
     donwsampleConst = 2;
 }

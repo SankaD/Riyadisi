@@ -48,7 +48,6 @@ Rect EyeDetector::optimizeDetection ( vector<Rect> data ) {
 
 EyeDetector::EyeDetector ( void ) {
 
-    //dataFile.open ("Testing/Images/eye_testing/cum_sum.txt");
 }
 
 EyeDetector::~EyeDetector ( void ) {

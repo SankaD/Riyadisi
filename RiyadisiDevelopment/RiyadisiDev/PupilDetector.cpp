@@ -36,8 +36,8 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
 
         minEnclosingCircle ( contours[i], centerTemp, radiusTemp );
         if ( area > maxArea
-                && centerTemp.y < eyeTemp.rows * 0.75
-                && centerTemp.y > eyeTemp.rows * 0.25 ) {
+                && centerTemp.y < eyeTemp.rows * 1.0
+                && centerTemp.y > eyeTemp.rows * 0.0 ) {
             maxAreaIndex = i;
             maxArea = area;
         }
