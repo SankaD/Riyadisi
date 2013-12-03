@@ -47,10 +47,10 @@ Rect FaceDetector::detect ( Mat frame )
 
 		} while ( angle < 90 && features.size() == 0 );
 
-		if(features.size() > 0 ){
+		/*if(features.size() > 0 ){
 			rectangle(rotatedFrame, features[0], Scalar(0,255,0), 1,8);
 			imshow("rot_test", rotatedFrame);
-		}
+		}*/
 	}
 	
 	return optimizeDetection( features )[0];

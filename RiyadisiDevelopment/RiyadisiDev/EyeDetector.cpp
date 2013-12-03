@@ -43,7 +43,7 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
 	}
 	if(rightEye.area() == 0)
 	{
-		rightEyeROI.x = faceImage.cols / 2;
+		rightEyeROI.x = 0;
 		rightEyeROI.y = faceImage.rows / 4;
 		rightEyeROI.width = faceImage.cols;
 		rightEyeROI.height = faceImage.rows / 4;
@@ -53,8 +53,8 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
     rightEye.x += rightEyeROI.x;
     rightEye.y += rightEyeROI.y;
 
-	if(! (leftEye.x + leftEye.width/2) < rightEye.x && (leftEye.x + leftEye.width/2) > (rightEye.x + rightEye.width) &&
-		(leftEye.y + leftEye.height/2) < rightEye.y && (leftEye.y + leftEye.height/2) > (rightEye.y + rightEye.height) )
+	if ( ! ( (leftEye.x + leftEye.width/2) < rightEye.x && (leftEye.x + leftEye.width/2) > (rightEye.x + rightEye.width) &&
+		(leftEye.y + leftEye.height/2) < rightEye.y && (leftEye.y + leftEye.height/2) > (rightEye.y + rightEye.height) ) )
 		eyes.push_back( rightEye );
 
     return eyes;

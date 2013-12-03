@@ -13,8 +13,7 @@ void MainProgram::run() {
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
-		//if(frameCount == 100) imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );;
-        frame = imageManager.acquireImage ( frame );
+		frame = imageManager.acquireImage ( frame );
 
         if ( imageManager.isVideoEnded() ) {
             return;
@@ -136,13 +135,13 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        bool alert; //=  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );
 
-		imshow ( "image", grayFrame );
+		imshow ( "image", frame );
     }
     Log::log ( "Program ended" );
 }
@@ -150,7 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/test3_edit.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 13.wmv" );
     //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 17.wmv" );
 	//imageManager = ImageManager ( ImageSourceType::Camera, "", 0 );
 

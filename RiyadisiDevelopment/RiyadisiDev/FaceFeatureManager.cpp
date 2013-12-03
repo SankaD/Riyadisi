@@ -139,7 +139,12 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 			{
 				mouthROI.y = nose.y + nose.height;
 			}
+			//imshow ( "Mouth", faceImage ( mouthROI ) );
 
+			/*mouthROI.x = faceFeature->getLeftEye()->getFeatureRect().x;
+			mouthROI.width = faceFeature->getRightEye()->getFeatureRect().x+faceFeature->getRightEye()->getFeatureRect().width-faceFeature->getLeftEye()->getFeatureRect().x;
+			mouthROI.y = face.height *2/3;
+			mouthROI.height = face.height/3;*/
 			mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
 
             if ( mouth.area() > 0 ) {
