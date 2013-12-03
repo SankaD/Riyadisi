@@ -7,7 +7,7 @@ Log::Log() {
 
 string Log::filename = "log/log.log";
 ofstream Log::file = ofstream ( "" );
-
+LogStatus Log::currentStatus =   LogStatus::Verbose ;
 
 Log::~Log() {
     file.close();
