@@ -30,15 +30,15 @@ void TrainingFileCreator::trainUsingFile ( string fileName ) {
                     stringStream << "data/data/" << ( i + 1 ) << ".data";
                     trainUsingVideo ( videoFileName, stringStream.str() );
                 } catch ( exception ex ) {
-                    Log::log ( ex.what()  );
+                    Log::log ( LogStatus::Error, ex.what()  );
                 }
             }
             listFileStream.close();
         } else {
-            Log::log ( "File was not opened" );
+            Log::log ( LogStatus::Error, "File was not opened" );
         }
     } catch ( exception ex ) {
-        Log::log (  ex.what()  );
+        Log::log ( LogStatus::Error, ex.what()  );
     }
 }
 

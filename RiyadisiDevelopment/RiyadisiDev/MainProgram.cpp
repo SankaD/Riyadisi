@@ -183,7 +183,7 @@ void MainProgram::trainingRun() {
             decisionEngine.trainEngine ();
         }
     } catch ( exception ex ) {
-        Log::log ( ex.what() ) ;
+        Log::log ( LogStatus::Error, ex.what() ) ;
     }
     Log::log ( "Training ended" );
 }
@@ -243,7 +243,7 @@ void MainProgram::createTrainingFile() {
         creator.trainUsingFile ( "Testing/filelist.txt" );
 
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log ( LogStatus::Error, ex.what() );
     }
     Log::log ( "Program ended" );
 }
