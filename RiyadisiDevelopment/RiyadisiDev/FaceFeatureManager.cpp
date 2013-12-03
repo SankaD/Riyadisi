@@ -40,30 +40,31 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         vector<Rect> eyes;
         eyes = eyeDetector.detect ( faceImage );
         int temp;
+		double perclosr,perclosl;
         if ( eyes[0].area() > 0 ) {
             leftEye = eyes[0];
             faceFeature->getLeftEye()->setFeatureRect ( leftEye );
             faceFeature->getLeftEye()->setAvailable ( true );
-            perclos = eyeStateDetector.getPerclosScore ( faceImage ( leftEye ), fs );
+            perclosl = eyeStateDetector.getPerclosScore ( faceFeature, "left", fs );
 
-            preeyeState = perclos;
+            preeyeState = perclosl;
 
         } else {
-            perclos = preeyeState;
+            perclosl = preeyeState;
         }
 
-        if ( eyes[1].area() > 0 ) {
+        if ( eyes.size() > 1 ) {
             rightEye = eyes[1];
             faceFeature->getRightEye()->setFeatureRect ( rightEye );
             faceFeature->getRightEye()->setAvailable ( true );
-            perclos = eyeStateDetector.getPerclosScore ( faceImage ( rightEye ), fs );
+            perclosr = eyeStateDetector.getPerclosScore ( faceFeature, "right", fs );
 
-            preeyeState = perclos;
+            preeyeState = perclosr;
         } else {
-            perclos = preeyeState;
+            perclosr = preeyeState;
         }
 
-
+		perclos=max(perclosl,perclosr);
         //------------ handle the nose region
         Rect nose, noseROI;
         vector<Rect> noseResults;
@@ -76,8 +77,8 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             noseROI.y =  noseROI.height / 4;
             noseROI.width = noseROI.width / 2;
             noseROI.height = noseROI.height / 2;
-			
-            Mat noseImage = faceImage ( noseROI );
+
+			Mat noseImage = faceImage ( noseROI );
 			noseResults = noseDetector.detect ( noseImage );
 
             if ( noseResults.size() > 0 ) {
@@ -118,7 +119,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
                 minEnclosingCircle ( points, noseCenter, radius );
                 line ( tempNose, Point ( noseCenter.x, noseCenter.y + 5 ), Point ( noseCenter.x, noseCenter.y - 5 ), Scalar ( 255, 255, 0 ) );
 
-                imshow ( "Nose", tempNose );
+                //imshow ( "Nose", tempNose );
             }
         }
         
@@ -138,8 +139,13 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 			{
 				mouthROI.y = nose.y + nose.height;
 			}
+			//imshow ( "Mouth", faceImage ( mouthROI ) );
 
-            mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
+			/*mouthROI.x = faceFeature->getLeftEye()->getFeatureRect().x;
+			mouthROI.width = faceFeature->getRightEye()->getFeatureRect().x+faceFeature->getRightEye()->getFeatureRect().width-faceFeature->getLeftEye()->getFeatureRect().x;
+			mouthROI.y = face.height *2/3;
+			mouthROI.height = face.height/3;*/
+			mouth = mouthDetector.detect ( faceImage ( mouthROI ) );
 
             if ( mouth.area() > 0 ) {
                 mouth.x += mouthROI.x;
@@ -152,14 +158,14 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
 
         //------------ handler the pupil regions
-        if ( faceFeature->getRightEye()->isAvailable() ) {
+		if ( faceFeature->getRightEye()->isAvailable() && faceFeature->getRightEye()->isEyeOpen() ) {
             Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
             if ( pupil.getPupilLocation().getRadius() > 0 ) {
                 faceFeature->getRightEye()->getPupil()->setAvailable ( true );
                 faceFeature->getRightEye()->getPupil()->setCenterPoint ( pupil.getPupilLocation().getCenter() );
             }
         }
-        if ( faceFeature->getLeftEye()->isAvailable() ) {
+        if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isEyeOpen() ) {
             Pupil pupil = pupilDetector.detectPupil ( faceImage ( leftEye ) );
             if ( pupil.getPupilLocation().getRadius() > 0 ) {
                 faceFeature->getLeftEye()->getPupil()->setAvailable ( true );

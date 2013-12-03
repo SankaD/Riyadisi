@@ -21,6 +21,7 @@
 #include "RightEyeDetector.h"
 #include "FaceDetector.h"
 #include "FeatureCollection.h"
+#include "FaceFeature.h"
 
 using namespace cv;
 using namespace std;
@@ -32,14 +33,12 @@ private:
     int currentIndex;
 public :
 
-    float calculateEyeState(Mat eye,FileStorage fs);
-    void processImage(Mat image);
-	float getPerclosScore(Mat eye,FileStorage fs);
+    float calculateEyeState( Mat eye,FileStorage fs);
+    void processImage( Mat image);
+	float getPerclosScore( FaceFeature *faceFeature, String eyeType, FileStorage fs);
 
 	EyeStateDetector ( void );
     ~EyeStateDetector ( void );
-
-	
 
 };
 

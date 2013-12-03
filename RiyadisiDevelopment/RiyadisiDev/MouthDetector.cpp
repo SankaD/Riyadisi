@@ -23,13 +23,14 @@ vector<vector<Point>> MouthDetector::getContourMap ( Mat image ) {
     float cannyRatio = 3;
     vector<vector<Point>> contours;
 
-    binaryThresold = calculateThreshold ( image );
+	binaryThresold = calculateThreshold ( image );
     threshold ( image, image, binaryThresold, 255, THRESH_BINARY );
     //adaptiveThreshold(image, image, 255, ADAPTIVE_THRESH_MEAN_C, THRESH_BINARY, 3, 0);
-
-    erode ( image, image, erodeElement );
+	
+	erode ( image, image, erodeElement );
     dilate ( image, image, dilateElement );
 
+	//imshow ( "transformed image", image );
     Canny ( image, image, lowerThreshold, upperThreshold, 3, true );
     findContours ( image, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
 
@@ -39,6 +40,21 @@ vector<vector<Point>> MouthDetector::getContourMap ( Mat image ) {
 Rect MouthDetector::detect ( Mat mouthROI ) {
     Rect mouth;
     Mat temp = mouthROI.clone();
+
+	/*mouthTemplate = imread("Testing/Images/mouth_template.jpg", CV_LOAD_IMAGE_UNCHANGED);
+	resize(mouthROI, mouthROI, Size ( 60, 40 ));
+	int binaryThresold = calculateThreshold ( mouthTemplate );
+	threshold ( mouthTemplate, mouthTemplate, binaryThresold, 255, THRESH_BINARY );
+	
+	binaryThresold = calculateThreshold ( mouthROI );
+	threshold ( mouthROI, mouthROI, binaryThresold, 255, THRESH_BINARY );
+	for(int i=0; i<mouthTemplate.rows; i++)
+		for(int j=0; j<mouthTemplate.cols; j++)
+		{
+			if( (int)mouthTemplate.at<uchar>(i,j) ==0 && (int)mouthROI.at<uchar>(i,j)==0 )
+				mouthROI.at<uchar>(i,j)= 255;
+		}
+	imwrite ( "Testing/Images/result.jpg", mouthROI );*/
 
     vector<vector<Point>> contours = getContourMap ( temp );
     vector<int> mouthContourIndices;
@@ -58,7 +74,7 @@ Rect MouthDetector::detect ( Mat mouthROI ) {
             mouthContourIndices.push_back ( i );
         }
         //rectangle(mouthROI, rectTemp, Scalar(0,255,0), 1, 8);
-    }
+	}
 
     vector<Point> mouthPoints;
     if ( mouthContourIndices.size() > 0 ) {
@@ -103,7 +119,7 @@ void MouthDetector::updateTemplate ( Mat image ) {
             mouthTemplate.at<uchar> ( j, i ) += ( mouthROI.at<uchar> ( j, i ) - mouthTemplate.at<uchar> ( j, i ) ) * alpha;
         }
     }
-    imwrite ( "Testing/Images/mouth_template.jpg", mouthTemplate );
+    //imwrite ( "Testing/Images/mouth_template.jpg", mouthTemplate );
 }
 
 int MouthDetector::calculateThreshold ( Mat image ) {

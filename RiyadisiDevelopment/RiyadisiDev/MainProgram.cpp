@@ -9,17 +9,17 @@ void MainProgram::run() {
     Log::log ( "Program started" );
     firstRun = true;
     frameCount = 0;
-
+	
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
-        frame = imageManager.acquireImage ( frame );
+		frame = imageManager.acquireImage ( frame );
 
         if ( imageManager.isVideoEnded() ) {
             return;
         }
-        frameCount++;
-
+		frameCount++;
+		        
         ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
@@ -135,13 +135,13 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        bool alert; //=  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );
 
-        imshow ( "image", frame );
+		imshow ( "image", frame );
     }
     Log::log ( "Program ended" );
 }
