@@ -41,7 +41,7 @@ Rect MouthDetector::detect ( Mat mouthROI ) {
     Rect mouth;
     Mat temp = mouthROI.clone();
 
-	/*mouthTemplate = imread("Testing/Images/mouth_template.jpg", CV_LOAD_IMAGE_UNCHANGED);
+	//mouthTemplate = imread("Testing/Images/mouth_template.jpg", CV_LOAD_IMAGE_UNCHANGED);
 	resize(mouthROI, mouthROI, Size ( 60, 40 ));
 	int binaryThresold = calculateThreshold ( mouthTemplate );
 	threshold ( mouthTemplate, mouthTemplate, binaryThresold, 255, THRESH_BINARY );
@@ -54,7 +54,7 @@ Rect MouthDetector::detect ( Mat mouthROI ) {
 			if( (int)mouthTemplate.at<uchar>(i,j) ==0 && (int)mouthROI.at<uchar>(i,j)==0 )
 				mouthROI.at<uchar>(i,j)= 255;
 		}
-	imwrite ( "Testing/Images/result.jpg", mouthROI );*/
+	//imwrite ( "Testing/Images/result.jpg", mouthROI );
 
     vector<vector<Point>> contours = getContourMap ( temp );
     vector<int> mouthContourIndices;

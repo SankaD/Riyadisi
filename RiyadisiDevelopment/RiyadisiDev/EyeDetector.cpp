@@ -11,12 +11,14 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
     leftEyeROI.height = faceImage.rows / 4;
 	//imshow("left_eye", faceImage( leftEyeROI ));
 
+	updateMinSizes( Size(leftEyeROI.width, leftEyeROI.height) );
+
     leftEye = optimizeDetection ( eyeGlassDetector.detect ( faceImage ( leftEyeROI ) ) );
 	if(leftEye.area() == 0)
 	{
 		leftEye = optimizeDetection( leftEyeDetector.detect ( faceImage( leftEyeROI ) ) );
 	} 
-	if(leftEye.area() == 0)
+	/*if(leftEye.area() == 0)
 	{
 		leftEyeROI.x = 0;
 		leftEyeROI.y = faceImage.rows / 4;
@@ -24,7 +26,7 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
 		leftEyeROI.height = faceImage.rows / 4;
 
         leftEye = optimizeDetection ( leftEyeDetector.detect ( faceImage ( leftEyeROI ) ) );
-	}
+	}*/
     leftEye.x += leftEyeROI.x;
     leftEye.y += leftEyeROI.y;
     eyes.push_back ( leftEye );
@@ -36,12 +38,14 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
     rightEyeROI.height = faceImage.rows / 4;
 	//imshow("right_eye", faceImage( rightEyeROI ));
 
+	updateMinSizes( Size(rightEyeROI.width, rightEyeROI.height) );
+
     rightEye = optimizeDetection ( eyeGlassDetector.detect ( faceImage ( rightEyeROI ) ) );
 	if(rightEye.area() == 0)
 	{
 		rightEye = optimizeDetection( rightEyeDetector.detect ( faceImage( rightEyeROI ) ) );
 	}
-	if(rightEye.area() == 0)
+	/*if(rightEye.area() == 0)
 	{
 		rightEyeROI.x = 0;
 		rightEyeROI.y = faceImage.rows / 4;
@@ -49,13 +53,12 @@ vector<Rect> EyeDetector::detect ( Mat faceImage ) {
 		rightEyeROI.height = faceImage.rows / 4;
 
         rightEye = optimizeDetection ( rightEyeDetector.detect ( faceImage ( rightEyeROI ) ) );
-    }
+    }*/
     rightEye.x += rightEyeROI.x;
     rightEye.y += rightEyeROI.y;
-
-	if ( ! ( (leftEye.x + leftEye.width/2) < rightEye.x && (leftEye.x + leftEye.width/2) > (rightEye.x + rightEye.width) &&
-		(leftEye.y + leftEye.height/2) < rightEye.y && (leftEye.y + leftEye.height/2) > (rightEye.y + rightEye.height) ) )
-		eyes.push_back( rightEye );
+	eyes.push_back( rightEye );
+	/*if ( ! ( (leftEye.x + leftEye.width/2) < rightEye.x && (leftEye.x + leftEye.width/2) > (rightEye.x + rightEye.width) ) )
+		eyes.push_back( rightEye );*/
 
     return eyes;
 }
@@ -71,10 +74,22 @@ Rect EyeDetector::optimizeDetection ( vector<Rect> data ) {
     return optimizedResult;
 }
 
-EyeDetector::EyeDetector ( void ) {
+void EyeDetector::updateMinSizes( Size roi )
+{
 
+	Size newMinSizeSize(roi.width/8, roi.height/8 );
+
+	eyeGlassDetector.setMinSize( newMinSizeSize );
+	leftEyeDetector.setMinSize( newMinSizeSize );
+	rightEyeDetector.setMinSize( newMinSizeSize );
 }
 
-EyeDetector::~EyeDetector ( void ) {
+EyeDetector::EyeDetector ( void ) 
+{
+	//dataFile.open ("Testing/Images/eye_testing/cum_sum.txt");
+}
+
+EyeDetector::~EyeDetector ( void ) 
+{
 
 }

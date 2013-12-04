@@ -12,7 +12,8 @@ std::vector<Rect> Detector::detect ( Mat frame ) {
     cascade.detectMultiScale ( downsampledImage, features, scale, minNeighbors, flags | CV_HAAR_SCALE_IMAGE, minSize, maxSize );
 
     // rescale into the original size
-    for ( int i = 0; i < features.size(); i++ ) {
+	for ( int i = 0; i < features.size(); i++ ) 
+	{
         features[i].x *= donwsampleConst ;
         features[i].y *= donwsampleConst ;
         features[i].height *= donwsampleConst;
@@ -28,6 +29,11 @@ Detector::Detector ( string cascadeName ) {
         printf ( "--(!)-- Error loading cascade : %s", cascadeName );
         exit ( -1 );
     }
+}
+
+void Detector::setMinSize ( Size size )
+{
+	this->minSize = size;
 }
 
 Detector::Detector ( void ) {
