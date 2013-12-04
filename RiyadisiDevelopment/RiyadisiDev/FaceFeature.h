@@ -11,6 +11,10 @@
 using namespace cv;
 using namespace std;
 
+enum Orientation{
+	PROFILE, FRONTAL
+};
+
 ///<summary>
 ///Represents facial features
 ///</summary>
@@ -21,7 +25,7 @@ private:
     EyeFeature rightEye;
     MouthFeature mouth;
     Mat image;
-	string orientation;
+	Orientation orientation;
 public:
     FaceFeature();
 
@@ -52,7 +56,7 @@ public:
     Gaze getGazeData();
     Mat getImage();
     void setImage ( Mat image ) ;
-	string getOrientation();
-    void setOrientation ( string orientation ) ;
+	Orientation getOrientation();
+    void setOrientation ( Orientation orientation ) ;
     virtual void clearFeature();
 };

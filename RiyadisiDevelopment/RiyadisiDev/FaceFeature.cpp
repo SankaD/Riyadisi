@@ -29,14 +29,14 @@ void FaceFeature::setImage ( Mat newImage )
     image = newImage;
 }
 
-string FaceFeature::getOrientation()
+Orientation FaceFeature::getOrientation()
 {
 	return orientation;
 }
     
-void FaceFeature::setOrientation ( string orientation ) 
+void FaceFeature::setOrientation ( Orientation orientation ) 
 {
-	FaceFeature::orientation = orientation;
+	orientation = orientation;
 }
 
 Gaze FaceFeature::getGazeData()

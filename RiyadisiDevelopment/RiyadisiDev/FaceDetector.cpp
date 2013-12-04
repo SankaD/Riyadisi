@@ -1,58 +1,82 @@
 #include "FaceDetector.h"
 
-Rect FaceDetector::detect ( Mat frame )
+Rect FaceDetector::detect ( FaceFeature* faceFeature )
 {
     vector<Rect> features;
-
+	Mat frame = faceFeature->getImage();
+	
+	//frontal face detection
 	features = fontalFaceDetector.detect( frame );
-	if( features.size() == 0 ) 
+	if( features.size() != 0 ) 
 	{
+		faceFeature->setOrientation( Orientation::FRONTAL );
+	}
+	else
+	{
+		//left profile face detection
 		features = profileFaceDetector.detect( frame );
-	}
-	if( features.size() == 0 ) 
-	{
-		Mat flippedFrame = Mat::zeros( frame.size(), frame.type() );
-		flip( frame, flippedFrame, 1);
-		features = profileFaceDetector.detect( flippedFrame );
 
-		for(int i=0; i<features.size(); i++) 
+		if( features.size() != 0 ) 
 		{
-			features[i].x = frame.cols - ( features[i].x + features[i].width );
+			faceFeature->setOrientation( Orientation::PROFILE );
 		}
-	}
-	if( features.size() == 0 ) 
-	{
-		Mat rotatedFrame = Mat::zeros( frame.size(), frame.type() );
-		int angle = -60;
-
-		do 
+		else
 		{
-			if( angle == 0 ) 
-			{
-				angle += 30;
-				continue;
-			}
+			//right profile face detection
+			Mat flippedFrame = Mat::zeros( frame.size(), frame.type() );
+			flip( frame, flippedFrame, 1);
+			features = profileFaceDetector.detect( flippedFrame );
 
-			Point center( frame.cols/2, frame.rows/2 );
-			Mat rotM = getRotationMatrix2D( center, angle, 1.0 );
-			cv::warpAffine( frame, rotatedFrame, rotM, frame.size() );
-			
-			features = fontalFaceDetector.detect( rotatedFrame );
 			for(int i=0; i<features.size(); i++) 
 			{
-				features[i].x = rotM.at<double>(0,0)*features[i].x + rotM.at<double>(0,1)*features[i].y + rotM.at<double>(0,2);
-				features[i].y = rotM.at<double>(1,0)*features[i].x + rotM.at<double>(1,1)*features[i].y + rotM.at<double>(1,2);           
-			} 
-			angle += 30;
+				features[i].x = frame.cols - ( features[i].x + features[i].width );
+			}
 
-		} while ( angle < 90 && features.size() == 0 );
+			
+			if( features.size() != 0 ) 
+			{
+				faceFeature->setOrientation( Orientation::PROFILE );
+			}
+			else
+			{
+				//rotated face detection
+				Mat rotatedFrame = Mat::zeros( frame.size(), frame.type() );
+				int angle = -60;
 
-		/*if(features.size() > 0 ){
-			rectangle(rotatedFrame, features[0], Scalar(0,255,0), 1,8);
-			imshow("rot_test", rotatedFrame);
-		}*/
-	}
-	
+				do 
+				{
+					if( angle == 0 ) 
+					{
+						angle += 30;
+						continue;
+					}
+
+					Point center( frame.cols/2, frame.rows/2 );
+					Mat rotM = getRotationMatrix2D( center, angle, 1.0 );
+					cv::warpAffine( frame, rotatedFrame, rotM, frame.size() );
+			
+					features = fontalFaceDetector.detect( rotatedFrame );
+					for(int i=0; i<features.size(); i++) 
+					{
+						features[i].x = rotM.at<double>(0,0)*features[i].x + rotM.at<double>(0,1)*features[i].y + rotM.at<double>(0,2);
+						features[i].y = rotM.at<double>(1,0)*features[i].x + rotM.at<double>(1,1)*features[i].y + rotM.at<double>(1,2);           
+					} 
+					angle += 30;
+
+				} while ( angle < 90 && features.size() == 0 );
+
+				/*if(features.size() > 0 ){
+					rectangle(rotatedFrame, features[0], Scalar(0,255,0), 1,8);
+					imshow("rot_test", rotatedFrame);
+				}*/
+				if( features.size() != 0 ) 
+				{
+					faceFeature->setOrientation( Orientation::FRONTAL );
+				}
+			}//end of rotated face detection
+		}//end of right profile face detection
+	}//end of left profile face detection
+
 	return optimizeDetection( features )[0];
 }
 

@@ -36,5 +36,6 @@ public:
     /// <param name="frame"> The image onto which the pupil is drawn </param>
     /// <param name="pupil"> The pupil which should be drawn</param>
     void drawPupil ( Mat frame, Pupil pupil );
+	int count;
 
 };

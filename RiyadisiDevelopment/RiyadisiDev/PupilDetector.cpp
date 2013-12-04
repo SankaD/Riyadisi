@@ -1,30 +1,33 @@
 #include "PupilDetector.h"
 
 PupilDetector::PupilDetector ( void ) {
+	//count = 0;
 }
+
 PupilDetector::~PupilDetector ( void ) {
 }
+
 Pupil PupilDetector::detectPupil ( Mat eye ) {
     Mat eyeTemp; // matrices for internal calculations
     int cannyThreshold = 10;
     float cannyRatio = 3;
     Pupil pupil;
-
+		
     //--- Preprocessing steps ---//
     eyeTemp = eye.clone();
-
+	
     //--- detecting the pupil ---//
     threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-
+	
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
     erode ( eyeTemp, eyeTemp, erodeElement );
-
+	
     vector<vector<Point>> contours;
 
     Canny ( eyeTemp.clone(), eyeTemp, cannyThreshold, cannyThreshold * cannyRatio, 3, true );
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-
+	
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
     double area = 0, maxArea = 0;

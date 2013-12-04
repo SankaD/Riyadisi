@@ -17,8 +17,8 @@ YawningDetector::~YawningDetector ( void ) {
 
 float YawningDetector::detectYawning ( FaceFeature *faceFeature ) {
     Rect mouth = faceFeature->getMouth()->getFeatureRect();
-    float value = mouth.height - prevH;
-    float yawningScore = value * 0.2 + cSum * 0.8;
+    float value = mouth.height-prevH;
+    float yawningScore = value * 0.6 + cSum * 0.4;
 
     prevH = mouth.height;
     cSum = yawningScore;

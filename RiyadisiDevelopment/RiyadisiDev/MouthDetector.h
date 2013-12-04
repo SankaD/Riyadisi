@@ -15,8 +15,10 @@ public:
 	vector<vector<Point>> getContourMap( Mat image);
 private:
 	Rect minEnclosingRectangle( vector<Point> data );
+	void applyMorphOperations ( Mat* image ) ;
 	Mat mouthTemplate;
 	int calculateThreshold( Mat image );
 	void updateTemplate( Mat imageList );
 	Mat erodeElement, dilateElement;
+	int timer;
 };
