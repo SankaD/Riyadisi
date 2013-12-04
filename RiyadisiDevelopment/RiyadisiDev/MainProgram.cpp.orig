@@ -9,17 +9,17 @@ void MainProgram::run() {
     Log::log ( "Program started" );
     firstRun = true;
     frameCount = 0;
-	
+
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
-		frame = imageManager.acquireImage ( frame );
+        frame = imageManager.acquireImage ( frame );
 
         if ( imageManager.isVideoEnded() ) {
             return;
         }
-		frameCount++;
-		        
+        frameCount++;
+
         ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
@@ -135,28 +135,30 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert; //=  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );
 
-		imshow ( "image", frame );
+        imshow ( "image", frame );
     }
     Log::log ( "Program ended" );
 }
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
-
 <<<<<<< HEAD
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
-=======
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 13.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 17.wmv" );
-	//imageManager = ImageManager ( ImageSourceType::Camera, "", 0 );
->>>>>>> 5fd6eedf362fe29775ba50962a623642e22fb8a5
 
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
+
+=======
+  // imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+  //  imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
+ //   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video_night5.wmv" );
+   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 5.wmv" );
+//	imageManager = ImageManager ( ImageSourceType::Camera, "",1 );
+>>>>>>> 9b703be33ad46384f2673b7f3a7c71024580d534
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }

@@ -135,7 +135,7 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        alertStatus =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
@@ -149,7 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 13.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
 	imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
 
     if ( !imageManager.isOpened() ) {
@@ -200,6 +200,8 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     ostringstream yawningText;
     ostringstream headRotationText;
 
+    ostringstream frameCountText;
+
     frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
 
     gazeText			<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
@@ -212,6 +214,8 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     if ( headRotAngles.size() > 0 ) {
         headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
     }
+
+    frameCountText		<< "Frame Number :"		<< frameCount;
 
     string drowsinessText	= ":: Drowsiness Measures  ::";
     string distractionText =  ":: Distraction Measures ::";
@@ -234,6 +238,7 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
 
 
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
+    addText ( frame, frameCountText.str(), Point ( frame.cols * 3 / 4, 30 ), fontRed );
     addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
 }
 void MainProgram::createTrainingFile() {

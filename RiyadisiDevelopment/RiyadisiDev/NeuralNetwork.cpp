@@ -11,7 +11,7 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
             if ( isExists ( neuralDataFilename ) ) {
                 network.create_from_file ( neuralDataFilename );
             } else {
-                network.create_standard ( numLayers, numInput, numNeuronsHidden, numOutput );
+                network.create_standard ( numLayers, numInput, numNeuronsHidden, 5, numOutput );
             }
             network.set_activation_function_hidden ( FANN::SIGMOID_SYMMETRIC );
             network.set_activation_function_output ( FANN::SIGMOID_SYMMETRIC );
@@ -71,9 +71,9 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         input[2] = gazeMeasure.horizontal;
         input[3] = gazeMeasure.vertical;
         input[4] = yawningMeasure;
-        input[5] = headRotationMeasure[0];
-        input[6] = headRotationMeasure[1];
-        input[7] = headRotationMeasure[2];
+        input[5] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[0] : 0;
+        input[6] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[1] : 0;
+        input[7] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[2] : 0;
         output = * ( network.run ( input ) );
 
         return ( output > 0.5 );

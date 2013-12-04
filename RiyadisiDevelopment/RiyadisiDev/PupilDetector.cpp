@@ -16,8 +16,9 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
     //--- Preprocessing steps ---//
     eyeTemp = eye.clone();
 	
+    imshow ( "eyeTemp", eyeTemp );
     //--- detecting the pupil ---//
-    threshold ( eyeTemp, eyeTemp, 50, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
+    threshold ( eyeTemp, eyeTemp, 20, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
 	
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
@@ -59,7 +60,7 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
     }
 
     // temp code -- start
-    Rect borders = getExactEyeBorders ( eye );
+    //Rect borders = getExactEyeBorders ( eye );
     //cout << borders.x << " " << borders.y << " " << borders.width << " " << borders.height << endl;
 
     // temp code -- finish
