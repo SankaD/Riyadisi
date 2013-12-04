@@ -114,11 +114,31 @@ float EyeStateDetector::getPerclosScore( FaceFeature *faceFeature, String eyeTyp
 {
 	Mat eye;
 	double eyestate=0;
-	if( eyeType == "left" ) eye = faceFeature->getImage()( faceFeature->getLeftEye()->getFeatureRect() );
-	else eye = faceFeature->getImage()( faceFeature->getRightEye()->getFeatureRect() );
+	float score = 0;
+
+	
+
+	if( eyeType == "left" ){ 
+		if(faceFeature->getImage()( faceFeature->getLeftEye()->getFeatureRect() ).size().width==0){
+					score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8;
+					scores[currentIndex] = score;
+					return scores[currentIndex];
+				}
+		
+		eye = faceFeature->getImage()( faceFeature->getLeftEye()->getFeatureRect() );}
+	else{ 
+					if(faceFeature->getImage()( faceFeature->getRightEye()->getFeatureRect() ).size().width==0){
+			score = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH] * 0.8;
+			scores[currentIndex] = score;
+			return scores[currentIndex];
+		}
+		
+		eye = faceFeature->getImage()( faceFeature->getRightEye()->getFeatureRect() );
+	
+	}
 
 	currentIndex = ( currentIndex + 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH;
-    float score = 0;
+    
     
 	eyestate= calculateEyeState ( eye, fs );
 	

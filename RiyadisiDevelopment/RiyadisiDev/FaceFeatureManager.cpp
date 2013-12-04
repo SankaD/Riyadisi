@@ -53,7 +53,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             perclosl = preeyeState;
         }
 
-        if ( eyes.size() > 1 ) {
+        if ( eyes[1].area() > 0 ) {
             rightEye = eyes[1];
             faceFeature->getRightEye()->setFeatureRect ( rightEye );
             faceFeature->getRightEye()->setAvailable ( true );
