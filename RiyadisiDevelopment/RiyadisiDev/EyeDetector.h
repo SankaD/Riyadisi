@@ -15,6 +15,7 @@ public:
     EyeDetector ( void );
     ~EyeDetector ( void );
     vector<Rect> detect ( Mat frame );
+	void EyeDetector::updateMinSizes( Size roi );
 private:
 	EyeGlassDetector eyeGlassDetector;
 	LeftEyeDetector leftEyeDetector;
