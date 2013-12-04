@@ -135,7 +135,7 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        alertStatus =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
@@ -149,7 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/30.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );

@@ -11,7 +11,7 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
             if ( isExists ( neuralDataFilename ) ) {
                 network.create_from_file ( neuralDataFilename );
             } else {
-                network.create_standard ( numLayers, numInput, numNeuronsHidden, numOutput );
+                network.create_standard ( numLayers, numInput, numNeuronsHidden, 5, numOutput );
             }
             network.set_activation_function_hidden ( FANN::SIGMOID_SYMMETRIC );
             network.set_activation_function_output ( FANN::SIGMOID_SYMMETRIC );

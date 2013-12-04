@@ -14,8 +14,8 @@ static const unsigned int numInput = 8;
 static const unsigned int numOutput = 1;
 static const unsigned int numLayers = 4;
 static const unsigned int numNeuronsHidden = 10;
-static const float desiredError = 0.01;
-static const unsigned int maxEpochs = 50000;
+static const float desiredError = 0.001;
+static const unsigned int maxEpochs = 500000;
 static const unsigned int epochsBetweenReports = 10000;
 
 ///<summary>
