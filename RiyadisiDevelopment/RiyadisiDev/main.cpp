@@ -23,6 +23,6 @@ int main ( int argc, char **argv ) {
                 break;
         }
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log ( LogStatus::Error, ex.what() );
     }
 }

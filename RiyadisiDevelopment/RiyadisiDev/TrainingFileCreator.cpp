@@ -27,18 +27,18 @@ void TrainingFileCreator::trainUsingFile ( string fileName ) {
                 try {
                     Log::log ( "Using file : " + videoFileName );
                     stringstream stringStream;
-                    stringStream << "data/data/" << i << ".data";
+                    stringStream << "data/data/" << ( i + 1 ) << ".data";
                     trainUsingVideo ( videoFileName, stringStream.str() );
                 } catch ( exception ex ) {
-                    Log::log ( ex.what()  );
+                    Log::log ( LogStatus::Error, ex.what()  );
                 }
             }
             listFileStream.close();
         } else {
-            Log::log ( "File was not opened" );
+            Log::log ( LogStatus::Error, "File was not opened" );
         }
     } catch ( exception ex ) {
-        Log::log (  ex.what()  );
+        Log::log ( LogStatus::Error, ex.what()  );
     }
 }
 
@@ -132,8 +132,8 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        double noddingOffLevel = 0.0;
         noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
+        noddingOffDetector.collectTraningData ( *faceFeature );
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();

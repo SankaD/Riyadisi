@@ -9,17 +9,17 @@ void MainProgram::run() {
     Log::log ( "Program started" );
     firstRun = true;
     frameCount = 0;
-	
+
     long int ticks = 0, ticksForFrame = 0;
 
     while ( true ) {
-		frame = imageManager.acquireImage ( frame );
+        frame = imageManager.acquireImage ( frame );
 
         if ( imageManager.isVideoEnded() ) {
             return;
         }
-		frameCount++;
-		        
+        frameCount++;
+
         ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
@@ -141,7 +141,7 @@ void MainProgram::run() {
 
         drawTexts ( frame, ticksForFrame );
 
-		imshow ( "image", frame );
+        imshow ( "image", frame );
     }
     Log::log ( "Program ended" );
 }
@@ -149,9 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 13.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 17.wmv" );
-	//imageManager = ImageManager ( ImageSourceType::Camera, "", 0 );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/27.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
@@ -185,7 +183,7 @@ void MainProgram::trainingRun() {
             decisionEngine.trainEngine ();
         }
     } catch ( exception ex ) {
-        Log::log ( ex.what() ) ;
+        Log::log ( LogStatus::Error, ex.what() ) ;
     }
     Log::log ( "Training ended" );
 }
@@ -245,7 +243,7 @@ void MainProgram::createTrainingFile() {
         creator.trainUsingFile ( "Testing/filelist.txt" );
 
     } catch ( exception ex ) {
-        Log::log ( ex.what() );
+        Log::log ( LogStatus::Error, ex.what() );
     }
     Log::log ( "Program ended" );
 }

@@ -2,15 +2,16 @@
 
 std::vector<Rect> Detector::detect ( Mat frame ) {
     std::vector<Rect> features;
-	Mat downsampledImage =  frame.clone();
+    Mat downsampledImage =  frame.clone();
+    equalizeHist ( downsampledImage, downsampledImage );
 
-	//down sampling
-	for ( int i = 0; i < donwsampleConst / 2; i++ ) {
+    //down sampling
+    for ( int i = 0; i < donwsampleConst / 2; i++ ) {
         pyrDown ( downsampledImage, downsampledImage, Size ( ( downsampledImage.cols  ) / 2, ( downsampledImage.rows  ) / 2 ) );
     }
     cascade.detectMultiScale ( downsampledImage, features, scale, minNeighbors, flags | CV_HAAR_SCALE_IMAGE, minSize, maxSize );
 
-	// rescale into the original size
+    // rescale into the original size
 	for ( int i = 0; i < features.size(); i++ ) 
 	{
         features[i].x *= donwsampleConst ;
@@ -18,8 +19,8 @@ std::vector<Rect> Detector::detect ( Mat frame ) {
         features[i].height *= donwsampleConst;
         features[i].width *= donwsampleConst;
     }
-	
-	return features;
+
+    return features;
 }
 
 Detector::Detector ( string cascadeName ) {
@@ -36,7 +37,7 @@ void Detector::setMinSize ( Size size )
 }
 
 Detector::Detector ( void ) {
-    
+
 }
 
 Detector::~Detector ( void ) {

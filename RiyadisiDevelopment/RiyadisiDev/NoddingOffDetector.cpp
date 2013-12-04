@@ -11,6 +11,7 @@ using namespace std;
 
 time_t t = clock();
 int noFrames = 10;
+int totalNoOfFrames = 0;
 int checkedFrames = 0;
 int prv_right_y_cordinate = 0, prv_left_y_cordinate = 0, prv_nose_y_cordinate = 0;
 cv::Mat right_seq ( 1, noFrames, CV_32F );
@@ -36,7 +37,6 @@ cv::Mat INIT = cv::Mat ( 1, 2, CV_64F, INITdata ).clone();
 //cv::Mat EMIS = cv::Mat(2,3,CV_64F,EMISdata).clone();
 //double INITdata[] = {0.401876, 0.598124 };
 //cv::Mat INIT = cv::Mat(1,2,CV_64F,INITdata).clone();
-
 
 double NoddingOffDetector::noddingOffDetect ( FaceFeature feature ) {
 
@@ -69,64 +69,84 @@ double NoddingOffDetector::noddingOffDetect ( FaceFeature feature ) {
 
     }
 
-    if ( checkedFrames < noFrames ) {
+
+
+    if ( checkedFrames >= noFrames ) {
+
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            right_seq.at<int> ( 0, i ) = right_seq.at<int> ( 0, i + 1 );
+        }
 
         int difference = rightEyeRect.y - prv_right_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 0;
-        } else if ( difference > 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 1;
-        } else if ( difference < -2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 2;
-        }
-        prv_right_y_cordinate = rightEyeRect.y;
-
-        difference = leftEyeRect.y - prv_left_y_cordinate;
-
-        if ( -2 <= difference && difference <= 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 0;
+            right_seq.at<int> ( 0, 9 ) = 0;
 
 
         }
 
         else if ( difference > 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 1;
+            right_seq.at<int> ( 0, 9 ) = 1;
 
 
         } else if ( difference < -2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 2;
+            right_seq.at<int> ( 0, 9 ) = 2;
+
+        }
+        prv_right_y_cordinate = rightEyeRect.y;
+
+
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            left_seq.at<int> ( 0, i ) = left_seq.at<int> ( 0, i + 1 );
+        }
+
+
+        difference = leftEyeRect.y - prv_left_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            left_seq.at<int> ( 0, 9 ) = 0;
+
+
+        }
+
+        else if ( difference > 2 ) {
+            left_seq.at<int> ( 0, 9 ) = 1;
+
+
+        } else if ( difference < -2 ) {
+            left_seq.at<int> ( 0, 9 ) = 2;
 
         }
         prv_left_y_cordinate = leftEyeRect.y;
 
 
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            nose_seq.at<int> ( 0, i ) = nose_seq.at<int> ( 0, i + 1 );
+        }
 
         difference = noseRect.y - prv_nose_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 0;
+            nose_seq.at<int> ( 0, 9 ) = 0;
 
 
         }
 
         else if ( difference > 2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 1;
+            nose_seq.at<int> ( 0, 9 ) = 1;
 
 
         } else if ( difference < -2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 2;
+            nose_seq.at<int> ( 0, 9 ) = 2;
 
         }
         prv_nose_y_cordinate = noseRect.y;
         checkedFrames++;
 
-    } else {
-
         viterbi ( right_seq.row ( 0 ), TRANS, EMIS, INIT, estates );
         for ( int i = 0; i < estates.cols; i++ ) {
             states[estates.at<int> ( 0, i )]++ ;
-            //outputFile<<estates.at<int>(0,i);
+            outputFile << estates.at<int> ( 0, i );
         }
 
         value = static_cast<double> ( states[0] );
@@ -137,7 +157,7 @@ double NoddingOffDetector::noddingOffDetect ( FaceFeature feature ) {
         viterbi ( left_seq.row ( 0 ), TRANS, EMIS, INIT, estates );
         for ( int i = 0; i < estates.cols; i++ ) {
             states[estates.at<int> ( 0, i )]++ ;
-            //outputFile<<estates.at<int>(0,i);
+            outputFile << estates.at<int> ( 0, i );
         }
         value = static_cast<double> ( states[0] );
 
@@ -148,7 +168,7 @@ double NoddingOffDetector::noddingOffDetect ( FaceFeature feature ) {
         viterbi ( nose_seq.row ( 0 ), TRANS, EMIS, INIT, estates );
         for ( int i = 0; i < estates.cols; i++ ) {
             states[estates.at<int> ( 0, i )]++ ;
-            //outputFile<<estates.at<int>(0,i);
+            outputFile << estates.at<int> ( 0, i );
         }
         value = static_cast<double> ( states[0] );
 
@@ -156,15 +176,49 @@ double NoddingOffDetector::noddingOffDetect ( FaceFeature feature ) {
 
         noddingOffLevel = ( left_noddingOffLevel + right_noddingOffLevel + nose_noddingOffLevel ) / 3;
 
-        checkedFrames = 0 ;
-
         outputFile << "      Nodding off level  " << noddingOffLevel;
         outputFile << "\n";
 
         return noddingOffLevel;
-    }
 
-    return 0.0;
+    } else {
+        int difference = rightEyeRect.y - prv_right_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 0;
+        } else if ( difference > 2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 1;
+
+        } else if ( difference < -2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_right_y_cordinate = rightEyeRect.y;
+
+        difference = leftEyeRect.y - prv_left_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 0;
+        } else if ( difference > 2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 1;
+        } else if ( difference < -2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_left_y_cordinate = leftEyeRect.y;
+
+        difference = noseRect.y - prv_nose_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 0;
+        } else if ( difference > 2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 1;
+        } else if ( difference < -2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_nose_y_cordinate = noseRect.y;
+        checkedFrames++;
+
+        return 0.0;
+    }
 }
 
 void NoddingOffDetector::train() {
@@ -179,13 +233,10 @@ void NoddingOffDetector::train() {
 
     if ( seqfile.is_open() ) {
         while ( seqfile >> line ) {
-
             seq.push_back ( line );
-
         }
 
         for ( int i = 0; i < 500; i++ ) {
-
             for ( int j = 0; j < noFrames; j++ ) {
                 seqMatrix.at<int> ( i, j ) = seq[i + j];
             }
@@ -193,15 +244,19 @@ void NoddingOffDetector::train() {
 
         seqfile.close();
 
-    } else { std::cout << "Unable to open file"; }
+    } else {
+        std::cout << "Unable to open file";
+    }
 
-    double TRGUESSdata[] = {0.4 , 0.6,
-                            0.4, 0.6
-                           };
+    double TRGUESSdata[] = {
+        0.4 , 0.6,
+        0.4, 0.6
+    };
     cv::Mat TRGUESS = cv::Mat ( 2, 2, CV_64F, TRGUESSdata ).clone();
-    double EMITGUESSdata[] = {1.0 / 3.0 , 1.0 / 3.0 , 1.0 / 3.0 , 1.0 / 3.0 ,
-                              1.0 / 3.0 , 1.0 / 3.0
-                             };
+    double EMITGUESSdata[] = {
+        1.0 / 3.0 , 1.0 / 3.0 , 1.0 / 3.0 , 1.0 / 3.0 ,
+        1.0 / 3.0 , 1.0 / 3.0
+    };
     cv::Mat EMITGUESS = cv::Mat ( 2, 3, CV_64F, EMITGUESSdata ).clone();
     double INITGUESSdata[] = {0.4  , 0.6 };
     cv::Mat INITGUESS = cv::Mat ( 1, 2, CV_64F, INITGUESSdata ).clone();
@@ -210,9 +265,8 @@ void NoddingOffDetector::train() {
 }
 
 void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
-
     int states[2];
-    std:: ofstream outputFile ( "newobservations.txt", std::ios::app );
+    std:: ofstream outputFile ( "newnewobservations.txt", std::ios::app );
     Rect leftEyeRect;
     Rect rightEyeRect;
     Rect noseRect;
@@ -222,119 +276,142 @@ void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
 
 
     if ( feature.isAvailable() ) {
-
         leftEyeRect = feature.getLeftEye()->getFeatureRect();
         rightEyeRect = feature.getRightEye()->getFeatureRect();
         noseRect = feature.getNose()->getFeatureRect();
 
 
-        rightEyeRect.y = rightEyeRect.x + feature.getFeatureRect().y;
-        leftEyeRect.y = leftEyeRect.x + feature.getFeatureRect().y;
-        noseRect.y = noseRect.x + feature.getFeatureRect().y;
+        rightEyeRect.y = rightEyeRect.y + feature.getFeatureRect().y;
+        leftEyeRect.y = leftEyeRect.y + feature.getFeatureRect().y;
+        noseRect.y = noseRect.y + feature.getFeatureRect().y;
 
     } else {
-
         rightEyeRect.y = prv_right_y_cordinate;
         leftEyeRect.y = prv_left_y_cordinate;
         noseRect.y = prv_nose_y_cordinate;
-
     }
 
 
+    if ( checkedFrames >= noFrames ) {
 
-    if ( checkedFrames < noFrames ) {
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            right_seq.at<int> ( 0, i ) = right_seq.at<int> ( 0, i + 1 );
+        }
 
         int difference = rightEyeRect.y - prv_right_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 0;
-
-
+            right_seq.at<int> ( 0, 9 ) = 0;
         }
 
         else if ( difference > 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 1;
-
-
+            right_seq.at<int> ( 0, 9 ) = 1;
         } else if ( difference < -2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 2;
-
+            right_seq.at<int> ( 0, 9 ) = 2;
         }
         prv_right_y_cordinate = rightEyeRect.y;
 
+
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            left_seq.at<int> ( 0, i ) = left_seq.at<int> ( 0, i + 1 );
+        }
 
 
         difference = leftEyeRect.y - prv_left_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 0;
-
+            left_seq.at<int> ( 0, 9 ) = 0;
         }
 
         else if ( difference > 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 1;
-
-
+            left_seq.at<int> ( 0, 9 ) = 1;
         } else if ( difference < -2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 2;
-
+            left_seq.at<int> ( 0, 9 ) = 2;
         }
         prv_left_y_cordinate = leftEyeRect.y;
 
 
+        for ( int i = 0; i < noFrames - 1; i++ ) {
+            nose_seq.at<int> ( 0, i ) = nose_seq.at<int> ( 0, i + 1 );
+        }
 
         difference = noseRect.y - prv_nose_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 0;
-
-
+            nose_seq.at<int> ( 0, 9 ) = 0;
         }
 
         else if ( difference > 2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 1;
-
-
+            nose_seq.at<int> ( 0, 9 ) = 1;
         } else if ( difference < -2 ) {
-            nose_seq.at<int> ( 0, checkedFrames ) = 2;
-
+            nose_seq.at<int> ( 0, 9 ) = 2;
         }
         prv_nose_y_cordinate = noseRect.y;
         checkedFrames++;
 
-    }
 
-    else {
 
-        for ( int i = 0; i < noFrames; i++ )
-
-        {
+        for ( int i = 0; i < noFrames; i++ ) {
             outputFile << right_seq.at<int> ( 0, i );
             outputFile << ",";
         }
         outputFile << "\n";
 
 
-        for ( int i = 0; i < noFrames; i++ )
-
-        {
+        for ( int i = 0; i < noFrames; i++ ) {
             outputFile << left_seq.at<int> ( 0, i );
             outputFile << ",";
         }
         outputFile << "\n";
 
 
-        for ( int i = 0; i < noFrames; i++ )
-
-        {
+        for ( int i = 0; i < noFrames; i++ ) {
             outputFile << nose_seq.at<int> ( 0, i );
             outputFile << ",";
         }
         outputFile << "\n";
+    }
 
+    else {
+        int difference = rightEyeRect.y - prv_right_y_cordinate;
 
+        if ( -2 <= difference && difference <= 2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 0;
+        }
 
-        checkedFrames = 0;
+        else if ( difference > 2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 1;
+        } else if ( difference < -2 ) {
+            right_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_right_y_cordinate = rightEyeRect.y;
+
+        difference = leftEyeRect.y - prv_left_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 0;
+        }
+
+        else if ( difference > 2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 1;
+        } else if ( difference < -2 ) {
+            left_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_left_y_cordinate = leftEyeRect.y;
+
+        difference = noseRect.y - prv_nose_y_cordinate;
+
+        if ( -2 <= difference && difference <= 2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 0;
+        }
+
+        else if ( difference > 2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 1;
+        } else if ( difference < -2 ) {
+            nose_seq.at<int> ( 0, checkedFrames ) = 2;
+        }
+        prv_nose_y_cordinate = noseRect.y;
+        checkedFrames++;
 
     }
 
@@ -574,3 +651,5 @@ void NoddingOffDetector::correctModel ( cv::Mat &TRANS, cv::Mat &EMIS, cv::Mat &
     for ( int j = 0; j < INIT.cols; j++ )
     { INIT.at<double> ( 0, j ) /= sum; }
 }
+
+
