@@ -149,16 +149,16 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 <<<<<<< HEAD
-
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
-
-=======
   // imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
   //  imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
  //   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video_night5.wmv" );
-   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 5.wmv" );
-//	imageManager = ImageManager ( ImageSourceType::Camera, "",1 );
->>>>>>> 9b703be33ad46384f2673b7f3a7c71024580d534
+ //  imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 5.wmv" );
+	imageManager = ImageManager ( ImageSourceType::Camera, "",1 );
+=======
+
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/27.wmv" );
+
+>>>>>>> 1a2f84f8fe4bdb7cdb379dc0f6234cf4965f13a0
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
