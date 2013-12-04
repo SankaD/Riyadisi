@@ -149,7 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );

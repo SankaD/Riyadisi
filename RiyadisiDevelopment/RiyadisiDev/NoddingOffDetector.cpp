@@ -325,13 +325,13 @@ void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
     else {
         int difference = noseRect.y - prv_nose_y_cordinate;
 
-        if ( -2 <= difference && difference <= 2 ) {
+        if ( -3 <= difference && difference <= 3 ) {
             nose_seq.at<int> ( 0, checkedFrames ) = 0;
         }
 
-        else if ( difference > 2 ) {
+        else if ( difference > 3 ) {
             nose_seq.at<int> ( 0, checkedFrames ) = 1;
-        } else if ( difference < -2 ) {
+        } else if ( difference < -3 ) {
             nose_seq.at<int> ( 0, checkedFrames ) = 2;
         }
         prv_nose_y_cordinate = noseRect.y;

@@ -9,7 +9,7 @@ int main ( int argc, char **argv ) {
         cout << "Select Mode : " << endl;
         cout << "\tNormal = 1\n\tTraining = 2\n\tTrainingFileCreation = 3" << endl;
         //cin >> key;
-        key = 3;
+        key = 1;
         switch ( key ) {
             case 1:
                 program.run();
