@@ -54,7 +54,7 @@ public:
     void save();
 private:
     bool isTraining;
-    string neuralDataFilename;;// = "neuralData.neural";
+    string neuralDataFilename;// = "neuralData.neural";
     neural_net network;
 
 };

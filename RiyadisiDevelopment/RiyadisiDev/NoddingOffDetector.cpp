@@ -265,11 +265,13 @@ void NoddingOffDetector::train() {
 }
 
 void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
+
     int states[2];
     std:: ofstream outputFile ( "newnewobservations.txt", std::ios::app );
     Rect leftEyeRect;
     Rect rightEyeRect;
     Rect noseRect;
+
 
     states[0] = 0, states[1] = 0;
 
@@ -286,84 +288,32 @@ void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
         noseRect.y = noseRect.y + feature.getFeatureRect().y;
 
     } else {
-        rightEyeRect.y = prv_right_y_cordinate;
-        leftEyeRect.y = prv_left_y_cordinate;
-        noseRect.y = prv_nose_y_cordinate;
+        rightEyeRect.y = prv_right_y_cordinate + rand() % 4;
+        leftEyeRect.y = prv_left_y_cordinate + rand() % 4;
+        noseRect.y = prv_nose_y_cordinate + rand() % 4;
     }
 
 
     if ( checkedFrames >= noFrames ) {
 
         for ( int i = 0; i < noFrames - 1; i++ ) {
-            right_seq.at<int> ( 0, i ) = right_seq.at<int> ( 0, i + 1 );
-        }
-
-        int difference = rightEyeRect.y - prv_right_y_cordinate;
-
-        if ( -2 <= difference && difference <= 2 ) {
-            right_seq.at<int> ( 0, 9 ) = 0;
-        }
-
-        else if ( difference > 2 ) {
-            right_seq.at<int> ( 0, 9 ) = 1;
-        } else if ( difference < -2 ) {
-            right_seq.at<int> ( 0, 9 ) = 2;
-        }
-        prv_right_y_cordinate = rightEyeRect.y;
-
-
-        for ( int i = 0; i < noFrames - 1; i++ ) {
-            left_seq.at<int> ( 0, i ) = left_seq.at<int> ( 0, i + 1 );
-        }
-
-
-        difference = leftEyeRect.y - prv_left_y_cordinate;
-
-        if ( -2 <= difference && difference <= 2 ) {
-            left_seq.at<int> ( 0, 9 ) = 0;
-        }
-
-        else if ( difference > 2 ) {
-            left_seq.at<int> ( 0, 9 ) = 1;
-        } else if ( difference < -2 ) {
-            left_seq.at<int> ( 0, 9 ) = 2;
-        }
-        prv_left_y_cordinate = leftEyeRect.y;
-
-
-        for ( int i = 0; i < noFrames - 1; i++ ) {
             nose_seq.at<int> ( 0, i ) = nose_seq.at<int> ( 0, i + 1 );
+            cout << nose_seq.at<int> ( 0, i ) << "     " << nose_seq.at<int> ( 0, i + 1 ) << endl;
         }
 
-        difference = noseRect.y - prv_nose_y_cordinate;
+        int difference = noseRect.y - prv_nose_y_cordinate;
 
-        if ( -2 <= difference && difference <= 2 ) {
+        if ( -3 <= difference && difference <= 3 ) {
             nose_seq.at<int> ( 0, 9 ) = 0;
         }
 
-        else if ( difference > 2 ) {
+        else if ( difference > 3 ) {
             nose_seq.at<int> ( 0, 9 ) = 1;
-        } else if ( difference < -2 ) {
+        } else if ( difference < -3 ) {
             nose_seq.at<int> ( 0, 9 ) = 2;
         }
         prv_nose_y_cordinate = noseRect.y;
         checkedFrames++;
-
-
-
-        for ( int i = 0; i < noFrames; i++ ) {
-            outputFile << right_seq.at<int> ( 0, i );
-            outputFile << ",";
-        }
-        outputFile << "\n";
-
-
-        for ( int i = 0; i < noFrames; i++ ) {
-            outputFile << left_seq.at<int> ( 0, i );
-            outputFile << ",";
-        }
-        outputFile << "\n";
-
 
         for ( int i = 0; i < noFrames; i++ ) {
             outputFile << nose_seq.at<int> ( 0, i );
@@ -373,33 +323,7 @@ void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
     }
 
     else {
-        int difference = rightEyeRect.y - prv_right_y_cordinate;
-
-        if ( -2 <= difference && difference <= 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 0;
-        }
-
-        else if ( difference > 2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 1;
-        } else if ( difference < -2 ) {
-            right_seq.at<int> ( 0, checkedFrames ) = 2;
-        }
-        prv_right_y_cordinate = rightEyeRect.y;
-
-        difference = leftEyeRect.y - prv_left_y_cordinate;
-
-        if ( -2 <= difference && difference <= 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 0;
-        }
-
-        else if ( difference > 2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 1;
-        } else if ( difference < -2 ) {
-            left_seq.at<int> ( 0, checkedFrames ) = 2;
-        }
-        prv_left_y_cordinate = leftEyeRect.y;
-
-        difference = noseRect.y - prv_nose_y_cordinate;
+        int difference = noseRect.y - prv_nose_y_cordinate;
 
         if ( -2 <= difference && difference <= 2 ) {
             nose_seq.at<int> ( 0, checkedFrames ) = 0;
@@ -415,8 +339,6 @@ void NoddingOffDetector::collectTraningData ( FaceFeature feature ) {
 
     }
 
-//outputFile<<rightEyeRect.y ;
-//outputFile<<"\n";
     outputFile.close();
 }
 
