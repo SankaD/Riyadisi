@@ -45,7 +45,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             leftEye = eyes[0];
             faceFeature->getLeftEye()->setFeatureRect ( leftEye );
             faceFeature->getLeftEye()->setAvailable ( true );
-            //perclosl = eyeStateDetector.getPerclosScore ( faceFeature, "left", fs );
+            perclosl = eyeStateDetector.getPerclosScore ( faceFeature, "left", fs );
 
             preeyeState = perclosl;
 
@@ -57,7 +57,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             rightEye = eyes[1];
             faceFeature->getRightEye()->setFeatureRect ( rightEye );
             faceFeature->getRightEye()->setAvailable ( true );
-            //perclosr = eyeStateDetector.getPerclosScore ( faceFeature, "right", fs );
+            perclosr = eyeStateDetector.getPerclosScore ( faceFeature, "right", fs );
 
             preeyeState = perclosr;
         } else {

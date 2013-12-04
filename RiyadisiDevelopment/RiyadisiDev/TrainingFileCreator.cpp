@@ -56,13 +56,18 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         throw new exception ( "Output file couldn't be opened" );
     }
 
-    while ( ! imageManager.isVideoEnded() ) {
+    alertStatus = false;
+
+    while ( true ) {
         frame = imageManager.acquireImage ( frame );
 
         ticksForFrame =  getTickCount() - ticks;
         ticks = getTickCount();
 
         key = waitKey ( 30 );
+        if ( imageManager.isVideoEnded() ) {
+            return;
+        }
 
         // if the used press 'c', abort
         if ( key == 'c' ) {
@@ -111,10 +116,10 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
                 faceRoi.width = faceRoi.width * 2;
                 faceRoi.height = faceRoi.height * 2;
 
-                if ( faceRoi.width > grayFrame.cols ) {
+                if ( faceRoi.width + faceRoi.x > grayFrame.cols ) {
                     faceRoi.width = grayFrame.cols - faceRoi.x;
                 }
-                if ( faceRoi.height > grayFrame.rows ) {
+                if ( faceRoi.height + faceRoi.y > grayFrame.rows ) {
                     faceRoi.height = grayFrame.rows - faceRoi.y;
                 }
             } else {
@@ -133,7 +138,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
         noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
-        noddingOffDetector.collectTraningData ( *faceFeature );
+        //noddingOffDetector.collectTraningData ( *faceFeature );
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
@@ -152,32 +157,6 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
         }
-
-        // drawing image
-        /* Point2f leftPupil = faceFeature->getLeftEye()->getPupil()->getCenterPoint();
-         Point2f rightPupil = faceFeature->getRightEye()->getPupil()->getCenterPoint();
-
-         leftPupil = faceFeature->getLeftEye()->getRelativePoint ( leftPupil );
-         rightPupil = faceFeature->getRightEye()->getRelativePoint ( rightPupil );
-
-         leftPupil = faceFeature->getRelativePoint ( leftPupil );
-         rightPupil = faceFeature->getRelativePoint ( rightPupil );
-
-         if ( faceFeature->isAvailable() ) {
-             rectangle ( frame, faceFeature->getFeatureRect(), Scalar ( 255, 0, 255 ) );
-             rectangle ( frame, leftEye , Scalar ( 0, 255, 0 ) );
-             rectangle ( frame, rightEye , Scalar ( 0, 255, 0 ) );
-
-             rectangle ( frame, mouth , Scalar ( 0, 255, 255 ) );
-             rectangle ( frame, nose , Scalar ( 255, 255, 0 ) );
-
-             if ( faceFeature->getLeftEye()->getPupil()->isAvailable() ) {
-                 point ( frame, leftPupil, Scalar ( 255, 0, 0 ) );
-             }
-             if ( faceFeature->getRightEye()->getPupil()->isAvailable() ) {
-                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
-             }
-         }*/
 
         outputFile << percloseScore << " "
                    << noddingOffLevel << " "
@@ -199,23 +178,34 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
 void TrainingFileCreator::drawTexts ( Mat &frame, long int ticksForFrame ) {
     CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
     CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
-    CvFont fontAlert = fontQt ( "Times", -2, Scalar ( 100, 100, 255 ), 100 );
+    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 255, 0, 255 ), 200 );
 
-    ostringstream distractedText ;
+    ostringstream gazeText ;
     ostringstream perclosText ;
     ostringstream frameTimeText;
     ostringstream noddingOffText;
     ostringstream yawningText;
     ostringstream headRotationText;
 
-    distractedText		<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
+    ostringstream frameCountText;
+
+    frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
+
+    gazeText			<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
     perclosText			<< "perclos Level     : " << percloseScore;
-    frameTimeText		<< "Frame Time        : " << imageManager.getFrameNumber();
+    frameTimeText		<< "Frame Time        : " << frameTime;
     noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;
     yawningText			<< "Yawning Rate	  : " << yawningScore;
-    headRotationText	<< "Head Rotation	  : " << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+    headRotationText	<< "Head Rotation     : " ;
 
-    string drowsinessText	= "Drowsiness Level : ";
+    if ( headRotAngles.size() > 0 ) {
+        headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+    }
+
+    frameCountText		<< "Frame Number :"		<< imageManager.getFrameNumber();
+
+    string drowsinessText	= ":: Drowsiness Measures  ::";
+    string distractionText =  ":: Distraction Measures ::";
     string alertText		= "Alert the driver  : ";
 
     if ( alertStatus ) {
@@ -223,12 +213,18 @@ void TrainingFileCreator::drawTexts ( Mat &frame, long int ticksForFrame ) {
     } else {
         alertText += "No";
     }
-    addText ( frame, distractedText.str(), Point ( 10, 10 ), fontYellow );
-    addText ( frame, drowsinessText, Point ( 10, 30 ), fontYellow );
+
+    addText ( frame, drowsinessText, Point ( 10, 10 ), fontYellow );
+    addText ( frame, perclosText.str(), Point ( 10, 30 ), fontYellow );
     addText ( frame, noddingOffText.str(), Point ( 10, 50 ), fontYellow );
-    addText ( frame, perclosText.str(), Point ( 10, 70 ), fontYellow );
-    addText ( frame, headRotationText.str(), Point ( 10, 90 ), fontYellow );
-    addText ( frame, yawningText.str(), Point ( 10, 110 ), fontYellow );
+    addText ( frame, yawningText.str(), Point ( 10, 70 ), fontYellow );
+
+    addText ( frame, distractionText, Point ( 10, 100 ), fontYellow );
+    addText ( frame, gazeText.str(), Point ( 10, 120 ), fontYellow );
+    addText ( frame, headRotationText.str(), Point ( 10, 140 ), fontYellow );
+
+
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
-    addText ( frame, alertText, Point ( 10, 140 ), fontAlert );
+    addText ( frame, frameCountText.str(), Point ( frame.cols * 3 / 4, 30 ), fontRed );
+    addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
 }
