@@ -15,6 +15,7 @@ public:
     CascadeClassifier getClassifier();
     void setCascadeFileName ( string filename );
     virtual vector<Rect> optimizeDetection ( vector<Rect> data ) = 0 ;
+	void setMinSize ( Size size );
 protected:
     int flags;
     int minNeighbors;

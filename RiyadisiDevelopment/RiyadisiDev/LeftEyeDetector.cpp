@@ -7,7 +7,7 @@ using namespace cv;
 LeftEyeDetector::LeftEyeDetector (  ) :
     Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" ) {
     scale = 1.1;
-    minSize = Size ( 30,  30 );
+    minSize = Size ( 10,  10 );
     donwsampleConst = 2;
 }
 

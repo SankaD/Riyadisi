@@ -16,3 +16,13 @@ RiyadisiDevelopment/output.out
 /RiyadisiDevelopment/*.psess
 /RiyadisiDevelopment/*.vsp
 /RiyadisiDevelopment/*.psess
+/RiyadisiDevelopment/RiyadisiDev/log/log.log
+
+*.log
+*.log
+RiyadisiDevelopment/RiyadisiDev/mwcomtypes_p.c
+RiyadisiDevelopment/RiyadisiDev/states.txt
+RiyadisiDevelopment/RiyadisiDev/mwcomtypes_i.c
+RiyadisiDevelopment/RiyadisiDev/mwcomtypes_h.h
+RiyadisiDevelopment/RiyadisiDev/data/data/0.data
+/RiyadisiDevelopment/RiyadisiDev/log/log.log.orig

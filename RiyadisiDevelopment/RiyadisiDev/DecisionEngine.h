@@ -2,6 +2,7 @@
 
 #include "FaceFeature.h"
 #include "FeatureCollection.h"
+#include "GazeDetector.h"
 #include "NeuralNetwork.h"
 #include "Log.h"
 
@@ -29,6 +30,6 @@ public:
     ///<summary>
     ///Checks whether an alert should be made or not according to the given parameters.
     ///</summary>
-    bool shouldAlert ( double eyeState, double noddingOff, double gaze, double headRotation, double yawning );
+    bool shouldAlert ( double eyeState, double noddingOff, DirectedGaze gaze, vector<float> headRotation, double yawning );
 
 };

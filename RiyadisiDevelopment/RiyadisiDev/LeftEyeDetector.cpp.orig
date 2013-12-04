@@ -1,0 +1,31 @@
+
+#include "LeftEyeDetector.h"
+
+using namespace std;
+using namespace cv;
+
+LeftEyeDetector::LeftEyeDetector (  ) :
+    Detector ( "Resources/Cascades/HaarCascades/haarcascade_mcs_lefteye.xml" ) {
+<<<<<<< HEAD
+    scale = 1.01;
+    minSize = Size ( 30,  30 );
+=======
+    scale = 1.1;
+    minSize = Size ( 10,  10 );
+>>>>>>> 5fd6eedf362fe29775ba50962a623642e22fb8a5
+    donwsampleConst = 2;
+}
+
+vector<Rect> LeftEyeDetector::optimizeDetection ( vector<Rect> data ) {
+    vector<Rect> optimizedResults;
+    // if the number of eyes detected within a face is greater than 2
+    if ( data.size() > 2 ) {
+
+    }
+    return optimizedResults;
+}
+
+LeftEyeDetector::~LeftEyeDetector() {
+
+}
+

@@ -24,8 +24,32 @@ public:
     ~ImageManager();
     Mat &acquireImage ();
     Mat &acquireImage ( Mat &image );
+
+    ///<summary>
+    ///Checks whether the video is opened.
+    ///</summary>
     bool isOpened();
+
+    ///<summary>
+    ///Gets the Frame rate of the video
+    ///</summary>
     float getFPS();
+
+    ///<summary>
+    ///Checks whether the video has reached its end.
+    ///</summary>
+    bool isVideoEnded();
+
+    ///<summary>
+    ///Gets the index of current frame
+    ///</summary>
+    int getFrameNumber();
+
+    ///<summary>
+    ///Gets the length of the video in terms of frames
+    ///</summary>
+    int getVideoFrameLength();
 private:
     VideoCapture capture;
+    bool videoEnded;
 };
