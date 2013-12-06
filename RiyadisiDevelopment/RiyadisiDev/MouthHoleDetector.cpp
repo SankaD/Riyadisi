@@ -116,7 +116,7 @@ Rect MouthHoleDetector::detect ( FaceFeature* faceFeature ) {
         if ( centerTemp.x < mouthROI.cols * 0.75
                 && centerTemp.x > mouthROI.cols * 0.25
                 && centerTemp.y < mouthROI.rows * 0.75
-                && centerTemp.y > mouthROI.rows * 0.25 )
+                /*&& centerTemp.y > mouthROI.rows * 0.25*/ )
             //&& mouthArea > imageArea/100)
         {
             //mouthContourIndices.push_back ( i );
@@ -200,7 +200,7 @@ int MouthHoleDetector::calculateThreshold ( Mat image ) {
 
     //find the threshold
     for ( int i = 0; i < 256; i++ ) {
-        if ( sum > count * 0.3 ) {
+        if ( sum > count * 0.2 ) {
             threshold = i;
             break;
         }
