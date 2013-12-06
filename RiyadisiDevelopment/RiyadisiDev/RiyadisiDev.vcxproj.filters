@@ -592,9 +592,6 @@
     <ClInclude Include="TrainingFileCreator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Calibrator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MouthHoleDetector.h">
       <Filter>Header Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClInclude>

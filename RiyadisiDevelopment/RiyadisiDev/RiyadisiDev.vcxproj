@@ -151,7 +151,6 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Calibrator.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />

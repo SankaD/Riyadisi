@@ -52,10 +52,13 @@ Rect FaceDetector::detect ( FaceFeature* faceFeature )
 					}
 
 					Point center( frame.cols/2, frame.rows/2 );
+					//rotation matrix
 					Mat rotM = getRotationMatrix2D( center, angle, 1.0 );
 					cv::warpAffine( frame, rotatedFrame, rotM, frame.size() );
 			
 					features = fontalFaceDetector.detect( rotatedFrame );
+					Mat rotTM = rotM.t();
+					cout<<rotTM<<endl;
 					for(int i=0; i<features.size(); i++) 
 					{
 						features[i].x = rotM.at<double>(0,0)*features[i].x + rotM.at<double>(0,1)*features[i].y + rotM.at<double>(0,2);
@@ -86,11 +89,13 @@ vector<Rect> FaceDetector::optimizeDetection ( vector<Rect> data )
 	vector<Point> centerPoints;
 	Rect temp;
 
+	//calculate center points
 	for(int i=0; i<data.size(); i++) 
 	{
 		centerPoints.push_back(Point( (data[i].x + data[i].width/2), (data[i].y + data[i].height/2) ));
 	}
 
+	//find the smallest fitting rectangle
 	for(int i=0; i<data.size(); i++) 
 	{
 		temp = data[i];
