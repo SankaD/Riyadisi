@@ -17,7 +17,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         Log::log ( "Finding features" );
 
         Log::log ( "Finding faces" );
-		faceFeature->setImage ( relatedImage ) ;
+        faceFeature->setImage ( relatedImage ) ;
         Rect face = faceDetector.detect ( faceFeature );
 
         if ( face.area() == 0 ) {
@@ -72,14 +72,14 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
 
         // reducing the search area for a nose
-		Log::log ( "Finding nose" );
+        Log::log ( "Finding nose" );
         if ( faceFeature->isAvailable() ) {
             noseROI = faceFeature->getFeatureRect();
             noseROI.x =  noseROI.width / 4;
             noseROI.y =  noseROI.height / 4;
             noseROI.width = noseROI.width / 2;
             noseROI.height = noseROI.height / 2;
-			imshow("nose_roi", faceImage ( noseROI ));
+            //imshow("nose_roi", faceImage ( noseROI ));
             Mat noseImage = faceImage ( noseROI );
             noseResults = noseDetector.detect ( noseImage );
 
@@ -127,23 +127,23 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
 
 
         //------------ handle the mouth region
-		Log::log ( "Finding mouth" );
+        Log::log ( "Finding mouth" );
         Rect mouth;
 
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() ) {
             //int mouthCenter = faceFeature->getLeftEye()->getCenterPoint().y + face.height * 0.36;
 
-			/*mouthROI.x = faceFeature->getLeftEye()->getCenterPoint().x;
+            /*mouthROI.x = faceFeature->getLeftEye()->getCenterPoint().x;
             mouthROI.width = faceFeature->getRightEye()->getCenterPoint().x - faceFeature->getLeftEye()->getCenterPoint().x;
             mouthROI.y = mouthCenter - mouthROI.width / 6;
             mouthROI.height = mouthROI.width / 3;
 
             if ( mouthROI.y < ( nose.y + nose.height ) ) {
                 mouthROI.y = nose.y + nose.height;
-			}*/
+            }*/
             //imshow ( "Mouth", faceImage ( mouthROI ) );
 
-			mouth = mouthHoleDetector.detect ( faceFeature );
+            mouth = mouthHoleDetector.detect ( faceFeature );
 
             if ( mouth.area() > 0 ) {
                 /*mouth.x += mouthROI.x;
@@ -155,7 +155,7 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
         }
 
         //------------ handler the pupil regions
-		Log::log ( "Finding pupils" );
+        Log::log ( "Finding pupils" );
         if ( faceFeature->getRightEye()->isAvailable() && faceFeature->getRightEye()->isEyeOpen() ) {
             Pupil pupil = pupilDetector.detectPupil ( faceImage ( rightEye ) );
             if ( pupil.getPupilLocation().getRadius() > 0 ) {

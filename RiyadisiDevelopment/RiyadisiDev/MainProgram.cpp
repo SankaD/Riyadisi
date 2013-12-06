@@ -105,8 +105,7 @@ void MainProgram::run() {
         //calculate head orientation
         if ( frameCount < 50 ) {
             headRotationDetector.updateGroundPosition ( faceFeature );
-        } else if ( frameCount == 50 )
-        { cout << ".............................................." << endl; }
+        }
 
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
@@ -144,15 +143,16 @@ void MainProgram::run() {
         drawTexts ( frame, ticksForFrame );
 
         imshow ( "image", frame );
-        cout << frameCount << endl;
     }
     Log::log ( "Program ended" );
 }
+
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::Camera );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
@@ -167,11 +167,13 @@ MainProgram::MainProgram() {
 
     cout << "Length of Video = " << imageManager.getVideoFrameLength() << endl;
 }
+
 void MainProgram::processImage() {
     // processing the image
     cvtColor ( frame, grayFrame, CV_BGR2GRAY );
     equalizeHist ( grayFrame, grayFrame );
 }
+
 void MainProgram::trainingRun() {
     Log::log ( "Training Started" );
     try {
@@ -190,6 +192,7 @@ void MainProgram::trainingRun() {
     }
     Log::log ( "Training ended" );
 }
+
 void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
     CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
@@ -206,7 +209,7 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
 
     frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
 
-    gazeText			<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
+    gazeText			<< "Gaze Level        : " << gazeScore.horizontal;
     perclosText			<< "perclos Level     : " << percloseScore;
     frameTimeText		<< "Frame Time        : " << frameTime;
     noddingOffText		<< "Nodding Off Rate  : " << noddingOffLevel;
@@ -214,10 +217,10 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     headRotationText	<< "Head Rotation     : " ;
 
     if ( headRotAngles.size() > 0 ) {
-        headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
+        headRotationText << headRotAngles[0] << ", " << headRotAngles[1] ;
     }
 
-    frameCountText		<< "Frame Number :"		<< frameCount;
+    frameCountText		<< "Frame Number : "		<< frameCount;
 
     string drowsinessText	= ":: Drowsiness Measures  ::";
     string distractionText =  ":: Distraction Measures ::";
@@ -243,6 +246,7 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     addText ( frame, frameCountText.str(), Point ( frame.cols * 3 / 4, 30 ), fontRed );
     addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
 }
+
 void MainProgram::createTrainingFile() {
     try {
         Log::log ( "Program started" );

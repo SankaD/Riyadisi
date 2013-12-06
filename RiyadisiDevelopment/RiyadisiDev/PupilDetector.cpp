@@ -1,7 +1,7 @@
 #include "PupilDetector.h"
 
 PupilDetector::PupilDetector ( void ) {
-	//count = 0;
+    //count = 0;
 }
 
 PupilDetector::~PupilDetector ( void ) {
@@ -12,23 +12,23 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
     int cannyThreshold = 10;
     float cannyRatio = 3;
     Pupil pupil;
-		
+
     //--- Preprocessing steps ---//
     eyeTemp = eye.clone();
-	
-    imshow ( "eyeTemp", eyeTemp );
+
+    //imshow ( "eyeTemp", eyeTemp );
     //--- detecting the pupil ---//
     threshold ( eyeTemp, eyeTemp, 20, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-	
+
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
     erode ( eyeTemp, eyeTemp, erodeElement );
-	
+
     vector<vector<Point>> contours;
 
     Canny ( eyeTemp.clone(), eyeTemp, cannyThreshold, cannyThreshold * cannyRatio, 3, true );
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-	
+
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
     double area = 0, maxArea = 0;
@@ -89,7 +89,7 @@ Rect PupilDetector::getExactEyeBorders ( Mat eye ) {
     Mat out;
     Canny ( tempEye, out, 50, 200 );
 
-    imshow ( "Eye", out );
+    //imshow ( "Eye", out );
 
     return border;
 }
