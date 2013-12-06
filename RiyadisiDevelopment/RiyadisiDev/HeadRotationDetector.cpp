@@ -179,7 +179,7 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 	angles.push_back(phiScore);
 	angles.push_back(shiScore);
 
-	cout<<Theta<<" "<<Phi<<" "<<Shi<<endl;
+	//cout<<Theta<<" "<<Phi<<" "<<Shi<<endl;
 		
 	return angles;
 }
