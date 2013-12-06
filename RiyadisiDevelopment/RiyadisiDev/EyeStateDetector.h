@@ -36,7 +36,7 @@ public :
     float calculateEyeState( Mat eye,FileStorage fs);
     void processImage( Mat image);
 	float getPerclosScore( FaceFeature *faceFeature, String eyeType, FileStorage fs);
-
+	float setScore(double eyestate);
 	EyeStateDetector ( void );
     ~EyeStateDetector ( void );
 
