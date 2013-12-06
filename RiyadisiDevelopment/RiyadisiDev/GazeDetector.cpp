@@ -32,11 +32,10 @@ Gaze GazeDetector::detectGaze ( FaceFeature faceFeature ) {
 
     return gaze;
 }
+double oldHScore = 0, oldVScore = 0;
 DirectedGaze GazeDetector::calculateScore ( Gaze gaze ) {
-    double hScore = 0, vScore = 0;
+    double hScore = oldHScore, vScore = oldVScore;
     DirectedGaze directedGaze ;
-
-
 
     if ( gaze.isAvailable() ) {
         double leftEyeScore, rightEyeScore;
@@ -54,6 +53,8 @@ DirectedGaze GazeDetector::calculateScore ( Gaze gaze ) {
         hScore = ( ( ( leftEyeScore > 0 ) ? leftEyeScore : ( -1 * leftEyeScore ) )
                    > ( ( rightEyeScore > 0 ) ? rightEyeScore : ( -1 * rightEyeScore ) ) )
                  ? leftEyeScore : rightEyeScore;
+        oldHScore = hScore;
+        oldVScore = vScore;
     }
 
     directedGaze.horizontal = hScore;
@@ -76,7 +77,7 @@ double GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSid
             score = ( pupil.y / eye.height ) - defaultTopRatio;
         }
     }
-    score *= 100;
+    score *= 200;
 
     return score;
 }
@@ -89,10 +90,10 @@ DirectedGaze GazeDetector::getDistractionScore() {
     double hScore = 0, vScore = 0;
     scores[currentIndex] = calculateScore ( getGaze ( 0 ) );
 
-    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.5
-             + scores[currentIndex].horizontal * 0.5 ;
-    vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.5
-             + scores[currentIndex].vertical * 0.5 ;
+    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.6
+             + scores[currentIndex].horizontal * 0.4 ;
+    vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.6
+             + scores[currentIndex].vertical * 0.4 ;
     scores[currentIndex].horizontal = hScore;
     scores[currentIndex].vertical = vScore;
 

@@ -135,7 +135,7 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        alertStatus =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        //alertStatus =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
@@ -150,7 +150,7 @@ MainProgram::MainProgram() {
     trainingMode = false;
 
     imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
-	imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
@@ -191,7 +191,7 @@ void MainProgram::trainingRun() {
 void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
     CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
-    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 0, 0, 0 ), 200 );
+    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 0, 255, 255 ), 200 );
 
     ostringstream gazeText ;
     ostringstream perclosText ;

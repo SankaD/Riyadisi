@@ -11,7 +11,7 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
             if ( isExists ( neuralDataFilename ) ) {
                 network.create_from_file ( neuralDataFilename );
             } else {
-                network.create_standard ( numLayers, numInput, numNeuronsHidden, 5, numOutput );
+                network.create_standard ( numLayers, numInput, numNeuronsHidden, numOutput );
             }
             network.set_activation_function_hidden ( FANN::SIGMOID_SYMMETRIC );
             network.set_activation_function_output ( FANN::SIGMOID_SYMMETRIC );
@@ -65,7 +65,8 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         throw exception ( "Unsupported mode" );
     }
     try {
-        fann_type input[8], output;
+        fann_type input[8];
+        fann_type *output;
         input[0] = weightedPerclose;
         input[1] = noddingOffMeasure;
         input[2] = gazeMeasure.horizontal;
@@ -74,9 +75,11 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         input[5] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[0] : 0;
         input[6] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[1] : 0;
         input[7] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[2] : 0;
-        output = * ( network.run ( input ) );
+        output =  network.run ( input ) ;
 
-        return ( output > 0.5 );
+
+
+        return ( output[1] > 0.8 || output[0] > 0.8 );
     } catch ( exception ex ) {
         Log::log (  ex.what() );
     }
