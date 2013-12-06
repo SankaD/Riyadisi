@@ -151,7 +151,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
+        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature, imageManager.getFrameNumber() );
         //noddingOffDetector.collectTraningData ( *faceFeature );
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
