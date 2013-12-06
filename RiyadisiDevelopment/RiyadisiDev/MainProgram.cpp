@@ -90,7 +90,7 @@ void MainProgram::run() {
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature ) * 10;
+        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
@@ -149,8 +149,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
