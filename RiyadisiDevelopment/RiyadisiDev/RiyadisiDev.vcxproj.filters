@@ -285,9 +285,6 @@
     <ClCompile Include="TrainingFileCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calibrator.cpp">
-      <Filter>Source Files\MainFeatures</Filter>
-    </ClCompile>
     <ClCompile Include="MouthHoleDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClCompile>
