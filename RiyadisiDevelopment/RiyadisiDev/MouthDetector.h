@@ -1,24 +1,11 @@
 #pragma once
+#include "Detector.h"
 
-#include "opencv2/highgui/highgui.hpp"
-#include "opencv2/imgproc/imgproc.hpp"
-#include <iostream>
-
-using namespace cv;
-using namespace std;
-
-class MouthDetector {
+class MouthDetector: public Detector {
 public:
     MouthDetector();
     ~MouthDetector();
-	Rect detect( Mat mouthROI );
-	vector<vector<Point>> getContourMap( Mat image);
+     vector<Rect> optimizeDetection ( vector<Rect> data );
 private:
-	Rect minEnclosingRectangle( vector<Point> data );
-	void applyMorphOperations ( Mat* image ) ;
-	Mat mouthTemplate;
-	int calculateThreshold( Mat image );
-	void updateTemplate( Mat imageList );
-	Mat erodeElement, dilateElement;
-	int timer;
+    string mouthCascadeName;
 };

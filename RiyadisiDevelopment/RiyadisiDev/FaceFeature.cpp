@@ -31,12 +31,12 @@ void FaceFeature::setImage ( Mat newImage )
 
 Orientation FaceFeature::getOrientation()
 {
-	return orientation;
+	return this->orientation;
 }
     
 void FaceFeature::setOrientation ( Orientation orientation ) 
 {
-	orientation = orientation;
+	this->orientation = orientation;
 }
 
 Gaze FaceFeature::getGazeData()

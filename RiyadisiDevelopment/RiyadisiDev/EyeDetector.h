@@ -5,6 +5,8 @@
 #include "EyeGlassDetector.h"
 #include "LeftEyeDetector.h"
 #include "RightEyeDetector.h"
+#include "FaceFeature.h"
+#include "Log.h"
 #include <fstream>
 
 using namespace cv;
@@ -14,7 +16,7 @@ class EyeDetector {
 public:
     EyeDetector ( void );
     ~EyeDetector ( void );
-    vector<Rect> detect ( Mat frame );
+    vector<Rect> detect ( FaceFeature* faceFeature );
 	void EyeDetector::updateMinSizes( Size roi );
 private:
 	EyeGlassDetector eyeGlassDetector;

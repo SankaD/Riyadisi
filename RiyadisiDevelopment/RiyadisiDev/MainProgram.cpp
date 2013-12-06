@@ -35,7 +35,7 @@ void MainProgram::run() {
         // Detection
         FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext();
 
-        Rect faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi;
+        Rect faceRoi;
 
         faceFeature->clearFeature();
 
@@ -47,7 +47,7 @@ void MainProgram::run() {
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -83,7 +83,7 @@ void MainProgram::run() {
                 faceRoi.height = grayFrame.rows;
             }
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
@@ -103,9 +103,12 @@ void MainProgram::run() {
         }
 
         //calculate head orientation
-        if ( frameCount < 20 ) {
+        if ( frameCount < 50 ) {
             headRotationDetector.updateGroundPosition ( faceFeature );
         }
+		else if( frameCount == 50 ) 
+			cout<<".............................................."<<endl;
+
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
         }
@@ -142,6 +145,7 @@ void MainProgram::run() {
         drawTexts ( frame, ticksForFrame );
 
         imshow ( "image", frame );
+		cout<<frameCount<<endl;
     }
     Log::log ( "Program ended" );
 }
@@ -149,8 +153,9 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
-	imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Motion 1.wmv" );
+	//imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
+	imageManager = ImageManager ( ImageSourceType::Camera, "", 1 );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );

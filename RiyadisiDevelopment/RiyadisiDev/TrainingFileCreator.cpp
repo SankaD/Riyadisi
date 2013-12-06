@@ -94,7 +94,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -130,7 +130,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
                 faceRoi.height = grayFrame.rows;
             }
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );

@@ -19,7 +19,7 @@ private:
 	vector<Point> list_l, list_r, list_n;
 	float radian( float angle );
 	float calcError( float theta, float phi, float shi);
-
+	float thetaScore, phiScore, shiScore;
 public:
     HeadRotationDetector ( void );
     ~HeadRotationDetector ( void );
