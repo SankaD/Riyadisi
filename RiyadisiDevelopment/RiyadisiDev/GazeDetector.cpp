@@ -76,7 +76,7 @@ double GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSid
             score = ( pupil.y / eye.height ) - defaultTopRatio;
         }
     }
-    score *= 100;
+    score *= 1;
 
     return score;
 }

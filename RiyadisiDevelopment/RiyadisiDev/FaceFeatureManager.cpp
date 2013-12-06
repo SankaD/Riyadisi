@@ -47,11 +47,13 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             faceFeature->getLeftEye()->setAvailable ( true );
             perclosl = eyeStateDetector.getPerclosScore ( faceFeature, "left", fs );
 
-            preeyeState = perclosl;
+            
 
         } else {
-            perclosl = preeyeState;
+			perclosl=eyeStateDetector.getPerclosScore ( faceFeature, "null", fs );
+          //  perclosl = preeyeState;
         }
+		preeyeState = perclosl;
 
         if ( eyes[1].area() > 0 ) {
             rightEye = eyes[1];
@@ -59,10 +61,12 @@ void FaceFeatureManager::findFeatures ( Mat image, FaceFeature *faceFeature, Rec
             faceFeature->getRightEye()->setAvailable ( true );
             perclosr = eyeStateDetector.getPerclosScore ( faceFeature, "right", fs );
 
-            preeyeState = perclosr;
+            
         } else {
-            perclosr = preeyeState;
+			perclosr=eyeStateDetector.getPerclosScore ( faceFeature, "null", fs );
+           // perclosr = preeyeState;
         }
+		preeyeState = perclosr;
 
 		perclos=max(perclosl,perclosr);
         //------------ handle the nose region
