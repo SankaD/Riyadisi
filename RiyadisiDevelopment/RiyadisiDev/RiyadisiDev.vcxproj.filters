@@ -285,9 +285,6 @@
     <ClCompile Include="TrainingFileCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calibrator.cpp">
-      <Filter>Source Files\MainFeatures</Filter>
-    </ClCompile>
     <ClCompile Include="MouthHoleDetector.cpp">
       <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClCompile>
@@ -593,9 +590,6 @@
       <Filter>Header Files\MainFeatures\SensoryProcessing\EyeDetection</Filter>
     </ClInclude>
     <ClInclude Include="TrainingFileCreator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Calibrator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MouthHoleDetector.h">
