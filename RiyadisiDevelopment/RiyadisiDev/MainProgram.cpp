@@ -105,9 +105,8 @@ void MainProgram::run() {
         //calculate head orientation
         if ( frameCount < 50 ) {
             headRotationDetector.updateGroundPosition ( faceFeature );
-        }
-		else if( frameCount == 50 ) 
-			cout<<".............................................."<<endl;
+        } else if ( frameCount == 50 )
+        { cout << ".............................................." << endl; }
 
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
@@ -145,7 +144,7 @@ void MainProgram::run() {
         drawTexts ( frame, ticksForFrame );
 
         imshow ( "image", frame );
-		cout<<frameCount<<endl;
+        cout << frameCount << endl;
     }
     Log::log ( "Program ended" );
 }
@@ -153,7 +152,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/1.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
 
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
