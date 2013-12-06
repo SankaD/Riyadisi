@@ -36,5 +36,7 @@ private:
     DirectedGaze gazeScore;
     vector<float> headRotAngles;
     bool alertStatus;
+
+    double frameTime;
 };
 

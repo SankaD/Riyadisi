@@ -7,6 +7,7 @@
 
 #include "FrontalFaceDetector.h"
 #include "ProfileFaceDetector.h"
+#include "FaceFeature.h"
 
 using namespace cv;
 using namespace std;
@@ -16,7 +17,7 @@ class FaceDetector {
 public:
     FaceDetector ( void );
     ~FaceDetector ( void );
-    Rect detect ( Mat frame );
+    Rect detect ( FaceFeature* faceFeature );
 private:
 	FrontalFaceDetector fontalFaceDetector;
 	ProfileFaceDetector profileFaceDetector;

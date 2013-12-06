@@ -35,7 +35,7 @@ void MainProgram::run() {
         // Detection
         FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext();
 
-        Rect faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi;
+        Rect faceRoi;
 
         faceFeature->clearFeature();
 
@@ -47,7 +47,7 @@ void MainProgram::run() {
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -83,14 +83,14 @@ void MainProgram::run() {
                 faceRoi.height = grayFrame.rows;
             }
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
         Rect rightEye = faceFeature->getRelativeRect ( faceFeature->getRightEye()->getFeatureRect() );
         Rect mouth = faceFeature->getRelativeRect ( faceFeature->getMouth()->getFeatureRect() );
 
-        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature ) * 10;
+        noddingOffLevel = noddingOffDetector.noddingOffDetect ( *faceFeature );
 
         gazeDetector.setCurrentGaze ( faceFeature->getGazeData() );
         gazeScore = gazeDetector.getDistractionScore();
@@ -103,9 +103,11 @@ void MainProgram::run() {
         }
 
         //calculate head orientation
-        if ( frameCount < 20 ) {
+        if ( frameCount < 50 ) {
             headRotationDetector.updateGroundPosition ( faceFeature );
-        }
+        } else if ( frameCount == 50 )
+        { cout << ".............................................." << endl; }
+
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
         }
@@ -135,24 +137,23 @@ void MainProgram::run() {
                 point ( frame, rightPupil, Scalar ( 255, 0, 0 ) );
             }
         }
-        bool alert =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
+        alertStatus =  decisionEngine.shouldAlert ( percloseScore, noddingOffLevel, gazeScore, headRotAngles, yawningScore );
 
         namedWindow ( "image", CV_WINDOW_AUTOSIZE );
 
         drawTexts ( frame, ticksForFrame );
 
         imshow ( "image", frame );
+        cout << frameCount << endl;
     }
     Log::log ( "Program ended" );
 }
 MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
-   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/me_with_ir.wmv" );
-  //  imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/video 8.wmv" );
- //   imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video_night5.wmv" );
-  // imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/Video 5.wmv" );
-//	imageManager = ImageManager ( ImageSourceType::Camera, "",1 );
+
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
+
     if ( !imageManager.isOpened() ) {
         throw exception ( "Program was unable to load the image source" );
     }
@@ -201,6 +202,8 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     ostringstream yawningText;
     ostringstream headRotationText;
 
+    ostringstream frameCountText;
+
     frameTime = ( ticksForFrame / (  getTickFrequency() ) ) * 1000;
 
     gazeText			<< "Gaze Level        : " << gazeScore.horizontal << " , " << gazeScore.vertical;
@@ -213,6 +216,8 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     if ( headRotAngles.size() > 0 ) {
         headRotationText << headRotAngles[0] << ", " << headRotAngles[1] << ", " << headRotAngles[2];
     }
+
+    frameCountText		<< "Frame Number :"		<< frameCount;
 
     string drowsinessText	= ":: Drowsiness Measures  ::";
     string distractionText =  ":: Distraction Measures ::";
@@ -235,6 +240,7 @@ void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
 
 
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
+    addText ( frame, frameCountText.str(), Point ( frame.cols * 3 / 4, 30 ), fontRed );
     addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
 }
 void MainProgram::createTrainingFile() {

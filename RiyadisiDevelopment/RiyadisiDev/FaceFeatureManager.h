@@ -8,7 +8,7 @@
 #include "EyeDetector.h"
 #include "PupilDetector.h"
 #include "NoseDetector.h"
-#include "MouthDetector.h"
+#include "MouthHoleDetector.h"
 #include "EyeStateDetector.h"
 #include <iostream>
 #include <stdio.h>
@@ -24,7 +24,7 @@ public:
     FaceFeatureManager ( void );
     ~FaceFeatureManager ( void );
     FeatureCollection *getFeatureCollection();
-    void findFeatures ( Mat image, FaceFeature *faceFeature, Rect faceROI, Rect leftEyeROI, Rect rightEyeROI, Rect mouthROI );
+    void findFeatures ( Mat image, FaceFeature *faceFeature, Rect faceROI );
     void findNoseFeature ( Mat image, Rect roi, NoseFeature &noseFeature );
     void findLeftEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
     void findRightEyeFeature ( Mat image, Rect roi, EyeFeature &eyeFeature );
@@ -38,10 +38,10 @@ private:
 	EyeDetector eyeDetector;
     LeftEyeDetector leftEyeDetector;
     RightEyeDetector rightEyeDetector;
-    MouthDetector mouthDetector;
+    MouthHoleDetector mouthHoleDetector;
     PupilDetector pupilDetector;
     NoseDetector noseDetector;
     EyeStateDetector eyeStateDetector;
     FileStorage fs;
-
+	Rect leftEyeROI, rightEyeROI, mouthROI;
 };

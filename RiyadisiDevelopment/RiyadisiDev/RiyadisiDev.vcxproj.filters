@@ -285,6 +285,9 @@
     <ClCompile Include="TrainingFileCreator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MouthHoleDetector.cpp">
+      <Filter>Source Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Cascades\haarcascades\haarcascade_eye.xml">
@@ -588,6 +591,9 @@
     </ClInclude>
     <ClInclude Include="TrainingFileCreator.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouthHoleDetector.h">
+      <Filter>Header Files\MainFeatures\SensoryProcessing\MouthDetection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

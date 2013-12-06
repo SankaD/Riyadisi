@@ -5,7 +5,9 @@ using namespace std;
 
 HeadRotationDetector::HeadRotationDetector ( void )
 {
-    
+    thetaScore = 0.0;
+	phiScore = 0.0;
+	shiScore = 0.0;
 }
 
 
@@ -19,12 +21,12 @@ void HeadRotationDetector::updateGroundPosition ( FaceFeature *faceFeature )
 	Point p2( faceFeature->getRightEye()->getCenterPoint().x, faceFeature->getRightEye()->getCenterPoint().y );
 	Point p3( faceFeature->getNose()->getCenterPoint().x, faceFeature->getNose()->getCenterPoint().y );
 
-	p1.x += faceFeature->getFeatureRect().x;
+	/*p1.x += faceFeature->getFeatureRect().x;
 	p1.y += faceFeature->getFeatureRect().y;
 	p2.x += faceFeature->getFeatureRect().x;
 	p2.y += faceFeature->getFeatureRect().y;
 	p3.x += faceFeature->getFeatureRect().x;
-	p3.y += faceFeature->getFeatureRect().y;
+	p3.y += faceFeature->getFeatureRect().y;*/
 	
 	pl.x += ( p1.x - pl.x ) * 0.2;
 	pl.y += ( p1.y - pl.y ) * 0.2;
@@ -48,7 +50,7 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 	fr = faceFeature->getRightEye()->getCenterPoint();
 	fn = faceFeature->getNose()->getCenterPoint();
 
-	fl.x += faceFeature->getFeatureRect().x;
+	/*fl.x += faceFeature->getFeatureRect().x;
 	fl.y += faceFeature->getFeatureRect().y;
 	fr.x += faceFeature->getFeatureRect().x;
 	fr.y += faceFeature->getFeatureRect().y;
@@ -69,15 +71,15 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 	pr.x *= d;
 	pr.y *= d;
 	pn.x *= d;
-	pn.y *= d;
+	pn.y *= d;*/
 	
 	
 	minE=1E+27;
-	for(float theta = -90; theta <= 90; theta = theta + 15)
+	for(float theta = 90; theta >= -90; theta = theta - 15)
 	{
-		for(float phi = -90; phi <= 90; phi = phi + 15)
+		for(float phi = 90; phi >= -90; phi = phi - 15)
 		{
-			for(float shi = -90; shi <= 90; shi = shi + 15)
+			for(float shi = 90; shi >= -90; shi = shi - 15)
 			{
 
 				E = calcError( theta, phi, shi );
@@ -95,11 +97,11 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 
 	
 	minE=1E+27;
-	for(float theta = Theta - 10; theta <= Theta + 10; theta = theta + 5)
+	for(float theta = Theta + 10; theta >= Theta - 10; theta = theta - 5)
 	{
-		for(float phi = Phi - 10; phi <= Phi + 10; phi = phi + 5)
+		for(float phi = Phi + 10; phi >= Phi - 10; phi = phi - 5)
 		{
-			for(float shi = Shi - 10; shi <= Shi + 10; shi = shi + 5)
+			for(float shi = Shi + 10; shi >= Shi - 10; shi = shi - 5)
 			{
 
 				E = calcError( theta, phi, shi );
@@ -117,11 +119,11 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 
 
 	minE=1E+27;
-	for(float theta = Theta - 4; theta <= Theta + 4; theta++)
+	for(float theta = Theta + 4; theta >= Theta - 4; theta--)
 	{
-		for(float phi = Phi - 4; phi <= Phi + 4; phi = phi++)
+		for(float phi = Phi + 4; phi >= Phi - 4; phi = phi--)
 		{
-			for(float shi = Shi - 4; shi <= Shi + 4; shi = shi++)
+			for(float shi = Shi + 4; shi >= Shi - 4; shi = shi--)
 			{
 
 				E = calcError( theta, phi, shi );
@@ -168,10 +170,16 @@ vector<float> HeadRotationDetector::calculateRotation ( FaceFeature *faceFeature
 		phi += alpha * dEShi / sqrt( pow(dETheta,2) + pow(dEPhi,2) + pow(dEShi,2) );
 	
 	} while ( E < 0.5 );*/
+
+	thetaScore = thetaScore *0.8 + Theta/60 * 0.2;
+	phiScore = phiScore *0.8 + Phi/60 * 0.2;
+	shiScore = phiScore *0.8 + Shi/60 * 0.2;
 				
-	angles.push_back(Theta);
-	angles.push_back(Phi);
-	angles.push_back(Shi);
+	angles.push_back(thetaScore);
+	angles.push_back(phiScore);
+	angles.push_back(shiScore);
+
+	//cout<<Theta<<" "<<Phi<<" "<<Shi<<endl;
 		
 	return angles;
 }
