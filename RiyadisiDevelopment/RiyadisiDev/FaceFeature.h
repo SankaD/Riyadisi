@@ -12,7 +12,7 @@ using namespace cv;
 using namespace std;
 
 enum Orientation{
-	PROFILE, FRONTAL
+	FRONTAL, LEFT_PROFILE, RIGHT_PROFILE
 };
 
 ///<summary>

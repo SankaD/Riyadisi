@@ -76,7 +76,11 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         input[7] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[2] : 0;
         output = * ( network.run ( input ) );
 
-
+<<<<<<< HEAD
+        return ( output[1] > 0.9 || output[0] > 0.9 );
+=======
+        return ( output > 0.5 );
+>>>>>>> 3d6389065b23cda041801117dba73a6e3a233d52
     } catch ( exception ex ) {
         Log::log (  ex.what() );
     }

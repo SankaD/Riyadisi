@@ -18,7 +18,7 @@ Rect FaceDetector::detect ( FaceFeature* faceFeature )
 
 		if( features.size() != 0 ) 
 		{
-			faceFeature->setOrientation( Orientation::PROFILE );
+			faceFeature->setOrientation( Orientation::LEFT_PROFILE );
 		}
 		else
 		{
@@ -35,7 +35,7 @@ Rect FaceDetector::detect ( FaceFeature* faceFeature )
 			
 			if( features.size() != 0 ) 
 			{
-				faceFeature->setOrientation( Orientation::PROFILE );
+				faceFeature->setOrientation( Orientation::RIGHT_PROFILE );
 			}
 			else
 			{

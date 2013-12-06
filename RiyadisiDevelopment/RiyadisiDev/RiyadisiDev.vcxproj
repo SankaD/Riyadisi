@@ -81,6 +81,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Calibrator.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="DecisionEngine.cpp" />
     <ClCompile Include="Detector.cpp" />
@@ -89,6 +90,7 @@
     <ClCompile Include="FrontalFaceDetector.cpp" />
     <ClCompile Include="HeadRotationDetector.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="MouthHoleDetector.cpp" />
     <ClCompile Include="ProfileFaceDetector.cpp" />
     <ClCompile Include="TrainingFileCreator.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -150,6 +152,7 @@
     <None Include="Resources\Cascades\haarcascades\haarcascade_upperbody.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Calibrator.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DecisionEngine.h" />
     <ClInclude Include="Detector.h" />
@@ -212,6 +215,7 @@
     <ClInclude Include="Mouth.h" />
     <ClInclude Include="MouthDetector.h" />
     <ClInclude Include="MouthFeature.h" />
+    <ClInclude Include="MouthHoleDetector.h" />
     <ClInclude Include="NeuralNetwork.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="NoddingOffDetector.h" />

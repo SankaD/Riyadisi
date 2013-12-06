@@ -41,8 +41,6 @@ void TrainingFileCreator::trainUsingFile ( string fileName ) {
         Log::log ( LogStatus::Error, ex.what()  );
     }
 }
-bool isDrowsy ;
-bool isDistracted ;
 
 void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputFileName ) {
     imageManager = ImageManager ( ImageSourceType::File, inputFileName );
@@ -58,8 +56,6 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
         throw new exception ( "Output file couldn't be opened" );
     }
 
-    isDrowsy = false;
-    isDistracted = false;
     alertStatus = false;
 
     while ( true ) {
@@ -78,16 +74,6 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
             break;
         } else if ( key == ' ' ) {
             alertStatus = !alertStatus;
-        } else if ( key ==  '1' ) {
-            isDrowsy = true;
-        } else if (  key == '2' ) {
-            isDistracted = true;
-        } else if (  key == '3' ) {
-            isDrowsy = true;
-            isDistracted = true;
-        } else if (  key == '0' ) {
-            isDrowsy = false;
-            isDistracted = false;
         }
 
         cvtColor ( frame, grayFrame, CV_BGR2GRAY );
@@ -108,7 +94,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -144,7 +130,7 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
                 faceRoi.height = grayFrame.rows;
             }
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
@@ -180,10 +166,8 @@ void TrainingFileCreator::trainUsingVideo ( string inputFileName, string outputF
                    << headRotAngles[0] << " "
                    << headRotAngles[1] << " "
                    << headRotAngles[2] << " "
-                   << ( isDrowsy  ? 1 : 0 ) << " "
-                   << ( isDistracted ? 1 : 0 )
+                   << ( alertStatus  ? 1 : 0 )
                    << endl;
-
 
         drawTexts ( frame, ticksForFrame );
 
@@ -224,11 +208,6 @@ void TrainingFileCreator::drawTexts ( Mat &frame, long int ticksForFrame ) {
     string distractionText =  ":: Distraction Measures ::";
     string alertText		= "Alert the driver  : ";
 
-    string drowsiText = "Drowsy : ";
-    string distractText = "Distracted : ";
-    drowsiText += ( isDrowsy ? "Yes" : "No" );
-    distractText += ( isDistracted ? "Yes" : "No" );
-
     if ( alertStatus ) {
         alertText += "Yes";
     } else {
@@ -247,7 +226,5 @@ void TrainingFileCreator::drawTexts ( Mat &frame, long int ticksForFrame ) {
 
     addText ( frame, frameTimeText.str(), Point ( frame.cols * 3 / 4 , 10 ), fontRed );
     addText ( frame, frameCountText.str(), Point ( frame.cols * 3 / 4, 30 ), fontRed );
-    //addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
-    addText ( frame, drowsiText, Point ( 200, 20 ), fontAlert );
-    addText ( frame, distractText, Point ( 200, 50 ), fontAlert );
+    addText ( frame, alertText, Point ( 200, 20 ), fontAlert );
 }

@@ -19,7 +19,6 @@ int main ( int argc, char **argv ) {
                 break;
             case 3:
                 program.createTrainingFile();
-                break;
             default:
                 break;
         }

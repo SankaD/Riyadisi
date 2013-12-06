@@ -35,7 +35,7 @@ void MainProgram::run() {
         // Detection
         FaceFeature *faceFeature = featureManager.getFeatureCollection()->getNext();
 
-        Rect faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi;
+        Rect faceRoi;
 
         faceFeature->clearFeature();
 
@@ -47,7 +47,7 @@ void MainProgram::run() {
             faceRoi.width = grayFrame.cols;
             faceRoi.height = grayFrame.rows;
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
 
             firstRun = false;
         } else {
@@ -83,7 +83,7 @@ void MainProgram::run() {
                 faceRoi.height = grayFrame.rows;
             }
 
-            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi, leftEyeRoi, rightEyeRoi, mouthRoi );
+            featureManager.findFeatures ( grayFrame, faceFeature, faceRoi );
         }
         Rect nose = faceFeature->getRelativeRect ( faceFeature->getNose()->getFeatureRect() );
         Rect leftEye = faceFeature->getRelativeRect ( faceFeature->getLeftEye()->getFeatureRect() );
@@ -103,9 +103,12 @@ void MainProgram::run() {
         }
 
         //calculate head orientation
-        if ( frameCount < 20 ) {
+        if ( frameCount < 50 ) {
             headRotationDetector.updateGroundPosition ( faceFeature );
         }
+		else if( frameCount == 50 ) 
+			cout<<".............................................."<<endl;
+
         if ( faceFeature->getLeftEye()->isAvailable() && faceFeature->getRightEye()->isAvailable() && faceFeature->getNose()->isAvailable() ) {
             headRotAngles =  headRotationDetector.calculateRotation ( faceFeature );
         }
@@ -142,6 +145,7 @@ void MainProgram::run() {
         drawTexts ( frame, ticksForFrame );
 
         imshow ( "image", frame );
+		cout<<frameCount<<endl;
     }
     Log::log ( "Program ended" );
 }
@@ -190,7 +194,7 @@ void MainProgram::trainingRun() {
 void MainProgram::drawTexts ( Mat &frame, long int ticksForFrame ) {
     CvFont fontYellow = fontQt ( "Times", -5, Scalar ( 255, 255, 0 ), 100 );
     CvFont fontRed = fontQt ( "Times", -5, Scalar ( 255, 0, 0 ), 100 );
-    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 0, 255, 255 ), 200 );
+    CvFont fontAlert = fontQt ( "Times", 12, Scalar ( 0, 0, 0 ), 200 );
 
     ostringstream gazeText ;
     ostringstream perclosText ;

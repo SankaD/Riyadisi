@@ -17,7 +17,7 @@ class FaceDetector {
 public:
     FaceDetector ( void );
     ~FaceDetector ( void );
-    Rect detect ( FaceFeature* frame );
+    Rect detect ( FaceFeature* faceFeature );
 private:
 	FrontalFaceDetector fontalFaceDetector;
 	ProfileFaceDetector profileFaceDetector;
