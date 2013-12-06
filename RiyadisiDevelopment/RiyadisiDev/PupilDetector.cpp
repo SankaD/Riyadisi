@@ -1,7 +1,7 @@
 #include "PupilDetector.h"
 
 PupilDetector::PupilDetector ( void ) {
-	//count = 0;
+    //count = 0;
 }
 
 PupilDetector::~PupilDetector ( void ) {
@@ -12,23 +12,22 @@ Pupil PupilDetector::detectPupil ( Mat eye ) {
     int cannyThreshold = 10;
     float cannyRatio = 3;
     Pupil pupil;
-		
+
     //--- Preprocessing steps ---//
     eyeTemp = eye.clone();
-	
-    imshow ( "eyeTemp", eyeTemp );
+
     //--- detecting the pupil ---//
     threshold ( eyeTemp, eyeTemp, 20, 255, CV_THRESH_BINARY ); // low value needed for pupil detection.
-	
+
     Mat erodeElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 1, 1 ) );
     Mat dilateElement = getStructuringElement ( MORPH_RECT, Size ( 3, 3 ), Point ( 2, 2 ) );
     erode ( eyeTemp, eyeTemp, erodeElement );
-	
+
     vector<vector<Point>> contours;
 
     Canny ( eyeTemp.clone(), eyeTemp, cannyThreshold, cannyThreshold * cannyRatio, 3, true );
     findContours ( eyeTemp.clone(), contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
-	
+
     cvtColor ( eyeTemp.clone(), eyeTemp, CV_GRAY2BGR );
 
     double area = 0, maxArea = 0;
@@ -82,13 +81,26 @@ void PupilDetector::drawPupil ( Mat frame, Pupil pupil ) {
 Rect PupilDetector::getExactEyeBorders ( Mat eye ) {
     Mat tempEye = eye.clone();
     Rect border;
+    Mat out;
 
     equalizeHist ( tempEye, tempEye );
-    GaussianBlur ( tempEye.clone(), tempEye, Size ( 5, 5 ), 5 );
-    //threshold ( tempEye.clone(), tempEye, 100, 255, CV_THRESH_TOZERO );
-    Mat out;
-    Canny ( tempEye, out, 50, 200 );
+    GaussianBlur ( tempEye.clone(), tempEye, Size ( 3, 3 ), 5 );
 
+    //threshold ( tempEye.clone(), tempEye, 200, 255, CV_THRESH_TOZERO );
+
+    // Canny ( tempEye, out, 50, 150, 3, true );
+    // findContours ( out.clone(), out, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_NONE );
+    Mat xMat, yMat;
+    Sobel ( tempEye, xMat, CV_16S, 1, 0, 1, 1.0, 0, BORDER_DEFAULT );
+    convertScaleAbs ( xMat.clone(), xMat );
+
+    Sobel ( tempEye, yMat, CV_16S, 0, 1, 1, 1.0, 0, BORDER_DEFAULT );
+    convertScaleAbs ( yMat.clone(), yMat );
+
+    addWeighted ( xMat, 0.5, yMat, 0.5, 0, out );
+
+    //equalizeHist ( out, out );
+    //threshold ( out.clone(), out, 150, 255, CV_THRESH_TOZERO );
     imshow ( "Eye", out );
 
     return border;

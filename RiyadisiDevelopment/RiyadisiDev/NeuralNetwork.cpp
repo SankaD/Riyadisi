@@ -79,7 +79,7 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
 
 
 
-        return ( output[1] > 0.8 || output[0] > 0.8 );
+        return ( output[1] > 0.9 || output[0] > 0.9 );
     } catch ( exception ex ) {
         Log::log (  ex.what() );
     }

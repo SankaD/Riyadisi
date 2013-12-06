@@ -1,6 +1,4 @@
 #include "GazeDetector.h"
-#include "Circle.h"
-#include <opencv2\imgproc\imgproc.hpp>
 
 using namespace cv;
 using namespace std;
@@ -32,32 +30,38 @@ Gaze GazeDetector::detectGaze ( FaceFeature faceFeature ) {
 
     return gaze;
 }
+
 double oldHScore = 0, oldVScore = 0;
+
 DirectedGaze GazeDetector::calculateScore ( Gaze gaze ) {
     double hScore = oldHScore, vScore = oldVScore;
     DirectedGaze directedGaze ;
+    double score = oldHScore;
 
     if ( gaze.isAvailable() ) {
         double leftEyeScore, rightEyeScore;
         double leftEyeHScore, rightEyeHScore;
 
-        leftEyeScore = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l' );
-        rightEyeScore = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil() , 'r' );
+        if ( gaze.getLeftPupil().x > 0.0 ) {
+            score = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l' );
+        } else if ( gaze.getRightPupil().x > 0.0 ) {
+            score = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil() , 'r' );
+        }
 
-        leftEyeHScore = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l', 'v' );
-        rightEyeHScore = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil(), 'r', 'v' );
+        //leftEyeHScore = calculateScoreForEye ( gaze.getLeftEye(), gaze.getLeftPupil(), 'l', 'v' );
+        //rightEyeHScore = calculateScoreForEye ( gaze.getRightEye(), gaze.getRightPupil(), 'r', 'v' );
 
-        vScore = ( leftEyeHScore > rightEyeHScore ) ? leftEyeHScore : rightEyeHScore;
+        //vScore = ( leftEyeHScore > rightEyeHScore ) ? leftEyeHScore : rightEyeHScore;
 
         // need a method which would compensate when a measure from one eye is not available.
-        hScore = ( ( ( leftEyeScore > 0 ) ? leftEyeScore : ( -1 * leftEyeScore ) )
-                   > ( ( rightEyeScore > 0 ) ? rightEyeScore : ( -1 * rightEyeScore ) ) )
-                 ? leftEyeScore : rightEyeScore;
-        oldHScore = hScore;
+        //hScore =   ( abs ( leftEyeScore ) >  abs ( rightEyeScore ) ) ? leftEyeScore : rightEyeScore;
+        //hScore = ( leftEyeScore + rightEyeScore ) / 2;
+
+        oldHScore = score;
         oldVScore = vScore;
     }
 
-    directedGaze.horizontal = hScore;
+    directedGaze.horizontal = score;
     directedGaze.vertical = vScore;
 
     return directedGaze;
@@ -71,7 +75,8 @@ double GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSid
             if ( eyeSide == 'l' ) {
                 score =   ( pupil.x / eye.width ) - defaultLeftRatio;
             } else if ( eyeSide == 'r' ) {
-                score =  ( pupil.x / eye.width ) - defaultRightRatio;
+                score = defaultRightRatio - ( ( eye.width - pupil.x ) / eye.width );
+                // score *= -1;
             }
         } else if ( direction == 'v' ) {
             score = ( pupil.y / eye.height ) - defaultTopRatio;
@@ -90,10 +95,10 @@ DirectedGaze GazeDetector::getDistractionScore() {
     double hScore = 0, vScore = 0;
     scores[currentIndex] = calculateScore ( getGaze ( 0 ) );
 
-    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.6
-             + scores[currentIndex].horizontal * 0.4 ;
-    vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.6
-             + scores[currentIndex].vertical * 0.4 ;
+    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.4
+             + scores[currentIndex].horizontal * 0.6 ;
+    /*vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.6
+             + scores[currentIndex].vertical * 0.4 ;*/
     scores[currentIndex].horizontal = hScore;
     scores[currentIndex].vertical = vScore;
 
