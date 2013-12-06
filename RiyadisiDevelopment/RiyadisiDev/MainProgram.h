@@ -19,8 +19,6 @@
 #include "Log.h"
 #include "TrainingFileCreator.h"
 
-
-
 class MainProgram {
 public:
     MainProgram();
@@ -56,7 +54,6 @@ private:
     float percloseScore, noddingOffLevel, yawningScore;
     DirectedGaze gazeScore;
     bool alertStatus;
-
 
     void drawTexts ( Mat &frame, long int ticksForFrame  );
 };
