@@ -82,7 +82,7 @@ double GazeDetector::calculateScoreForEye ( Rect eye, Point2f pupil, char eyeSid
             score = ( pupil.y / eye.height ) - defaultTopRatio;
         }
     }
-    score *= 200;
+    score *= 4;
 
     return score;
 }
@@ -95,8 +95,8 @@ DirectedGaze GazeDetector::getDistractionScore() {
     double hScore = 0, vScore = 0;
     scores[currentIndex] = calculateScore ( getGaze ( 0 ) );
 
-    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.4
-             + scores[currentIndex].horizontal * 0.6 ;
+    hScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].horizontal * 0.3
+             + scores[currentIndex].horizontal * 0.7 ;
     /*vScore = scores[ ( currentIndex - 1 + FEATURE_ARRAY_LENGTH ) % FEATURE_ARRAY_LENGTH].vertical * 0.6
              + scores[currentIndex].vertical * 0.4 ;*/
     scores[currentIndex].horizontal = hScore;
