@@ -24,6 +24,7 @@ NeuralNetwork::NeuralNetwork ( bool isTraining ) {
         Log::log (  ex.what() );
     }
 }
+
 NeuralNetwork::~NeuralNetwork() {
     try {
         // deletion
@@ -32,6 +33,7 @@ NeuralNetwork::~NeuralNetwork() {
         Log::log ( ex.what() );
     }
 }
+
 void NeuralNetwork::trainNetwork ( string fileName ) {
     if ( !isTraining ) {
         throw exception ( "Unsupported mode" );
@@ -43,6 +45,7 @@ void NeuralNetwork::trainNetwork ( string fileName ) {
         Log::log (  ex.what() );
     }
 }
+
 void NeuralNetwork::save() {
     // only save in the operation mode.
     if ( !isTraining ) {
@@ -58,6 +61,7 @@ void NeuralNetwork::save() {
 void NeuralNetwork::resetNetwork() {
     throw exception ( "Not implemented yet" );
 }
+
 bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMeasure,
                                     DirectedGaze gazeMeasure, vector<float> headRotationMeasure,
                                     double yawningMeasure ) {
@@ -65,7 +69,8 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         throw exception ( "Unsupported mode" );
     }
     try {
-        fann_type input[8], output;
+        fann_type input[8];
+        fann_type *output;
         input[0] = weightedPerclose;
         input[1] = noddingOffMeasure;
         input[2] = gazeMeasure.horizontal;
@@ -74,10 +79,11 @@ bool NeuralNetwork::getAlertValue ( double weightedPerclose, double noddingOffMe
         input[5] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[0] : 0;
         input[6] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[1] : 0;
         input[7] = ( headRotationMeasure.size() > 1 ) ? headRotationMeasure[2] : 0;
-        output = * ( network.run ( input ) );
+        output =  network.run ( input );
 
-
+        return ( output[0] > 0.9 || output[1] > 0.9 );
     } catch ( exception ex ) {
         Log::log (  ex.what() );
     }
+    return false;
 }

@@ -151,7 +151,7 @@ MainProgram::MainProgram() {
     isAlertOn = false;
     trainingMode = false;
 
-    //imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/27.wmv" );
+    imageManager = ImageManager ( ImageSourceType::File, "Testing/Videos/29.wmv" );
     //imageManager = ImageManager ( ImageSourceType::Camera );
 
     if ( !imageManager.isOpened() ) {
